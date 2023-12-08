@@ -24,3 +24,21 @@ def get_db():
 
 # Use LocalProxy to read the global db instance with just `db`
 db = LocalProxy(get_db)
+
+"""
+def add_comment(movie_id, name, email, comment, date):
+   
+    Inserts a comment into the comments collection, with the following fields:
+
+    - "name"
+    - "email"
+    - "movie_id"
+    - "text"
+    - "date"
+
+    Name and email must be retrieved from the "user" object.
+   
+
+    comment_doc = { 'movie_id' : movie_id, 'name' : name, 'email' : email,'text' : comment, 'date' : date}
+    return db.comments.insert_one(comment_doc)
+     """
