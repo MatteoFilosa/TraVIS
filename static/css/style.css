@@ -1,0 +1,245 @@
+
+@import "https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap";
+body {
+    font-family: 'Roboto', sans-serif;
+    background: #fafafa;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1em;
+    font-weight: 400;
+    line-height: 1.7em;
+    color: #999;
+}
+
+a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.navbar {
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+    border-radius: 0;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+
+}
+.navbar ul{
+    justify-content: center;
+}
+.navbar-btn {
+    box-shadow: none;
+    outline: none !important;
+    border: none;
+}
+.nav-item.active{
+    font-weight: 700;
+}
+.navbar-brand{
+    color: #800016;
+    font-weight: 700;
+    padding-left: 10px;
+    font-size: 1.5em;
+}
+.btn.btn-info{
+    background-color:#800016;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    outline: none;
+    box-shadow: none;
+}
+
+.btn.btn-info:hover{
+    background-color:white;
+    box-sizing: border-box;
+    border: 2px solid #800016;
+    color: #800016;
+    outline: none;
+    box-shadow: none;
+}
+.btn.btn-info.active,.btn.btn-info:active:focus{
+    background-color:white !important;
+    box-sizing: border-box;
+    border: 2px solid #800016 !important;
+    color: #800016 !important;
+    outline: none;
+    box-shadow: none !important;
+}
+
+.dots{
+    cursor: pointer;
+    width: 38px;
+    height: 31px;
+    background-color:white;
+    color: #800016;
+    box-sizing: border-box;
+    border: 2px solid #800016;
+    outline: none;
+    box-shadow: none;
+    border-radius:9% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dots:hover{
+    transition: all 0.3s;
+    background-color:#800016;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    color: white;
+    outline: none;
+    box-shadow: none;
+}
+.dots.active,.dots:active:focus{
+    transition: all 0.3s;
+    background-color:#800016 !important;
+    box-sizing: border-box;
+    border: 2px solid transparent !important;
+    color: white !important;
+    outline: none;
+    box-shadow: none !important;
+}
+
+.navbar li{
+    margin-right: 4rem;
+}
+
+.nav.nav-tabs{
+    background-color: #800016;
+    width: 100%;
+    color: white;
+    height: 45px;
+    padding-left: 31px;
+    padding-top: 8px;
+    margin-top: auto;
+    margin-left: auto;
+    margin-bottom: 5px;
+}
+.nav-link{
+    height:37px
+}
+.nav-link.active{
+background-color: #FAFAFA !important;
+border: none;
+}
+.nav.nav-tabs li{
+    margin-right: 1rem;
+}
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    height: 100vh;
+    max-height: 100vh;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #191919;
+    color: #fff;
+    transition: all 0.3s;
+    padding: 1%;
+
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header{
+    font-weight: 400;
+    font-size: 1.2em;
+    margin-bottom: 10%;
+}
+
+#sidebar li p{
+    font-weight: 400;
+    font-size: 1.1em;
+    color: white;
+}
+#sidebar ul ul p{
+    font-weight: 400;
+    font-size: 1em;
+    color: #ddd;
+}
+
+.line{
+    width: 109%;
+    margin-left: -10px;
+    height: 1px;
+    border-bottom: 1px solid #dddddd66;
+    margin-bottom: 20px;
+}
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s;
+    background-color: #FAFAFA;
+}
+
+.mainContainer{
+    width: 100%;
+    height: 87vh;
+    display: flex;
+    justify-content: space-evenly;
+}
+.website{
+    background-color: white;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 1%;
+    min-width: 49.5%;
+    max-width: 50%;
+    height: 100%;
+    padding: auto;
+    /* resize: both;
+    overflow: auto; */
+}
+.statechart{
+    background-color: white;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 1%;
+    min-width: 49.5%;
+    max-width: 50%;
+    height: 100%;
+    /* resize: both;
+    overflow: auto;*/
+} 
+.statechart img{
+    width: 100%;
+    height: 100%;
+}
+#website {
+    width: 100%;
+    height: 100%;
+    border-radius: 2%;
+}
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 1280px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+}
+
+
