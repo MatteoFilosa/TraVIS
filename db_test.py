@@ -2,13 +2,14 @@ from flask import Flask, render_template
 from flask_pymongo import PyMongo
 from configparser import ConfigParser
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_url_path='', 
+            static_folder='static',
+            template_folder='templates')
 
 # Leggi il file di configurazione
 config = ConfigParser()
 config.read('config.ini')
-
-
 
 @app.route("/")
 def home_page():
