@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_pymongo import PyMongo
 from configparser import ConfigParser
 import os
@@ -80,32 +80,30 @@ def get_statecharts():
     app.config["MONGO_URI"] = mongo_uri
     mongo = PyMongo(app)
 
+    statecharts_data = []
+
     try:
         # Gets all docs from collection
         statecharts = mongo.db.state_charts.find()
 
-      
-        download_folder = "static/files/downloadedStatecharts"
-        os.makedirs(download_folder, exist_ok=True)
-
         for statechart in statecharts:
-           
             name = statechart["name"]
             svg_data = statechart["svg"]
 
-            # Creates dest file
-            file_path = os.path.join(download_folder, f"{name}.svg")
+            statechart_info = {
+                "name": name,
+                "svg": svg_data
+            }
 
-            # Saves SVG
-            with open(file_path, "w") as file:
-                file.write(svg_data)
+            statecharts_data.append(statechart_info)
 
-        print("SVGs downloaded successfully!")
+        print("Statecharts data collected successfully!")
 
     except Exception as e:
         print(f"Error: {e}")
 
-    return render_template('index.html')
+    # Return JSON response
+    return jsonify(statecharts_data)
 
 
 if __name__ == "__main__":
