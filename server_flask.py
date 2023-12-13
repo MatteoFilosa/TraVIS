@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify
+from flask_cors import CORS
 from flask_pymongo import PyMongo
 from configparser import ConfigParser
 import os
@@ -7,6 +8,8 @@ app = Flask(__name__,
             static_url_path='', 
             static_folder='static',
             template_folder='templates')
+
+CORS(app)
 
 config = ConfigParser()
 config.read('config.ini')
@@ -70,7 +73,7 @@ def upload_statechart():
     except Exception as e:
         print(f"Error: {e}")
 
-    return render_template('index.html')
+    return "Statecharts correctly uploaded!"
 
 @app.route("/get_statecharts") #Gets all the statecharts from DB
 def get_statecharts():
