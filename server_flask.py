@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, make_response
 from flask_cors import CORS
 from flask_pymongo import PyMongo
 from configparser import ConfigParser
@@ -75,9 +75,8 @@ def upload_statechart():
 
     return "Statecharts correctly uploaded!"
 
-@app.route("/get_statecharts") #Gets all the statecharts from DB
+@app.route("/get_statecharts")
 def get_statecharts():
-    
     database_name = "visualizations"  # You can change db name here
     mongo_uri = config['DATABASES'][database_name]
     app.config["MONGO_URI"] = mongo_uri
@@ -104,10 +103,16 @@ def get_statecharts():
 
     except Exception as e:
         print(f"Error: {e}")
+        # Consider returning an error response if something goes wrong
 
-    # Return JSON response
-    return jsonify(statecharts_data)
+    # Convert data to JSON
+    response_data = jsonify(statecharts_data)
 
+    # Set Cache-Control header to enable browser caching for 1 hour (3600 seconds)
+    response = make_response(response_data)
+    response.headers["Cache-Control"] = "max-age=3600"
+
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True)
