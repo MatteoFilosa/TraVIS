@@ -6,13 +6,13 @@ var statecharts;
 var statechartSVG;
 var matchingName = null;
 var matchingSvg = null;
-var minimapWidth = 0, minimapHeight = 0;
+var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0;
 
 // Function to generate the minimap
 function generateMinimap(originalSVG) {
-    var scaleFactor = 50;
-    var originalWidth = originalSVG.width.baseVal.valueInSpecifiedUnits;
-    var originalHeight = originalSVG.height.baseVal.valueInSpecifiedUnits;
+    scaleFactor = 50;
+    originalWidth = originalSVG.width.baseVal.valueInSpecifiedUnits;
+    originalHeight = originalSVG.height.baseVal.valueInSpecifiedUnits;
 
     if (originalWidth / scaleFactor < 100 || originalHeight / scaleFactor < 100) {
         scaleFactor = 25;
@@ -51,41 +51,53 @@ function setupMinimapClickHandler(originalSVG) {
     indicator.style.transition = "all 0.3s ease-in-out"; // Add a transition for a smoother effect
     minimapContainer.appendChild(indicator);
 
+    // Event listener per il click sul minimap
     minimapContainer.addEventListener("click", function (event) {
-        const clickedX = event.offsetX;
-        const clickedY = event.offsetY;
+        // Clicked position on the minimap
+        var clickedX = event.offsetX;
+        var clickedY = event.offsetY;
 
-        // Calculate the corresponding point in the original SVG
-        const scaleX = originalSVG.width.baseVal.value / minimapContainer.clientWidth;
-        const scaleY = originalSVG.height.baseVal.value / minimapContainer.clientHeight;
-        const targetX = clickedX * scaleX;
-        const targetY = clickedY * scaleY;
+        // Calculate the proportion relative to the total height of the minimap
+        var proportion = minimapHeight / clickedY;
 
-        // Calculate the scroll position required to center the clicked point
-        const scrollTop = targetY - statechartSVG.clientHeight / 2;
+        // Calculate the maximum scrollable height of the SVG
+        var maxScroll = statechartSVG.scrollHeight - statechartSVG.clientHeight;
 
-        // Move the main SVG to the desired point
-        statechartSVG.scrollTop = scrollTop;
+        // Calculate the new scroll position of the SVG
+        var newScrollPosition = maxScroll / proportion;
+
+        // Ensure that the new scroll position is within the allowed limits
+        statechartSVG.scrollTop = Math.min(newScrollPosition, maxScroll);
 
         // Update the position of the indicator
-        updateIndicatorPosition(targetX, targetY, scaleX, scaleY);
+        updateIndicatorPosition(clickedX, clickedY);
     });
 
-    // Event handler for scrolling on statechartSVG
+    // Event listener for scrolling of SVG
     statechartSVG.addEventListener("scroll", function () {
+        // Calculate the position of the indicator based on the scroll of SVG
         const minimapRect = minimapContainer.getBoundingClientRect();
-        const indicatorY = (statechartSVG.scrollTop / statechartSVG.scrollHeight) * minimapRect.height;
+        const maxScroll = statechartSVG.scrollHeight - statechartSVG.clientHeight;
+        const indicatorY = (statechartSVG.scrollTop / maxScroll) * minimapRect.height;
 
-        indicator.style.top = indicatorY + minimapRect.top + "px";
+        // Update the position of the indicator
+        updateIndicatorPosition(null, null, indicatorY);
     });
 
-    // Function to update the position of the indicator
-    function updateIndicatorPosition(targetX, targetY, scaleX, scaleY) {
-        // Calculate the relative position on the minimap
-        const indicatorY = (targetY / scaleY) - (indicator.clientHeight / 2);
+    // Event listener for scrolling of statechartSVG
+    statechartSVG.addEventListener("scroll", function () {
+        updateIndicatorPosition();
+    });
 
-        // Adjustment of the position based on the margins and padding of the minimap
+    // Function to update the position of the indicator based on scrolling
+    function updateIndicatorPosition() {
+        // Calculate the position of the indicator based on the scroll of statechartSVG
         const minimapRect = minimapContainer.getBoundingClientRect();
+        const maxScroll = statechartSVG.scrollHeight - statechartSVG.clientHeight;
+        const indicatorY = (statechartSVG.scrollTop / maxScroll) * minimapRect.height;
+
+        // Update the position of the indicator
+        const indicator = document.getElementById("indicator");
         indicator.style.top = indicatorY + minimapRect.top + "px";
     }
 }
