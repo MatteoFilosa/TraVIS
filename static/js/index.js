@@ -8,6 +8,32 @@ var matchingName = null;
 var matchingSvg = null;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0;
 
+function resizeContainers(layoutType){
+    var statechartContainer = document.getElementById("statechartContainer");
+    var websiteContainer = document.getElementById("websiteContainer");
+
+    var websiteWidth,websiteHeight;
+    var statechartWidth,statechartHeight;
+
+    switch(layoutType){
+        case "website":
+            statechartContainer.style.minWidth='29.5%';
+            statechartContainer.style.height='24%';
+            websiteContainer.style.minWidth='69.5%';
+            break;
+        case "statechart":
+            websiteContainer.style.minWidth='29.5%';
+            websiteContainer.style.height='24%';
+            statechartContainer.style.minWidth='69.5%';
+            break;
+        default:
+            statechartContainer.style.minWidth='49.5%';
+            statechartContainer.style.height='100%';
+            websiteContainer.style.minWidth='49.5%';
+            websiteContainer.style.height='100%';
+    }
+}
+
 // Function to generate the minimap
 function generateMinimap(originalSVG) {
     scaleFactor = 50;
@@ -35,7 +61,7 @@ function generateMinimap(originalSVG) {
 function setupMinimapClickHandler(originalSVG) {
     const minimapContainer = document.getElementById("minimapContainer");
     const statechartSVG = document.getElementById("statechartSVG");
-    console.log(minimapWidth);
+    //console.log(minimapWidth);
 
     // Add the indicator on the minimap
     const indicator = document.createElement("div");

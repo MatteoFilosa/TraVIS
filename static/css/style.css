@@ -214,8 +214,7 @@ border: none;
     max-width: 50%;
     height: 100%;
     padding: auto;
-    /* resize: both;
-    overflow: auto; */
+    transition: all 0.3s ease-in-out;
 }
 .statechart{
     background-color: white;
@@ -228,8 +227,7 @@ border: none;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    /* resize: both;
-    overflow: auto;*/
+    transition: all 0.3s ease-in-out;
 } 
 .statechartSVG svg{
     width: 100%;
@@ -275,6 +273,27 @@ border: none;
 #statechartSVG::-webkit-scrollbar-track {
     background-color: #f0f0f0;
 
+}
+
+.layoutButtons{
+    width: 214px;
+    display: flex;
+    justify-content: space-evenly;
+    position: absolute;
+    left: 43.5%;
+}
+
+.layoutButtons button{
+    width: 59px;
+    height: 90%;
+    border: 2px solid white;
+    background-color: transparent;
+    border-radius: 12%;
+}
+
+.layoutButtons button img{
+    width: 41px;
+    height: 20px;
 }
 /* ---------------------------------------------------
     MEDIAQUERIES
