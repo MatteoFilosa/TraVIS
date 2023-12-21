@@ -1,5 +1,5 @@
-
 @import "https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap";
+
 body {
     font-family: 'Roboto', sans-serif;
     background: #fafafa;
@@ -28,41 +28,49 @@ a:focus {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 
 }
-.navbar ul{
+
+.navbar ul {
     justify-content: center;
 }
+
 .navbar-btn {
     box-shadow: none;
     outline: none !important;
     border: none;
 }
-.nav-item.active{
+
+.nav-item.active {
     font-weight: 700;
 }
-.navbar-brand{
+
+.navbar-brand {
     color: #800016;
     font-weight: 700;
     padding-left: 10px;
     font-size: 1.5em;
 }
-.btn.btn-info{
-    background-color:#800016;
+
+.btn.btn-info {
+    background-color: #800016;
     box-sizing: border-box;
     border: 2px solid transparent;
     outline: none;
     box-shadow: none;
+    color: white;
 }
 
-.btn.btn-info:hover{
-    background-color:white;
+.btn.btn-info:hover {
+    background-color: white;
     box-sizing: border-box;
     border: 2px solid #800016;
     color: #800016;
     outline: none;
     box-shadow: none;
 }
-.btn.btn-info.active,.btn.btn-info:active:focus{
-    background-color:white !important;
+
+.btn.btn-info.active,
+.btn.btn-info:active:focus {
+    background-color: white !important;
     box-sizing: border-box;
     border: 2px solid #800016 !important;
     color: #800016 !important;
@@ -70,33 +78,36 @@ a:focus {
     box-shadow: none !important;
 }
 
-.dots{
+.dots {
     cursor: pointer;
     width: 38px;
     height: 31px;
-    background-color:white;
+    background-color: white;
     color: #800016;
     box-sizing: border-box;
     border: 2px solid #800016;
     outline: none;
     box-shadow: none;
-    border-radius:9% !important;
+    border-radius: 9% !important;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.dots:hover{
+
+.dots:hover {
     transition: all 0.3s;
-    background-color:#800016;
+    background-color: #800016;
     box-sizing: border-box;
     border: 2px solid transparent;
     color: white;
     outline: none;
     box-shadow: none;
 }
-.dots.active,.dots:active:focus{
+
+.dots.active,
+.dots:active:focus {
     transition: all 0.3s;
-    background-color:#800016 !important;
+    background-color: #800016 !important;
     box-sizing: border-box;
     border: 2px solid transparent !important;
     color: white !important;
@@ -104,41 +115,52 @@ a:focus {
     box-shadow: none !important;
 }
 
-.navbar li{
+.navbar li {
     margin-right: 4rem;
 }
 
-.nav.nav-tabs{
+.nav.nav-tabs {
     background-color: #800016;
     width: 100%;
     color: white;
     height: 45px;
-    padding-left: 31px;
+    padding-left: 15px;
     padding-top: 8px;
     margin-top: auto;
     margin-left: auto;
     margin-bottom: 5px;
 }
-.nav-link{
-    height:37px
+
+.nav-link {
+    height: 37px
 }
-.nav-link.active{
-background-color: #FAFAFA !important;
-border: none;
+
+.nav-link.active {
+    background-color: #FAFAFA !important;
+    border: none;
 }
-.nav.nav-tabs li{
+
+.nav.nav-tabs li {
+    margin-right: 1rem;
+    display: inline-flex;
+}
+
+.nav.nav-tabs li p {
+    color: white;
     margin-right: 1rem;
 }
 
-#loadSystem{
+#loadSystem {
     border: 2px solid #800016;
-    color:#800016;
+    color: #800016;
 }
-#loadSystem:hover{
+
+#loadSystem:hover {
     border: 2px solid transparent;
-    color:white;
+    color: white;
     background-color: #800016;
 }
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -165,35 +187,41 @@ border: none;
     margin-left: -250px;
 }
 
-#sidebar .sidebar-header{
+#sidebar .sidebar-header {
+    height: 31px;
     font-weight: 400;
     font-size: 1.1em;
     display: flex;
-    justify-content: space-evenly;
-    margin-bottom: 10%;
-    margin-top: 5px;
+    justify-content: space-between;
+    margin-bottom: 8%;
+}
+#sidebar .sidebar-header button{
+    height: 100%;
+    width: auto;
 }
 
-#sidebar li p{
+#sidebar li p {
     font-weight: 400;
     font-size: 1.1em;
     color: white;
 }
-#sidebar ul ul p{
+
+#sidebar ul ul p {
     font-weight: 400;
     font-size: 1em;
     color: #ddd;
 }
 
-.line{
+.line {
     width: 109%;
     margin-left: -10px;
     height: 1px;
     border-bottom: 1px solid #dddddd66;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
-.sidebarPin{
+.sidebarPin {
     width: 40px;
     height: 40px;
     background-color: transparent;
@@ -212,13 +240,14 @@ border: none;
     background-color: #FAFAFA;
 }
 
-.mainContainer{
+.mainContainer {
     width: 100%;
     height: 87vh;
     display: flex;
     justify-content: space-evenly;
 }
-.website{
+
+.website {
     background-color: white;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 1%;
@@ -228,7 +257,8 @@ border: none;
     padding: auto;
     transition: all 0.3s ease-in-out;
 }
-.statechart{
+
+.statechart {
     background-color: white;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 1%;
@@ -240,16 +270,18 @@ border: none;
     justify-content: center;
     overflow: hidden;
     transition: all 0.3s ease-in-out;
-} 
-.statechartSVG svg{
+}
+
+.statechartSVG svg {
     width: 100%;
     height: 100%;
 
 }
 
-.spinner-border{
+.spinner-border {
     display: none;
 }
+
 #website {
     width: 100%;
     height: 100%;
@@ -257,9 +289,9 @@ border: none;
 }
 
 #minimapContainer {
-    
+
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
- 
+
 }
 
 
@@ -287,26 +319,27 @@ border: none;
 
 }
 
-.layoutButtons{
+.layoutButtons {
     width: 214px;
     display: flex;
     justify-content: space-evenly;
     position: absolute;
-    left: 43.5%;
+    right: 4px;
 }
 
-.layoutButtons button{
-    width: 59px;
+.layoutButtons button {
+    width: 47px;
     height: 90%;
     border: 2px solid white;
     background-color: transparent;
     border-radius: 12%;
 }
 
-.layoutButtons button img{
-    width: 41px;
-    height: 20px;
+.layoutButtons button img {
+    width: 31px;
+    height: 16px;
 }
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -315,12 +348,12 @@ border: none;
     #sidebar {
         margin-left: -250px;
     }
+
     #sidebar.active {
         margin-left: 0;
     }
+
     #sidebarCollapse span {
         display: none;
     }
 }
-
-

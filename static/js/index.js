@@ -8,6 +8,17 @@ var matchingName = null;
 var matchingSvg = null;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0;
 
+// Array of colors is given  
+let color1 = d3.schemeCategory10[0];  
+let color2 = d3.schemeCategory10[1];  
+let color3 = d3.schemeCategory10[2];  
+let color4 = d3.schemeCategory10[3];  
+let color5 = d3.schemeCategory10[4];  
+let color6 = d3.schemeCategory10[5]; 
+let color7 = d3.schemeCategory10[6];  
+let color8 = d3.schemeCategory10[7]; 
+let color9 = d3.schemeCategory10[8];  
+let color10 = d3.schemeCategory10[9];  
 
 function resizeContainers(layoutType) {
     var statechartContainer = document.getElementById("statechartContainer");
@@ -250,5 +261,7 @@ window.onload = function () {
         document.getElementById("sidebar").classList.toggle("active");
     });
 
-
+    document.getElementById("slidersNum").style.color = color2;
+    document.getElementById("buttonsNum").style.color = color1;
+    document.getElementById("inputsNum").style.color = color5;
 };
