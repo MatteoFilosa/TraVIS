@@ -8,31 +8,52 @@ var matchingName = null;
 var matchingSvg = null;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0;
 
-function resizeContainers(layoutType){
+function resizeContainers(layoutType) {
     var statechartContainer = document.getElementById("statechartContainer");
     var websiteContainer = document.getElementById("websiteContainer");
+    var minimapContainer = document.getElementById("minimapContainer");
+    var minimapSVG = document.getElementById("minimapSVG");
+    var indicator = document.getElementById("indicator");
 
-    var websiteWidth,websiteHeight;
-    var statechartWidth,statechartHeight;
-
-    switch(layoutType){
+    switch (layoutType) {
         case "website":
-            statechartContainer.style.minWidth='29.5%';
-            statechartContainer.style.height='24%';
-            websiteContainer.style.minWidth='69.5%';
+            statechartContainer.style.minWidth = '29.5%';
+            statechartContainer.style.height = '24%';
+            websiteContainer.style.minWidth = '69.5%';
+
+            // Nascondi gli elementi nel caso "website"
+            minimapContainer.style.display = 'none';
+            minimapSVG.style.display = 'none';
+            indicator.style.display = 'none';
+
             break;
         case "statechart":
-            websiteContainer.style.minWidth='29.5%';
-            websiteContainer.style.height='24%';
-            statechartContainer.style.minWidth='69.5%';
+            websiteContainer.style.minWidth = '29.5%';
+            websiteContainer.style.height = '24%';
+            statechartContainer.style.minWidth = '69.5%';
+
+            // Mostra gli elementi negli altri casi
+            minimapContainer.style.display = 'block';
+            minimapSVG.style.display = 'block';
+            indicator.style.display = 'block';
+
+            console.log("Case: statechart");
             break;
         default:
-            statechartContainer.style.minWidth='49.5%';
-            statechartContainer.style.height='100%';
-            websiteContainer.style.minWidth='49.5%';
-            websiteContainer.style.height='100%';
+            statechartContainer.style.minWidth = '49.5%';
+            statechartContainer.style.height = '100%';
+            websiteContainer.style.minWidth = '49.5%';
+            websiteContainer.style.height = '100%';
+
+            // Mostra gli elementi negli altri casi
+            minimapContainer.style.display = 'block';
+            minimapSVG.style.display = 'block';
+            indicator.style.display = 'block';
+
+            console.log("Case: default");
     }
 }
+
 
 // Function to generate the minimap
 function generateMinimap(originalSVG) {
@@ -54,6 +75,7 @@ function generateMinimap(originalSVG) {
     // Add content to the minimapContainer
     var minimapContainer = document.getElementById("minimapContainer");
     minimapContainer.innerHTML = "";
+    minimapSVG.setAttribute("id", "minimapSVG");
     minimapContainer.appendChild(minimapSVG);
 }
 
@@ -62,19 +84,25 @@ function setupMinimapClickHandler(originalSVG) {
     const minimapContainer = document.getElementById("minimapContainer");
     const statechartSVG = document.getElementById("statechartSVG");
     //console.log(minimapWidth);
-
+    //var originalHeightPixel = document.getElementById("graph0").getBoundingClientRect().height
+    //var ratio = originalHeightPixel/800
+    //var indicatorHeight = ratio * minimapHeight;
     // Add the indicator on the minimap
     const indicator = document.createElement("div");
     indicator.id = "indicator";
     indicator.style.position = "absolute";
     indicator.style.width = minimapWidth + "px"; // Rectangle width equal to minimap width
-    indicator.style.height = "20px"; // Rectangle height
+    //indicator.style.height = indicatorHeight + "px"; // Rectangle height
+    indicator.style.height = "80px";
     indicator.style.backgroundColor = "transparent"; // Transparent background
     indicator.style.borderTop = "2px solid lightblue"; // Blue top border
     indicator.style.borderLeft = "2px solid lightblue"; // Blue left border
     indicator.style.borderRight = "2px solid lightblue"; // Blue right border
     indicator.style.borderBottom = "2px solid lightblue"; // Blue bottom border
     indicator.style.transition = "all 0.3s ease-in-out"; // Add a transition for a smoother effect
+    const minimapRect = minimapContainer.getBoundingClientRect();
+    indicator.style.top = minimapRect.top + "px";
+    
     minimapContainer.appendChild(indicator);
 
     // Event listener per il click sul minimap
@@ -120,12 +148,23 @@ function setupMinimapClickHandler(originalSVG) {
         // Calculate the position of the indicator based on the scroll of statechartSVG
         const minimapRect = minimapContainer.getBoundingClientRect();
         const maxScroll = statechartSVG.scrollHeight - statechartSVG.clientHeight;
-        const indicatorY = (statechartSVG.scrollTop / maxScroll) * minimapRect.height;
+        const indicator = document.getElementById("indicator");
+
+        // Calcola la posizione massima dell'indicatore
+        const maxIndicatorTop = minimapRect.height - indicator.clientHeight;
+
+        // Calcola la posizione dell'indicatore
+        let indicatorY = (statechartSVG.scrollTop / maxScroll) * maxIndicatorTop;
+
+        // Imposta la posizione massima consentita per l'indicatore
+        if (indicatorY > maxIndicatorTop) {
+            indicatorY = maxIndicatorTop;
+        }
 
         // Update the position of the indicator
-        const indicator = document.getElementById("indicator");
         indicator.style.top = indicatorY + minimapRect.top + "px";
     }
+
 }
 
 // Function to check if there is a corresponding statechart in the URL
@@ -173,6 +212,7 @@ function CheckIfStatechartExists() {
 
 // Function to load the system
 function LoadSystem() {
+    statechartSVG.innerHTML = "";
     loadButton.disabled = true;
     var websiteContainer = document.getElementById("website");
 
