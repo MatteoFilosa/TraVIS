@@ -1,5 +1,10 @@
 @import "https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap";
 
+/* 381D2A
+381D2A
+9cb5f2
+#b2a7ac
+ */
 body {
     font-family: 'Roboto', sans-serif;
     background: #fafafa;
@@ -10,7 +15,7 @@ p {
     font-size: 1.1em;
     font-weight: 400;
     line-height: 1.7em;
-    color: #999;
+    color: white;
 }
 
 a,
@@ -22,7 +27,7 @@ a:focus {
 }
 
 .navbar {
-    background: #fff;
+    background: #381D2A !important;
     border-bottom: 1px solid #ddd;
     border-radius: 0;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
@@ -44,36 +49,36 @@ a:focus {
 }
 
 .navbar-brand {
-    color: #800016;
+    color: black;
     font-weight: 700;
     padding-left: 10px;
     font-size: 1.5em;
 }
 
 .btn.btn-info {
-    background-color: #800016;
+    background-color: white;
     box-sizing: border-box;
-    border: 2px solid transparent;
+    border: 2px solid #381D2A;
     outline: none;
     box-shadow: none;
-    color: white;
+    color: #381D2A;
 }
 
 .btn.btn-info:hover {
-    background-color: white;
+    background-color: #381D2A;
     box-sizing: border-box;
-    border: 2px solid #800016;
-    color: #800016;
+    border: 2px solid white;
+    color: white;
     outline: none;
     box-shadow: none;
 }
 
 .btn.btn-info.active,
 .btn.btn-info:active:focus {
-    background-color: white !important;
+    background-color: #381D2A !important;
     box-sizing: border-box;
-    border: 2px solid #800016 !important;
-    color: #800016 !important;
+    border: 2px solid white !important;
+    color: white !important;
     outline: none;
     box-shadow: none !important;
 }
@@ -82,10 +87,10 @@ a:focus {
     cursor: pointer;
     width: 38px;
     height: 31px;
-    background-color: white;
+    background-color: #381D2A;
     color: #800016;
     box-sizing: border-box;
-    border: 2px solid #800016;
+    border: 2px solid white;
     outline: none;
     box-shadow: none;
     border-radius: 9% !important;
@@ -96,7 +101,7 @@ a:focus {
 
 .dots:hover {
     transition: all 0.3s;
-    background-color: #800016;
+    background-color: #381D2A;
     box-sizing: border-box;
     border: 2px solid transparent;
     color: white;
@@ -107,7 +112,7 @@ a:focus {
 .dots.active,
 .dots:active:focus {
     transition: all 0.3s;
-    background-color: #800016 !important;
+    background-color: #381D2A !important;
     box-sizing: border-box;
     border: 2px solid transparent !important;
     color: white !important;
@@ -120,7 +125,7 @@ a:focus {
 }
 
 .nav.nav-tabs {
-    background-color: #800016;
+    background-color: #b2a7ac;
     width: 100%;
     color: white;
     height: 45px;
@@ -146,19 +151,19 @@ a:focus {
 }
 
 .nav.nav-tabs li p {
-    color: white;
+    color: black;
     margin-right: 1rem;
 }
 
 #loadSystem {
-    border: 2px solid #800016;
-    color: #800016;
+    border: 2px solid white;
+    color: white;
 }
 
 #loadSystem:hover {
     border: 2px solid transparent;
     color: white;
-    background-color: #800016;
+    background-color: #688dc4;
 }
 
 /* ---------------------------------------------------
@@ -176,8 +181,8 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #191919;
-    color: #fff;
+    background: #381D2A;
+    color: black;
     transition: all 0.3s;
     padding: 1%;
 
@@ -188,6 +193,7 @@ a:focus {
 }
 
 #sidebar .sidebar-header {
+    color: black;
     height: 31px;
     font-weight: 400;
     font-size: 1.1em;
@@ -198,6 +204,9 @@ a:focus {
 #sidebar .sidebar-header button{
     height: 100%;
     width: auto;
+    border-radius: 50%;
+    border: 1px solid white;
+    background-color: white;
 }
 
 #sidebar li p {
@@ -228,7 +237,15 @@ a:focus {
     box-shadow: none;
     border: none;
 }
-
+.list-unstyled {
+    color: white;
+}
+.nav-item a{
+    color: white !important;
+}
+a.dropdown-item{
+    color: black !important;
+}
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
