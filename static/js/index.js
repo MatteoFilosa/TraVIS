@@ -8,6 +8,7 @@ var matchingName = null;
 var matchingSvg = null;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0;
 
+
 function resizeContainers(layoutType) {
     var statechartContainer = document.getElementById("statechartContainer");
     var websiteContainer = document.getElementById("websiteContainer");
@@ -102,7 +103,7 @@ function setupMinimapClickHandler(originalSVG) {
     indicator.style.transition = "all 0.3s ease-in-out"; // Add a transition for a smoother effect
     const minimapRect = minimapContainer.getBoundingClientRect();
     indicator.style.top = minimapRect.top + "px";
-    
+
     minimapContainer.appendChild(indicator);
 
     // Event listener per il click sul minimap
@@ -226,6 +227,17 @@ function LoadSystem() {
     CheckIfStatechartExists();
 }
 
+var pin = false;
+
+function pinSidebar() {
+    pin = !pin;
+    document.getElementById("sidebarCollapse").disabled = pin;
+    if(pin){
+        document.getElementById("pinImg").src="/images/pinFilled.png";
+    }else{
+        document.getElementById("pinImg").src="/images/pin.png";
+    }
+}
 // Function executed when the page is loaded
 window.onload = function () {
     var sideBarCollapse = document.getElementById("sidebarCollapse");
@@ -237,4 +249,6 @@ window.onload = function () {
         sideBarCollapse.classList.toggle("active");
         document.getElementById("sidebar").classList.toggle("active");
     });
+
+
 };
