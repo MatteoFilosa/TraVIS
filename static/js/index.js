@@ -191,7 +191,8 @@ function isNameInUrl(jsonData, systemUrl) {
 
         if (originalSVG) {
             statechartSVG.appendChild(originalSVG);
-
+            console.log("Versione di D3.js:", d3.version);
+            
             // Generate and set up the minimap
             generateMinimap(originalSVG);
 
@@ -199,40 +200,42 @@ function isNameInUrl(jsonData, systemUrl) {
             setupMinimapClickHandler(originalSVG);
 
             // DRAG. Works, but it is kinda bugged. It is some attribute that needs to be changed...
-            d3.select("#graph0").call(drag());
 
-            function drag() {
-                let initialY = 0;  // Variable to store the initial y-coordinate
-                let lastY = 0;
-                let translatedY = 0;
+            const statechart = d3.select("#graph0");
 
-                function dragstarted(event, d) {
-                    d3.select(this).raise().attr("stroke", "black");
-                    initialY = lastY;  // Set the initial y-coordinate to the last translatedY
-                }
 
-                function dragged(event, d) {
-                    // Calculate the vertical distance moved during dragging
-                    const dy = d3.event.y - initialY;
+         
+            statechart.call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
 
-                    translatedY = initialY + dy;
+            function dragstarted() {
+           
+                statechart.classed("dragging", true);
+            }
 
-                    console.log("Initial y: " + initialY, "dy: " + dy, "d3.event.y: " + d3.event.y, "lastY: " + lastY, "translatedY: " + translatedY);
+            function dragged() {
+                console.log(d3.event)
+                statechart.attr("transform", "translate(" + d3.event.x + "," + d3.event.y + ")");
+            }
 
-                    // Update the translation in the transform attribute
-                    d3.select("#graph0").attr("transform", `translate(4, ${translatedY})`);
+            function dragended() {
 
-                    lastY = translatedY
-                }
+                statechart.classed("dragging", false);
+            }
 
-                function dragended(event, d) {
-                    d3.select(this).attr("stroke", null);
-                }
 
-                return d3.drag()
-                    .on("start", dragstarted)
-                    .on("drag", dragged)
-                    .on("end", dragended);
+
+            //ZOOM
+
+            const zoom = d3.zoom()
+                .scaleExtent([2, 100])
+                .on("zoom", zoomed);
+
+ 
+            statechart.call(zoom);
+
+            function zoomed() {
+                
+                statechart.attr("transform", d3.event.transform);
             }
 
             return true;
@@ -243,6 +246,7 @@ function isNameInUrl(jsonData, systemUrl) {
     }
     return false;
 }
+
 
 
 /* // Function to add zoom in and zoom out buttons to statechartSVG
