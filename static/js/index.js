@@ -179,7 +179,6 @@ function setupMinimapClickHandler(originalSVG) {
 
 }
 
-// Function to check if there is a corresponding statechart in the URL
 function isNameInUrl(jsonData, systemUrl) {
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
     if (matchingElement) {
@@ -199,6 +198,43 @@ function isNameInUrl(jsonData, systemUrl) {
             // Configure the handler to click on the minimap passing originalSVG as a parameter
             setupMinimapClickHandler(originalSVG);
 
+            // DRAG. Works, but it is kinda bugged. It is some attribute that needs to be changed...
+            d3.select("#graph0").call(drag());
+
+            function drag() {
+                let initialY = 0;  // Variable to store the initial y-coordinate
+                let lastY = 0;
+                let translatedY = 0;
+
+                function dragstarted(event, d) {
+                    d3.select(this).raise().attr("stroke", "black");
+                    initialY = lastY;  // Set the initial y-coordinate to the last translatedY
+                }
+
+                function dragged(event, d) {
+                    // Calculate the vertical distance moved during dragging
+                    const dy = d3.event.y - initialY;
+
+                    translatedY = initialY + dy;
+
+                    console.log("Initial y: " + initialY, "dy: " + dy, "d3.event.y: " + d3.event.y, "lastY: " + lastY, "translatedY: " + translatedY);
+
+                    // Update the translation in the transform attribute
+                    d3.select("#graph0").attr("transform", `translate(4, ${translatedY})`);
+
+                    lastY = translatedY
+                }
+
+                function dragended(event, d) {
+                    d3.select(this).attr("stroke", null);
+                }
+
+                return d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended);
+            }
+
             return true;
         } else {
             console.error("Invalid original SVG");
@@ -207,6 +243,26 @@ function isNameInUrl(jsonData, systemUrl) {
     }
     return false;
 }
+
+
+/* // Function to add zoom in and zoom out buttons to statechartSVG
+function addZoomButtons() {
+    const zoomButtonsContainer = document.createElement("div");
+    zoomButtonsContainer.id = "zoomButtons";
+    zoomButtonsContainer.innerHTML = `
+        <button onclick="zoom('in')">+</button>
+        <button onclick="zoom('out')">-</button>
+    `;
+    statechartSVG.appendChild(zoomButtonsContainer);
+} */
+
+
+function zoom(type) {
+   
+}
+
+
+
 
 // Function to check if there is a corresponding statechart in the URL
 function CheckIfStatechartExists() {
@@ -267,3 +323,4 @@ window.onload = function () {
     document.getElementById("buttonsNum").style.color = color1;
     document.getElementById("inputsNum").style.color = color5;
 };
+
