@@ -184,58 +184,80 @@ function isNameInUrl(jsonData, systemUrl) {
     if (matchingElement) {
         matchingName = matchingElement.name;
         matchingSvg = matchingElement.svg;
+        console.log(matchingSvg)
         statechartSVG.style.display = "block";
         var parser = new DOMParser();
         var doc = parser.parseFromString(matchingSvg, "image/svg+xml");
         var originalSVG = doc.documentElement;
+        console.log(originalSVG)
 
         if (originalSVG) {
             statechartSVG.appendChild(originalSVG);
-            console.log("Versione di D3.js:", d3.version);
-            
+          
             // Generate and set up the minimap
             generateMinimap(originalSVG);
 
             // Configure the handler to click on the minimap passing originalSVG as a parameter
             setupMinimapClickHandler(originalSVG);
 
-            // DRAG. Works, but it is kinda bugged. It is some attribute that needs to be changed...
-
             const statechart = d3.select("#graph0");
 
+            // Initial translation values
+            var translateX = 0;
+            var translateY = 0;
 
-         
-            statechart.call(d3.drag().on("start", dragstarted).on("drag", dragged).on("end", dragended));
+            // Initial scale values
+            var scale = 1, currentX = 0, currentY = 0;
 
-            function dragstarted() {
-           
-                statechart.classed("dragging", true);
-            }
+            //DRAG
 
-            function dragged() {
-                console.log(d3.event)
-                statechart.attr("transform", "translate(" + d3.event.x + "," + d3.event.y + ")");
-            }
-
-            function dragended() {
-
-                statechart.classed("dragging", false);
-            }
-
-
-
-            //ZOOM
+            statechart.call(
+                d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended)
+            );
 
             const zoom = d3.zoom()
                 .scaleExtent([2, 100])
                 .on("zoom", zoomed);
 
- 
             statechart.call(zoom);
 
+            function dragstarted() {
+                statechart.classed("dragging", true);
+
+                // Initialize translation values with currentX and currentY
+                translateX = currentX;
+                translateY = currentY;
+            }
+
+            function dragged() {
+                translateX += d3.event.dx;
+                translateY += d3.event.dy;
+
+                // Update the translation part of the transform attribute
+                statechart.attr("transform", "translate(" + translateX + "," + translateY + ") scale(" + scale + ")");
+            }
+
+            function dragended() {
+                statechart.classed("dragging", false);
+
+                // Update the currentX and currentY values after dragging ends
+                currentX = translateX;
+                currentY = translateY;
+            }
+
             function zoomed() {
-                
+                // Update the scale part of the transform attribute
+                scale = d3.event.transform.k;
+                currentX = d3.event.transform.x;
+                currentY = d3.event.transform.y;
+                console.log(d3.event.transform);
+
+                // Update the entire transform attribute, including both scale and translation
                 statechart.attr("transform", d3.event.transform);
+                
             }
 
             return true;
