@@ -249,7 +249,7 @@ a:focus {
     padding: 4%;
 }
 .nav-item a{
-    color: black !important;
+    color: rgb(36, 36, 36) !important;
 }
 a.dropdown-item{
     color: black !important;
@@ -369,6 +369,47 @@ a.dropdown-item{
     cursor: move;
 }
 
+/* ---------------------------------------------------
+    User Traces Page
+----------------------------------------------------- */
+.titleContainer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#traceContainer{
+    background-color: white;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    width: 98%;
+    height: 105%;
+    transition: all 0.3s ease-in-out;
+    margin-top: 0.5%;
+    display: flex;
+}
+
+#traceContainer h1{
+    color: #554e8d;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2%;
+}
+.filterButton{
+    background-color: #52b0c3;
+    border-radius: 9px;
+    width: 129px;
+    height: 33px;
+    margin-right: 10px;
+    border: 1px solid transparent;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+.filterSidebar{
+    height: 100%;
+    width: 15%;
+    background-color: #332e58;
+    border-radius: 2px;
+    padding: 1.5%;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */

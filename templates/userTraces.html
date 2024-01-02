@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <title> YATF</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
+        integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
+        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js"
+        integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
+        crossorigin="anonymous"></script>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="js/index.js"></script>
+</head>
+
+<body>
+    <div class="wrapper">
+        
+        <!-- Page Content  -->
+        <div id="content">
+            <!-- Main Nav Bar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 3.2em">
+                <div class="container-fluid">
+                    <!-- <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                    </button> -->
+                    <a class="navbar-brand" href="#" style="color: #52b0c3">YATF</a>
+                    <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav">
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">System Overview</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/">Statechart</a>
+                                    <a class="dropdown-item" href="#">Interactive Elements</a>
+                                </div>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">User Traces</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">User Testing</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Version History</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="width: 250px;"></div>
+
+
+                </div>
+            </nav>
+
+            <div class="mainContainer">
+                <div id="traceContainer">
+                    <div class="filterSidebar">
+                        <p>Sort by</p>
+                        <div class="line"></div>
+                        <p>Filter by</p>
+                    </div>
+                    <div style="display: block;
+                    width: 100%;
+                    padding: 1.5%;">
+                        <h1>Loaded User Traces #</h1>
+                       <div class="titleContainer">
+                        
+                        <!-- <div>
+                            <div class="filterButton nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">Sort By</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/">Statechart</a>
+                                    <a class="dropdown-item" href="#">Interactive Elements</a>
+                                </div>
+                            </div> -->
+                            <!-- <button class="filterButton">
+                                <p>
+                                    Filter
+                                </p>
+                            </button> -->
+                        </div>
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col"><input type="checkbox"></th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Events</th>
+                                <th scope="col">Timestamp</th>
+                                <th scope="col">Number of Events</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row"><input type="checkbox"></th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                                <td>1</td>
+                              </tr>
+                              <tr>
+                                <th scope="row"><input type="checkbox"></th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                                <td>1</td>
+                              </tr>
+                              <tr>
+                                <th scope="row"><input type="checkbox"></th>
+                                <td colspan="2">Larry the Bird</td>
+                                <td>@twitter</td>
+                                <td>1</td>
+                              </tr>
+                              
+                            </tbody>
+                          </table> 
+                    </div>
+                    
+                    
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <script src=" 
+    https://d3js.org/d3.v4.min.js">
+    </script>
+    <script src=" 
+    https://d3js.org/d3-color.v1.min.js">
+    </script>
+    <script src=" 
+    https://d3js.org/d3-interpolate.v1.min.js">
+    </script>
+    <script src=" 
+    https://d3js.org/d3-scale-chromatic.v1.min.js">
+    </script>
+
+</body>
+
+</html>

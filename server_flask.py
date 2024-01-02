@@ -14,9 +14,14 @@ CORS(app)
 config = ConfigParser()
 config.read('config.ini')
 
+
 @app.route("/")
 def home():
     return render_template('index.html')
+
+@app.route("/userTraces")
+def userTraces():
+    return render_template('userTraces.html')
 
 @app.route("/upload_statechart") #Function that uploads all the statecharts
 def upload_statechart():
