@@ -314,32 +314,41 @@ a.dropdown-item{
 }
 
 #minimapContainer {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: absolute;
+
+    bottom: 0;
+
+    right: 0;
+
+    z-index: 1;
 
 }
 
 
-#statechartSVG {
-    max-height: 800px;
+#statechartContainer {
+    max-height: auto;
+
+    max-width: 800px;
 
     overflow-y: scroll;
 
-    overflow-x: scroll;
+    overflow-x: auto;
 
 }
 
-#statechartSVG::-webkit-scrollbar {
+#statechartContainer::-webkit-scrollbar {
     width: 8px;
 
 }
 
-#statechartSVG::-webkit-scrollbar-thumb {
+#statechartContainer::-webkit-scrollbar-thumb {
     background-color: #888;
 
 }
 
-#statechartSVG::-webkit-scrollbar-track {
+#statechartContainer::-webkit-scrollbar-track {
     background-color: #f0f0f0;
 
 }
