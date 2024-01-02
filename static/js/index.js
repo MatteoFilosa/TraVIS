@@ -327,10 +327,8 @@ function pinSidebar() {
     document.getElementById("sidebarCollapse").disabled = pin;
     if(pin){
         document.getElementById("pinImg").src="/images/pinFilled.png";
-        document.getElementById("sidebarPinButton").style.backgroundColor = "#381D2A";
     }else{
         document.getElementById("pinImg").src="/images/pin.png";
-        document.getElementById("sidebarPinButton").style.backgroundColor = "white";
     }
 }
 // Function executed when the page is loaded
@@ -347,6 +345,6 @@ window.onload = function () {
 
     document.getElementById("slidersNum").style.color = color2;
     document.getElementById("buttonsNum").style.color = color1;
-    document.getElementById("inputsNum").style.color = color5;
+    document.getElementById("inputsNum").style.color = color9;
 };
 
