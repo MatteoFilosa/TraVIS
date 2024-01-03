@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify, make_response
 from flask_cors import CORS
 from flask_pymongo import PyMongo
 from configparser import ConfigParser
-import os
+import os, re
 
 app = Flask(__name__,
             static_url_path='', 
@@ -80,6 +80,78 @@ def upload_statechart():
 
     return "Statecharts correctly uploaded!"
 
+
+#Function to upload the user traces we already had from Falcon Crossfilter
+@app.route("/upload_user_traces")
+def upload_user_traces():
+    database_name = "user_traces"  
+    mongo_uri = config['DATABASES'][database_name]
+    app.config["MONGO_URI"] = mongo_uri
+    mongo = PyMongo(app)
+
+    svg_folder = "static/files/user_traces_falcon"
+    collection_name = "falcon"
+
+    try:
+        # List all files in the specified folder
+        all_files = os.listdir(svg_folder)
+
+        for file_name in all_files:
+            svg_path = os.path.join(svg_folder, file_name)
+
+            # Verifying if the file was already added to the db
+            existing_document = mongo.db[collection_name].find_one({"name": file_name})
+
+            if existing_document:
+                print(f"{file_name} is already in the database. Skipping...")
+            else:
+                with open(svg_path, "r") as file:
+                    user_trace_data = file.read()
+
+                # Insert the document into the collection
+                document = {"name": file_name, "user_trace": user_trace_data}
+                mongo.db[collection_name].insert_one(document)
+                print(f"{file_name} inserted into the database.")
+
+        print("Process complete!")
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": str(e)}), 500
+
+    return "User traces correctly uploaded!"
+
+#Function to download the user_traces
+@app.route("/get_user_traces")
+def get_user_traces():
+    database_name = "user_traces"  
+    mongo_uri = config['DATABASES'][database_name]
+    app.config["MONGO_URI"] = mongo_uri
+    mongo = PyMongo(app)
+    collection_name = "falcon"
+
+    try:
+        # Fetch all documents from the collection and convert cursor to a list
+        user_traces_data = list(mongo.db[collection_name].find({}, {"_id": 0}))
+
+        # Remove newline characters and extra spaces from each document
+        cleaned_data = [
+            {k: re.sub(r'\s+', ' ', v.strip().replace("\n", "").replace("\\", "")) if isinstance(v, str) else v
+             for k, v in doc.items()}
+            for doc in user_traces_data
+        ]
+
+        # Return the cleaned data as JSON response
+        print(cleaned_data)
+        print("----")
+        print(jsonify(cleaned_data))
+        return jsonify(cleaned_data)
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
 @app.route("/get_statecharts")
 def get_statecharts():
     database_name = "visualizations"  # You can change db name here
@@ -108,7 +180,7 @@ def get_statecharts():
 
     except Exception as e:
         print(f"Error: {e}")
-        # Consider returning an error response if something goes wrong
+        
 
     # Convert data to JSON
     response_data = jsonify(statecharts_data)

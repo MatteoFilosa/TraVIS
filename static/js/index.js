@@ -118,16 +118,16 @@ function updateIndicatorPosition() {
 function setupMinimapClickHandler(originalSVG) {
     const minimapContainer = document.getElementById("minimapContainer");
     const statechartSVG = document.getElementById("statechartSVG");
-    //console.log(minimapWidth);
-    //var originalHeightPixel = document.getElementById("graph0").getBoundingClientRect().height
-    //var ratio = originalHeightPixel/800
-    //var indicatorHeight = ratio * minimapHeight;
-    // Add the indicator on the minimap
+    var svgHeight = statechartSVG.getBoundingClientRect().height;
+    //To adjust the indicator's height basing on the original svg's height
+    var ratio = 800/svgHeight
+    if (ratio > 1) ratio = 1
+    console.log(svgHeight, ratio)
     const indicator = document.createElement("div");
     indicator.id = "indicator";
     indicator.style.position = "absolute";
     indicator.style.width = minimapWidth + "px";
-    indicator.style.height = "80px";
+    indicator.style.height = (ratio * 100) + "%";
     indicator.style.backgroundColor = "transparent";
     indicator.style.borderTop = "2px solid lightblue";
     indicator.style.borderLeft = "2px solid lightblue";
@@ -139,7 +139,7 @@ function setupMinimapClickHandler(originalSVG) {
     minimapContainer.appendChild(indicator);
 
     // Set the top position relative to the minimapContainer
-    indicator.style.top = "0";
+    indicator.style.top = "200px";
     indicator.style.left = "0";
     indicator.style.bottom = "0";
     indicator.style.right = "0";
@@ -300,7 +300,7 @@ function isNameInUrl(jsonData, systemUrl) {
                 scale = d3.event.transform.k;
                 currentX = d3.event.transform.x;
                 currentY = d3.event.transform.y;
-                console.log(originalWidth, originalHeight, currentX, currentY);
+                console.log(currentX, currentY);
 
                 var indicator = document.getElementById("indicator");
 

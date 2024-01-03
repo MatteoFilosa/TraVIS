@@ -293,7 +293,6 @@ a.dropdown-item{
     display: -webkit-flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
     transition: all 0.3s ease-in-out;
 }
 
@@ -322,35 +321,31 @@ a.dropdown-item{
 
     right: 0;
 
+    margin-right: 20px;
+    margin-bottom: 20px;
+
     z-index: 1;
+    
 
 }
 
 
 #statechartContainer {
-    max-height: auto;
-
-    max-width: 800px;
-
+    
+    overflow-x: scroll;
     overflow-y: scroll;
-
-    overflow-x: auto;
-
 }
 
 #statechartContainer::-webkit-scrollbar {
     width: 8px;
-
 }
 
 #statechartContainer::-webkit-scrollbar-thumb {
     background-color: #888;
-
 }
 
 #statechartContainer::-webkit-scrollbar-track {
     background-color: #f0f0f0;
-
 }
 
 .layoutButtons {
