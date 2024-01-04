@@ -264,7 +264,7 @@ function isNameInUrl(jsonData, systemUrl) {
                 // Update the translation part of the transform attribute
                 statechart.attr("transform", "translate(" + translateX + "," + translateY + ") scale(" + scale + ")");
 
-                console.log(translateX, translateY, d3.event.x, d3.event.y)
+                //console.log(translateX, translateY, d3.event.x, d3.event.y)
             }
 
             function dragended() {
@@ -286,7 +286,7 @@ function isNameInUrl(jsonData, systemUrl) {
                 newLeft = Math.min(Math.max(newLeft, 0), minimapContainer.clientWidth - indicator.clientWidth);
                 newTop = Math.min(Math.max(newTop, 0), minimapContainer.clientHeight - indicator.clientHeight);
 
-                // Update the position of the indicator. We have to invert!
+                // Update the position of the indicator.
                 indicator.style.left = newLeft + "px";
                 indicator.style.top = newTop + "px";
 
@@ -300,7 +300,7 @@ function isNameInUrl(jsonData, systemUrl) {
                 scale = d3.event.transform.k;
                 currentX = d3.event.transform.x;
                 currentY = d3.event.transform.y;
-                console.log(currentX, currentY);
+                console.log("Scale: " + scale + ", X: " + currentX + ", Y: " +  currentY);
 
                 var indicator = document.getElementById("indicator");
 
@@ -310,15 +310,19 @@ function isNameInUrl(jsonData, systemUrl) {
                 var currentLeft = parseFloat(indicatorLeft);
                 var currentTop = parseFloat(indicatorTop);
 
-                // Calcolare le nuove posizioni dell'indicatore
-                var newLeft = currentLeft - ((currentX / minimapWidth) / scale / scaleFactor);
-                var newTop = currentTop - ((currentY / 80) / scale / scaleFactor);
+                // Trying to get the best approximation possible. It is kinda messy, I know.
+                var newLeft = ( ((currentX ) / scale / scaleFactor)) * -1;
+                var newTop = (currentTop) + ((currentY / 2 / scale) / scaleFactor );
+                console.log(newLeft, newTop)
 
-                // Assicurarsi che l'indicatore non esca mai dai bordi del minimapContainer
+                // To let the indicator inside the boundaries
                 newLeft = Math.min(Math.max(newLeft, 0), minimapContainer.clientWidth - indicator.clientWidth);
                 newTop = Math.min(Math.max(newTop, 0), minimapContainer.clientHeight - indicator.clientHeight);
 
-                // Aggiornare la posizione dell'indicatore
+                //Small adjustment
+                newTop = newTop - (scale * 5)
+
+                //Update indicator pos
                 indicator.style.left = newLeft + "px";
                 indicator.style.top = newTop + "px";
 
@@ -327,7 +331,7 @@ function isNameInUrl(jsonData, systemUrl) {
 
                 // Update the size of the indicator based on the zoom level
                 const newWidth = minimapWidth / scale;
-                const newHeight = 80 / scale;
+                const newHeight = minimapHeight /scale;
 
                 indicator.style.width = newWidth + "px";
                 indicator.style.height = newHeight + "px";
