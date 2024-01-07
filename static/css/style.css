@@ -422,13 +422,20 @@ a.dropdown-item{
 }
 thead{
     height: 50px;
-    background-color: #d7eff6;
+    background-color: #bbe0eb;
     position: sticky;
     top: 0;
 }
 tr{
     height: 4rem;
 }
+tbody tr:hover{
+    background-color: #d7eff6 !important;
+}
+.table-selected{
+    background-color: #d7eff6 !important;
+}
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
