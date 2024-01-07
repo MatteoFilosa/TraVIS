@@ -28,7 +28,7 @@
         crossorigin="anonymous"></script>
 
     <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/userTraces.js"></script>
 </head>
 
 <body>
@@ -82,56 +82,19 @@
                     <div style="display: block;
                     width: 100%;
                     padding: 1.5%;">
-                        <h1>Loaded User Traces #</h1>
-                       <div class="titleContainer">
-                        
-                        <!-- <div>
-                            <div class="filterButton nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">Sort By</a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/">Statechart</a>
-                                    <a class="dropdown-item" href="#">Interactive Elements</a>
-                                </div>
-                            </div> -->
-                            <!-- <button class="filterButton">
-                                <p>
-                                    Filter
-                                </p>
-                            </button> -->
-                        </div>
-                        <table class="table table-hover">
+                        <h1 id="tracesNum">Loaded User Traces: </h1>
+                        <table class="table-responsive table-hover" >
                             <thead>
                               <tr>
-                                <th scope="col"><input type="checkbox"></th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Events</th>
-                                <th scope="col">Timestamp</th>
-                                <th scope="col">Number of Events</th>
+                                <th scope="col" style="width: 5%;"><input type="checkbox"></th>
+                                <th scope="col" style="width: 20%;">Name</th>
+                                <th scope="col" style="width: 10%;">Raw Value</th>
+                                <th scope="col" style="width: 15%;">Timestamp</th>
+                                <th scope="col" style="width: 10%;">Number of Events</th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row"><input type="checkbox"></th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                                <td>1</td>
-                              </tr>
-                              <tr>
-                                <th scope="row"><input type="checkbox"></th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                                <td>1</td>
-                              </tr>
-                              <tr>
-                                <th scope="row"><input type="checkbox"></th>
-                                <td colspan="2">Larry the Bird</td>
-                                <td>@twitter</td>
-                                <td>1</td>
-                              </tr>
-                              
+                            <tbody id="tracesTable">
+                              <!-- Table rows will be dynamically added here -->
                             </tbody>
                           </table> 
                     </div>

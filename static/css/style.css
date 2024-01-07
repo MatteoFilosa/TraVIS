@@ -414,6 +414,21 @@ a.dropdown-item{
     border-radius: 2px;
     padding: 1.5%;
 }
+.table-responsive{
+    max-height: 600px !important;
+    height: 600px;
+    overflow: auto;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+thead{
+    height: 50px;
+    background-color: #d7eff6;
+    position: sticky;
+    top: 0;
+}
+tr{
+    height: 4rem;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */

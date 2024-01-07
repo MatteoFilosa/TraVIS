@@ -23,6 +23,24 @@ let color10 = d3.schemeCategory10[9];
 
 //#endregion
 
+// Function executed when index.html is loaded
+window.onload = function () {
+    var sideBarCollapse = document.getElementById("sidebarCollapse");
+    loadingIcon = document.getElementById("loadingIcon");
+    loadButton = document.getElementById("loadSystem");
+    statechartSVG = document.getElementById("statechartSVG");
+
+    sideBarCollapse.addEventListener("click", function () {
+        sideBarCollapse.classList.toggle("active");
+        document.getElementById("sidebar").classList.toggle("active");
+    });
+
+    document.getElementById("slidersNum").style.color = color2;
+    document.getElementById("buttonsNum").style.color = color1;
+    document.getElementById("inputsNum").style.color = color9;
+};
+
+
 //#region Resize Containers
 function resizeContainers(layoutType) {
     var statechartContainer = document.getElementById("statechartContainer");
@@ -403,28 +421,5 @@ function LoadSystem() {
     websiteContainer.src = systemURL;
     CheckIfStatechartExists();
 }
-// Function executed when index.html is loaded
-window.onload = function () {
-    var sideBarCollapse = document.getElementById("sidebarCollapse");
-    loadingIcon = document.getElementById("loadingIcon");
-    loadButton = document.getElementById("loadSystem");
-    statechartSVG = document.getElementById("statechartSVG");
 
-    sideBarCollapse.addEventListener("click", function () {
-        sideBarCollapse.classList.toggle("active");
-        document.getElementById("sidebar").classList.toggle("active");
-    });
-
-    document.getElementById("slidersNum").style.color = color2;
-    document.getElementById("buttonsNum").style.color = color1;
-    document.getElementById("inputsNum").style.color = color9;
-};
-
-//#endregion
-
-//#region User Traces
-
-function getUserTraces(){
-
-}
 //#endregion
