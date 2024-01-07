@@ -1,4 +1,4 @@
-// Global variable declarations
+//#region Global Variables
 var systemURL;
 var loadButton;
 var loadingIcon;
@@ -21,6 +21,9 @@ let color8 = d3.schemeCategory10[7];
 let color9 = d3.schemeCategory10[8];
 let color10 = d3.schemeCategory10[9];
 
+//#endregion
+
+//#region Resize Containers
 function resizeContainers(layoutType) {
     var statechartContainer = document.getElementById("statechartContainer");
     var websiteContainer = document.getElementById("websiteContainer");
@@ -66,7 +69,9 @@ function resizeContainers(layoutType) {
             console.log("Case: default");
     }
 }
+//#endregion
 
+//#region Minimap
 
 // Function to generate the minimap
 function generateMinimap(originalSVG) {
@@ -185,7 +190,9 @@ function setupMinimapClickHandler(originalSVG) {
 
 
 }
+//#endregion
 
+//#region Statechart
 function isNameInUrl(jsonData, systemUrl) {
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
     if (matchingElement) {
@@ -346,17 +353,6 @@ function isNameInUrl(jsonData, systemUrl) {
     return false;
 }
 
-
-
-
-
-function zoom(type) {
-
-}
-
-
-
-
 // Function to check if there is a corresponding statechart in the URL
 function CheckIfStatechartExists() {
     const url = 'http://127.0.0.1:5000/get_statecharts';
@@ -370,7 +366,24 @@ function CheckIfStatechartExists() {
             isNameInUrl(json, systemURL);
         });
 }
+//#endregion
 
+//#region Sidebar
+var pin = false;
+
+function pinSidebar() {
+    pin = !pin;
+    document.getElementById("sidebarCollapse").disabled = pin;
+    if (pin) {
+        document.getElementById("pinImg").src = "/images/pinFilled.png";
+    } else {
+        document.getElementById("pinImg").src = "/images/pin.png";
+    }
+}
+
+//#endregion
+
+//#region Load system
 // Function to load the system
 function LoadSystem() {
     statechartSVG.innerHTML = "";
@@ -390,19 +403,7 @@ function LoadSystem() {
     websiteContainer.src = systemURL;
     CheckIfStatechartExists();
 }
-
-var pin = false;
-
-function pinSidebar() {
-    pin = !pin;
-    document.getElementById("sidebarCollapse").disabled = pin;
-    if (pin) {
-        document.getElementById("pinImg").src = "/images/pinFilled.png";
-    } else {
-        document.getElementById("pinImg").src = "/images/pin.png";
-    }
-}
-// Function executed when the page is loaded
+// Function executed when index.html is loaded
 window.onload = function () {
     var sideBarCollapse = document.getElementById("sidebarCollapse");
     loadingIcon = document.getElementById("loadingIcon");
@@ -419,3 +420,11 @@ window.onload = function () {
     document.getElementById("inputsNum").style.color = color9;
 };
 
+//#endregion
+
+//#region User Traces
+
+function getUserTraces(){
+
+}
+//#endregion
