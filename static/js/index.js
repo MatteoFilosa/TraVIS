@@ -7,6 +7,7 @@ var statechartSVG;
 var matchingName = null;
 var matchingSvg = null;
 var statechartContainer;
+var statechart;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0;
 
 // Array of colors is given  
@@ -143,7 +144,7 @@ function setupMinimapClickHandler(originalSVG) {
     const statechartSVG = document.getElementById("statechartSVG");
     var svgHeight = statechartSVG.getBoundingClientRect().height;
     //To adjust the indicator's height basing on the original svg's height
-    var ratio = 800/svgHeight
+    var ratio = 800 / svgHeight
     if (ratio > 1) ratio = 1
     console.log(svgHeight, ratio)
     const indicator = document.createElement("div");
@@ -210,6 +211,98 @@ function setupMinimapClickHandler(originalSVG) {
 }
 //#endregion
 
+function dragstarted() {
+    statechart.classed("dragging", true);
+
+    // Initialize translation values with currentX and currentY
+    translateX = currentX;
+    translateY = currentY;
+    indicatorLeft = indicator.style.left;
+    indicatorTop = indicator.style.top;
+
+}
+
+function dragged() {
+    translateX += d3.event.dx;
+    translateY += d3.event.dy;
+
+
+    // Update the translation part of the transform attribute
+    statechart.attr("transform", "translate(" + translateX + "," + translateY + ") scale(" + scale + ")");
+
+    //console.log(translateX, translateY, d3.event.x, d3.event.y)
+}
+
+function dragended() {
+    statechart.classed("dragging", false);
+
+    // Extract numeric values from the current left and top properties
+    var currentLeft = parseFloat(indicatorLeft);
+    var currentTop = parseFloat(indicatorTop);
+
+    // Calculate the change in translation values
+    var dx = translateX - currentX;
+    var dy = translateY - currentY;
+
+    // Update the translated values with the correct proportion based on the scale factor and the scale (zoom) value
+    var newLeft = currentLeft - ((dx / scaleFactor) / scale);
+    var newTop = currentTop - ((dy / scaleFactor) / scale);
+
+    // Ensure that the indicator stays within the bounds of minimapContainer
+    newLeft = Math.min(Math.max(newLeft, 0), minimapContainer.clientWidth - indicator.clientWidth);
+    newTop = Math.min(Math.max(newTop, 0), minimapContainer.clientHeight - indicator.clientHeight);
+
+    // Update the position of the indicator.
+    indicator.style.left = newLeft + "px";
+    indicator.style.top = newTop + "px";
+
+    // Update the currentX and currentY values after dragging ends
+    currentX = translateX;
+    currentY = translateY;
+}
+
+function zoomed() {
+    // Update the scale part of the transform attribute
+    scale = d3.event.transform.k;
+    currentX = d3.event.transform.x;
+    currentY = d3.event.transform.y;
+    console.log("Scale: " + scale + ", X: " + currentX + ", Y: " + currentY);
+
+    var indicator = document.getElementById("indicator");
+
+    indicatorLeft = indicator.style.left;
+    indicatorTop = indicator.style.top;
+
+    var currentLeft = parseFloat(indicatorLeft);
+    var currentTop = parseFloat(indicatorTop);
+
+    // Trying to get the best approximation possible. It is kinda messy, I know.
+    var newLeft = (((currentX) / scale / scaleFactor)) * -1;
+    var newTop = (currentTop) + ((currentY / 2 / scale) / scaleFactor);
+    console.log(newLeft, newTop)
+
+    // To let the indicator inside the boundaries
+    newLeft = Math.min(Math.max(newLeft, 0), minimapContainer.clientWidth - indicator.clientWidth);
+    newTop = Math.min(Math.max(newTop, 0), minimapContainer.clientHeight - indicator.clientHeight);
+
+    //Small adjustment
+    newTop = newTop - (scale * 5)
+
+    //Update indicator pos
+    indicator.style.left = newLeft + "px";
+    indicator.style.top = newTop + "px";
+
+    // Update the entire transform attribute, including both scale and translation
+    statechart.attr("transform", d3.event.transform);
+
+    // Update the size of the indicator based on the zoom level
+    const newWidth = minimapWidth / scale;
+    const newHeight = minimapHeight / scale;
+
+    indicator.style.width = newWidth + "px";
+    indicator.style.height = newHeight + "px";
+}
+
 //#region Statechart
 function isNameInUrl(jsonData, systemUrl) {
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
@@ -237,7 +330,7 @@ function isNameInUrl(jsonData, systemUrl) {
 
             //I need to do this otherwise it selects the minimap instead of the big statechart ...
 
-            const statechart = d3.select(statechartSVG)
+            statechart = d3.select(statechartSVG)
                 .selectAll("#graph0")
                 .filter(function () {
                     return this.parentNode.id !== "minimapSVG";
@@ -270,97 +363,7 @@ function isNameInUrl(jsonData, systemUrl) {
 
             statechart.call(zoom);
 
-            function dragstarted() {
-                statechart.classed("dragging", true);
 
-                // Initialize translation values with currentX and currentY
-                translateX = currentX;
-                translateY = currentY;
-                indicatorLeft = indicator.style.left;
-                indicatorTop = indicator.style.top;
-
-            }
-
-            function dragged() {
-                translateX += d3.event.dx;
-                translateY += d3.event.dy;
-
-
-                // Update the translation part of the transform attribute
-                statechart.attr("transform", "translate(" + translateX + "," + translateY + ") scale(" + scale + ")");
-
-                //console.log(translateX, translateY, d3.event.x, d3.event.y)
-            }
-
-            function dragended() {
-                statechart.classed("dragging", false);
-
-                // Extract numeric values from the current left and top properties
-                var currentLeft = parseFloat(indicatorLeft);
-                var currentTop = parseFloat(indicatorTop);
-
-                // Calculate the change in translation values
-                var dx = translateX - currentX;
-                var dy = translateY - currentY;
-
-                // Update the translated values with the correct proportion based on the scale factor and the scale (zoom) value
-                var newLeft = currentLeft - ((dx / scaleFactor) / scale);
-                var newTop = currentTop - ((dy / scaleFactor) / scale);
-
-                // Ensure that the indicator stays within the bounds of minimapContainer
-                newLeft = Math.min(Math.max(newLeft, 0), minimapContainer.clientWidth - indicator.clientWidth);
-                newTop = Math.min(Math.max(newTop, 0), minimapContainer.clientHeight - indicator.clientHeight);
-
-                // Update the position of the indicator.
-                indicator.style.left = newLeft + "px";
-                indicator.style.top = newTop + "px";
-
-                // Update the currentX and currentY values after dragging ends
-                currentX = translateX;
-                currentY = translateY;
-            }
-
-            function zoomed() {
-                // Update the scale part of the transform attribute
-                scale = d3.event.transform.k;
-                currentX = d3.event.transform.x;
-                currentY = d3.event.transform.y;
-                console.log("Scale: " + scale + ", X: " + currentX + ", Y: " +  currentY);
-
-                var indicator = document.getElementById("indicator");
-
-                indicatorLeft = indicator.style.left;
-                indicatorTop = indicator.style.top;
-
-                var currentLeft = parseFloat(indicatorLeft);
-                var currentTop = parseFloat(indicatorTop);
-
-                // Trying to get the best approximation possible. It is kinda messy, I know.
-                var newLeft = ( ((currentX ) / scale / scaleFactor)) * -1;
-                var newTop = (currentTop) + ((currentY / 2 / scale) / scaleFactor );
-                console.log(newLeft, newTop)
-
-                // To let the indicator inside the boundaries
-                newLeft = Math.min(Math.max(newLeft, 0), minimapContainer.clientWidth - indicator.clientWidth);
-                newTop = Math.min(Math.max(newTop, 0), minimapContainer.clientHeight - indicator.clientHeight);
-
-                //Small adjustment
-                newTop = newTop - (scale * 5)
-
-                //Update indicator pos
-                indicator.style.left = newLeft + "px";
-                indicator.style.top = newTop + "px";
-
-                // Update the entire transform attribute, including both scale and translation
-                statechart.attr("transform", d3.event.transform);
-
-                // Update the size of the indicator based on the zoom level
-                const newWidth = minimapWidth / scale;
-                const newHeight = minimapHeight /scale;
-
-                indicator.style.width = newWidth + "px";
-                indicator.style.height = newHeight + "px";
-            }
 
             return true;
         } else {
