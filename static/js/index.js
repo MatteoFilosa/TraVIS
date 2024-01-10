@@ -8,7 +8,7 @@ var matchingName = null;
 var matchingSvg = null;
 var statechartContainer;
 var statechart;
-var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0;
+var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0, currentX = 0, currentY = 0, translateX = 0, translateY = 0, minimapRatio = 0, scale = 1, svgWidth = 0, svgHeight = 0;
 
 // Array of colors is given  
 let color1 = d3.schemeCategory10[0];
@@ -98,6 +98,10 @@ function generateMinimap(originalSVG) {
     originalWidth = originalSVG.width.baseVal.valueInSpecifiedUnits;
     originalHeight = originalSVG.height.baseVal.valueInSpecifiedUnits;
 
+    //Needed to avoid certain behaviors while dragging the indicator
+    currentY = originalHeight;
+    translateY = originalHeight;
+
     if (originalWidth / scaleFactor < 100 || originalHeight / scaleFactor < 100) {
         scaleFactor = 25;
     }
@@ -138,20 +142,77 @@ function updateIndicatorPosition() {
     indicator.style.top = indicatorY + "px";
 }
 
+//Dragging the indicator
+
+let initialX, initialY;
+
+function indicatorDragStarted() {
+    indicator.classList.add("dragging");
+
+    initialX = parseFloat(indicator.style.left);
+    initialY = parseFloat(indicator.style.top);
+}
+
+function indicatorDragged() {
+    const indicatorRect = indicator.getBoundingClientRect();
+    const minimapRect = minimapContainer.getBoundingClientRect();
+
+    // Calculate the position of the indicator based on the drag
+    let newX = event.clientX - minimapRect.left - indicatorRect.width / 2;
+    let newY = event.clientY - minimapRect.top - indicatorRect.height / 2;
+
+    // Ensure that the indicator stays within the bounds of minimapContainer
+    newX = Math.min(Math.max(newX, 0), minimapRect.width - indicatorRect.width);
+    newY = Math.min(Math.max(newY, 0), minimapRect.height - indicatorRect.height);
+
+    // Update the position of the indicator
+    indicator.style.left = newX + "px";
+    indicator.style.top = newY + "px";
+
+    const deltaX = parseFloat(indicator.style.left) - initialX;
+    const deltaY = parseFloat(indicator.style.top) - initialY;
+    console.log(deltaX, deltaY)
+    translateX -= deltaX * ((svgWidth / minimapWidth) / 1.5 )
+    translateY -= deltaY * ((svgHeight / minimapHeight) / 1.5 )
+    statechart.attr("transform", "translate(" + translateX + "," + translateY + ") scale(" + scale + ")");
+    currentX = translateX
+    currentY = translateY
+    
+    
+}
+
+function indicatorDragEnded() {
+    indicator.classList.remove("dragging");
+
+    // Calcola la differenza in pixel tra la posizione iniziale e finale
+    const deltaX = parseFloat(indicator.style.left) - initialX;
+    const deltaY = parseFloat(indicator.style.top) - initialY;
+
+    // Update the currentX and currentY values after dragging ends
+    //currentX = translateX;
+    //currentY = translateY;
+
+    // Aggiorna anche la differenza in pixel
+    console.log("Differenza X:", deltaX, "Differenza Y:", deltaY);
+}
+
 // Function to configure the click handler on the minimap
 function setupMinimapClickHandler(originalSVG) {
     const minimapContainer = document.getElementById("minimapContainer");
     const statechartSVG = document.getElementById("statechartSVG");
-    var svgHeight = statechartSVG.getBoundingClientRect().height;
+    svgHeight = statechartSVG.getBoundingClientRect().height;
+    svgWidth = statechartSVG.getBoundingClientRect().width;
+    console.log(svgWidth)
+    console.log(svgHeight)
     //To adjust the indicator's height basing on the original svg's height
-    var ratio = 800 / svgHeight
-    if (ratio > 1) ratio = 1
-    console.log(svgHeight, ratio)
+    minimapRatio = 800 / svgHeight
+    if (minimapRatio > 1) minimapRatio = 1
+    console.log(svgHeight, minimapRatio)
     const indicator = document.createElement("div");
     indicator.id = "indicator";
     indicator.style.position = "absolute";
     indicator.style.width = minimapWidth + "px";
-    indicator.style.height = (ratio * 100) + "%";
+    indicator.style.height = (minimapRatio * 100) + "%";
     indicator.style.backgroundColor = "transparent";
     indicator.style.borderTop = "2px solid lightblue";
     indicator.style.borderLeft = "2px solid lightblue";
@@ -206,15 +267,28 @@ function setupMinimapClickHandler(originalSVG) {
         updateIndicatorPosition();
     });
 
+    // Event listener for dragging the indicator
+    indicator.addEventListener("mousedown", function () {
+        indicatorDragStarted();
+
+        document.addEventListener("mousemove", indicatorDragged);
+        document.addEventListener("mouseup", function () {
+            document.removeEventListener("mousemove", indicatorDragged);
+            indicatorDragEnded();
+        });
+    });
 
 
 }
+
 //#endregion
 
 function dragstarted() {
+    
     statechart.classed("dragging", true);
 
     // Initialize translation values with currentX and currentY
+    
     translateX = currentX;
     translateY = currentY;
     indicatorLeft = indicator.style.left;
@@ -226,9 +300,13 @@ function dragged() {
     translateX += d3.event.dx;
     translateY += d3.event.dy;
 
-
+    
     // Update the translation part of the transform attribute
-    statechart.attr("transform", "translate(" + translateX + "," + translateY + ") scale(" + scale + ")");
+    if (typeof scale === undefined) {
+        statechart.attr("transform", "translate(" + translateX + "," + translateY + ")");
+    }
+
+    else statechart.attr("transform", "translate(" + translateX + "," + translateY + ") scale(" + scale + ")");
 
     //console.log(translateX, translateY, d3.event.x, d3.event.y)
 }
@@ -315,6 +393,9 @@ function isNameInUrl(jsonData, systemUrl) {
         var doc = parser.parseFromString(matchingSvg, "image/svg+xml");
         var originalSVG = doc.documentElement;
         console.log(originalSVG)
+
+        //Variables reset for correct behavior of zoom, drag, etc
+        scale = 1, currentX = 0, currentY = svgHeight, translateX = 0, translateY = currentY
 
         if (originalSVG) {
             statechartSVG.appendChild(originalSVG);

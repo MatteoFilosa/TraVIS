@@ -168,6 +168,14 @@ a:focus {
     background-color: white;
 }
 
+#indicator.dragging {
+    cursor: grab;
+}
+
+#indicator.dragging:active {
+    cursor: grabbing;
+}
+
 /* ---------------------------------------------------
     SIDEBAR STYLE
 ----------------------------------------------------- */
@@ -332,7 +340,6 @@ a.dropdown-item{
 
 #statechartContainer {
     
-    overflow-x: scroll;
     overflow-y: scroll;
 }
 
