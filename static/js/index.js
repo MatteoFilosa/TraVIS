@@ -376,7 +376,9 @@ function isNameInUrl(jsonData, systemUrl) {
     
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
     if (matchingElement) {
-       
+       if(document.getElementById("notFoundText")){
+        document.getElementById("notFoundText").remove();
+       }
         matchingName = matchingElement.name;
         matchingSvg = matchingElement.svg;
         console.log(matchingSvg)
@@ -435,13 +437,17 @@ function isNameInUrl(jsonData, systemUrl) {
                 .on("zoom", zoomed);
 
             statechart.call(zoom);
-
-
-
             return true;
         } else {
             console.error("Invalid original SVG");
             return false;
+        }
+    }else{
+        if(!document.getElementById("notFoundText")){
+            const notFoundtext = document.createElement("div");
+            notFoundtext.id="notFoundText";
+            notFoundtext.textContent = "No statechart found for inserted URL"
+            document.getElementById("statechartContainer").appendChild(notFoundtext);
         }
     }
     return false;
