@@ -34,7 +34,7 @@ function truncateString(str, maxLength) {
 // Function to populate the table with JSON data
 function populateTable(data) {
     const tableBody = document.getElementById("tracesTable");
-
+    
     data.forEach((element, index) => {
         const row = document.createElement("tr");
 
@@ -51,20 +51,34 @@ function populateTable(data) {
         nameCell.textContent = element.name;
         row.appendChild(nameCell);
 
-        // Add User Trace column
-        const userTraceCell = document.createElement("td");
-        userTraceCell.textContent = truncateString(element.user_trace, 20);
-        row.appendChild(userTraceCell);
+        const lenthCell = document.createElement("td");
+        var traceData = JSON.parse(element.user_trace);
+        lenthCell.textContent = traceData.length;
+        row.appendChild(lenthCell);
 
-        // Add empty timestamp column
-        const TimestampCell = document.createElement("td");
-        TimestampCell.textContent = "";
-        row.appendChild(TimestampCell);
+        eventTypes(traceData).then(function(value){
+            const mousemoveCell = document.createElement("td");
+            mousemoveCell.textContent = value.mousemove;
+            row.appendChild(mousemoveCell);
 
-        // Add empty events column
-        const EventsCell = document.createElement("td");
-        EventsCell.textContent = "";
-        row.appendChild(EventsCell);
+            const brushCell = document.createElement("td");
+            brushCell.textContent = value.brush;
+            row.appendChild(brushCell);
+
+            const wheelCell = document.createElement("td");
+            wheelCell.textContent = value.wheel;
+            row.appendChild(wheelCell);
+
+            const mouseoutCell = document.createElement("td");
+            mouseoutCell.textContent = value.mouseout;
+            row.appendChild(mouseoutCell);
+        }
+            
+        );
+
+        
+
+        
 
         // Add the row to the table
         tableBody.appendChild(row);
@@ -78,6 +92,28 @@ function populateTable(data) {
             }
         });
     });
+}
+
+async function eventTypes(jsonData) {
+    var searchWords = ["mousemove", "click", "brush", "wheel", "mouseout"];
+    var wordCount = {};
+
+    // Initialize counts for all search words to zero
+    searchWords.forEach(function(searchWord) {
+        wordCount[searchWord] = 0;
+    });
+
+    jsonData.forEach(function(obj) {
+        Object.values(obj).forEach(function(value) {
+            searchWords.forEach(function(searchWord) {
+                if (String(value).includes(searchWord)) {
+                    wordCount[searchWord]++;
+                }
+            });
+        });
+    });
+
+    return wordCount;
 }
 //#endregion
 
