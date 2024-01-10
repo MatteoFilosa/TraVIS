@@ -5,6 +5,9 @@ var loadedTraces;
 //#endregion
 
 window.onload = function () {
+    loadingIcon = document.getElementById("loadingIcon");
+    table = document.getElementById("table");
+
     getUserTraces();
 }
 
@@ -15,7 +18,9 @@ function getUserTraces() {
         .then(json => {
             loadedTraces = json;
             tracesNum = json.length;
-            document.getElementById("tracesNum").innerHTML += tracesNum;
+            loadingIcon.style.display = "none";
+            table.style.display = "block";
+            document.getElementById("tracesNum").innerHTML = "Loaded User Traces: " + tracesNum;
             populateTable(loadedTraces);
 
         });

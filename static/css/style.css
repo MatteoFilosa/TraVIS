@@ -422,6 +422,7 @@ a.dropdown-item{
     padding: 1.5%;
 }
 .table-responsive{
+    
     max-height: 600px !important;
     height: 600px;
     overflow: auto;
@@ -441,6 +442,9 @@ tbody tr:hover{
 }
 .table-selected{
     background-color: #d7eff6 !important;
+}
+#table{
+    display: none;
 }
 
 /* ---------------------------------------------------

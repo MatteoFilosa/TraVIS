@@ -82,8 +82,12 @@
                     <div style="display: block;
                     width: 100%;
                     padding: 1.5%;">
-                        <h1 id="tracesNum">Loaded User Traces: </h1>
-                        <table class="table-responsive table-hover" >
+                        <h1 id="tracesNum">Loading User Traces... </h1>
+                        <div class="spinner-border" id="loadingIcon" role="status" style="display: block;margin-left: 50%;
+                        margin-top: 22%;">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <table class="table-responsive table-hover" id="table" >
                             <thead>
                               <tr>
                                 <th scope="col" style="width: 5%;padding-left: 1%;"><input type="checkbox" id="selectAllCheckbox" onclick="selectAllTraces()"></th>
