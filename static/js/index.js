@@ -8,6 +8,7 @@ var matchingName = null;
 var matchingSvg = null;
 var statechartContainer;
 var statechart;
+var lastStatechartUrl = "";
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0, currentX = 0, currentY = 0, translateX = 0, translateY = 0, minimapRatio = 0, scale = 1, svgWidth = 0, svgHeight = 0;
 
 // Array of colors is given  
@@ -121,26 +122,6 @@ function generateMinimap(originalSVG) {
     minimapContainer.appendChild(minimapSVG);
 }
 
-// Function to update the position of the indicator based on scrolling
-function updateIndicatorPosition() {
-    var statechartContainer = document.getElementById("statechartContainer");
-    const minimapContainer = document.getElementById("minimapContainer");
-    const minimapRect = minimapContainer.getBoundingClientRect();
-    const indicator = document.getElementById("indicator");
-
-    // Calculate the position of the indicator based on the scroll of statechartSVG
-    const maxScroll = statechartSVG.scrollHeight - statechartSVG.clientHeight;
-    let indicatorY = (statechartSVG.scrollTop / maxScroll) * minimapRect.height;
-
-    // Calculate the maximum allowed top position for the indicator
-    const maxIndicatorTop = minimapRect.height - indicator.clientHeight;
-
-    // Ensure that the indicatorY is within the bounds of minimapContainer
-    indicatorY = Math.max(0, Math.min(indicatorY, maxIndicatorTop));
-
-    // Update the position of the indicator
-    indicator.style.top = indicatorY + "px";
-}
 
 //Dragging the indicator
 
@@ -173,7 +154,7 @@ function indicatorDragged() {
     const deltaY = parseFloat(indicator.style.top) - initialY;
     console.log(deltaX, deltaY)
     translateX -= deltaX * ((svgWidth / minimapWidth) / 1.5 )
-    translateY -= deltaY * ((svgHeight / minimapHeight) / 1.5 )
+    translateY -= deltaY * ((svgHeight / minimapHeight) / 2 )
     statechart.attr("transform", "translate(" + translateX + "," + translateY + ") scale(" + scale + ")");
     currentX = translateX
     currentY = translateY
@@ -212,7 +193,7 @@ function setupMinimapClickHandler(originalSVG) {
     indicator.id = "indicator";
     indicator.style.position = "absolute";
     indicator.style.width = minimapWidth + "px";
-    indicator.style.height = (minimapRatio * 100) + "%";
+    indicator.style.height = (minimapRatio * 80) + "%";
     indicator.style.backgroundColor = "transparent";
     indicator.style.borderTop = "2px solid lightblue";
     indicator.style.borderLeft = "2px solid lightblue";
@@ -247,25 +228,9 @@ function setupMinimapClickHandler(originalSVG) {
         // Ensure that the new scroll position is within the allowed limits
         statechartSVG.scrollTop = Math.min(newScrollPosition, maxScroll);
 
-        // Update the position of the indicator
-        updateIndicatorPosition(clickedX, clickedY);
+     
     });
 
-    // Event listener for scrolling of SVG
-    statechartSVG.addEventListener("scroll", function () {
-        // Calculate the position of the indicator based on the scroll of SVG
-        const minimapRect = minimapContainer.getBoundingClientRect();
-        const maxScroll = statechartSVG.scrollHeight - statechartSVG.clientHeight;
-        const indicatorY = (statechartSVG.scrollTop / maxScroll) * minimapRect.height;
-
-        // Update the position of the indicator
-        updateIndicatorPosition(null, null, indicatorY);
-    });
-
-    // Event listener for scrolling of statechartSVG
-    statechartSVG.addEventListener("scroll", function () {
-        updateIndicatorPosition();
-    });
 
     // Event listener for dragging the indicator
     indicator.addEventListener("mousedown", function () {
@@ -278,6 +243,30 @@ function setupMinimapClickHandler(originalSVG) {
         });
     });
 
+    // Reset Button
+    const resetButton = document.createElement("button");
+    resetButton.innerHTML = "Reset";
+    resetButton.className = "btn btn-info";
+    resetButton.style.position = "absolute";
+    resetButton.style.bottom = "10px";
+    resetButton.style.right = "10px";
+    resetButton.addEventListener("click", function () {
+
+        statechart.attr("transform", "translate(4 " + originalHeight + ")");
+
+
+        indicator.style.width = minimapWidth + "px";
+        indicator.style.height = (minimapRatio * 80) + "%";
+        indicator.style.top = "200px";
+        indicator.style.left = "0";
+        indicator.style.bottom = "0";
+        indicator.style.right = "0";
+
+        scale = 1, currentX = 0, currentY = originalHeight, translateX = 0, translateY = currentY
+    });
+
+    minimapContainer.appendChild(resetButton);
+
 
 }
 
@@ -288,9 +277,10 @@ function dragstarted() {
     statechart.classed("dragging", true);
 
     // Initialize translation values with currentX and currentY
-    
+    console.log(translateX, translateY)
     translateX = currentX;
     translateY = currentY;
+    console.log(translateX, translateY)
     indicatorLeft = indicator.style.left;
     indicatorTop = indicator.style.top;
 
@@ -383,8 +373,10 @@ function zoomed() {
 
 //#region Statechart
 function isNameInUrl(jsonData, systemUrl) {
+    
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
     if (matchingElement) {
+       
         matchingName = matchingElement.name;
         matchingSvg = matchingElement.svg;
         console.log(matchingSvg)
@@ -393,9 +385,11 @@ function isNameInUrl(jsonData, systemUrl) {
         var doc = parser.parseFromString(matchingSvg, "image/svg+xml");
         var originalSVG = doc.documentElement;
         console.log(originalSVG)
+        lastStatechartUrl = systemURL;
 
         //Variables reset for correct behavior of zoom, drag, etc
-        scale = 1, currentX = 0, currentY = svgHeight, translateX = 0, translateY = currentY
+        
+        console.log(translateX, translateY)
 
         if (originalSVG) {
             statechartSVG.appendChild(originalSVG);
@@ -418,16 +412,14 @@ function isNameInUrl(jsonData, systemUrl) {
                 });
 
 
-            // Initial translation values
-            var translateX = 0;
-            var translateY = 0;
+            // Initial translation value
 
             // Update indicator position
             const indicator = document.getElementById("indicator");
             var indicatorTop, indicatorLeft;
 
             // Initial scale values
-            var scale = 1, currentX = 0, currentY = originalHeight;
+            scale = 1, currentX = 0, currentY = originalHeight, translateX = 0, translateY = currentY
 
             //DRAG
 

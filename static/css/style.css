@@ -344,7 +344,7 @@ a.dropdown-item{
 }
 
 #statechartContainer::-webkit-scrollbar {
-    width: 8px;
+    width: 0px;
 }
 
 #statechartContainer::-webkit-scrollbar-thumb {
