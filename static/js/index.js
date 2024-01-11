@@ -106,10 +106,15 @@ function generateMinimap(originalSVG) {
     if (originalWidth / scaleFactor < 100 || originalHeight / scaleFactor < 100) {
         scaleFactor = 25;
     }
-
+    
     minimapWidth = originalWidth / scaleFactor;
     minimapHeight = originalHeight / scaleFactor;
+    if(minimapHeight < 100){
+        minimapHeight *= 2
+        minimapWidth  *= 2
+    }
     console.log(minimapWidth, minimapHeight)
+
 
     var minimapSVG = originalSVG.cloneNode(true);
     minimapSVG.setAttribute("width", minimapWidth);
@@ -394,16 +399,22 @@ function isNameInUrl(jsonData, systemUrl) {
         console.log(translateX, translateY)
 
         if (originalSVG) {
+
             statechartSVG.appendChild(originalSVG);
-
-
+            
             // Generate and set up the minimap
             generateMinimap(originalSVG);
+
+            //Set the id of the originalSVG
+            originalSVG.setAttribute("id", "originalSVG")
+
+            //To avoid the cropping effect while zooming, I need to give the svg more height.
+            if(originalHeight < originalWidth) originalSVG.height.baseVal.valueInSpecifiedUnits = originalWidth + 1000;
+            
 
             // Configure the handler to click on the minimap passing originalSVG as a parameter
             setupMinimapClickHandler(originalSVG);
 
-            console.log(d3.selectAll("#graph0"))
 
             //I need to do this otherwise it selects the minimap instead of the big statechart ...
 
@@ -413,7 +424,7 @@ function isNameInUrl(jsonData, systemUrl) {
                     return this.parentNode.id !== "minimapSVG";
                 });
 
-
+            //document.getElementById("statechartSVG");
             // Initial translation value
 
             // Update indicator position
