@@ -336,11 +336,30 @@ a.dropdown-item{
     
 
 }
+#statechartSVG {
 
+    overflow-x: scroll;
+    overflow-y: scroll;
+
+}
+
+#statechartSVG::-webkit-scrollbar {
+    width: 0px;
+}
+
+#statechartSVG::-webkit-scrollbar-thumb {
+    background-color: #888;
+}
+
+#statechartSVG::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
 
 #statechartContainer {
-    
+
+    overflow-x: scroll;
     overflow-y: scroll;
+    
 }
 
 #statechartContainer::-webkit-scrollbar {

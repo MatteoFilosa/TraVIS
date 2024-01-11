@@ -210,7 +210,7 @@ function setupMinimapClickHandler(originalSVG) {
     minimapContainer.appendChild(indicator);
 
     // Set the top position relative to the minimapContainer
-    indicator.style.top = "200px";
+    indicator.style.top = "45%";
     indicator.style.left = "0";
     indicator.style.bottom = "0";
     indicator.style.right = "0";
@@ -262,7 +262,7 @@ function setupMinimapClickHandler(originalSVG) {
 
         indicator.style.width = minimapWidth + "px";
         indicator.style.height = (minimapRatio * 80) + "%";
-        indicator.style.top = "200px";
+        indicator.style.top = "40%";
         indicator.style.left = "0";
         indicator.style.bottom = "0";
         indicator.style.right = "0";
@@ -356,10 +356,10 @@ function zoomed() {
 
     // To let the indicator inside the boundaries
     newLeft = Math.min(Math.max(newLeft, 0), minimapContainer.clientWidth - indicator.clientWidth);
-    newTop = Math.min(Math.max(newTop, 0), minimapContainer.clientHeight - indicator.clientHeight);
+    newTop = Math.min(Math.max(newTop, 0), (minimapContainer.clientHeight - indicator.clientHeight - (scale * 5)));
 
-    //Small adjustment
-    newTop = newTop - (scale * 5)
+    
+    
 
     //Update indicator pos
     indicator.style.left = newLeft + "px";
@@ -394,9 +394,8 @@ function isNameInUrl(jsonData, systemUrl) {
         console.log(originalSVG)
         lastStatechartUrl = systemURL;
 
-        //Variables reset for correct behavior of zoom, drag, etc
+  
         
-        console.log(translateX, translateY)
 
         if (originalSVG) {
 
@@ -424,12 +423,7 @@ function isNameInUrl(jsonData, systemUrl) {
                     return this.parentNode.id !== "minimapSVG";
                 });
 
-            //document.getElementById("statechartSVG");
-            // Initial translation value
-
-            // Update indicator position
-            const indicator = document.getElementById("indicator");
-            var indicatorTop, indicatorLeft;
+            
 
             // Initial scale values
             scale = 1, currentX = 0, currentY = originalHeight, translateX = 0, translateY = currentY
