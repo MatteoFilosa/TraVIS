@@ -1,6 +1,6 @@
 //#region Global Variables
 var tracesNum;
-var selectedTraces = [];
+var selectedTraces = new Set();
 var loadedTraces;
 //#endregion
 
@@ -43,6 +43,7 @@ function populateTable(data) {
         checkboxCell.style.paddingLeft = "1%";
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
+        checkbox.id=element.name;
         checkboxCell.appendChild(checkbox);
         row.appendChild(checkboxCell);
 
@@ -75,11 +76,6 @@ function populateTable(data) {
         }
             
         );
-
-        
-
-        
-
         // Add the row to the table
         tableBody.appendChild(row);
 
@@ -87,8 +83,12 @@ function populateTable(data) {
         checkbox.addEventListener('change', function () {
             if (checkbox.checked) {
                 row.classList.add('table-selected');
+                selectedTraces.add(checkbox.id);
+                console.log(selectedTraces);
             } else {
                 row.classList.remove('table-selected');
+                selectedTraces.delete(checkbox.id);
+                console.log(selectedTraces);
             }
         });
     });
@@ -131,9 +131,12 @@ function selectAllTraces() {
         const row = checkbox.closest('tr');
         if (checkbox.checked) {
             row.classList.add('table-selected');
+            selectedTraces.add(checkbox.id);
         } else {
             row.classList.remove('table-selected');
+            selectedTraces.delete(checkbox.id);
         }
+        
     });
 }
 
