@@ -6,6 +6,8 @@ http://awareserver.dis.uniroma1.it:11768/crumbs-example/
 
 https://fredhohman.com/summit/
 
+https://vega.github.io/falcon/flights/
+
 -----------These URLs below have CORS/security issue and/or don't load a statechart in the system-------------
 
 https://aware-diag-sapienza.github.io/filtering-overview/prototype/index.html
