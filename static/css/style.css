@@ -1,4 +1,4 @@
-@import "https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap";
+@import "https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700&display=swap";
 
 /* 381D2A
 381D2A
@@ -191,10 +191,11 @@ a:focus {
 #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background-color: #332e58;
-    color: white;
+    background-color: white;
+    color: black;
     transition: all 0.3s;
-
+    -webkit-box-shadow: 6px 0px 9px -6px #000000; 
+    box-shadow: 6px 0px 9px -6px #000000;
 }
 
 #sidebar.active {
@@ -227,13 +228,14 @@ a:focus {
     padding: 1%;
     font-weight: 400;
     font-size: 1.1em;
-    color: white;
+    color: black;
+    font-weight: 500;
 }
 
 #sidebar ul ul p {
     font-weight: 400;
     font-size: 1em;
-    color: #ddd;
+    color: black;
 }
 
 .line {
@@ -253,7 +255,7 @@ a:focus {
     border: none;
 }
 .list-unstyled {
-    color: white;
+    color: black;
     padding: 4%;
 }
 .nav-item a{
@@ -261,6 +263,15 @@ a:focus {
 }
 a.dropdown-item{
     color: black !important;
+}
+.form-check-input[type=checkbox]{
+    border-radius: 0.25em;
+    border: 1px solid #52b0c3;
+    box-shadow: 6px 8px 9px -6px #000000;
+}
+.form-check-label {
+    margin-bottom: 0;
+    font-weight: 500;
 }
 /* ---------------------------------------------------
     CONTENT STYLE
