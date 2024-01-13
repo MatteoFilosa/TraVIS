@@ -208,7 +208,7 @@ a:focus {
     background-color: #554e8d;
     height: 95px;
     font-weight: 400;
-    font-size: 1.1em;
+    font-size: 1.4em;
     display: flex;
     justify-content: space-between;
     margin-bottom: 4%;
@@ -221,13 +221,13 @@ a:focus {
 }
 #sidebar .sidebar-header p{
     color: white;
-    font-weight: 700;
-    font-size: 1.5rem;
+    font-weight: 500;
+    font-size: 1.5srem;
 }
 #sidebar li p {
     padding: 1%;
     font-weight: 400;
-    font-size: 1.1em;
+    font-size: 1em;
     color: black;
     font-weight: 500;
 }
@@ -272,6 +272,15 @@ a.dropdown-item{
 .form-check-label {
     margin-bottom: 0;
     font-weight: 500;
+    font-size: 0.9em;
+}
+.iconTitle{
+    display: flex;
+
+}
+.iconTitle img{
+    margin-right: 5px;
+    margin-top: 5px;
 }
 /* ---------------------------------------------------
     CONTENT STYLE
