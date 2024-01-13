@@ -56,6 +56,7 @@ function resizeContainers(layoutType) {
             statechartContainer.style.minWidth = '29.5%';
             statechartContainer.style.height = '24%';
             websiteContainer.style.minWidth = '69.5%';
+            websiteContainer.style.height = '100%';
 
             // Nascondi gli elementi nel caso "website"
             minimapContainer.style.display = 'none';
@@ -67,6 +68,7 @@ function resizeContainers(layoutType) {
             websiteContainer.style.minWidth = '29.5%';
             websiteContainer.style.height = '24%';
             statechartContainer.style.minWidth = '69.5%';
+            statechartContainer.style.height = '100%';
 
             // Mostra gli elementi negli altri casi
             minimapContainer.style.display = 'block';
