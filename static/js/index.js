@@ -9,6 +9,7 @@ var matchingSvg = null;
 var statechartContainer;
 var statechart;
 var lastStatechartUrl = "";
+var minimapHidden = false;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0, currentX = 0, currentY = 0, translateX = 0, translateY = 0, minimapRatio = 0, scale = 1, svgWidth = 0, svgHeight = 0;
 
 // Array of colors is given  
@@ -180,7 +181,9 @@ function indicatorDragEnded() {
 
     // Aggiorna anche la differenza in pixel
     console.log("Differenza X:", deltaX, "Differenza Y:", deltaY);
+    panned = true;
 }
+
 
 // Function to configure the click handler on the minimap
 function setupMinimapClickHandler(originalSVG) {
@@ -200,10 +203,10 @@ function setupMinimapClickHandler(originalSVG) {
     indicator.style.width = minimapWidth + "px";
     indicator.style.height = (minimapRatio * 80) + "%";
     indicator.style.backgroundColor = "transparent";
-    indicator.style.borderTop = "2px solid lightblue";
-    indicator.style.borderLeft = "2px solid lightblue";
-    indicator.style.borderRight = "2px solid lightblue";
-    indicator.style.borderBottom = "2px solid lightblue";
+    indicator.style.borderTop = "2px solid #0096FF";
+    indicator.style.borderLeft = "2px solid #0096FF";
+    indicator.style.borderRight = "2px solid #0096FF";
+    indicator.style.borderBottom = "2px solid #0096FF";
     indicator.style.transition = "all 0.3s ease-in-out";
 
     // Append the indicator to the minimapContainer
@@ -272,7 +275,34 @@ function setupMinimapClickHandler(originalSVG) {
 
     minimapContainer.appendChild(resetButton);
 
+    // Toggle Button
+    const toggleButton = document.createElement("button");
+    toggleButton.innerHTML = "Hide";
+    toggleButton.className = "btn btn-info";
+    toggleButton.style.position = "absolute";
+    toggleButton.style.bottom = "10px";
+    toggleButton.style.left = "10px";
+    toggleButton.addEventListener("click", function () {
+        if (minimapHidden) {
+            // Show the minimap container
+            document.getElementById("indicator").style.display = "block";
+            document.getElementById("minimapSVG").style.display = "block";
+            resetButton.style.display = "block";
+            toggleButton.innerHTML = "Hide";
+            toggleButton.style.left = "10px";
+            minimapHidden = false;
+        } else {
+            // Hide the minimap container
+            toggleButton.innerHTML = "Show";
+            document.getElementById("indicator").style.display = "none";
+            document.getElementById("minimapSVG").style.display = "none";
+            resetButton.style.display = "none";
+            toggleButton.style.left = "-50px";
+            minimapHidden = true;
+        }
+    });
 
+    minimapContainer.appendChild(toggleButton);
 }
 
 //#endregion
@@ -332,6 +362,7 @@ function dragended() {
     // Update the currentX and currentY values after dragging ends
     currentX = translateX;
     currentY = translateY;
+    
 }
 
 function zoomed() {
@@ -426,7 +457,7 @@ function isNameInUrl(jsonData, systemUrl) {
             
 
             // Initial scale values
-            scale = 1, currentX = 0, currentY = originalHeight, translateX = 0, translateY = currentY
+            scale = 1, currentX = 0, currentY = originalHeight, translateX = 0, translateY = currentY, minimapHidden = false;
 
             //DRAG
 

@@ -12,6 +12,7 @@ window.onload = function () {
 }
 
 function getUserTraces() {
+    
     const url = 'http://127.0.0.1:5000/get_user_traces';
     fetch(url)
         .then(response => response.json())
