@@ -57,6 +57,7 @@ function resizeContainers(layoutType) {
             statechartContainer.style.minWidth = '29.5%';
             statechartContainer.style.height = '24%';
             websiteContainer.style.minWidth = '69.5%';
+            websiteContainer.style.height = '100%';
 
             // Nascondi gli elementi nel caso "website"
             minimapContainer.style.display = 'none';
@@ -68,6 +69,7 @@ function resizeContainers(layoutType) {
             websiteContainer.style.minWidth = '29.5%';
             websiteContainer.style.height = '24%';
             statechartContainer.style.minWidth = '69.5%';
+            statechartContainer.style.height = '100%';
 
             // Mostra gli elementi negli altri casi
             minimapContainer.style.display = 'block';
@@ -305,8 +307,6 @@ function setupMinimapClickHandler(originalSVG) {
     minimapContainer.appendChild(toggleButton);
 }
 
-//#endregion
-
 function dragstarted() {
     
     statechart.classed("dragging", true);
@@ -406,6 +406,7 @@ function zoomed() {
     indicator.style.width = newWidth + "px";
     indicator.style.height = newHeight + "px";
 }
+//#endregion
 
 //#region Statechart
 function isNameInUrl(jsonData, systemUrl) {
@@ -510,10 +511,13 @@ var pin = false;
 function pinSidebar() {
     pin = !pin;
     document.getElementById("sidebarCollapse").disabled = pin;
+    
     if (pin) {
         document.getElementById("pinImg").src = "/images/pinFilled.png";
+        document.getElementById("sidebarCollapse").style.opacity = '24%';
     } else {
         document.getElementById("pinImg").src = "/images/pin.png";
+        document.getElementById("sidebarCollapse").style.opacity = '100%';
     }
 }
 
