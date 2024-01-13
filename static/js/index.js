@@ -275,8 +275,6 @@ function setupMinimapClickHandler(originalSVG) {
 
 }
 
-//#endregion
-
 function dragstarted() {
     
     statechart.classed("dragging", true);
@@ -375,6 +373,7 @@ function zoomed() {
     indicator.style.width = newWidth + "px";
     indicator.style.height = newHeight + "px";
 }
+//#endregion
 
 //#region Statechart
 function isNameInUrl(jsonData, systemUrl) {
@@ -479,10 +478,13 @@ var pin = false;
 function pinSidebar() {
     pin = !pin;
     document.getElementById("sidebarCollapse").disabled = pin;
+    
     if (pin) {
         document.getElementById("pinImg").src = "/images/pinFilled.png";
+        document.getElementById("sidebarCollapse").style.opacity = '24%';
     } else {
         document.getElementById("pinImg").src = "/images/pin.png";
+        document.getElementById("sidebarCollapse").style.opacity = '100%';
     }
 }
 
