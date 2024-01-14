@@ -205,10 +205,10 @@ function setupMinimapClickHandler(originalSVG) {
     indicator.style.width = minimapWidth + "px";
     indicator.style.height = (minimapRatio * 80) + "%";
     indicator.style.backgroundColor = "transparent";
-    indicator.style.borderTop = "2px solid #0096FF";
-    indicator.style.borderLeft = "2px solid #0096FF";
-    indicator.style.borderRight = "2px solid #0096FF";
-    indicator.style.borderBottom = "2px solid #0096FF";
+    indicator.style.borderTop = "2px solid #554e8d";
+    indicator.style.borderLeft = "2px solid #554e8d";
+    indicator.style.borderRight = "2px solid #554e8d";
+    indicator.style.borderBottom = "2px solid #554e8d";
     indicator.style.transition = "all 0.3s ease-in-out";
 
     // Append the indicator to the minimapContainer
