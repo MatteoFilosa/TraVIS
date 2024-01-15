@@ -82,6 +82,7 @@ function populateTable(data) {
             const iconImg=document.createElement("img");
             iconImg.classList.add("expandButton");
             iconImg.src="images/expandIcon.png";
+            iconImg.id=`buttonImg${id_Cnt}`;
             iconButton.appendChild(iconImg);
 
             
@@ -90,9 +91,11 @@ function populateTable(data) {
                 if(document.getElementById(`row${numbersOnlyID}`).getAttribute('data-visible')==='false'){
                     document.getElementById(`row${numbersOnlyID}`).classList.add("extrainfoRow");
                     document.getElementById(`row${numbersOnlyID}`).setAttribute('data-visible', 'true');
+                    document.getElementById(`buttonImg${numbersOnlyID}`).style.transform="rotate(180deg)";
                 }else{
                     document.getElementById(`row${numbersOnlyID}`).classList.remove("extrainfoRow");
                     document.getElementById(`row${numbersOnlyID}`).setAttribute('data-visible', 'false');
+                    document.getElementById(`buttonImg${numbersOnlyID}`).style.transform="rotate(0deg)";
                 }
                 
             });
