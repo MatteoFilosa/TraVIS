@@ -112,9 +112,9 @@ function generateMinimap(originalSVG) {
     
     minimapWidth = originalWidth / scaleFactor;
     minimapHeight = originalHeight / scaleFactor;
-    if(minimapHeight < 100){
-        minimapHeight *= 2
-        minimapWidth  *= 2
+    if(minimapHeight < 100 || minimapWidth < 100){
+        minimapHeight *= 2.5
+        minimapWidth  *= 2.5
     }
     console.log(minimapWidth, minimapHeight)
 
@@ -258,8 +258,8 @@ function setupMinimapClickHandler(originalSVG) {
     resetButton.innerHTML = "Reset";
     resetButton.className = "btn btn-info";
     resetButton.style.position = "absolute";
-    resetButton.style.bottom = "10px";
-    resetButton.style.right = "10px";
+    resetButton.style.bottom = "5px";
+    resetButton.style.right = "5px";
     resetButton.addEventListener("click", function () {
 
         statechart.attr("transform", "translate(4 " + originalHeight + ")");
@@ -272,7 +272,7 @@ function setupMinimapClickHandler(originalSVG) {
         indicator.style.bottom = "0";
         indicator.style.right = "0";
 
-        scale = 1, currentX = 0, currentY = originalHeight, translateX = 0, translateY = currentY
+        scale = 1, currentX = 0, currentY = originalHeight, translateX = 0, translateY = currentY;
     });
 
     minimapContainer.appendChild(resetButton);
@@ -282,8 +282,8 @@ function setupMinimapClickHandler(originalSVG) {
     toggleButton.innerHTML = "Hide";
     toggleButton.className = "btn btn-info";
     toggleButton.style.position = "absolute";
-    toggleButton.style.bottom = "10px";
-    toggleButton.style.left = "10px";
+    toggleButton.style.bottom = "5px";
+    toggleButton.style.left = "5px";
     toggleButton.addEventListener("click", function () {
         if (minimapHidden) {
             // Show the minimap container
@@ -291,7 +291,7 @@ function setupMinimapClickHandler(originalSVG) {
             document.getElementById("minimapSVG").style.display = "block";
             resetButton.style.display = "block";
             toggleButton.innerHTML = "Hide";
-            toggleButton.style.left = "10px";
+            toggleButton.style.left = "5px";
             minimapHidden = false;
         } else {
             // Hide the minimap container
@@ -312,7 +312,7 @@ function dragstarted() {
     statechart.classed("dragging", true);
 
     // Initialize translation values with currentX and currentY
-    console.log(translateX, translateY)
+    
     translateX = currentX;
     translateY = currentY;
     console.log(translateX, translateY)
@@ -324,6 +324,7 @@ function dragstarted() {
 function dragged() {
     translateX += d3.event.dx;
     translateY += d3.event.dy;
+    console.log("dragged")
 
     
     // Update the translation part of the transform attribute
@@ -362,14 +363,21 @@ function dragended() {
     // Update the currentX and currentY values after dragging ends
     currentX = translateX;
     currentY = translateY;
+    console.log(translateX, translateY, d3.event)
     
 }
 
 function zoomed() {
+    console.log
     // Update the scale part of the transform attribute
     scale = d3.event.transform.k;
+    console.log("[BEFORE] Scale: " + scale + ", X: " + currentX + ", Y: " + currentY);
+
     currentX = d3.event.transform.x;
     currentY = d3.event.transform.y;
+
+    
+    
     console.log("Scale: " + scale + ", X: " + currentX + ", Y: " + currentY);
 
     var indicator = document.getElementById("indicator");
@@ -383,21 +391,23 @@ function zoomed() {
     // Trying to get the best approximation possible. It is kinda messy, I know.
     var newLeft = (((currentX) / scale / scaleFactor)) * -1;
     var newTop = (currentTop) + ((currentY / 2 / scale) / scaleFactor);
-    console.log(newLeft, newTop)
+ 
 
     // To let the indicator inside the boundaries
     newLeft = Math.min(Math.max(newLeft, 0), minimapContainer.clientWidth - indicator.clientWidth);
     newTop = Math.min(Math.max(newTop, 0), (minimapContainer.clientHeight - indicator.clientHeight - (scale * 5)));
 
     
-    
+    // Update the entire transform attribute, including both scale and translation
+    statechart.attr("transform", "translate(" + currentX + "," + currentY + ") scale(" + scale + ")");
 
     //Update indicator pos
     indicator.style.left = newLeft + "px";
     indicator.style.top = newTop + "px";
 
-    // Update the entire transform attribute, including both scale and translation
-    statechart.attr("transform", d3.event.transform);
+    
+
+    
 
     // Update the size of the indicator based on the zoom level
     const newWidth = minimapWidth / scale;
@@ -405,6 +415,7 @@ function zoomed() {
 
     indicator.style.width = newWidth + "px";
     indicator.style.height = newHeight + "px";
+  
 }
 //#endregion
 
@@ -432,6 +443,8 @@ function isNameInUrl(jsonData, systemUrl) {
         if (originalSVG) {
 
             statechartSVG.appendChild(originalSVG);
+
+            
             
             // Generate and set up the minimap
             generateMinimap(originalSVG);

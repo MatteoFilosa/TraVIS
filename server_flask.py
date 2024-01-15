@@ -1,6 +1,7 @@
 from flask import Flask, render_template, jsonify, make_response
 from flask_cors import CORS
 from flask_pymongo import PyMongo
+from flask_caching import Cache
 from configparser import ConfigParser
 import os, re
 
@@ -10,6 +11,8 @@ app = Flask(__name__,
             template_folder='templates')
 
 CORS(app)
+
+cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 
 config = ConfigParser()
 config.read('config.ini')
@@ -36,7 +39,7 @@ def upload_statechart():
 
 
     svg_folder = "static/files/statechartSVGS"
-    visualization_names = ["radviz", "crosswidget", "crumbs", "datavis", "idmvis", "influence_map", "ivan", "nemesis", "summit", "wasp"]
+    visualization_names = ["radviz", "crosswidget", "crumbs", "datavis", "idmvis", "influence_map", "ivan", "nemesis", "summit", "wasp", "falcon"]
 
     try:
         for vis_name in visualization_names:
@@ -121,8 +124,9 @@ def upload_user_traces():
 
     return "User traces correctly uploaded!"
 
-#Function to download the user_traces
+# Function to download the user_traces with caching
 @app.route("/get_user_traces")
+@cache.cached(timeout=300)  # Cache timeout set to 300 seconds (adjust as needed)
 def get_user_traces():
     database_name = "user_traces"  
     mongo_uri = config['DATABASES'][database_name]
@@ -150,6 +154,9 @@ def get_user_traces():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
+
+if __name__ == "__main__":
+    app.run(debug=True)
 
 
 @app.route("/get_statecharts")

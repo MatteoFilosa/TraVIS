@@ -6,7 +6,7 @@ http://awareserver.dis.uniroma1.it:11768/crumbs-example/
 
 https://fredhohman.com/summit/
 
-https://vega.github.io/falcon/flights/
+https://vega.github.io/falcon/flights/  Falcon, 1M version (the 7M doesn't work).
 
 -----------These URLs below have CORS/security issue and/or don't load a statechart in the system-------------
 
