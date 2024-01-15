@@ -92,15 +92,15 @@ def upload_user_traces():
     app.config["MONGO_URI"] = mongo_uri
     mongo = PyMongo(app)
 
-    svg_folder = "static/files/user_traces_falcon"
-    collection_name = "falcon"
+    folder = "static/files/user_traces/violations" #Change folder to change which user traces to upload
+    collection_name = "violations" 
 
     try:
         # List all files in the specified folder
-        all_files = os.listdir(svg_folder)
+        all_files = os.listdir(folder)
 
         for file_name in all_files:
-            svg_path = os.path.join(svg_folder, file_name)
+            svg_path = os.path.join(folder, file_name)
 
             # Verifying if the file was already added to the db
             existing_document = mongo.db[collection_name].find_one({"name": file_name})

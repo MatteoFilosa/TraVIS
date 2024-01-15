@@ -1,0 +1,9 @@
+{
+    "0": [],
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": [
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[7]/canvas[1]brush mousemove with time: 287.3342037200928 with details: [[107, 50], [272, 154]] in path: 4"
+    ]
+}

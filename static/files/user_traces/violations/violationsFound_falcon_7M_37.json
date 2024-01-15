@@ -1,0 +1,22 @@
+{
+    "0": [],
+    "1": [
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[4]/canvas[1]brush mousemove with time: 204.39720153808594 with details: [[305, 50], [335, 50]] in path: 1"
+    ],
+    "2": [],
+    "3": [
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[6]/canvas[1]brush mousemove with time: 475.0025272369385 with details: [[318, 50], [503, 50]] in path: 3",
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[6]/canvas[1]brush mousemove with time: 203.95231246948242 with details: [[318, 50], [503, 50]] in path: 3",
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[6]/canvas[1]brush mousemove with time: 305.70435523986816 with details: [[318, 50], [358, 50]] in path: 3"
+    ],
+    "4": [
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[7]/canvas[1]mousemove with time: 249.20153617858887 with details: [303, 12] in path: 4",
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[3]/canvas[1]brush mousemove with time: 360.187292098999 with details: [[272, 50], [321, 50]] in path: 4",
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[3]/canvas[1]brush mousemove with time: 229.08353805541992 with details: [[272, 50], [321, 50]] in path: 4",
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[3]/canvas[1]brush mousemove with time: 224.9777317047119 with details: [[272, 50], [321, 50]] in path: 4",
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[3]/canvas[1]brush mousemove with time: 309.1158866882324 with details: [[272, 50], [321, 50]] in path: 4",
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[7]/canvas[1]brush mousemove with time: 200.06203651428223 with details: [[176, 50], [272, 376]] in path: 4",
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[7]/canvas[1]brush mousemove with time: 430.513858795166 with details: [[176, 50], [272, 376]] in path: 4",
+        "violation of level 1 on /html[1]/body[1]/div[2]/div[7]/canvas[1]brush mousemove with time: 401.19075775146484 with details: [[176, 50], [272, 376]] in path: 4"
+    ]
+}
