@@ -298,7 +298,12 @@ a.dropdown-item{
     display: flex;
     justify-content: space-evenly;
 }
-
+/* .dragLine{
+    cursor: w-resize;
+    height: 100%;
+    width: 10px;
+    background-color: #554e8d;
+} */
 .website {
     background-color: white;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
@@ -485,6 +490,30 @@ tbody tr:hover{
     display: none;
 }
 
+.expandButton{
+    width: 42px;
+    height: 31px;
+    background-color: transparent;
+    border: none;
+}
+.expandButton img{
+    width: 25px;
+    height: 25px;
+}
+.extrainfoRow{
+    display: table-row !important;
+    height: 15em;
+    border-top: 1px solid #00000026;
+    background-color: #e8faff69;
+}
+.extrainfoRow:hover{
+    background-color: #e8faff69 !important;
+}
+th img{
+    margin-right: 6px;
+    margin-bottom: 3px;
+    vertical-align: middle;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
