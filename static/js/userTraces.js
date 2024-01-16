@@ -24,6 +24,66 @@ function getUserTraces() {
             document.getElementById("tracesNum").innerHTML = "Loaded User Traces: " + tracesNum;
             populateTable(loadedTraces);
 
+        }).then(() => {
+            $('#table thead tr')
+            .clone(true)
+            .addClass('filters')
+            .appendTo('#table thead');
+
+            var table = new DataTable("#table", {
+                columnDefs: [
+                    { "orderable": false, "targets": [0, 7] },
+                    { "searchable": false, "targets": [0, 7] },
+                ],
+                orderCellsTop: true,
+                fixedHeader: true,
+                initComplete: function () {
+                    var api = this.api();
+            
+                    // For each column
+                    api.columns().eq(0).each(function (colIdx) {
+                        // Skip the first and last columns
+                        if (colIdx !== 0 && colIdx !== api.columns().eq(0).length - 1) {
+                            // Set the header cell to contain the input element
+                            var cell = $('.filters th').eq(
+                                $(api.column(colIdx).header()).index()
+                            );
+                            var title = $(cell).text();
+                            $(cell).html('<input type="text" placeholder="' + title + '" />');
+            
+                            // On every keypress in this input
+                            $(
+                                'input',
+                                $('.filters th').eq($(api.column(colIdx).header()).index())
+                            )
+                                .off('keyup change')
+                                .on('change', function (e) {
+                                    // Get the search value
+                                    $(this).attr('title', $(this).val());
+                                    var regexr = '^{search}$';
+            
+                                    // Search the column for that value
+                                    api
+                                        .column(colIdx)
+                                        .search(
+                                            this.value != ''
+                                                ? regexr.replace('{search}', '(((' + this.value + ')))')
+                                                : '',
+                                            this.value != '',
+                                            this.value == ''
+                                        )
+                                        .draw();
+                                })
+                                .on('keyup', function (e) {
+                                    e.stopPropagation();
+            
+                                    $(this).trigger('change');
+                                });
+                        }
+                    });
+                },
+            });
+            
         });
 }
 
@@ -50,7 +110,7 @@ function populateTable(data) {
 
         // Add Name column
         const nameCell = document.createElement("td");
-        nameCell.textContent = "User " + id_Cnt;
+        nameCell.textContent = id_Cnt;
         row.appendChild(nameCell);
 
         const eventsCell = document.createElement("td");
@@ -78,50 +138,55 @@ function populateTable(data) {
             const iconCell = document.createElement("td");
             const iconButton = document.createElement("button");
             iconButton.classList.add("expandButton");
-            iconButton.id=`button${id_Cnt}`;
-            const iconImg=document.createElement("img");
+            iconButton.id = `button${id_Cnt}`;
+            const iconImg = document.createElement("img");
             iconImg.classList.add("expandButton");
-            iconImg.src="images/expandIcon.png";
-            iconImg.id=`buttonImg${id_Cnt}`;
+            iconImg.src = "images/expandIcon.png";
+            iconImg.id = `buttonImg${id_Cnt}`;
             iconButton.appendChild(iconImg);
 
-            
-            iconButton.addEventListener("click",()=>{
+
+            iconButton.addEventListener("click", () => {
                 var numbersOnlyID = iconButton.id.replace(/\D/g, '');
-                if(document.getElementById(`row${numbersOnlyID}`).getAttribute('data-visible')==='false'){
-                    document.getElementById(`row${numbersOnlyID}`).classList.add("extrainfoRow");
-                    document.getElementById(`row${numbersOnlyID}`).setAttribute('data-visible', 'true');
-                    document.getElementById(`buttonImg${numbersOnlyID}`).style.transform="rotate(180deg)";
-                }else{
-                    document.getElementById(`row${numbersOnlyID}`).classList.remove("extrainfoRow");
-                    document.getElementById(`row${numbersOnlyID}`).setAttribute('data-visible', 'false');
-                    document.getElementById(`buttonImg${numbersOnlyID}`).style.transform="rotate(0deg)";
+                if (document.getElementById(`extrainfoDiv`).getAttribute('data-visible') === 'false') {
+                    document.getElementById("extrainfoDiv").classList.remove("hiddenInfo");
+                    document.getElementById("extrainfoDiv").classList.add("extrainfoDiv");
+                    document.getElementById(`extrainfoDiv`).setAttribute('data-visible', 'true');
+                } else {
+                    document.getElementById("extrainfoDiv").classList.add("hiddenInfo");
+                    document.getElementById("extrainfoDiv").classList.remove("extrainfoDiv");
+                    document.getElementById(`extrainfoDiv`).setAttribute('data-visible', 'false');
                 }
-                
+
+
             });
             iconCell.appendChild(iconButton);
             row.appendChild(iconCell);
-    
+
+
             // Add the row to the table
             tableBody.appendChild(row);
-    
-            const extrainfoRow = document.createElement("tr");
-            extrainfoRow.id=`row${id_Cnt}`;
-            extrainfoRow.style.display="none";
-            extrainfoRow.style.transition="display 1s";
-            //extrainfoRow.classList.add("extrainfoRow");
 
-            const infoDiv = document.createElement("td");
-            infoDiv.textContent="Test";
-            infoDiv.colSpan="10";
-            extrainfoRow.appendChild(infoDiv);
-            
-            tableBody.appendChild(extrainfoRow);
-            id_Cnt++;
+            // const extrainfoRow = document.createElement("tr");
+            // extrainfoRow.classList.add("no-sort");
+            // extrainfoRow.id = `row${id_Cnt}`;
+            // extrainfoRow.style.display = "none";
+            // extrainfoRow.style.transition = "display 1s";
+            // //extrainfoRow.classList.add("extrainfoRow");
+
+            // const infoDiv = document.createElement("td");
+            // infoDiv.textContent = "Test";
+
+            // infoDiv.colSpan = "10";
+            // extrainfoRow.appendChild(infoDiv);
+
+            //tableBody.appendChild(extrainfoRow);
+
+
         }
 
         );
-
+        id_Cnt++;
         // eventsCell.textContent = traceData.length;
         // row.appendChild(eventsCell);
 
@@ -137,8 +202,6 @@ function populateTable(data) {
                 console.log(selectedTraces);
             }
         });
-
-        
     });
 }
 

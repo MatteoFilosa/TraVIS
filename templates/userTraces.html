@@ -11,10 +11,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+
+    <!-- DataTables JavaScript -->
+    <!-- <script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script> -->
+
     <!-- Our Custom CSS -->
     <link rel="stylesheet" href="css/style.css" />
 
@@ -33,7 +42,7 @@
 
 <body>
     <div class="wrapper">
-        
+
         <!-- Page Content  -->
         <div id="content">
             <!-- Main Nav Bar -->
@@ -74,44 +83,54 @@
 
             <div class="mainContainer">
                 <div id="traceContainer">
-                    <div class="filterSidebar">
+                    <!-- <div class="filterSidebar">
                         <p>Sort by</p>
                         <div class="line"></div>
                         <p>Filter by</p>
-                    </div>
-                    <div style="display: block;
+                    </div> -->
+                    <div id="tableDiv" style="display: block;
                     width: 100%;
-                    padding: 1.5%;">
+                    padding: 1.5%;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);transition: all 0.3s;">
                         <h1 id="tracesNum">Loading User Traces... </h1>
                         <div class="spinner-border" id="loadingIcon" role="status" style="display: block;margin-left: 50%;
                         margin-top: 22%;">
                             <span class="sr-only">Loading...</span>
                         </div>
-                        <table class="table-responsive table-hover" id="table" >
+                        <table class="table-responsive table-hover" id="table">
                             <thead>
-                              <tr>
-                                <th scope="col" style="width: 2%;padding-left: 1%;"><input type="checkbox" id="selectAllCheckbox" onclick="selectAllTraces()"></th>
-                                <th scope="col" style="width: 5%;"><img src="images/userIcon.png" width="20px" height="20px"/>User ID</th>
-                                <th scope="col" style="width: 5%;"><img src="images/interactorIcon.png" width="20px" height="20px"/>Events</th>
-                                <th scope="col" style="width: 5%;"><img src="images/mousemoveIcon.png" width="20px" height="20px"/>Mousemoves</th>
-                                <th scope="col" style="width: 5%;"><img src="images/brushIcon.png" width="20px" height="20px"/>Brush</th>
-                                <th scope="col" style="width: 5%;"><img src="images/clickIcon.png" width="20px" height="20px"/>Click</th>
-                                <th scope="col" style="width: 5%;"><img src="images/zoomIcon.png" width="20px" height="20px"/>Zoom</th>
-                                <th scope="col" style="width: 1%;"></th>
-                              </tr>
+                                <tr>
+                                    <th scope="col" style="width: 2%;padding-left: 1%;"><input type="checkbox"
+                                            id="selectAllCheckbox" onclick="selectAllTraces()"></th>
+                                    <th scope="col" style="width: 5%;"><img src="images/userIcon.png" width="20px"
+                                            height="20px" />User ID</th>
+                                    <th scope="col" style="width: 5%;"><img src="images/interactorIcon.png" width="20px"
+                                            height="20px" />Events</th>
+                                    <th scope="col" style="width: 5%;"><img src="images/mousemoveIcon.png" width="20px"
+                                            height="20px" />Mousemoves</th>
+                                    <th scope="col" style="width: 5%;"><img src="images/brushIcon.png" width="20px"
+                                            height="20px" />Brush</th>
+                                    <th scope="col" style="width: 5%;"><img src="images/clickIcon.png" width="20px"
+                                            height="20px" />Click</th>
+                                    <th scope="col" style="width: 5%;"><img src="images/zoomIcon.png" width="20px"
+                                            height="20px" />Zoom</th>
+                                    <th scope="col" style="width: 1%;"></th>
+                                </tr>
                             </thead>
                             <tbody id="tracesTable">
-                              <!-- Table rows will be dynamically added here -->
+                                <!-- Table rows will be dynamically added here -->
                             </tbody>
-                          </table> 
+                        </table>
                     </div>
-                    
-                    
-                    </div>
-                    
+                    <!-- <div class="hiddenInfo" id="extrainfoDiv">
+                        <h1>Trace Information </h1>
+                    </div> -->
+
+
                 </div>
+
             </div>
         </div>
+    </div>
     </div>
 
     <!-- jQuery CDN - Slim version (=without AJAX) -->

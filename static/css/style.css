@@ -194,7 +194,7 @@ a:focus {
     background-color: white;
     color: black;
     transition: all 0.3s;
-    -webkit-box-shadow: 6px 0px 9px -6px #000000; 
+    -webkit-box-shadow: 6px 0px 9px -6px #000000;
     box-shadow: 6px 0px 9px -6px #000000;
 }
 
@@ -214,15 +214,18 @@ a:focus {
     padding: 3%;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
-#sidebar .sidebar-header button{
+
+#sidebar .sidebar-header button {
     height: 35px;
     width: 50px;
 }
-#sidebar .sidebar-header p{
+
+#sidebar .sidebar-header p {
     color: white;
     font-weight: 500;
     font-size: 1.5srem;
 }
+
 #sidebar li p {
     padding: 1%;
     font-weight: 400;
@@ -253,34 +256,42 @@ a:focus {
     box-shadow: none;
     border: none;
 }
+
 .list-unstyled {
     color: black;
     padding: 4%;
 }
-.nav-item a{
+
+.nav-item a {
     color: rgb(36, 36, 36) !important;
 }
-a.dropdown-item{
+
+a.dropdown-item {
     color: black !important;
 }
-.form-check-input[type=checkbox]{
+
+.form-check-input[type=checkbox] {
     border-radius: 0.25em;
     border: 1px solid #52b0c3;
     box-shadow: 6px 8px 9px -6px #000000;
 }
+
 .form-check-label {
     margin-bottom: 0;
     font-weight: 500;
     font-size: 0.9em;
 }
-.iconTitle{
+
+.iconTitle {
     display: flex;
 
 }
-.iconTitle img{
+
+.iconTitle img {
     margin-right: 5px;
     margin-top: 5px;
 }
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
@@ -298,6 +309,7 @@ a.dropdown-item{
     display: flex;
     justify-content: space-evenly;
 }
+
 /* .dragLine{
     cursor: w-resize;
     height: 100%;
@@ -357,7 +369,7 @@ a.dropdown-item{
     margin-bottom: 20px;
 
     z-index: 1;
-    
+
 
 }
 
@@ -371,8 +383,8 @@ a.dropdown-item{
     z-index: 1000;
     position: absolute;
     overflow: hidden;
-    
-    
+
+
 }
 
 #statechartSVG {
@@ -382,7 +394,7 @@ a.dropdown-item{
 
 }
 
-#content{
+#content {
     overflow: hidden;
 }
 
@@ -390,7 +402,7 @@ a.dropdown-item{
 
     overflow-x: scroll;
     overflow-y: scroll;
-    
+
 }
 
 #statechartContainer::-webkit-scrollbar {
@@ -435,12 +447,13 @@ a.dropdown-item{
 /* ---------------------------------------------------
     User Traces Page
 ----------------------------------------------------- */
-.titleContainer{
+.titleContainer {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
-#traceContainer{
+
+#traceContainer {
     background-color: white;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
@@ -451,13 +464,14 @@ a.dropdown-item{
     display: flex;
 }
 
-#traceContainer h1{
+#traceContainer h1 {
     color: #554e8d;
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 2%;
 }
-.filterButton{
+
+.filterButton {
     background-color: #52b0c3;
     border-radius: 9px;
     width: 129px;
@@ -466,64 +480,92 @@ a.dropdown-item{
     border: 1px solid transparent;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
-.filterSidebar{
+
+.filterSidebar {
     height: 100%;
     width: 15%;
     background-color: #554e8d;
     border-radius: 2px;
     padding: 1.5%;
 }
-.table-responsive{
+
+.table-responsive {
     width: 100%;
     max-height: 600px !important;
     height: 600px;
     overflow: auto;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
-thead{
+
+thead {
     height: 50px;
     background-color: #bbe0eb;
     position: sticky;
     top: 0;
 }
-tr{
+
+tr {
     height: 4rem;
 }
-tbody tr:hover{
+
+tbody tr:hover {
     background-color: #d7eff6 !important;
 }
-.table-selected{
+
+.table-selected {
     background-color: #d7eff6 !important;
 }
-#table{
+
+#table {
     display: none;
 }
 
-.expandButton{
+.expandButton {
     width: 42px;
     height: 31px;
     background-color: transparent;
     border: none;
     transition: all 0.2s ease-in-out;
 }
-.expandButton img{
+
+.expandButton img {
     width: 25px;
     height: 25px;
 }
-.extrainfoRow{
+
+.extrainfoRow {
     display: table-row !important;
     height: 15em;
     border-top: 1px solid #00000026;
     background-color: #e8faff69;
 }
-.extrainfoRow:hover{
+
+.extrainfoRow:hover {
     background-color: #e8faff69 !important;
 }
-th img{
+
+th img {
     margin-right: 6px;
     margin-bottom: 3px;
     vertical-align: middle;
 }
+
+.extrainfoDiv {
+    display: block;
+    width: 34.1%;
+    overflow: hidden;
+    /* margin-right: -101%; */
+    opacity: 1;
+    height: 92%;
+    padding: 1.5%;
+    /* background-color: #bbe0eb38; */
+    transition: all 0.3s;
+}
+.hiddenInfo{
+    opacity: 0;
+    transition: all 0.3s;
+}
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
