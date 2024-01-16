@@ -315,7 +315,7 @@ function dragstarted() {
     
     translateX = currentX;
     translateY = currentY;
-    console.log(translateX, translateY)
+    
     indicatorLeft = indicator.style.left;
     indicatorTop = indicator.style.top;
 
@@ -324,15 +324,11 @@ function dragstarted() {
 function dragged() {
     translateX += d3.event.dx;
     translateY += d3.event.dy;
-    console.log("dragged")
-
+   
+    //console.log(translateX, translateY)
     
-    // Update the translation part of the transform attribute
-    if (typeof scale === undefined) {
-        statechart.attr("transform", "translate(" + translateX + "," + translateY + ")");
-    }
-
-    else statechart.attr("transform", "translate(" + translateX + "," + translateY + ") scale(" + scale + ")");
+    
+    statechart.attr("transform", "translate(" + translateX + "," + translateY + ") scale(" + scale + ")");
 
     //console.log(translateX, translateY, d3.event.x, d3.event.y)
 }
@@ -368,17 +364,17 @@ function dragended() {
 }
 
 function zoomed() {
-    console.log
+    
     // Update the scale part of the transform attribute
+    
+    
+    
     scale = d3.event.transform.k;
-    console.log("[BEFORE] Scale: " + scale + ", X: " + currentX + ", Y: " + currentY);
-
     currentX = d3.event.transform.x;
     currentY = d3.event.transform.y;
 
     
-    
-    console.log("Scale: " + scale + ", X: " + currentX + ", Y: " + currentY);
+
 
     var indicator = document.getElementById("indicator");
 
@@ -399,7 +395,7 @@ function zoomed() {
 
     
     // Update the entire transform attribute, including both scale and translation
-    statechart.attr("transform", "translate(" + currentX + "," + currentY + ") scale(" + scale + ")");
+    statechart.attr("transform", d3.event.transform);
 
     //Update indicator pos
     indicator.style.left = newLeft + "px";
@@ -420,6 +416,58 @@ function zoomed() {
 //#endregion
 
 //#region Statechart
+
+function graphLayout(svg) {
+    var textElements = svg.querySelectorAll("g.node text");
+    var tooltip = document.getElementById("tooltip");
+
+    function adjustTooltipPosition() {
+        var rect = tooltip.getBoundingClientRect();
+        var maxX = window.innerWidth - rect.width;
+        var maxY = window.innerHeight - rect.height;
+        var x = Math.min(Math.max(event.pageX, 0), maxX);
+        var y = Math.min(Math.max(event.pageY, 0), maxY);
+        tooltip.style.left = x + 'px';
+        tooltip.style.top = y + 'px';
+    }
+
+    textElements.forEach(function (textElement) {
+        var node = textElement.parentElement;
+        var xPath = "";
+
+        // Hide Xpath
+        if (node.classList.contains("node")) {
+            if ((textElement.textContent.includes('[')) && (textElement.textContent.includes(']'))) {
+                xPath = textElement;
+                xPath.classList.add("xPath");
+                xPath.style.display = 'none';
+
+                // Tooltip
+                node.addEventListener("mouseover", function () {
+                    tooltip.textContent = xPath.innerHTML;
+                    tooltip.style.display = 'block';
+                    adjustTooltipPosition();
+                });
+
+                node.addEventListener("mouseout", function () {
+                    tooltip.style.display = 'none';
+                });
+            }
+
+            // Increase font size of non-hidden text
+            if (textElement.innerHTML.length > 3) {
+                var fontSize = parseFloat(textElement.style.fontSize) || 12; // Default font size is 12px
+                textElement.style.fontSize = (fontSize + 7) + 'px';
+
+                var textY = parseFloat(textElement.getAttribute("y"));
+                textElement.classList.add("nodeText");
+                textElement.setAttribute("y", textY + 8);
+            }
+        }
+    });
+}
+
+
 function isNameInUrl(jsonData, systemUrl) {
     
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
@@ -441,6 +489,11 @@ function isNameInUrl(jsonData, systemUrl) {
         
 
         if (originalSVG) {
+
+
+            graphLayout(originalSVG);
+
+        
 
             statechartSVG.appendChild(originalSVG);
 

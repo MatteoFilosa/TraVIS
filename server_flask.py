@@ -179,7 +179,9 @@ def get_statecharts():
             statechart_info = {
                 "name": name,
                 "svg": svg_data
-            }
+            }  
+
+            print(statechart_info)
 
             statecharts_data.append(statechart_info)
 
