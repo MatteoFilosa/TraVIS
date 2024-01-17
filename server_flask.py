@@ -155,6 +155,39 @@ def get_user_traces():
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
 
+# Function to download the user_traces with caching
+@app.route("/get_violations")
+@cache.cached(timeout=300)  # Cache timeout set to 300 seconds (adjust as needed)
+def get_violations():
+    database_name = "user_traces"  
+    mongo_uri = config['DATABASES'][database_name]
+    app.config["MONGO_URI"] = mongo_uri
+    mongo = PyMongo(app)
+    collection_name = "violations"
+
+    try:
+        # Fetch all documents from the collection and convert cursor to a list
+        user_traces_data = list(mongo.db[collection_name].find({}, {"_id": 0}))
+
+        # Remove newline characters and extra spaces from each document
+        cleaned_data = [
+            {k: re.sub(r'\s+', ' ', v.strip().replace("\n", "").replace("\\", "")) if isinstance(v, str) else v
+             for k, v in doc.items()}
+            for doc in user_traces_data
+        ]
+
+        # Return the cleaned data as JSON response
+        # print(cleaned_data)
+        # print("----")
+        # print(jsonify(cleaned_data))
+        return jsonify(cleaned_data)
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
