@@ -92,8 +92,8 @@ def upload_user_traces():
     app.config["MONGO_URI"] = mongo_uri
     mongo = PyMongo(app)
 
-    folder = "static/files/user_traces/violations" #Change folder to change which user traces to upload
-    collection_name = "violations" 
+    folder = "static/files/user_traces/user_traces_falcon_with_time" #Change folder to change which user traces to upload
+    collection_name = "time" 
 
     try:
         # List all files in the specified folder
