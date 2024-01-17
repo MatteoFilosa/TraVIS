@@ -434,6 +434,7 @@ function graphLayout(svg) {
     textElements.forEach(function (textElement) {
         var node = textElement.parentElement;
         var xPath = "";
+        console.log(node)
 
         // Hide Xpath
         if (node.classList.contains("node")) {
@@ -447,21 +448,68 @@ function graphLayout(svg) {
                     tooltip.textContent = xPath.innerHTML;
                     tooltip.style.display = 'block';
                     adjustTooltipPosition();
+                    console.log("mouseover detected")
                 });
 
                 node.addEventListener("mouseout", function () {
                     tooltip.style.display = 'none';
+                    console.log("mouseout detected")
                 });
             }
 
             // Increase font size of non-hidden text
             if (textElement.innerHTML.length > 3) {
                 var fontSize = parseFloat(textElement.style.fontSize) || 12; // Default font size is 12px
-                textElement.style.fontSize = (fontSize + 7) + 'px';
+                textElement.style.fontSize = (fontSize + 4) + 'px';
 
                 var textY = parseFloat(textElement.getAttribute("y"));
                 textElement.classList.add("nodeText");
                 textElement.setAttribute("y", textY + 8);
+            }
+
+            // Check for "mousemove" or "mouseup" and set child polygon's fill property accordingly
+            var firstString = textElement.textContent.split(',')[0];
+            var polygon = node.querySelector('polygon');
+
+            if (firstString.includes('mousemove')) {
+                if (polygon) {
+                    polygon.setAttribute('fill', 'blue'); // Set color for "mousemove"
+                    
+                }
+            } else if (firstString.includes('mouseup')) {
+                if (polygon) {
+                    polygon.setAttribute('fill', 'green'); // Set color for "mouseup"
+                }
+            }
+            else if (firstString.includes('mousedown')) {
+                if (polygon) {
+                    polygon.setAttribute('fill', 'orange'); // Set color for "mousedown"
+                }
+            }
+            else if (firstString.includes('click')) {
+                if (polygon) {
+                    polygon.setAttribute('fill', 'yellow'); // Set color for "click"
+                }
+            }
+            else if (firstString.includes('dblclick')) {
+                if (polygon) {
+                    polygon.setAttribute('fill', 'purple'); // Set color for "dblclick"
+                }
+            }
+            else if (firstString.includes('wheel')) {
+                if (polygon) {
+                    polygon.setAttribute('fill', 'pink'); // Set color for "wheel"
+                }
+            }
+            else if (firstString.includes('facsimile_back')) {
+                if (polygon) {
+                    polygon.setAttribute('fill', 'cyan'); // Set color for "facsimile_back"
+                }
+            }
+            else if (firstString.includes('mouseout')) {
+                if (polygon) {
+                    polygon.setAttribute('fill', 'red'); // Set color for "mouseout"
+                }
             }
         }
     });
