@@ -499,7 +499,7 @@ a.dropdown-item {
 
 thead {
     height: 50px;
-    background-color: #bbe0eb;
+    background-color: #aeaccb;
     position: sticky;
     top: 0;
 }
@@ -509,11 +509,11 @@ tr {
 }
 
 tbody tr:hover {
-    background-color: #d7eff6 !important;
+    background-color: #d5d4e5 !important;
 }
 
 .table-selected {
-    background-color: #d7eff6 !important;
+    background-color: #d5d4e5 !important;
 }
 
 #table {
@@ -561,11 +561,30 @@ th img {
     /* background-color: #bbe0eb38; */
     transition: all 0.3s;
 }
-.hiddenInfo{
+
+.hiddenInfo {
     opacity: 0;
     transition: all 0.3s;
 }
 
+tr.filters {
+    height: 2rem;
+}
+
+.filters input[type=checkbox] {
+    display: none;
+}
+
+table.dataTable thead .sorting_asc{
+    background-image: url("../images/upArrow.png") !important;
+}
+
+table.dataTable thead .sorting_desc {
+    background-image: url("../images/downArrow.png") !important;
+}
+table.dataTable thead .sorting {
+    background-image: none;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */

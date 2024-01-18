@@ -2,6 +2,7 @@
 var tracesNum;
 var selectedTraces = new Set();
 var loadedTraces;
+var violationsForAllTraces;
 //#endregion
 
 window.onload = function () {
@@ -9,6 +10,7 @@ window.onload = function () {
     table = document.getElementById("table");
 
     getUserTraces();
+    getViolations();
 }
 
 function getUserTraces() {
@@ -25,21 +27,26 @@ function getUserTraces() {
             populateTable(loadedTraces);
 
         }).then(() => {
-            $('#table thead tr')
-            .clone(true)
-            .addClass('filters')
-            .appendTo('#table thead');
 
+            $('#table thead tr')
+                .clone(true)
+                .addClass('filters')
+                .appendTo('#table thead');
+
+            //enable filtering for table
             var table = new DataTable("#table", {
                 columnDefs: [
-                    { "orderable": false, "targets": [0, 7] },
-                    { "searchable": false, "targets": [0, 7] },
+                    //exclude first and last row from filtering and sorting
+                    { "orderable": false, "targets": [0, 9] },
+                    { "searchable": false, "targets": [0, 9] },
+                    { "width": "2%", "targets": [0,1,2,3,4,5,6,7,8,9] }
                 ],
+                order: [[1, 'asc']], 
                 orderCellsTop: true,
                 fixedHeader: true,
                 initComplete: function () {
                     var api = this.api();
-            
+
                     // For each column
                     api.columns().eq(0).each(function (colIdx) {
                         // Skip the first and last columns
@@ -49,8 +56,8 @@ function getUserTraces() {
                                 $(api.column(colIdx).header()).index()
                             );
                             var title = $(cell).text();
-                            $(cell).html('<input type="text" placeholder="' + title + '" />');
-            
+                            $(cell).html('<input type="text" placeholder="' + title + ' " style="width: 120px;height:24px;border:none;font-size:14px"" />');
+                            
                             // On every keypress in this input
                             $(
                                 'input',
@@ -61,7 +68,7 @@ function getUserTraces() {
                                     // Get the search value
                                     $(this).attr('title', $(this).val());
                                     var regexr = '^{search}$';
-            
+
                                     // Search the column for that value
                                     api
                                         .column(colIdx)
@@ -76,16 +83,27 @@ function getUserTraces() {
                                 })
                                 .on('keyup', function (e) {
                                     e.stopPropagation();
-            
+
                                     $(this).trigger('change');
                                 });
                         }
                     });
                 },
             });
-            
+
         });
 }
+
+function getViolations() {
+    const url = 'http://127.0.0.1:5000/get_violations';
+    fetch(url)
+        .then(response => response.json())
+        .then(json => {
+            violationsForAllTraces = json;
+            console.log(violationsForAllTraces);
+        });
+}
+
 
 //#region Update Table
 // Function to truncate a string and add ellipsis
@@ -113,11 +131,23 @@ function populateTable(data) {
         nameCell.textContent = id_Cnt;
         row.appendChild(nameCell);
 
+        // Add Events column
         const eventsCell = document.createElement("td");
         var traceData = JSON.parse(element.user_trace);
         eventsCell.textContent = traceData.length;
         row.appendChild(eventsCell);
 
+        // Add violations column
+        const violationsCell = document.createElement("td");
+        violationsCell.textContent = "0";
+        row.appendChild(violationsCell);
+
+        // Add time column
+        const timeCell = document.createElement("td");
+        timeCell.textContent = "0";
+        row.appendChild(timeCell);
+
+        // Add each event on a column
         eventTypes(traceData).then(function (value) {
             const mousemoveCell = document.createElement("td");
             mousemoveCell.textContent = value.mousemove;
@@ -135,13 +165,14 @@ function populateTable(data) {
             mouseoutCell.textContent = value.mouseout;
             row.appendChild(mouseoutCell);
 
+            // Add button on last column
             const iconCell = document.createElement("td");
             const iconButton = document.createElement("button");
             iconButton.classList.add("expandButton");
             iconButton.id = `button${id_Cnt}`;
             const iconImg = document.createElement("img");
             iconImg.classList.add("expandButton");
-            iconImg.src = "images/expandIcon.png";
+            iconImg.src = "images/downArrow.png";
             iconImg.id = `buttonImg${id_Cnt}`;
             iconButton.appendChild(iconImg);
 
@@ -187,8 +218,6 @@ function populateTable(data) {
 
         );
         id_Cnt++;
-        // eventsCell.textContent = traceData.length;
-        // row.appendChild(eventsCell);
 
         // Add event listener to each checkbox for changing row color
         checkbox.addEventListener('change', function () {
