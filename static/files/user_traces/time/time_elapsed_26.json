@@ -1,0 +1,26 @@
+{
+  "total_time": 52028.17702293396,
+  "total_average_time": 19.486208622821707,
+  "groups": {
+    "0": {
+      "total_time": 38333.919525146484,
+      "average_time": 17.1746951277538
+    },
+    "1": {
+      "total_time": 13699.452877044678,
+      "average_time": 31.42076347946027
+    },
+    "2": {
+      "total_time": -5.195379257202148,
+      "average_time": -2.597689628601074
+    },
+    "3": {
+      "total_time": 0,
+      "average_time": 0
+    },
+    "4": {
+      "total_time": 0,
+      "average_time": 0
+    }
+  }
+}

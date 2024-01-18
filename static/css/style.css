@@ -357,20 +357,15 @@ a.dropdown-item {
 }
 
 #minimapContainer {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    border: 2px solid #554e8d;
+    /* Light Blue border color */
     position: absolute;
-
     bottom: 0;
-
     right: 0;
-
-    margin-right: 20px;
-    margin-bottom: 20px;
-
+    margin-right: 10px;
+    margin-bottom: 10px;
     z-index: 1;
-
-
 }
 
 #tooltip {
