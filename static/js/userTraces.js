@@ -3,14 +3,17 @@ var tracesNum;
 var selectedTraces = new Set();
 var loadedTraces;
 var violationsForAllTraces;
+var timeForAllTraces;
 //#endregion
 
 window.onload = function () {
     loadingIcon = document.getElementById("loadingIcon");
     table = document.getElementById("table");
 
-    getUserTraces();
     getViolations();
+    getTime();
+    getUserTraces();
+
 }
 
 function getUserTraces() {
@@ -39,9 +42,9 @@ function getUserTraces() {
                     //exclude first and last row from filtering and sorting
                     { "orderable": false, "targets": [0, 9] },
                     { "searchable": false, "targets": [0, 9] },
-                    { "width": "2%", "targets": [0,1,2,3,4,5,6,7,8,9] }
+                    { "width": "2%", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] }
                 ],
-                order: [[1, 'asc']], 
+                order: [[1, 'asc']],
                 orderCellsTop: true,
                 fixedHeader: true,
                 initComplete: function () {
@@ -57,7 +60,7 @@ function getUserTraces() {
                             );
                             var title = $(cell).text();
                             $(cell).html('<input type="text" placeholder="' + title + ' " style="width: 120px;height:24px;border:none;font-size:14px"" />');
-                            
+
                             // On every keypress in this input
                             $(
                                 'input',
@@ -100,10 +103,16 @@ function getViolations() {
         .then(response => response.json())
         .then(json => {
             violationsForAllTraces = json;
-            console.log(violationsForAllTraces);
         });
 }
-
+function getTime() {
+    const url = 'http://127.0.0.1:5000/get_userTraceTime';
+    fetch(url)
+        .then(response => response.json())
+        .then(json => {
+            timeForAllTraces = json;
+        });
+}
 
 //#region Update Table
 // Function to truncate a string and add ellipsis
@@ -137,15 +146,26 @@ function populateTable(data) {
         eventsCell.textContent = traceData.length;
         row.appendChild(eventsCell);
 
-        // Add violations column
-        const violationsCell = document.createElement("td");
-        violationsCell.textContent = "0";
-        row.appendChild(violationsCell);
+        let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
+        // Extract the captured number from the file name
+        let extractedNumber = match ? match[1] : null;
+        
+        findViolations(extractedNumber).then(function (value) {
+            // Add violations column
+            const violationsCell = document.createElement("td");
+            const sum = Object.values(value).reduce((acc, curr) => acc + curr, 0);
+            violationsCell.textContent = sum;
+            row.appendChild(violationsCell);
+        });
 
-        // Add time column
-        const timeCell = document.createElement("td");
-        timeCell.textContent = "0";
-        row.appendChild(timeCell);
+
+        findTotalTime(extractedNumber).then(function (value) {
+            // Add time column
+            const timeCell = document.createElement("td");
+            timeCell.textContent = value;
+            row.appendChild(timeCell);
+        });
+
 
         // Add each event on a column
         eventTypes(traceData).then(function (value) {
@@ -280,4 +300,62 @@ function selectAllTraces() {
     });
 }
 
+//#endregion
+
+
+//#region Calculate Time and Violations
+
+async function findTotalTime(userID) {
+    var totalTimeInMinutes = 0;
+    timeForAllTraces.forEach((element, index) => {
+        let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
+        // Extract the captured number from the file name
+        let extractedNumber = match ? match[1] : null;
+
+        if (extractedNumber === userID) {
+
+            const userTrace = JSON.parse(element.user_trace);
+            totalTimeInMinutes = (userTrace.total_time / 1000).toFixed(2); // Convert milliseconds to minutes 
+        }
+
+    });
+    return totalTimeInMinutes;
+}
+
+async function findViolations(number) {
+    // Initialize level counters
+    const levelCount = {
+        level0: 0,
+        level1: 0,
+        level2: 0,
+        level3: 0,
+        level4: 0
+    };
+    for (const element of violationsForAllTraces) {
+
+        let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
+        // Extract the captured number from the file name
+        let extractedNumber = match ? match[1] : null;
+        //console.log(extractedNumber,number);
+        if (extractedNumber === number) {
+
+            const userTrace = JSON.parse(element.user_trace);
+            // Iterate through the JSON data
+
+            for (const key in userTrace) {
+                var levelname = 'level' + key;
+                //levelCount[levelname]=userTrace[key].length;
+                for (const violationString of userTrace[key]) {
+                    const match = violationString.match(/violation of level (\d+)/);
+                    if (match) {
+                        const level = `level${match[1]}`;
+                        // Increment the corresponding level counter
+                        levelCount[level]++;
+                    }
+                }
+            }
+        }
+    }
+    return levelCount;
+}
 //#endregion
