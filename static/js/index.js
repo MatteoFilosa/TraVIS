@@ -434,7 +434,7 @@ function graphLayout(svg) {
     textElements.forEach(function (textElement) {
         var node = textElement.parentElement;
         var xPath = "";
-        console.log(node)
+        //console.log(node)
 
         // Hide Xpath
         if (node.classList.contains("node")) {
@@ -448,12 +448,12 @@ function graphLayout(svg) {
                     tooltip.textContent = xPath.innerHTML;
                     tooltip.style.display = 'block';
                     adjustTooltipPosition();
-                    console.log("mouseover detected")
+                    //console.log("mouseover detected")
                 });
 
                 node.addEventListener("mouseout", function () {
                     tooltip.style.display = 'none';
-                    console.log("mouseout detected")
+                    //console.log("mouseout detected")
                 });
             }
 
@@ -473,22 +473,22 @@ function graphLayout(svg) {
 
             if (firstString.includes('mousemove')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', 'blue'); // Set color for "mousemove"
+                    polygon.setAttribute('fill', '#554e8d'); // Set color for "mousemove"
                     
                 }
             } else if (firstString.includes('mouseup')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', 'green'); // Set color for "mouseup"
+                    polygon.setAttribute('fill', 'black'); // Set color for "mouseup"
                 }
             }
             else if (firstString.includes('mousedown')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', 'orange'); // Set color for "mousedown"
+                    polygon.setAttribute('fill', '#381D2A'); // Set color for "mousedown"
                 }
             }
             else if (firstString.includes('click')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', 'yellow'); // Set color for "click"
+                    polygon.setAttribute('fill', '#0734c6'); // Set color for "click"
                 }
             }
             else if (firstString.includes('dblclick')) {
@@ -498,17 +498,22 @@ function graphLayout(svg) {
             }
             else if (firstString.includes('wheel')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', 'pink'); // Set color for "wheel"
+                    polygon.setAttribute('fill', '#640a0a'); // Set color for "wheel"
                 }
             }
             else if (firstString.includes('facsimile_back')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', 'cyan'); // Set color for "facsimile_back"
+                    polygon.setAttribute('fill', '#05771c'); // Set color for "facsimile_back"
                 }
             }
             else if (firstString.includes('mouseout')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', 'red'); // Set color for "mouseout"
+                    polygon.setAttribute('fill', '#9f0087'); // Set color for "mouseout"
+                }
+            }
+            else if (firstString.includes('mouseover')) {
+                if (polygon) {
+                    polygon.setAttribute('fill', '#52b0c3'); // Set color for "mouseover"
                 }
             }
         }
@@ -525,12 +530,12 @@ function isNameInUrl(jsonData, systemUrl) {
        }
         matchingName = matchingElement.name;
         matchingSvg = matchingElement.svg;
-        console.log(matchingSvg)
+        //console.log(matchingSvg)
         statechartSVG.style.display = "block";
         var parser = new DOMParser();
         var doc = parser.parseFromString(matchingSvg, "image/svg+xml");
         var originalSVG = doc.documentElement;
-        console.log(originalSVG)
+        //console.log(originalSVG)
         lastStatechartUrl = systemURL;
 
   

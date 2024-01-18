@@ -14,6 +14,33 @@ window.onload = function () {
     getTime();
     getUserTraces();
 
+    document.getElementById("selectAllCheckbox").addEventListener('change', function () {
+        const tableBody = document.getElementById("tracesTable");
+    
+        const checkboxes = document.querySelectorAll("#tracesTable input[type='checkbox']");
+        const selectAllCheckbox = document.getElementById("selectAllCheckbox");
+    
+        checkboxes.forEach((checkbox) => {
+            checkbox.checked = selectAllCheckbox.checked;
+    
+            const row = checkbox.closest('tr');
+            if (checkbox.checked) {
+                row.classList.add('table-selected');
+                selectedTraces.add(checkbox.id);
+            } else {
+                row.classList.remove('table-selected');
+                selectedTraces.delete(checkbox.id);
+            }
+    
+        });
+        if(selectedTraces.size!=0){
+            document.getElementById("selectTraceBtn").style.display="block";
+            document.getElementById("selectTraceBtn").innerHTML=`Replay ${selectedTraces.size} traces`;
+        }else{
+            document.getElementById("selectTraceBtn").style.display="none";
+        }
+    });
+    
 }
 
 function getUserTraces() {
@@ -44,6 +71,7 @@ function getUserTraces() {
                     { "searchable": false, "targets": [0, 9] },
                     { "width": "2%", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] }
                 ],
+                paging: false,
                 order: [[1, 'asc']],
                 orderCellsTop: true,
                 fixedHeader: true,
@@ -245,10 +273,19 @@ function populateTable(data) {
                 row.classList.add('table-selected');
                 selectedTraces.add(checkbox.id);
                 console.log(selectedTraces);
+                document.getElementById("selectTraceBtn").style.display="block";
+
             } else {
                 row.classList.remove('table-selected');
                 selectedTraces.delete(checkbox.id);
                 console.log(selectedTraces);
+            }
+            console.log(selectedTraces.size);
+            if(selectedTraces.size!=0){
+                document.getElementById("selectTraceBtn").style.display="block";
+                document.getElementById("selectTraceBtn").innerHTML=`Replay ${selectedTraces.size} traces`;
+            }else{
+                document.getElementById("selectTraceBtn").style.display="none";
             }
         });
     });
@@ -279,26 +316,7 @@ async function eventTypes(jsonData) {
 
 //#region Select Trace
 
-function selectAllTraces() {
-    const tableBody = document.getElementById("tracesTable");
 
-    const checkboxes = document.querySelectorAll("#tracesTable input[type='checkbox']");
-    const selectAllCheckbox = document.getElementById("selectAllCheckbox");
-
-    checkboxes.forEach((checkbox) => {
-        checkbox.checked = selectAllCheckbox.checked;
-
-        const row = checkbox.closest('tr');
-        if (checkbox.checked) {
-            row.classList.add('table-selected');
-            selectedTraces.add(checkbox.id);
-        } else {
-            row.classList.remove('table-selected');
-            selectedTraces.delete(checkbox.id);
-        }
-
-    });
-}
 
 //#endregion
 

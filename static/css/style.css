@@ -437,8 +437,6 @@ a.dropdown-item {
     cursor: move;
 }
 
-
-
 /* ---------------------------------------------------
     User Traces Page
 ----------------------------------------------------- */
@@ -453,17 +451,17 @@ a.dropdown-item {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
     width: 98%;
-    height: 105%;
+    min-height: 105%;
+    height: fit-content;
     transition: all 0.3s ease-in-out;
     margin-top: 0.5%;
-    display: flex;
 }
 
 #traceContainer h1 {
     color: #554e8d;
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 2%;
+    margin-bottom: -1%;
 }
 
 .filterButton {
@@ -546,22 +544,10 @@ th img {
 }
 
 .extrainfoDiv {
-    display: block;
-    width: 34.1%;
-    overflow: hidden;
-    /* margin-right: -101%; */
-    opacity: 1;
-    height: 92%;
-    padding: 1.5%;
-    /* background-color: #bbe0eb38; */
-    transition: all 0.3s;
+    padding: 1%;
+    height: 500px;
+    display: none;
 }
-
-.hiddenInfo {
-    opacity: 0;
-    transition: all 0.3s;
-}
-
 tr.filters {
     height: 2rem;
 }
@@ -582,6 +568,21 @@ table.dataTable thead .sorting {
 }
 table.dataTable tbody td {
     padding: 8px 19px;
+}
+.selectTraceBtn{
+    display: none;
+    height: 79px;
+    width: 227px;
+    position: absolute;
+    right: 54px;
+    bottom: 37px;
+    border: none;
+    border-radius: 6px;
+    background-color: #52b0c3;
+    font-size: 22px;
+    font-weight: 500;
+    color: white;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 /* ---------------------------------------------------
     MEDIAQUERIES

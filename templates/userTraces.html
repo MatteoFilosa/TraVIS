@@ -43,7 +43,7 @@
     <div class="wrapper">
 
         <!-- Page Content  -->
-        <div id="content">
+        <div id="content" style="overflow-y: scroll;">
             <!-- Main Nav Bar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 3.2em">
                 <div class="container-fluid">
@@ -89,7 +89,7 @@
                     </div> -->
                     <div id="tableDiv" style="display: block;
                     width: 100%;
-                    padding: 1.5%;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);transition: all 0.3s;">
+                    padding: 1.5%;transition: all 0.3s;">
                         <h1 id="tracesNum">Loading User Traces... </h1>
                         <div class="spinner-border" id="loadingIcon" role="status" style="display: block;margin-left: 50%;
                         margin-top: 22%;">
@@ -99,7 +99,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col" style="width: 2%;padding-left: 1%;"><input type="checkbox"
-                                            id="selectAllCheckbox" onclick="selectAllTraces()"></th>
+                                            id="selectAllCheckbox"></th>
                                     <th scope="col" style="width: 2%;"><img src="images/userIcon.png" width="20px"
                                             height="20px" />User ID</th>
                                     <th scope="col" style="width: 2%;"><img src="images/interactorIcon.png" width="20px"
@@ -125,9 +125,10 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- <div class="hiddenInfo" id="extrainfoDiv">
+                    <button class="selectTraceBtn" id="selectTraceBtn"></button>
+                    <div class="extrainfoDiv" id="extrainfoDiv">
                         <h1>Trace Information </h1>
-                    </div> -->
+                    </div> 
 
 
                 </div>
