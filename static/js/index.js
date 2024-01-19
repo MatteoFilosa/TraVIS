@@ -314,42 +314,37 @@ function setupMinimapClickHandler(originalSVG) {
 
 
 
-function adjustIndicator(scale, currentX, currentY) {
-    
-    // Update the scale part of the transform attribute
-    
-
+function adjustIndicator(scale, currentX, currentY, event) {
+    console.log(event.sourceEvent.type == "wheel")
     var indicator = document.getElementById("indicator");
 
-    // Trying to get the best approximation possible. It is kinda messy, I know.
-    var newLeft = (((currentX) / scale / scaleFactor)) * -1;
-    var newTop = (parseFloat(indicator.style.top)) + ((currentY / 2 / scale) / scaleFactor);
- 
+    // Calcolo delle nuove posizioni
+    var newLeft = ((currentX / scale / scaleFactor)) * -1;
+    var newTop = (currentY / scale / scaleFactor) ;
 
-    // To let the indicator inside the boundaries
+    if (event.sourceEvent.type != "wheel") newTop = (currentY / scale / scaleFactor) * -1;
+
+    // Limitare l'indicatore all'interno dei confini
     newLeft = Math.min(Math.max(newLeft, 0), minimapContainer.clientWidth - indicator.clientWidth);
-    newTop = Math.min(Math.max(newTop, 0), (minimapContainer.clientHeight - indicator.clientHeight - (scale * 5)));
+    newTop = Math.min(Math.max(newTop, 0), minimapContainer.clientHeight - indicator.clientHeight);
+
+    console.log(newTop)
 
     
-    // Update the entire transform attribute, including both scale and translation
     
 
-    //Update indicator pos
+    // Aggiorna la posizione dell'indicatore
     indicator.style.left = newLeft + "px";
-    indicator.style.top = newTop + "px";
+    indicator.style.top = newTop + "px";  // Usa indicator.style.top invece di indicator.style.bottom
 
-    
-
-    
-
-    // Update the size of the indicator based on the zoom level
+    // Aggiorna la dimensione dell'indicatore in base al livello di zoom
     const newWidth = minimapWidth / scale;
     const newHeight = minimapHeight / scale;
 
     indicator.style.width = newWidth + "px";
     indicator.style.height = newHeight + "px";
-  
 }
+
 //#endregion
 
 //#region Statechart
@@ -525,7 +520,7 @@ function isNameInUrl(jsonData, systemUrl) {
                     .selectAll("g")
                     .attr('transform', event.transform);
                     console.log(event)
-                    adjustIndicator(event.transform.k, event.transform.x, event.transform.y)
+                    adjustIndicator(event.transform.k, event.transform.x, event.transform.y, event)
                 });
 
             statechart.call(zoom)
