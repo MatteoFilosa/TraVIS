@@ -10,10 +10,11 @@ var statechartContainer;
 var statechart;
 var lastStatechartUrl = "";
 var minimapHidden = false;
+var gelem;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0, currentX = 0, currentY = 0, translateX = 0, translateY = 0, minimapRatio = 0, scale = 1, svgWidth = 0, svgHeight = 0;
 
 // Array of colors is given  
-let color1 = d3.schemeCategory10[0];
+/* let color1 = d3.schemeCategory10[0];
 let color2 = d3.schemeCategory10[1];
 let color3 = d3.schemeCategory10[2];
 let color4 = d3.schemeCategory10[3];
@@ -22,7 +23,7 @@ let color6 = d3.schemeCategory10[5];
 let color7 = d3.schemeCategory10[6];
 let color8 = d3.schemeCategory10[7];
 let color9 = d3.schemeCategory10[8];
-let color10 = d3.schemeCategory10[9];
+let color10 = d3.schemeCategory10[9]; */
 
 //#endregion
 
@@ -307,86 +308,22 @@ function setupMinimapClickHandler(originalSVG) {
     minimapContainer.appendChild(toggleButton);
 }
 
-function dragstarted() {
-    
-    statechart.classed("dragging", true);
 
-    // Initialize translation values with currentX and currentY
-    
-    translateX = currentX;
-    translateY = currentY;
-    
-    indicatorLeft = indicator.style.left;
-    indicatorTop = indicator.style.top;
 
-}
 
-function dragged() {
-    translateX += d3.event.dx;
-    translateY += d3.event.dy;
-   
-    //console.log(translateX, translateY)
-    
-    
-    statechart.attr("transform", "translate(" + translateX + "," + translateY + ") scale(" + scale + ")");
 
-    //console.log(translateX, translateY, d3.event.x, d3.event.y)
-}
 
-function dragended() {
-    statechart.classed("dragging", false);
 
-    // Extract numeric values from the current left and top properties
-    var currentLeft = parseFloat(indicatorLeft);
-    var currentTop = parseFloat(indicatorTop);
-
-    // Calculate the change in translation values
-    var dx = translateX - currentX;
-    var dy = translateY - currentY;
-
-    // Update the translated values with the correct proportion based on the scale factor and the scale (zoom) value
-    var newLeft = currentLeft - ((dx / scaleFactor) / scale);
-    var newTop = currentTop - ((dy / scaleFactor) / scale);
-
-    // Ensure that the indicator stays within the bounds of minimapContainer
-    newLeft = Math.min(Math.max(newLeft, 0), minimapContainer.clientWidth - indicator.clientWidth);
-    newTop = Math.min(Math.max(newTop, 0), minimapContainer.clientHeight - indicator.clientHeight);
-
-    // Update the position of the indicator.
-    indicator.style.left = newLeft + "px";
-    indicator.style.top = newTop + "px";
-
-    // Update the currentX and currentY values after dragging ends
-    currentX = translateX;
-    currentY = translateY;
-    console.log(translateX, translateY, d3.event)
-    
-}
-
-function zoomed() {
+function adjustIndicator(scale, currentX, currentY) {
     
     // Update the scale part of the transform attribute
     
-    
-    
-    scale = d3.event.transform.k;
-    currentX = d3.event.transform.x;
-    currentY = d3.event.transform.y;
-
-    
-
 
     var indicator = document.getElementById("indicator");
 
-    indicatorLeft = indicator.style.left;
-    indicatorTop = indicator.style.top;
-
-    var currentLeft = parseFloat(indicatorLeft);
-    var currentTop = parseFloat(indicatorTop);
-
     // Trying to get the best approximation possible. It is kinda messy, I know.
     var newLeft = (((currentX) / scale / scaleFactor)) * -1;
-    var newTop = (currentTop) + ((currentY / 2 / scale) / scaleFactor);
+    var newTop = (parseFloat(indicator.style.top)) + ((currentY / 2 / scale) / scaleFactor);
  
 
     // To let the indicator inside the boundaries
@@ -395,7 +332,7 @@ function zoomed() {
 
     
     // Update the entire transform attribute, including both scale and translation
-    statechart.attr("transform", d3.event.transform);
+    
 
     //Update indicator pos
     indicator.style.left = newLeft + "px";
@@ -579,20 +516,21 @@ function isNameInUrl(jsonData, systemUrl) {
             // Initial scale values
             scale = 1, currentX = 0, currentY = originalHeight, translateX = 0, translateY = currentY, minimapHidden = false;
 
-            //DRAG
+            
 
-            statechart.call(
-                d3.drag()
-                    .on("start", dragstarted)
-                    .on("drag", dragged)
-                    .on("end", dragended)
-            );
+            var zoom = d3.zoom()
+                .scaleExtent([1, 8])
+                .on('zoom', function (event) {
+                    statechart
+                    .selectAll("g")
+                    .attr('transform', event.transform);
+                    console.log(event)
+                    adjustIndicator(event.transform.k, event.transform.x, event.transform.y)
+                });
 
-            const zoom = d3.zoom()
-                .scaleExtent([2, 100])
-                .on("zoom", zoomed);
+            statechart.call(zoom)
 
-            statechart.call(zoom);
+
             return true;
         } else {
             console.error("Invalid original SVG");
