@@ -11,6 +11,7 @@ var statechart;
 var lastStatechartUrl = "";
 var minimapHidden = false;
 var gelem;
+var json, url;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0, currentX = 0, currentY = 0, translateX = 0, translateY = 0, minimapRatio = 0, scale = 1, svgWidth = 0, svgHeight = 0;
 
 // Array of colors is given  
@@ -117,7 +118,7 @@ function generateMinimap(originalSVG) {
         minimapHeight *= 2.5
         minimapWidth  *= 2.5
     }
-    console.log(minimapWidth, minimapHeight)
+    console.log("Minimap width: " + minimapWidth + " , minimap height: " + minimapHeight)
 
 
     var minimapSVG = originalSVG.cloneNode(true);
@@ -132,18 +133,20 @@ function generateMinimap(originalSVG) {
 }
 
 
-//Dragging the indicator
-
 let initialX, initialY;
+let isDragging = false;
 
 function indicatorDragStarted() {
     indicator.classList.add("dragging");
+    isDragging = true;
 
     initialX = parseFloat(indicator.style.left);
     initialY = parseFloat(indicator.style.top);
 }
 
 function indicatorDragged() {
+    if (!isDragging) return;
+
     const indicatorRect = indicator.getBoundingClientRect();
     const minimapRect = minimapContainer.getBoundingClientRect();
 
@@ -161,18 +164,24 @@ function indicatorDragged() {
 
     const deltaX = parseFloat(indicator.style.left) - initialX;
     const deltaY = parseFloat(indicator.style.top) - initialY;
-    console.log(deltaX, deltaY)
-    translateX -= deltaX * ((svgWidth / minimapWidth) / 1.5 )
-    translateY -= deltaY * ((svgHeight / minimapHeight) / 2 )
-    statechart.attr("transform", "translate(" + translateX + "," + translateY + ") scale(" + scale + ")");
-    currentX = translateX
-    currentY = translateY
+
+    translateX -= deltaX * ((svgWidth / minimapWidth) / 1.5);
+    translateY -= deltaY * ((svgHeight / minimapHeight) / 2);
+    console.log(translateX, translateY, deltaX, deltaY)
+
     
+    statechart.attr("transform", "translate(" + translateX + "," + translateY + ")");
+
+    
+
+    
+
     
 }
 
 function indicatorDragEnded() {
     indicator.classList.remove("dragging");
+    isDragging = false;
 
     // Calcola la differenza in pixel tra la posizione iniziale e finale
     const deltaX = parseFloat(indicator.style.left) - initialX;
@@ -184,7 +193,8 @@ function indicatorDragEnded() {
 
     // Aggiorna anche la differenza in pixel
     console.log("Differenza X:", deltaX, "Differenza Y:", deltaY);
-    panned = true;
+  
+    
 }
 
 
@@ -194,17 +204,17 @@ function setupMinimapClickHandler(originalSVG) {
     const statechartSVG = document.getElementById("statechartSVG");
     svgHeight = statechartSVG.getBoundingClientRect().height;
     svgWidth = statechartSVG.getBoundingClientRect().width;
-    console.log(svgWidth)
-    console.log(svgHeight)
+    console.log("Svg width: " + svgWidth + ", svg height: " + svgHeight)
+    
     //To adjust the indicator's height basing on the original svg's height
     minimapRatio = 800 / svgHeight
     if (minimapRatio > 1) minimapRatio = 1
-    console.log(svgHeight, minimapRatio)
+    console.log("Minimap ratio: " + minimapRatio)
     const indicator = document.createElement("div");
     indicator.id = "indicator";
     indicator.style.position = "absolute";
     indicator.style.width = minimapWidth + "px";
-    indicator.style.height = (minimapRatio * 80) + "%";
+    indicator.style.height = (minimapRatio * 75) + "%";
     indicator.style.backgroundColor = "transparent";
     indicator.style.borderTop = "2px solid #554e8d";
     indicator.style.borderLeft = "2px solid #554e8d";
@@ -263,7 +273,7 @@ function setupMinimapClickHandler(originalSVG) {
     resetButton.style.right = "5px";
     resetButton.addEventListener("click", function () {
 
-        statechart.attr("transform", "translate(4 " + originalHeight + ")");
+        statechart.selectAll("g").attr("transform", "translate(0, 0) scale(1)");
 
 
         indicator.style.width = minimapWidth + "px";
@@ -315,35 +325,34 @@ function setupMinimapClickHandler(originalSVG) {
 
 
 function adjustIndicator(scale, currentX, currentY, event) {
-    console.log(event.sourceEvent.type == "wheel")
+    console.log(statechart);
     var indicator = document.getElementById("indicator");
 
-    // Calcolo delle nuove posizioni
+    // New positions for inicator calculation
     var newLeft = ((currentX / scale / scaleFactor)) * -1;
-    var newTop = (currentY / scale / scaleFactor) ;
+    var newTop = (currentY / scale / scaleFactor);
 
-    if (event.sourceEvent.type != "wheel") newTop = (currentY / scale / scaleFactor) * -1;
+    console.log(newTop)
+    console.log(minimapContainer.clientHeight - indicator.clientHeight)
 
-    // Limitare l'indicatore all'interno dei confini
+    // To let the indicator stay in the boundaries of the minimap
     newLeft = Math.min(Math.max(newLeft, 0), minimapContainer.clientWidth - indicator.clientWidth);
     newTop = Math.min(Math.max(newTop, 0), minimapContainer.clientHeight - indicator.clientHeight);
 
-    console.log(newTop)
-
-    
-    
-
-    // Aggiorna la posizione dell'indicatore
+    //Needed otherwise the indicator goes in the opposite direction in the Y-axis
+    if (event.sourceEvent.type != "wheel") newTop = (minimapContainer.clientHeight - indicator.clientHeight) - newTop
+  
     indicator.style.left = newLeft + "px";
-    indicator.style.top = newTop + "px";  // Usa indicator.style.top invece di indicator.style.bottom
+    indicator.style.top = newTop + "px"; 
 
-    // Aggiorna la dimensione dell'indicatore in base al livello di zoom
+    
     const newWidth = minimapWidth / scale;
     const newHeight = minimapHeight / scale;
 
     indicator.style.width = newWidth + "px";
     indicator.style.height = newHeight + "px";
 }
+
 
 //#endregion
 
@@ -544,7 +553,7 @@ function isNameInUrl(jsonData, systemUrl) {
 
 // Function to check if there is a corresponding statechart in the URL
 function CheckIfStatechartExists() {
-    const url = 'http://127.0.0.1:5000/get_statecharts';
+    url = 'http://127.0.0.1:5000/get_statecharts';
     fetch(url)
         .then(response => response.json())
         .then(json => {
