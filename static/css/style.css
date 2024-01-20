@@ -455,15 +455,20 @@ a.dropdown-item {
     height: fit-content;
     transition: all 0.3s ease-in-out;
     margin-top: 0.5%;
+    display: flex;
 }
 
 #traceContainer h1 {
     color: #554e8d;
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: -1%;
+    margin-bottom: 1%;
+    height: 50px;
 }
 
+#tracesNum{
+    padding: 1%;
+}
 .filterButton {
     background-color: #52b0c3;
     border-radius: 9px;
@@ -546,7 +551,8 @@ th img {
 .extrainfoDiv {
     padding: 1%;
     height: 500px;
-    display: none;
+    display: flex;
+    width: 30%;
 }
 tr.filters {
     height: 2rem;
@@ -570,7 +576,7 @@ table.dataTable tbody td {
     padding: 8px 19px;
 }
 .selectTraceBtn{
-    display: none;
+    opacity: 0;
     height: 79px;
     width: 227px;
     position: absolute;
@@ -583,6 +589,14 @@ table.dataTable tbody td {
     font-weight: 500;
     color: white;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+#placeholderText{
+    color: #0000008e;
+    height: 50px;
+    top: 48%;
+    left: 77%;
+    position: absolute;
 }
 /* ---------------------------------------------------
     MEDIAQUERIES

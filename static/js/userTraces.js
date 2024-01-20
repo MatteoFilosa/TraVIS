@@ -16,13 +16,13 @@ window.onload = function () {
 
     document.getElementById("selectAllCheckbox").addEventListener('change', function () {
         const tableBody = document.getElementById("tracesTable");
-    
+
         const checkboxes = document.querySelectorAll("#tracesTable input[type='checkbox']");
         const selectAllCheckbox = document.getElementById("selectAllCheckbox");
-    
+
         checkboxes.forEach((checkbox) => {
             checkbox.checked = selectAllCheckbox.checked;
-    
+
             const row = checkbox.closest('tr');
             if (checkbox.checked) {
                 row.classList.add('table-selected');
@@ -31,16 +31,16 @@ window.onload = function () {
                 row.classList.remove('table-selected');
                 selectedTraces.delete(checkbox.id);
             }
-    
+
         });
-        if(selectedTraces.size!=0){
-            document.getElementById("selectTraceBtn").style.display="block";
-            document.getElementById("selectTraceBtn").innerHTML=`Replay ${selectedTraces.size} traces`;
-        }else{
-            document.getElementById("selectTraceBtn").style.display="none";
+        if (selectedTraces.size != 0) {
+            document.getElementById("selectTraceBtn").style.display = "block";
+            document.getElementById("selectTraceBtn").innerHTML = `Replay ${selectedTraces.size} traces`;
+        } else {
+            document.getElementById("selectTraceBtn").style.display = "none";
         }
     });
-    
+
 }
 
 function getUserTraces() {
@@ -58,68 +58,63 @@ function getUserTraces() {
 
         }).then(() => {
 
-            $('#table thead tr')
-                .clone(true)
-                .addClass('filters')
-                .appendTo('#table thead');
 
             //enable filtering for table
             var table = new DataTable("#table", {
                 columnDefs: [
                     //exclude first and last row from filtering and sorting
-                    { "orderable": false, "targets": [0, 9] },
-                    { "searchable": false, "targets": [0, 9] },
-                    { "width": "2%", "targets": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] }
+                    { "orderable": false, "targets": [0, 5] },
+                    { "searchable": false, "targets": [0, 5] }
                 ],
                 paging: false,
                 order: [[1, 'asc']],
                 orderCellsTop: true,
-                fixedHeader: true,
-                initComplete: function () {
-                    var api = this.api();
+                fixedHeader: true
+                // initComplete: function () {
+                //     var api = this.api();
 
-                    // For each column
-                    api.columns().eq(0).each(function (colIdx) {
-                        // Skip the first and last columns
-                        if (colIdx !== 0 && colIdx !== api.columns().eq(0).length - 1) {
-                            // Set the header cell to contain the input element
-                            var cell = $('.filters th').eq(
-                                $(api.column(colIdx).header()).index()
-                            );
-                            var title = $(cell).text();
-                            $(cell).html('<input type="text" placeholder="' + title + ' " style="width: 120px;height:24px;border:none;font-size:14px"" />');
+                //     // For each column
+                //     api.columns().eq(0).each(function (colIdx) {
+                //         // Skip the first and last columns
+                //         if (colIdx !== 0 && colIdx !== api.columns().eq(0).length - 1) {
+                //             // Set the header cell to contain the input element
+                //             var cell = $('.filters th').eq(
+                //                 $(api.column(colIdx).header()).index()
+                //             );
+                //             var title = $(cell).text();
+                //             $(cell).html('<input type="text" placeholder="' + title + ' " style="width: 120px;height:24px;border:none;font-size:14px"" />');
 
-                            // On every keypress in this input
-                            $(
-                                'input',
-                                $('.filters th').eq($(api.column(colIdx).header()).index())
-                            )
-                                .off('keyup change')
-                                .on('change', function (e) {
-                                    // Get the search value
-                                    $(this).attr('title', $(this).val());
-                                    var regexr = '^{search}$';
+                //             // On every keypress in this input
+                //             $(
+                //                 'input',
+                //                 $('.filters th').eq($(api.column(colIdx).header()).index())
+                //             )
+                //                 .off('keyup change')
+                //                 .on('change', function (e) {
+                //                     // Get the search value
+                //                     $(this).attr('title', $(this).val());
+                //                     var regexr = '^{search}$';
 
-                                    // Search the column for that value
-                                    api
-                                        .column(colIdx)
-                                        .search(
-                                            this.value != ''
-                                                ? regexr.replace('{search}', '(((' + this.value + ')))')
-                                                : '',
-                                            this.value != '',
-                                            this.value == ''
-                                        )
-                                        .draw();
-                                })
-                                .on('keyup', function (e) {
-                                    e.stopPropagation();
+                //                     // Search the column for that value
+                //                     api
+                //                         .column(colIdx)
+                //                         .search(
+                //                             this.value != ''
+                //                                 ? regexr.replace('{search}', '(((' + this.value + ')))')
+                //                                 : '',
+                //                             this.value != '',
+                //                             this.value == ''
+                //                         )
+                //                         .draw();
+                //                 })
+                //                 .on('keyup', function (e) {
+                //                     e.stopPropagation();
 
-                                    $(this).trigger('change');
-                                });
-                        }
-                    });
-                },
+                //                     $(this).trigger('change');
+                //                 });
+                //         }
+                //     });
+                //},
             });
 
         });
@@ -177,7 +172,7 @@ function populateTable(data) {
         let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
         // Extract the captured number from the file name
         let extractedNumber = match ? match[1] : null;
-        
+
         findViolations(extractedNumber).then(function (value) {
             // Add violations column
             const violationsCell = document.createElement("td");
@@ -188,30 +183,11 @@ function populateTable(data) {
 
 
         findTotalTime(extractedNumber).then(function (value) {
+            nameCell.textContent = id_Cnt;
             // Add time column
             const timeCell = document.createElement("td");
-            timeCell.textContent = value;
+            timeCell.textContent = value + " seconds";
             row.appendChild(timeCell);
-        });
-
-
-        // Add each event on a column
-        eventTypes(traceData).then(function (value) {
-            const mousemoveCell = document.createElement("td");
-            mousemoveCell.textContent = value.mousemove;
-            row.appendChild(mousemoveCell);
-
-            const brushCell = document.createElement("td");
-            brushCell.textContent = value.brush;
-            row.appendChild(brushCell);
-
-            const wheelCell = document.createElement("td");
-            wheelCell.textContent = value.wheel;
-            row.appendChild(wheelCell);
-
-            const mouseoutCell = document.createElement("td");
-            mouseoutCell.textContent = value.mouseout;
-            row.appendChild(mouseoutCell);
 
             // Add button on last column
             const iconCell = document.createElement("td");
@@ -220,7 +196,7 @@ function populateTable(data) {
             iconButton.id = `button${id_Cnt}`;
             const iconImg = document.createElement("img");
             iconImg.classList.add("expandButton");
-            iconImg.src = "images/downArrow.png";
+            iconImg.src = "images/moreInfo.png";
             iconImg.id = `buttonImg${id_Cnt}`;
             iconButton.appendChild(iconImg);
 
@@ -228,13 +204,25 @@ function populateTable(data) {
             iconButton.addEventListener("click", () => {
                 var numbersOnlyID = iconButton.id.replace(/\D/g, '');
                 if (document.getElementById(`extrainfoDiv`).getAttribute('data-visible') === 'false') {
-                    document.getElementById("extrainfoDiv").classList.remove("hiddenInfo");
-                    document.getElementById("extrainfoDiv").classList.add("extrainfoDiv");
+                    iconImg.src="images/moreInfo_pressed.png";
                     document.getElementById(`extrainfoDiv`).setAttribute('data-visible', 'true');
+                    document.getElementById(`extrainfoDiv`).setAttribute('data-activatedBy', numbersOnlyID);
+                    showExtraInformation(numbersOnlyID);
                 } else {
-                    document.getElementById("extrainfoDiv").classList.add("hiddenInfo");
-                    document.getElementById("extrainfoDiv").classList.remove("extrainfoDiv");
-                    document.getElementById(`extrainfoDiv`).setAttribute('data-visible', 'false');
+                    const activatedBy = document.getElementById(`extrainfoDiv`).getAttribute('data-activatedBy');
+                    console.log(`Was activatedBy:${activatedBy}, pressed by:${numbersOnlyID}`);
+                    if(activatedBy != 0 && activatedBy!=numbersOnlyID ){
+                        document.getElementById(`buttonImg${activatedBy}`).src="images/moreInfo.png";
+                        document.getElementById(`buttonImg${numbersOnlyID}`).src="images/moreInfo_pressed.png";
+                        document.getElementById(`extrainfoDiv`).setAttribute('data-activatedBy', numbersOnlyID);
+                        showExtraInformation(numbersOnlyID);
+                    }else{
+                        iconImg.src = "images/moreInfo.png";
+                        document.getElementById(`extrainfoDiv`).setAttribute('data-visible', 'false');
+                        document.getElementById(`extrainfoDiv`).setAttribute('data-activatedBy', 0);
+                        clearExtraInformation();
+                    }
+                    
                 }
 
 
@@ -242,30 +230,53 @@ function populateTable(data) {
             iconCell.appendChild(iconButton);
             row.appendChild(iconCell);
 
-
             // Add the row to the table
             tableBody.appendChild(row);
-
-            // const extrainfoRow = document.createElement("tr");
-            // extrainfoRow.classList.add("no-sort");
-            // extrainfoRow.id = `row${id_Cnt}`;
-            // extrainfoRow.style.display = "none";
-            // extrainfoRow.style.transition = "display 1s";
-            // //extrainfoRow.classList.add("extrainfoRow");
-
-            // const infoDiv = document.createElement("td");
-            // infoDiv.textContent = "Test";
-
-            // infoDiv.colSpan = "10";
-            // extrainfoRow.appendChild(infoDiv);
-
-            //tableBody.appendChild(extrainfoRow);
+            id_Cnt++;
+        });
 
 
-        }
+        // Add each event on a column
+        // eventTypes(traceData).then(function (value) {
+        //     const mousemoveCell = document.createElement("td");
+        //     mousemoveCell.textContent = value.mousemove;
+        //     row.appendChild(mousemoveCell);
 
-        );
-        id_Cnt++;
+        //     const brushCell = document.createElement("td");
+        //     brushCell.textContent = value.brush;
+        //     row.appendChild(brushCell);
+
+        //     const wheelCell = document.createElement("td");
+        //     wheelCell.textContent = value.wheel;
+        //     row.appendChild(wheelCell);
+
+        //     const mouseoutCell = document.createElement("td");
+        //     mouseoutCell.textContent = value.mouseout;
+        //     row.appendChild(mouseoutCell);
+
+
+
+        //     // const extrainfoRow = document.createElement("tr");
+        //     // extrainfoRow.classList.add("no-sort");
+        //     // extrainfoRow.id = `row${id_Cnt}`;
+        //     // extrainfoRow.style.display = "none";
+        //     // extrainfoRow.style.transition = "display 1s";
+        //     // //extrainfoRow.classList.add("extrainfoRow");
+
+        //     // const infoDiv = document.createElement("td");
+        //     // infoDiv.textContent = "Test";
+
+        //     // infoDiv.colSpan = "10";
+        //     // extrainfoRow.appendChild(infoDiv);
+
+        //     //tableBody.appendChild(extrainfoRow);
+
+
+        // }
+
+        // );
+
+        
 
         // Add event listener to each checkbox for changing row color
         checkbox.addEventListener('change', function () {
@@ -273,7 +284,7 @@ function populateTable(data) {
                 row.classList.add('table-selected');
                 selectedTraces.add(checkbox.id);
                 console.log(selectedTraces);
-                document.getElementById("selectTraceBtn").style.display="block";
+                document.getElementById("selectTraceBtn").style.opacity = 1;
 
             } else {
                 row.classList.remove('table-selected');
@@ -281,11 +292,11 @@ function populateTable(data) {
                 console.log(selectedTraces);
             }
             console.log(selectedTraces.size);
-            if(selectedTraces.size!=0){
-                document.getElementById("selectTraceBtn").style.display="block";
-                document.getElementById("selectTraceBtn").innerHTML=`Replay ${selectedTraces.size} traces`;
-            }else{
-                document.getElementById("selectTraceBtn").style.display="none";
+            if (selectedTraces.size != 0) {
+                document.getElementById("selectTraceBtn").style.display = "block";
+                document.getElementById("selectTraceBtn").innerHTML = `Replay ${selectedTraces.size} traces`;
+            } else {
+                document.getElementById("selectTraceBtn").style.opacity = 0;
             }
         });
     });
@@ -316,7 +327,14 @@ async function eventTypes(jsonData) {
 
 //#region Select Trace
 
-
+function showExtraInformation(userID) {
+    document.getElementById("placeholderText").style.display = "none";
+    document.getElementById("traceInfoTitle").innerHTML = `Trace Information ${userID}`;
+}
+function clearExtraInformation() {
+    document.getElementById("placeholderText").style.display = "block";
+    document.getElementById("traceInfoTitle").innerHTML = "Trace Information   ";
+}
 
 //#endregion
 
