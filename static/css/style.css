@@ -522,10 +522,14 @@ tbody tr:hover {
     width: 42px;
     height: 31px;
     background-color: transparent;
-    border: none;
+    border: 1px solid black;
+    border-radius: 6px;
     transition: all 0.2s ease-in-out;
 }
-
+.expandButtonPressed{
+    background-color: #52b0c3;
+    border: 1px solid #52b0c3;
+}
 .expandButton img {
     width: 25px;
     height: 25px;
@@ -550,9 +554,12 @@ th img {
 
 .extrainfoDiv {
     padding: 1%;
-    height: 500px;
-    display: flex;
+    height: fit-content;
     width: 30%;
+}
+.extrainfoDiv p {
+    color:#000000 !important;
+
 }
 tr.filters {
     height: 2rem;

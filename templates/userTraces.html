@@ -102,13 +102,13 @@
                                             id="selectAllCheckbox"></th>
                                     <th scope="col" style="width: 2.5%;"><img src="images/userIcon.png" width="20px"
                                             height="20px" />User ID</th>
-                                    <th scope="col" style="width: 2.5%;"><img src="images/interactorIcon.png" width="20px"
-                                            height="20px" />Events</th>
+                                    <th scope="col" style="width: 2.5%;"><img src="images/interactorIcon.png"
+                                            width="20px" height="20px" />Events</th>
                                     <th scope="col" style="width: 2.5%;"><img src="images/errorIcon.png" width="20px"
-                                        height="20px" />Violations</th>
+                                            height="20px" />Violations</th>
                                     <th scope="col" style="width: 2.5%;"><img src="images/timeIcon.png" width="20px"
-                                        height="20px" />Total Time </th>
-                                    <th scope="col" style="width: 0.1%;">   </th>
+                                            height="20px" />Total Time </th>
+                                    <th scope="col" style="width: 0.1%;"> </th>
                                     <!-- <th scope="col" style="width: 2%;"><img src="images/mousemoveIcon.png" width="20px"
                                             height="20px" />Mousemove</th>
                                     <th scope="col" style="width: 2%;"><img src="images/brushIcon.png" width="20px"
@@ -118,7 +118,7 @@
                                     <th scope="col" style="width: 2%;"><img src="images/zoomIcon.png" width="20px"
                                             height="20px" />Zoom</th> -->
 
-                                    
+
                                 </tr>
                             </thead>
                             <tbody id="tracesTable">
@@ -128,15 +128,47 @@
                     </div>
                     <button class="selectTraceBtn" id="selectTraceBtn"></button>
                     <div class="extrainfoDiv" id="extrainfoDiv" data-visible="false">
-                        <h1 id="traceInfoTitle">Trace Information    </h1>
+                        <h1 id="traceInfoTitle">Trace Information </h1>
                         <div id="placeholderText">Select a trace to view more information</div>
-                    </div> 
+                        <div id="extrainfoContent" style="display: none;">
+                            <div style="display: flex;">
+                                <div class="eventsDiv">
+                                    <p>Events</p>
+                                    <ul id="eventsList">
+                                        <li>item 1</li>
+                                        <li>item 2</li>
+                                        <li>item 3</li>
+                                    </ul>
+                                </div>
+                                <div class="heatMapDiv"></div>
+                            </div>
+                            <div class="violationsDiv">
+                                <p>Violations</p>
+                                <ul id="violationsList">
+                                    <li>Level 1</li>
+                                    <li>Level 2</li>
+                                    <li>Level 3</li>
+                                </ul>
+                            </div>
+                            <div class="timeDiv">
+                                <p>Time</p>
+                                <ul id="timeList">
+                                    <li>Total time</li>
+                                    <li>Average time</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
 
 
                 </div>
 
+
             </div>
+
         </div>
+    </div>
     </div>
     </div>
 
