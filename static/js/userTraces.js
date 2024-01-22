@@ -172,6 +172,8 @@ function populateTable(data) {
     // Add Events column
     const eventsCell = document.createElement("td");
     var traceData = JSON.parse(element.user_trace);
+    eventsCell.style.display="flex";
+    eventTypes(extractedNumber).then(function (value) {eventsCell.appendChild(createEventsBar(value))});
     eventsCell.textContent = traceData.length;
     row.appendChild(eventsCell);
 
@@ -290,7 +292,7 @@ function populateTable(data) {
 
 function showExtraInformation(userID) {
   document.getElementById("placeholderText").style.display = "none";
-  document.getElementById("extrainfoContent").style.display = "block";
+  document.getElementById("extrainfoContent").style.opacity = 1;
   document.getElementById(
     "traceInfoTitle"
   ).innerHTML = `Trace Information ${userID}`;
@@ -299,14 +301,14 @@ function showExtraInformation(userID) {
     const eventsList = document.getElementById("eventsList");
     eventsList.innerHTML = "";
     for (const key in value) {
-      if(value[key]>0){
+      if (value[key] > 0) {
         var eventElement = document.createElement("li");
         eventElement.textContent = `${key}: ${value[key]}`;
-        eventElement.style.textTransform="capitalize";
+        eventElement.style.textTransform = "capitalize";
         eventsList.append(eventElement);
       }
-        
     }
+    
   });
 
   findViolations(userID).then(function (value) {
@@ -337,10 +339,11 @@ function showExtraInformation(userID) {
     timeList.append(totalTime);
     timeList.append(averageTime);
   });
+  
 }
 function clearExtraInformation() {
   document.getElementById("placeholderText").style.display = "block";
-  document.getElementById("extrainfoContent").style.display = "none";
+  document.getElementById("extrainfoContent").style.opacity = 0;
   document.getElementById("traceInfoTitle").innerHTML = "Trace Information   ";
 }
 
@@ -442,3 +445,68 @@ async function findViolations(userID) {
   return levelCount;
 }
 //#endregion
+
+function createEventsBar(events) {
+  const eventRectangle = document.createElement("div");
+  eventRectangle.id="eventRectangle";
+  eventRectangle.innerHTML = "";
+
+  // Calculate the percentage of each event type
+  const totalEvents = Object.values(events).reduce(
+    (acc, count) => acc + count,
+    0
+  );
+  const percentages = {};
+  for (const [eventName, count] of Object.entries(events)) {
+    percentages[eventName] = (count / totalEvents) * 100;
+  }
+
+  const sortedPercentages = Object.entries(events)
+    .map(([eventName, count]) => ({
+      eventName,
+      percentage: (count / totalEvents) * 100,
+    }))
+    .sort((a, b) => a.percentage - b.percentage);
+
+
+  for (const [eventName, count] of Object.entries(events)) {
+    const eventDiv = document.createElement("div");
+    eventDiv.classList.add("eventColor");
+    eventDiv.style.height = "20px";
+    eventDiv.style.width = `${
+      (count / Object.values(events).reduce((acc, count) => acc + count, 0)) *
+      100
+    }%`;
+    eventDiv.style.backgroundColor = getColor(eventName);
+    eventRectangle.appendChild(eventDiv);
+  }
+  return eventRectangle;
+}
+// Function to get color based on event name
+function getColor(eventName) {
+  switch (eventName) {
+    case "mouseover":
+      return "#8e0152";
+    case "click":
+      return "#c51b7d";
+    case "brush":
+      return "#de77ae";
+    case "mousemove":
+      return "#f1b6da";
+    case "wheel":
+      return "#fde0ef";
+    case "mouseout":
+      return "#e6f5d0";
+    case "mouseover":
+      return "#b8e186";
+    case "mousedown":
+      return "#7fbc41";
+    case "mouseup":
+      return "#4d9221";
+    case "Double Click":
+      return "#276419";
+    // Add more cases as needed
+    default:
+      return "black";
+  }
+}

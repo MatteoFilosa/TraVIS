@@ -605,6 +605,15 @@ table.dataTable tbody td {
     left: 77%;
     position: absolute;
 }
+#eventRectangle{
+    width: 200px;
+    height: 30px;
+    display: flex;
+    margin-left: 11px;
+}
+.eventColor {
+    flex-grow: 0;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
