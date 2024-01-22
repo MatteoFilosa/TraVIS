@@ -102,22 +102,13 @@
                                             id="selectAllCheckbox"></th>
                                     <th scope="col" style="width: 2.5%;"><img src="images/userIcon.png" width="20px"
                                             height="20px" />User ID</th>
-                                    <th scope="col" style="width: 1%;"><img src="images/interactorIcon.png"
-                                            width="20px" height="20px" />Events</th>
+                                    <th scope="col" style="width: 1%;"><img src="images/interactorIcon.png" width="20px"
+                                            height="20px" />Events</th>
                                     <th scope="col" style="width: 2.5%;"><img src="images/errorIcon.png" width="20px"
                                             height="20px" />Violations</th>
                                     <th scope="col" style="width: 2.5%;"><img src="images/timeIcon.png" width="20px"
                                             height="20px" />Total Time </th>
                                     <th scope="col" style="width: 0.1%;"> </th>
-                                    <!-- <th scope="col" style="width: 2%;"><img src="images/mousemoveIcon.png" width="20px"
-                                            height="20px" />Mousemove</th>
-                                    <th scope="col" style="width: 2%;"><img src="images/brushIcon.png" width="20px"
-                                            height="20px" />Brush</th>
-                                    <th scope="col" style="width: 2%;"><img src="images/clickIcon.png" width="20px"
-                                            height="20px" />Click</th>
-                                    <th scope="col" style="width: 2%;"><img src="images/zoomIcon.png" width="20px"
-                                            height="20px" />Zoom</th> -->
-
 
                                 </tr>
                             </thead>
@@ -131,7 +122,7 @@
                         <h1 id="traceInfoTitle">Trace Information </h1>
                         <div id="placeholderText">Select a trace to view more information</div>
                         <div id="extrainfoContent" style="opacity: 0;transition: all 0.3s">
-                            <div style="display: flex;">
+                            <div style="display: flex;justify-content: space-between;margin-bottom: 44px;">
                                 <div class="eventsDiv">
                                     <p>Events</p>
                                     <ul id="eventsList">
@@ -140,7 +131,7 @@
                                         <li>item 3</li>
                                     </ul>
                                 </div>
-                                <div class="heatMapDiv"></div>
+                                <div id="heatmap"></div>
                             </div>
                             <div class="violationsDiv">
                                 <p>Violations</p>

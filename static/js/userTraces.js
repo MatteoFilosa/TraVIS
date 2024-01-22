@@ -172,8 +172,10 @@ function populateTable(data) {
     // Add Events column
     const eventsCell = document.createElement("td");
     var traceData = JSON.parse(element.user_trace);
-    eventsCell.style.display="flex";
-    eventTypes(extractedNumber).then(function (value) {eventsCell.appendChild(createEventsBar(value))});
+    eventsCell.style.display = "flex";
+    eventTypes(extractedNumber).then(function (value) {
+      eventsCell.appendChild(createEventsBar(value));
+    });
     eventsCell.textContent = traceData.length;
     row.appendChild(eventsCell);
 
@@ -295,8 +297,9 @@ function showExtraInformation(userID) {
   document.getElementById("extrainfoContent").style.opacity = 1;
   document.getElementById(
     "traceInfoTitle"
-  ).innerHTML = `Trace Information ${userID}`;
+  ).innerHTML = `Trace Information: User ${userID}`;
 
+  generateHeatmap(userID);
   eventTypes(userID).then(function (value) {
     const eventsList = document.getElementById("eventsList");
     eventsList.innerHTML = "";
@@ -304,11 +307,12 @@ function showExtraInformation(userID) {
       if (value[key] > 0) {
         var eventElement = document.createElement("li");
         eventElement.textContent = `${key}: ${value[key]}`;
+        if(key=="dblclick")
+          eventElement.textContent = `Double click: ${value[key]}`;
         eventElement.style.textTransform = "capitalize";
         eventsList.append(eventElement);
       }
     }
-    
   });
 
   findViolations(userID).then(function (value) {
@@ -320,13 +324,10 @@ function showExtraInformation(userID) {
     level2.textContent = "Level 2: " + value.level2;
     var level3 = document.createElement("li");
     level3.textContent = "Level 3: " + value.level3;
-    var level4 = document.createElement("li");
-    level4.textContent = "Level 4: " + value.level4;
 
     violationsList.append(level1);
     violationsList.append(level2);
     violationsList.append(level3);
-    violationsList.append(level4);
   });
   findTotalTime(userID).then(function (value) {
     const timeList = document.getElementById("timeList");
@@ -339,7 +340,6 @@ function showExtraInformation(userID) {
     timeList.append(totalTime);
     timeList.append(averageTime);
   });
-  
 }
 function clearExtraInformation() {
   document.getElementById("placeholderText").style.display = "block";
@@ -354,11 +354,11 @@ async function eventTypes(userID) {
   var searchWords = [
     "mousemove",
     "click",
+    "dblclick",
     "brush",
     "wheel",
     "mouseout",
     "mouseover",
-    "click",
     "mousedown",
     "mouseup",
     "Double Click",
@@ -417,7 +417,6 @@ async function findViolations(userID) {
     level1: 0,
     level2: 0,
     level3: 0,
-    level4: 0,
   };
   for (const element of violationsForAllTraces) {
     let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
@@ -448,7 +447,7 @@ async function findViolations(userID) {
 
 function createEventsBar(events) {
   const eventRectangle = document.createElement("div");
-  eventRectangle.id="eventRectangle";
+  eventRectangle.id = "eventRectangle";
   eventRectangle.innerHTML = "";
 
   // Calculate the percentage of each event type
@@ -468,7 +467,6 @@ function createEventsBar(events) {
     }))
     .sort((a, b) => a.percentage - b.percentage);
 
-
   for (const [eventName, count] of Object.entries(events)) {
     const eventDiv = document.createElement("div");
     eventDiv.classList.add("eventColor");
@@ -481,6 +479,46 @@ function createEventsBar(events) {
     eventRectangle.appendChild(eventDiv);
   }
   return eventRectangle;
+}
+
+function generateHeatmap(userID) {
+  var mainDiv = document.getElementById("heatmap");
+  mainDiv.innerHTML = "";
+
+  loadedTraces.forEach((element, index) => {
+    let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
+    // Extract the captured number from the file name
+    let extractedNumber = match ? match[1] : null;
+
+    if (extractedNumber === userID) {
+      let traceData = JSON.parse(element.user_trace);
+      let cnt = 0;
+
+      // Calculate the number of rows based on the length of the traceData array
+      var rows = Math.ceil(Math.sqrt(traceData.length));
+      var columns = Math.ceil(traceData.length / rows);
+
+      traceData.forEach(function (obj, i) {
+        // Create a div for each event
+        var eventDiv = document.createElement("div");
+        eventDiv.className = "event-rectangle";
+        eventDiv.style.width = 100 / columns + "%";
+        eventDiv.style.height = 100 / rows + "%";
+        eventDiv.style.backgroundColor = getColor(obj.event);
+        eventDiv.style.position = "absolute";
+        eventDiv.style.left = (i % columns) * (100 / columns) + "%";
+        eventDiv.style.top = Math.floor(i / columns) * (100 / rows) + "%";
+
+        // Append the event div to the main div
+        mainDiv.appendChild(eventDiv);
+        cnt++;
+      });
+
+      // Set the number of rows and columns as CSS variables for the main div
+      mainDiv.style.setProperty("--rows", rows);
+      mainDiv.style.setProperty("--columns", columns);
+    }
+  });
 }
 // Function to get color based on event name
 function getColor(eventName) {
@@ -497,16 +535,21 @@ function getColor(eventName) {
       return "#fde0ef";
     case "mouseout":
       return "#e6f5d0";
-    case "mouseover":
+    case "mousedown":
       return "#b8e186";
     case "mousedown":
       return "#7fbc41";
     case "mouseup":
       return "#4d9221";
-    case "Double Click":
+    case "dblclick":
       return "#276419";
+    case "Double Click":
+      return "yellow";
+    case "facsimile back":
+      return "#072700";
     // Add more cases as needed
     default:
-      return "black";
+      console.log(eventName);
+      return "red";
   }
 }

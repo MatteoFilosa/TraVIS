@@ -414,53 +414,80 @@ function graphLayout(svg) {
 
             if (firstString.includes('mousemove')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', '#554e8d'); // Set color for "mousemove"
+                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "mousemove"
                     
                 }
             } else if (firstString.includes('mouseup')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', 'black'); // Set color for "mouseup"
+                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "mouseup"
                 }
             }
             else if (firstString.includes('mousedown')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', '#381D2A'); // Set color for "mousedown"
+                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "mousedown"
                 }
             }
             else if (firstString.includes('click')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', '#0734c6'); // Set color for "click"
+                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "click"
                 }
             }
             else if (firstString.includes('dblclick')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', 'purple'); // Set color for "dblclick"
+                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "dblclick"
                 }
             }
             else if (firstString.includes('wheel')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', '#640a0a'); // Set color for "wheel"
+                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "wheel"
                 }
             }
             else if (firstString.includes('facsimile_back')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', '#05771c'); // Set color for "facsimile_back"
+                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "facsimile_back"
                 }
             }
             else if (firstString.includes('mouseout')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', '#9f0087'); // Set color for "mouseout"
+                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "mouseout"
                 }
             }
             else if (firstString.includes('mouseover')) {
                 if (polygon) {
-                    polygon.setAttribute('fill', '#52b0c3'); // Set color for "mouseover"
+                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "mouseover"
                 }
             }
         }
     });
 }
 
+// Function to get color based on event name
+function getColor(eventName) {
+    if (eventName.includes("mouseover")) {
+        return "#8e0152";
+    } else if (eventName.includes("click")) {
+        return "#c51b7d";
+    } else if (eventName.includes("brush")) {
+        return "#de77ae";
+    } else if (eventName.includes("mousemove")) {
+        return "#f1b6da";
+    } else if (eventName.includes("mousedown")) {
+        return "#b8e186";
+    }else if (eventName.includes("wheel")) {
+        return "#fde0ef";
+    } else if (eventName.includes("mouseout")) {
+        return "#e6f5d0";
+    } else if (eventName.includes("mouseup")) {
+        return "#4d9221";
+    } else if (eventName.includes("dblclick")) {
+        return "#276419";
+    } else if (eventName.includes("facsimile_back")) {
+        return "#072700";
+    } else {
+        console.log(eventName);
+        return "red";
+    }
+}
 
 function isNameInUrl(jsonData, systemUrl) {
     

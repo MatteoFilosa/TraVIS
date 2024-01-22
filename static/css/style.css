@@ -614,6 +614,21 @@ table.dataTable tbody td {
 .eventColor {
     flex-grow: 0;
 }
+#heatmap {
+    width: 300px;
+    height: 300px;
+    position: relative;
+}
+.event-rectangle {
+    display: inline-block;
+    width: calc(100% / var(--columns));
+    height: calc(100% / var(--rows));
+    box-sizing: border-box;
+  }
+  #extrainfoContent p{
+    font-weight: 500;
+  }
+
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
