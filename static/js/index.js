@@ -551,6 +551,20 @@ function isNameInUrl(jsonData, systemUrl) {
     return false;
 }
 
+// Function to download gv state charts
+function graphviz() {
+    url = 'http://127.0.0.1:5000/get_statecharts_gv';
+    fetch(url)
+        .then(response => response.json())
+        .then(json => {
+            console.log(json);
+            loadButton.disabled = false;
+            loadingIcon.style.display = "none";
+            statecharts = json;
+            console.log("Get graphviz")
+        });
+}
+
 // Function to check if there is a corresponding statechart in the URL
 function CheckIfStatechartExists() {
     url = 'http://127.0.0.1:5000/get_statecharts';

@@ -38,15 +38,16 @@ def upload_statechart():
     
 
 
-    svg_folder = "static/files/statechartSVGS"
+    svg_folder = "static/files/statechartGV"
     visualization_names = ["radviz", "crosswidget", "crumbs", "datavis", "idmvis", "influence_map", "ivan", "nemesis", "summit", "wasp", "falcon"]
+    collection_name = "graphviz" 
 
     try:
         for vis_name in visualization_names:
-            svg_path = os.path.join(svg_folder, f"{vis_name}.svg")
+            svg_path = os.path.join(svg_folder, f"{vis_name}.gv")
 
             # Verifying if the state chart was already added to the db
-            existing_document = mongo.db.state_charts.find_one({"name": vis_name})
+            existing_document = mongo.db[collection_name].find_one({"name": vis_name})
 
             if existing_document:
                 print(f"{vis_name} is already in the database. Skipping...")
@@ -56,7 +57,7 @@ def upload_statechart():
 
                 # Inserisci il documento nella collezione
                 documento = {"name": vis_name, "svg": svg_data}
-                mongo.db.state_charts.insert_one(documento)
+                mongo.db[collection_name].insert_one(documento)
                 print(f"{vis_name} inserted into the database.")
 
         print("Process complete!")
@@ -246,6 +247,50 @@ def get_statecharts():
             print(statechart_info)
 
             statecharts_data.append(statechart_info)
+
+        print("Statecharts data collected successfully!")
+
+    except Exception as e:
+        print(f"Error: {e}")
+        
+
+    # Convert data to JSON
+    response_data = jsonify(statecharts_data)
+
+    # Set Cache-Control header to enable browser caching for 1 hour (3600 seconds)
+    response = make_response(response_data)
+    response.headers["Cache-Control"] = "max-age=3600"
+
+    return response
+
+#Get statecharts in graphviz format
+@app.route("/get_statecharts_gv")
+def get_statecharts_gv():
+    database_name = "visualizations"  # You can change db name here
+    mongo_uri = config['DATABASES'][database_name]
+    app.config["MONGO_URI"] = mongo_uri
+    mongo = PyMongo(app)
+    collection_name = "graphviz"
+
+    statecharts_data = []
+
+    try:
+        # Gets all docs from collection
+        statecharts = mongo.db[collection_name].find()
+
+        for statechart in statecharts:
+            name = statechart["name"]
+            svg_data = statechart["svg"]
+
+            statechart_info = {
+                "name": name,
+                "svg": svg_data
+            }  
+
+            print(statechart_info)
+
+            statecharts_data.append(statechart_info)
+            print(statechart_info)
 
         print("Statecharts data collected successfully!")
 
