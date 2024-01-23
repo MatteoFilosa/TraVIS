@@ -18,8 +18,28 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 config = ConfigParser()
 config.read('config.ini')
 
-def graph_layout(gv):
-    return "a"
+#Removes XPath for now and sets font color to black
+def graph_layout(name):
+    input_file_path = 'static/files/statechartGV/' + name +'.gv'
+    output_file_path = 'static/files/statechartGVLayout/' + name + '.gv'
+
+    patternXPath = re.compile(r"\\n\([^)]*\)")
+    patternBlack = re.compile(r'fillcolor="#000000"')
+    replacement = 'fillcolor="#FFFFFF"'
+
+    with open(input_file_path, 'r') as input_file:
+        lines = input_file.readlines()
+    
+    modified_lines = [re.sub(patternXPath, "", line) for line in lines]
+    modified_lines = [re.sub(patternBlack, replacement, line) for line in lines]
+
+
+    with open(output_file_path, 'w') as output_file:
+        output_file.writelines(modified_lines)
+
+    print(f"Modified content written to {output_file_path}")
+
+    return modified_lines
 
 @app.route("/")
 def home():
@@ -288,15 +308,15 @@ def get_statecharts_gv():
 
             statechart_info = {
                 "name": name,
-                "svg": svg_data
+                "svg": graph_layout(name)
             }  
 
-            print(statechart_info)
-
+          
+            
             statecharts_data.append(statechart_info)
-            print(statechart_info)
+    
 
-            graph_layout(statechart_info["svg"])
+            print(statechart_info["svg"])
 
         print("Statecharts data collected successfully!")
 

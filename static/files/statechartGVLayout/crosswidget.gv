@@ -1,0 +1,710 @@
+digraph G {
+
+	rankdir="LR";
+	splines=ortho;
+
+	E0 [label="'mouseenter' on '#v-0'\n(/html[1]/body[1]/main[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E0 [arrowhead="box"];
+	E0 -> 1;
+
+	E1 [label="'click' on '#selector-block-Alcohol div.selector-block-title span.undo'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[1]/span[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E1 [arrowhead="box"];
+	E1 -> 0;
+
+	E2 [label="'mouseenter' on '#bargram-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E2 [arrowhead="box"];
+	E2 -> 2;
+
+	E3 [label="'mousedown' on '#bargram-selector-Alcohol div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E3 [arrowhead="box"];
+	E3 -> 3;
+
+	E4 [label="'mouseenter' on '#boxplot-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E4 [arrowhead="box"];
+	E4 -> 4;
+
+	E5 [label="'click' on '#selector-block-Malicacid div.selector-block-title span.undo'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[1]/span[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E5 [arrowhead="box"];
+	E5 -> 0;
+
+	E6 [label="'mouseenter' on '#bargram-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E6 [arrowhead="box"];
+	E6 -> 5;
+
+	E7 [label="'mousedown' on '#bargram-selector-Malicacid div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E7 [arrowhead="box"];
+	E7 -> 6;
+
+	E8 [label="'mouseenter' on '#boxplot-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E8 [arrowhead="box"];
+	E8 -> 7;
+
+	E9 [label="'click' on '#selector-block-Ash div.selector-block-title span.undo'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[1]/span[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E9 [arrowhead="box"];
+	E9 -> 0;
+
+	E10 [label="'mouseenter' on '#bargram-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E10 [arrowhead="box"];
+	E10 -> 8;
+
+	E11 [label="'mousedown' on '#bargram-selector-Ash div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E11 [arrowhead="box"];
+	E11 -> 9;
+
+	E12 [label="'mouseenter' on '#boxplot-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E12 [arrowhead="box"];
+	E12 -> 10;
+
+	E13 [label="'click' on '#selector-block-Alcalinityofash div.selector-block-title span.undo'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[1]/span[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E13 [arrowhead="box"];
+	E13 -> 0;
+
+	E14 [label="'mouseenter' on '#bargram-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E14 [arrowhead="box"];
+	E14 -> 11;
+
+	E15 [label="'mousedown' on '#bargram-selector-Alcalinityofash div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E15 [arrowhead="box"];
+	E15 -> 12;
+
+	E16 [label="'mouseenter' on '#boxplot-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E16 [arrowhead="box"];
+	E16 -> 13;
+
+	E17 [label="'click' on '#deselect-all'\n(/html[1]/body[1]/main[1]/div[6]/button[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E17 [arrowhead="box"];
+	E17 -> 0;
+
+	E18 [label="'click' on '#settings'\n(/html[1]/body[1]/main[1]/span[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E18 [arrowhead="box"];
+	E18 -> 14;
+
+	E19 [label="'mouseleave' on '#v-0'\n(/html[1]/body[1]/main[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	1 -> E19 [arrowhead="box"];
+	E19 -> 0;
+
+	E20 [label="'click' on '#bargram-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	2 -> E20 [arrowhead="box"];
+	E20 -> 2;
+
+	E21 [label="'mouseleave' on '#bargram-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	2 -> E21 [arrowhead="box"];
+	E21 -> 0;
+
+	E22 [label="'facsimile_back' on '#bargram-selector-Alcohol div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	3 -> E22 [arrowhead="box"];
+	E22 -> 0;
+
+	E23 [label="'click' on '#boxplot-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	4 -> E23 [arrowhead="box"];
+	E23 -> 4;
+
+	E24 [label="'mouseleave' on '#boxplot-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	4 -> E24 [arrowhead="box"];
+	E24 -> 0;
+
+	E25 [label="'click' on '#bargram-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	5 -> E25 [arrowhead="box"];
+	E25 -> 5;
+
+	E26 [label="'mouseleave' on '#bargram-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	5 -> E26 [arrowhead="box"];
+	E26 -> 0;
+
+	E27 [label="'facsimile_back' on '#bargram-selector-Malicacid div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	6 -> E27 [arrowhead="box"];
+	E27 -> 0;
+
+	E28 [label="'click' on '#boxplot-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	7 -> E28 [arrowhead="box"];
+	E28 -> 7;
+
+	E29 [label="'mouseleave' on '#boxplot-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	7 -> E29 [arrowhead="box"];
+	E29 -> 0;
+
+	E30 [label="'click' on '#bargram-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	8 -> E30 [arrowhead="box"];
+	E30 -> 8;
+
+	E31 [label="'mouseleave' on '#bargram-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	8 -> E31 [arrowhead="box"];
+	E31 -> 0;
+
+	E32 [label="'facsimile_back' on '#bargram-selector-Ash div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	9 -> E32 [arrowhead="box"];
+	E32 -> 0;
+
+	E33 [label="'click' on '#boxplot-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	10 -> E33 [arrowhead="box"];
+	E33 -> 10;
+
+	E34 [label="'mouseleave' on '#boxplot-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	10 -> E34 [arrowhead="box"];
+	E34 -> 0;
+
+	E35 [label="'click' on '#bargram-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	11 -> E35 [arrowhead="box"];
+	E35 -> 11;
+
+	E36 [label="'mouseleave' on '#bargram-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	11 -> E36 [arrowhead="box"];
+	E36 -> 0;
+
+	E37 [label="'facsimile_back' on '#bargram-selector-Alcalinityofash div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	12 -> E37 [arrowhead="box"];
+	E37 -> 0;
+
+	E38 [label="'click' on '#boxplot-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	13 -> E38 [arrowhead="box"];
+	E38 -> 13;
+
+	E39 [label="'mouseleave' on '#boxplot-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	13 -> E39 [arrowhead="box"];
+	E39 -> 0;
+
+	E40 [label="'click' on '#modal-settings'\n(/html[1]/body[1]/main[1]/div[8])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E40 [arrowhead="box"];
+	E40 -> 15;
+
+	E41 [label="'mousedown' on '#modal-settings div.modal-dialog'\n(/html[1]/body[1]/main[1]/div[8]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E41 [arrowhead="box"];
+	E41 -> 14;
+
+	E42 [label="'click' on '#modal-settings div.modal-dialog div.modal-content div.modal-header button.close'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E42 [arrowhead="box"];
+	E42 -> 15;
+
+	E43 [label="'change' [wine.csv] on '#dataset'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/select[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E43 [arrowhead="box"];
+	E43 -> 29;
+
+	E44 [label="'change' on '#blockOperationOr'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E44 [arrowhead="box"];
+	E44 -> 14;
+
+	E45 [label="'change' on '#selectorOperationAnd'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E45 [arrowhead="box"];
+	E45 -> 14;
+
+	E46 [label="'change' on '#feedback-domain'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[4]/div[1]/div[1]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E46 [arrowhead="box"];
+	E46 -> 14;
+
+	E47 [label="'change' on '#feedback-coverage'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[4]/div[1]/div[2]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E47 [arrowhead="box"];
+	E47 -> 14;
+
+	E48 [label="'change' on '#feedback-arrows'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[4]/div[1]/div[3]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E48 [arrowhead="box"];
+	E48 -> 14;
+
+	E49 [label="'change' on '#feedback-tooltip'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[4]/div[1]/div[4]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E49 [arrowhead="box"];
+	E49 -> 14;
+
+	E50 [label="'change' on '#uniform-selector'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[5]/div[1]/div[1]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E50 [arrowhead="box"];
+	E50 -> 14;
+
+	E51 [label="'change' on '#boxplot-selector'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[5]/div[1]/div[2]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E51 [arrowhead="box"];
+	E51 -> 14;
+
+	E52 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[1]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E52 [arrowhead="box"];
+	E52 -> 14;
+
+	E53 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[2]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E53 [arrowhead="box"];
+	E53 -> 14;
+
+	E54 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[3]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E54 [arrowhead="box"];
+	E54 -> 14;
+
+	E55 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[4]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E55 [arrowhead="box"];
+	E55 -> 14;
+
+	E56 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[5]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E56 [arrowhead="box"];
+	E56 -> 14;
+
+	E57 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[6]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E57 [arrowhead="box"];
+	E57 -> 14;
+
+	E58 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[7]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E58 [arrowhead="box"];
+	E58 -> 14;
+
+	E59 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[8]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E59 [arrowhead="box"];
+	E59 -> 14;
+
+	E60 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[9]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E60 [arrowhead="box"];
+	E60 -> 14;
+
+	E61 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[10]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E61 [arrowhead="box"];
+	E61 -> 14;
+
+	E62 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[11]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E62 [arrowhead="box"];
+	E62 -> 14;
+
+	E63 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[12]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E63 [arrowhead="box"];
+	E63 -> 14;
+
+	E64 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[13]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E64 [arrowhead="box"];
+	E64 -> 14;
+
+	E65 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[14]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E65 [arrowhead="box"];
+	E65 -> 14;
+
+	E66 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[15]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E66 [arrowhead="box"];
+	E66 -> 14;
+
+	E67 [label="'click' on '#save-button'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[3]/button[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	14 -> E67 [arrowhead="box"];
+	E67 -> 15;
+
+	E68 [label="'mouseenter' on '#v-0'\n(/html[1]/body[1]/main[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E68 [arrowhead="box"];
+	E68 -> 16;
+
+	E69 [label="'click' on '#selector-block-Alcohol div.selector-block-title span.undo'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[1]/span[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E69 [arrowhead="box"];
+	E69 -> 15;
+
+	E70 [label="'mouseenter' on '#bargram-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E70 [arrowhead="box"];
+	E70 -> 17;
+
+	E71 [label="'mousedown' on '#bargram-selector-Alcohol div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E71 [arrowhead="box"];
+	E71 -> 18;
+
+	E72 [label="'mouseenter' on '#boxplot-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E72 [arrowhead="box"];
+	E72 -> 19;
+
+	E73 [label="'click' on '#selector-block-Malicacid div.selector-block-title span.undo'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[1]/span[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E73 [arrowhead="box"];
+	E73 -> 15;
+
+	E74 [label="'mouseenter' on '#bargram-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E74 [arrowhead="box"];
+	E74 -> 20;
+
+	E75 [label="'mousedown' on '#bargram-selector-Malicacid div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E75 [arrowhead="box"];
+	E75 -> 21;
+
+	E76 [label="'mouseenter' on '#boxplot-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E76 [arrowhead="box"];
+	E76 -> 22;
+
+	E77 [label="'click' on '#selector-block-Ash div.selector-block-title span.undo'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[1]/span[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E77 [arrowhead="box"];
+	E77 -> 15;
+
+	E78 [label="'mouseenter' on '#bargram-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E78 [arrowhead="box"];
+	E78 -> 23;
+
+	E79 [label="'mousedown' on '#bargram-selector-Ash div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E79 [arrowhead="box"];
+	E79 -> 24;
+
+	E80 [label="'mouseenter' on '#boxplot-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E80 [arrowhead="box"];
+	E80 -> 25;
+
+	E81 [label="'click' on '#selector-block-Alcalinityofash div.selector-block-title span.undo'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[1]/span[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E81 [arrowhead="box"];
+	E81 -> 15;
+
+	E82 [label="'mouseenter' on '#bargram-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E82 [arrowhead="box"];
+	E82 -> 26;
+
+	E83 [label="'mousedown' on '#bargram-selector-Alcalinityofash div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E83 [arrowhead="box"];
+	E83 -> 27;
+
+	E84 [label="'mouseenter' on '#boxplot-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E84 [arrowhead="box"];
+	E84 -> 28;
+
+	E85 [label="'click' on '#deselect-all'\n(/html[1]/body[1]/main[1]/div[6]/button[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E85 [arrowhead="box"];
+	E85 -> 15;
+
+	E86 [label="'click' on '#settings'\n(/html[1]/body[1]/main[1]/span[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	15 -> E86 [arrowhead="box"];
+	E86 -> 14;
+
+	E87 [label="'mouseleave' on '#v-0'\n(/html[1]/body[1]/main[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	16 -> E87 [arrowhead="box"];
+	E87 -> 15;
+
+	E88 [label="'click' on '#bargram-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	17 -> E88 [arrowhead="box"];
+	E88 -> 17;
+
+	E89 [label="'mouseleave' on '#bargram-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	17 -> E89 [arrowhead="box"];
+	E89 -> 15;
+
+	E90 [label="'facsimile_back' on '#bargram-selector-Alcohol div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	18 -> E90 [arrowhead="box"];
+	E90 -> 15;
+
+	E91 [label="'click' on '#boxplot-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	19 -> E91 [arrowhead="box"];
+	E91 -> 19;
+
+	E92 [label="'mouseleave' on '#boxplot-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	19 -> E92 [arrowhead="box"];
+	E92 -> 15;
+
+	E93 [label="'click' on '#bargram-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	20 -> E93 [arrowhead="box"];
+	E93 -> 20;
+
+	E94 [label="'mouseleave' on '#bargram-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	20 -> E94 [arrowhead="box"];
+	E94 -> 15;
+
+	E95 [label="'facsimile_back' on '#bargram-selector-Malicacid div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	21 -> E95 [arrowhead="box"];
+	E95 -> 15;
+
+	E96 [label="'click' on '#boxplot-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	22 -> E96 [arrowhead="box"];
+	E96 -> 22;
+
+	E97 [label="'mouseleave' on '#boxplot-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	22 -> E97 [arrowhead="box"];
+	E97 -> 15;
+
+	E98 [label="'click' on '#bargram-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	23 -> E98 [arrowhead="box"];
+	E98 -> 23;
+
+	E99 [label="'mouseleave' on '#bargram-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	23 -> E99 [arrowhead="box"];
+	E99 -> 15;
+
+	E100 [label="'facsimile_back' on '#bargram-selector-Ash div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	24 -> E100 [arrowhead="box"];
+	E100 -> 15;
+
+	E101 [label="'click' on '#boxplot-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	25 -> E101 [arrowhead="box"];
+	E101 -> 25;
+
+	E102 [label="'mouseleave' on '#boxplot-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	25 -> E102 [arrowhead="box"];
+	E102 -> 15;
+
+	E103 [label="'click' on '#bargram-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	26 -> E103 [arrowhead="box"];
+	E103 -> 26;
+
+	E104 [label="'mouseleave' on '#bargram-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	26 -> E104 [arrowhead="box"];
+	E104 -> 15;
+
+	E105 [label="'facsimile_back' on '#bargram-selector-Alcalinityofash div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	27 -> E105 [arrowhead="box"];
+	E105 -> 15;
+
+	E106 [label="'click' on '#boxplot-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	28 -> E106 [arrowhead="box"];
+	E106 -> 28;
+
+	E107 [label="'mouseleave' on '#boxplot-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	28 -> E107 [arrowhead="box"];
+	E107 -> 15;
+
+	E108 [label="'click' on '#modal-settings'\n(/html[1]/body[1]/main[1]/div[8])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E108 [arrowhead="box"];
+	E108 -> 30;
+
+	E109 [label="'mousedown' on '#modal-settings div.modal-dialog'\n(/html[1]/body[1]/main[1]/div[8]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E109 [arrowhead="box"];
+	E109 -> 29;
+
+	E110 [label="'click' on '#modal-settings div.modal-dialog div.modal-content div.modal-header button.close'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E110 [arrowhead="box"];
+	E110 -> 30;
+
+	E111 [label="'change' [cars.csv] on '#dataset'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/select[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E111 [arrowhead="box"];
+	E111 -> 14;
+
+	E112 [label="'change' on '#blockOperationOr'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/div[2]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E112 [arrowhead="box"];
+	E112 -> 29;
+
+	E113 [label="'change' on '#selectorOperationAnd'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[3]/div[1]/div[1]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E113 [arrowhead="box"];
+	E113 -> 29;
+
+	E114 [label="'change' on '#feedback-domain'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[4]/div[1]/div[1]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E114 [arrowhead="box"];
+	E114 -> 29;
+
+	E115 [label="'change' on '#feedback-coverage'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[4]/div[1]/div[2]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E115 [arrowhead="box"];
+	E115 -> 29;
+
+	E116 [label="'change' on '#feedback-arrows'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[4]/div[1]/div[3]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E116 [arrowhead="box"];
+	E116 -> 29;
+
+	E117 [label="'change' on '#feedback-tooltip'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[4]/div[1]/div[4]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E117 [arrowhead="box"];
+	E117 -> 29;
+
+	E118 [label="'change' on '#uniform-selector'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[5]/div[1]/div[1]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E118 [arrowhead="box"];
+	E118 -> 29;
+
+	E119 [label="'change' on '#boxplot-selector'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[5]/div[1]/div[2]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E119 [arrowhead="box"];
+	E119 -> 29;
+
+	E120 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[1]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E120 [arrowhead="box"];
+	E120 -> 29;
+
+	E121 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[2]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E121 [arrowhead="box"];
+	E121 -> 29;
+
+	E122 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[3]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E122 [arrowhead="box"];
+	E122 -> 29;
+
+	E123 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[4]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E123 [arrowhead="box"];
+	E123 -> 29;
+
+	E124 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[5]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E124 [arrowhead="box"];
+	E124 -> 29;
+
+	E125 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[6]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E125 [arrowhead="box"];
+	E125 -> 29;
+
+	E126 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[7]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E126 [arrowhead="box"];
+	E126 -> 29;
+
+	E127 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[8]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E127 [arrowhead="box"];
+	E127 -> 29;
+
+	E128 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[9]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E128 [arrowhead="box"];
+	E128 -> 29;
+
+	E129 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[10]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E129 [arrowhead="box"];
+	E129 -> 29;
+
+	E130 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[11]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E130 [arrowhead="box"];
+	E130 -> 29;
+
+	E131 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[12]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E131 [arrowhead="box"];
+	E131 -> 29;
+
+	E132 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[13]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E132 [arrowhead="box"];
+	E132 -> 29;
+
+	E133 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[14]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E133 [arrowhead="box"];
+	E133 -> 29;
+
+	E134 [label="'change' on '#metrics-list div.form-check input.form-check-input'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[2]/div[1]/div[6]/div[1]/div[1]/div[15]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E134 [arrowhead="box"];
+	E134 -> 29;
+
+	E135 [label="'click' on '#save-button'\n(/html[1]/body[1]/main[1]/div[8]/div[1]/div[1]/div[3]/button[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	29 -> E135 [arrowhead="box"];
+	E135 -> 30;
+
+	E136 [label="'mouseenter' on '#v-0'\n(/html[1]/body[1]/main[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E136 [arrowhead="box"];
+	E136 -> 31;
+
+	E137 [label="'click' on '#selector-block-Alcohol div.selector-block-title span.undo'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[1]/span[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E137 [arrowhead="box"];
+	E137 -> 30;
+
+	E138 [label="'mouseenter' on '#bargram-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E138 [arrowhead="box"];
+	E138 -> 32;
+
+	E139 [label="'mousedown' on '#bargram-selector-Alcohol div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E139 [arrowhead="box"];
+	E139 -> 33;
+
+	E140 [label="'mouseenter' on '#boxplot-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E140 [arrowhead="box"];
+	E140 -> 34;
+
+	E141 [label="'click' on '#selector-block-Malicacid div.selector-block-title span.undo'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[1]/span[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E141 [arrowhead="box"];
+	E141 -> 30;
+
+	E142 [label="'mouseenter' on '#bargram-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E142 [arrowhead="box"];
+	E142 -> 35;
+
+	E143 [label="'mousedown' on '#bargram-selector-Malicacid div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E143 [arrowhead="box"];
+	E143 -> 36;
+
+	E144 [label="'mouseenter' on '#boxplot-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E144 [arrowhead="box"];
+	E144 -> 37;
+
+	E145 [label="'click' on '#selector-block-Ash div.selector-block-title span.undo'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[1]/span[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E145 [arrowhead="box"];
+	E145 -> 30;
+
+	E146 [label="'mouseenter' on '#bargram-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E146 [arrowhead="box"];
+	E146 -> 38;
+
+	E147 [label="'mousedown' on '#bargram-selector-Ash div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E147 [arrowhead="box"];
+	E147 -> 39;
+
+	E148 [label="'mouseenter' on '#boxplot-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E148 [arrowhead="box"];
+	E148 -> 40;
+
+	E149 [label="'click' on '#selector-block-Alcalinityofash div.selector-block-title span.undo'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[1]/span[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E149 [arrowhead="box"];
+	E149 -> 30;
+
+	E150 [label="'mouseenter' on '#bargram-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E150 [arrowhead="box"];
+	E150 -> 41;
+
+	E151 [label="'mousedown' on '#bargram-selector-Alcalinityofash div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E151 [arrowhead="box"];
+	E151 -> 42;
+
+	E152 [label="'mouseenter' on '#boxplot-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E152 [arrowhead="box"];
+	E152 -> 43;
+
+	E153 [label="'click' on '#deselect-all'\n(/html[1]/body[1]/main[1]/div[6]/button[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E153 [arrowhead="box"];
+	E153 -> 30;
+
+	E154 [label="'click' on '#settings'\n(/html[1]/body[1]/main[1]/span[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	30 -> E154 [arrowhead="box"];
+	E154 -> 29;
+
+	E155 [label="'mouseleave' on '#v-0'\n(/html[1]/body[1]/main[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	31 -> E155 [arrowhead="box"];
+	E155 -> 30;
+
+	E156 [label="'click' on '#bargram-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	32 -> E156 [arrowhead="box"];
+	E156 -> 32;
+
+	E157 [label="'mouseleave' on '#bargram-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	32 -> E157 [arrowhead="box"];
+	E157 -> 30;
+
+	E158 [label="'facsimile_back' on '#bargram-selector-Alcohol div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	33 -> E158 [arrowhead="box"];
+	E158 -> 30;
+
+	E159 [label="'click' on '#boxplot-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	34 -> E159 [arrowhead="box"];
+	E159 -> 34;
+
+	E160 [label="'mouseleave' on '#boxplot-interval-Alcohol-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[1]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	34 -> E160 [arrowhead="box"];
+	E160 -> 30;
+
+	E161 [label="'click' on '#bargram-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	35 -> E161 [arrowhead="box"];
+	E161 -> 35;
+
+	E162 [label="'mouseleave' on '#bargram-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	35 -> E162 [arrowhead="box"];
+	E162 -> 30;
+
+	E163 [label="'facsimile_back' on '#bargram-selector-Malicacid div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	36 -> E163 [arrowhead="box"];
+	E163 -> 30;
+
+	E164 [label="'click' on '#boxplot-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	37 -> E164 [arrowhead="box"];
+	E164 -> 37;
+
+	E165 [label="'mouseleave' on '#boxplot-interval-Malicacid-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[3]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	37 -> E165 [arrowhead="box"];
+	E165 -> 30;
+
+	E166 [label="'click' on '#bargram-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	38 -> E166 [arrowhead="box"];
+	E166 -> 38;
+
+	E167 [label="'mouseleave' on '#bargram-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	38 -> E167 [arrowhead="box"];
+	E167 -> 30;
+
+	E168 [label="'facsimile_back' on '#bargram-selector-Ash div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	39 -> E168 [arrowhead="box"];
+	E168 -> 30;
+
+	E169 [label="'click' on '#boxplot-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	40 -> E169 [arrowhead="box"];
+	E169 -> 40;
+
+	E170 [label="'mouseleave' on '#boxplot-interval-Ash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[5]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	40 -> E170 [arrowhead="box"];
+	E170 -> 30;
+
+	E171 [label="'click' on '#bargram-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	41 -> E171 [arrowhead="box"];
+	E171 -> 41;
+
+	E172 [label="'mouseleave' on '#bargram-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	41 -> E172 [arrowhead="box"];
+	E172 -> 30;
+
+	E173 [label="'facsimile_back' on '#bargram-selector-Alcalinityofash div.values-container div.value.slider'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[1]/div[4]/div[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	42 -> E173 [arrowhead="box"];
+	E173 -> 30;
+
+	E174 [label="'click' on '#boxplot-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	43 -> E174 [arrowhead="box"];
+	E174 -> 43;
+
+	E175 [label="'mouseleave' on '#boxplot-interval-Alcalinityofash-0'\n(/html[1]/body[1]/main[1]/div[4]/div[1]/div[7]/div[2]/div[2]/div[2]/div[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	43 -> E175 [arrowhead="box"];
+	E175 -> 30;
+
+}

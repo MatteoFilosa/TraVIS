@@ -1,0 +1,130 @@
+digraph G {
+
+	rankdir="LR";
+	splines=ortho;
+
+	E0 [label="'mouseover' on '#net g.layer-glyph-wrapper'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E0 [arrowhead="box"];
+	E0 -> 1;
+
+	E1 [label="'click' on '#left-inner-embeddin […] button.square-button'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/button[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E1 [arrowhead="box"];
+	E1 -> 0;
+
+	E2 [label="'wheel' on '#left-inner-embedding svg rect'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E2 [arrowhead="box"];
+	E2 -> 0;
+
+	E3 [label="'mousedown' on '#left-inner-embedding svg rect'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E3 [arrowhead="box"];
+	E3 -> 0;
+
+	E4 [label="'dblclick' on '#left-inner-embedding svg rect'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E4 [arrowhead="box"];
+	E4 -> 0;
+
+	E5 [label="'mouseover' on '#point-n02106550'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E5 [arrowhead="box"];
+	E5 -> 2;
+
+	E6 [label="'click' on '#left-inner-class-ba […] button.square-button'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[1]/button[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E6 [arrowhead="box"];
+	E6 -> 0;
+
+	E7 [label="'click' on '#left-inner-class-ba […] button.square-button'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[2]/button[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E7 [arrowhead="box"];
+	E7 -> 0;
+
+	E8 [label="'click' on '#left-inner-class-ba […] button.square-button'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[2]/div[3]/button[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E8 [arrowhead="box"];
+	E8 -> 0;
+
+	E9 [label="'mouseover' on '#class-bar-n02114548'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E9 [arrowhead="box"];
+	E9 -> 3;
+
+	E10 [label="'mouseover' on '#class-bar-n02114712'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E10 [arrowhead="box"];
+	E10 -> 4;
+
+	E11 [label="'click' on '#dag-home'\n(/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[5]/button[1]/i[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E11 [arrowhead="box"];
+	E11 -> 0;
+
+	E12 [label="'input' on '#dag-channel-count-filter-slider'\n(/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[6]/div[1]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E12 [arrowhead="box"];
+	E12 -> 0;
+
+	E13 [label="'input' on '#dag-width-filter-slider'\n(/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[7]/div[1]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E13 [arrowhead="box"];
+	E13 -> 0;
+
+	E14 [label="'input' on '#dag-height-filter-slider'\n(/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[8]/div[1]/input[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E14 [arrowhead="box"];
+	E14 -> 0;
+
+	E15 [label="'wheel' on '#dag rect'\n(/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E15 [arrowhead="box"];
+	E15 -> 0;
+
+	E16 [label="'mousedown' on '#dag rect'\n(/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E16 [arrowhead="box"];
+	E16 -> 0;
+
+	E17 [label="'dblclick' on '#dag rect'\n(/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E17 [arrowhead="box"];
+	E17 -> 0;
+
+	E18 [label="'mouseover' on '#dag-edge-mixed5b-101-mixed5a-1'\n(/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E18 [arrowhead="box"];
+	E18 -> 5;
+
+	E19 [label="'mouseover' on '#mixed5b-101-channel'\n(/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='image'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	0 -> E19 [arrowhead="box"];
+	E19 -> 6;
+
+	E20 [label="'mouseout' on '#net g.layer-glyph-wrapper'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	1 -> E20 [arrowhead="box"];
+	E20 -> 0;
+
+	E21 [label="'click' on '#net g.layer-glyph-wrapper'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	1 -> E21 [arrowhead="box"];
+	E21 -> 1;
+
+	E22 [label="'mouseout' on '#point-n02106550'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	2 -> E22 [arrowhead="box"];
+	E22 -> 0;
+
+	E23 [label="'click' on '#point-n02106550'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	2 -> E23 [arrowhead="box"];
+	E23 -> 2;
+
+	E24 [label="'mouseout' on '#class-bar-n02114548'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	3 -> E24 [arrowhead="box"];
+	E24 -> 0;
+
+	E25 [label="'click' on '#class-bar-n02114548'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	3 -> E25 [arrowhead="box"];
+	E25 -> 3;
+
+	E26 [label="'mouseout' on '#class-bar-n02114712'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	4 -> E26 [arrowhead="box"];
+	E26 -> 0;
+
+	E27 [label="'click' on '#class-bar-n02114712'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	4 -> E27 [arrowhead="box"];
+	E27 -> 4;
+
+	E28 [label="'mouseout' on '#dag-edge-mixed5b-101-mixed5a-1'\n(/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	5 -> E28 [arrowhead="box"];
+	E28 -> 0;
+
+	E29 [label="'mousemove' on '#mixed5b-101-channel'\n(/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='image'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	6 -> E29 [arrowhead="box"];
+	E29 -> 6;
+
+	E30 [label="'mouseout' on '#mixed5b-101-channel'\n(/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='image'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	6 -> E30 [arrowhead="box"];
+	E30 -> 0;
+
+}
