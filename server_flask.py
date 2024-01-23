@@ -4,6 +4,7 @@ from flask_pymongo import PyMongo
 from flask_caching import Cache
 from configparser import ConfigParser
 import os, re
+import graphviz
 
 app = Flask(__name__,
             static_url_path='', 
@@ -17,6 +18,8 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 config = ConfigParser()
 config.read('config.ini')
 
+def graph_layout(gv):
+    return "a"
 
 @app.route("/")
 def home():
@@ -249,7 +252,8 @@ def get_statecharts():
             statecharts_data.append(statechart_info)
 
         print("Statecharts data collected successfully!")
-
+        
+       
     except Exception as e:
         print(f"Error: {e}")
         
@@ -292,7 +296,13 @@ def get_statecharts_gv():
             statecharts_data.append(statechart_info)
             print(statechart_info)
 
+            graph_layout(statechart_info["svg"])
+
         print("Statecharts data collected successfully!")
+
+        #Graph Layout
+
+            
 
     except Exception as e:
         print(f"Error: {e}")
