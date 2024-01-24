@@ -24,8 +24,8 @@ def graph_layout(name):
     output_file_path = 'static/files/statechartGVLayout/' + name + '.gv'
 
     patternXPath = re.compile(r"\\n\([^)]*\)")
-    patternBlack = re.compile(r'fillcolor="#000000"')
-    replacement = 'fillcolor="#FFFFFF"'
+    patternBlack = re.compile(r'fontcolor="#FFFFFF"')
+    replacement = 'fontcolor="#000000"'
 
     with open(input_file_path, 'r') as input_file:
         lines = input_file.readlines()

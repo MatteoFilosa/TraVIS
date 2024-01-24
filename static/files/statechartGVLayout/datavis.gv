@@ -3,335 +3,335 @@ digraph G {
 	rankdir="LR";
 	splines=ortho;
 
-	E0 [label="'click' on '#navfluid a.navbar-brand'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E0 [label="'click' on '#navfluid a.navbar-brand'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E0 [arrowhead="box"];
 	E0 -> 0;
 
-	E1 [label="'click' on '#navigationbar ul.na […] down-toggle.nav-link'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E1 [label="'click' on '#navigationbar ul.na […] down-toggle.nav-link'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E1 [arrowhead="box"];
 	E1 -> 1;
 
-	E2 [label="'mousedown' on '#svg_icicle g.context g.brush'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E2 [label="'mousedown' on '#svg_icicle g.context g.brush'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E2 [arrowhead="box"];
 	E2 -> 0;
 
-	E3 [label="'contextmenu' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E3 [label="'contextmenu' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E3 [arrowhead="box"];
 	E3 -> 0;
 
-	E4 [label="'mousemove' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E4 [label="'mousemove' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E4 [arrowhead="box"];
 	E4 -> 0;
 
-	E5 [label="'mouseout' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E5 [label="'mouseout' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E5 [arrowhead="box"];
 	E5 -> 0;
 
-	E6 [label="'wheel' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E6 [label="'wheel' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E6 [arrowhead="box"];
 	E6 -> 0;
 
-	E7 [label="'mousedown' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E7 [label="'mousedown' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E7 [arrowhead="box"];
 	E7 -> 0;
 
-	E8 [label="'dblclick' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E8 [label="'dblclick' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E8 [arrowhead="box"];
 	E8 -> 0;
 
-	E9 [label="'mousemove' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][4]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E9 [label="'mousemove' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][4]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E9 [arrowhead="box"];
 	E9 -> 0;
 
-	E10 [label="'mouseout' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][4]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E10 [label="'mouseout' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][4]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E10 [arrowhead="box"];
 	E10 -> 0;
 
-	E11 [label="'click' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][4]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E11 [label="'click' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][4]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E11 [arrowhead="box"];
 	E11 -> 0;
 
-	E12 [label="'click' on '#navfluid a.navbar-brand'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E12 [label="'click' on '#navfluid a.navbar-brand'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E12 [arrowhead="box"];
 	E12 -> 0;
 
-	E13 [label="'click' on '#navigationbar ul.na […] down-toggle.nav-link'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E13 [label="'click' on '#navigationbar ul.na […] down-toggle.nav-link'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E13 [arrowhead="box"];
 	E13 -> 0;
 
-	E14 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E14 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E14 [arrowhead="box"];
 	E14 -> 0;
 
-	E15 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E15 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E15 [arrowhead="box"];
 	E15 -> 2;
 
-	E16 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E16 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[3])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E16 [arrowhead="box"];
 	E16 -> 4;
 
-	E17 [label="'mousedown' on '#svg_icicle g.context g.brush'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E17 [label="'mousedown' on '#svg_icicle g.context g.brush'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E17 [arrowhead="box"];
 	E17 -> 1;
 
-	E18 [label="'contextmenu' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E18 [label="'contextmenu' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E18 [arrowhead="box"];
 	E18 -> 1;
 
-	E19 [label="'mousemove' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E19 [label="'mousemove' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E19 [arrowhead="box"];
 	E19 -> 1;
 
-	E20 [label="'mouseout' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E20 [label="'mouseout' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E20 [arrowhead="box"];
 	E20 -> 1;
 
-	E21 [label="'wheel' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E21 [label="'wheel' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E21 [arrowhead="box"];
 	E21 -> 1;
 
-	E22 [label="'mousedown' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E22 [label="'mousedown' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E22 [arrowhead="box"];
 	E22 -> 1;
 
-	E23 [label="'dblclick' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E23 [label="'dblclick' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E23 [arrowhead="box"];
 	E23 -> 1;
 
-	E24 [label="'mousemove' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][4]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E24 [label="'mousemove' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][4]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E24 [arrowhead="box"];
 	E24 -> 1;
 
-	E25 [label="'mouseout' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][4]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E25 [label="'mouseout' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][4]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E25 [arrowhead="box"];
 	E25 -> 1;
 
-	E26 [label="'click' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][4]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E26 [label="'click' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][4]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E26 [arrowhead="box"];
 	E26 -> 0;
 
-	E27 [label="'click' on '#navfluid a.navbar-brand'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E27 [label="'click' on '#navfluid a.navbar-brand'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E27 [arrowhead="box"];
 	E27 -> 0;
 
-	E28 [label="'click' on '#navigationbar ul.na […] down-toggle.nav-link'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E28 [label="'click' on '#navigationbar ul.na […] down-toggle.nav-link'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E28 [arrowhead="box"];
 	E28 -> 3;
 
-	E29 [label="'mousedown' on '#contextArc'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E29 [label="'mousedown' on '#contextArc'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E29 [arrowhead="box"];
 	E29 -> 2;
 
-	E30 [label="'mousedown' on '#contextHandleP0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][2]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E30 [label="'mousedown' on '#contextHandleP0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][2]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E30 [arrowhead="box"];
 	E30 -> 2;
 
-	E31 [label="'mousedown' on '#contextHandle0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][2]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E31 [label="'mousedown' on '#contextHandle0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][2]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E31 [arrowhead="box"];
 	E31 -> 2;
 
-	E32 [label="'mousemove' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E32 [label="'mousemove' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E32 [arrowhead="box"];
 	E32 -> 2;
 
-	E33 [label="'mouseout' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E33 [label="'mouseout' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E33 [arrowhead="box"];
 	E33 -> 2;
 
-	E34 [label="'wheel' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E34 [label="'wheel' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E34 [arrowhead="box"];
 	E34 -> 2;
 
-	E35 [label="'mousedown' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E35 [label="'mousedown' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E35 [arrowhead="box"];
 	E35 -> 2;
 
-	E36 [label="'dblclick' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E36 [label="'dblclick' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E36 [arrowhead="box"];
 	E36 -> 2;
 
-	E37 [label="'mousemove' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][5]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E37 [label="'mousemove' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][5]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E37 [arrowhead="box"];
 	E37 -> 2;
 
-	E38 [label="'mouseout' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][5]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E38 [label="'mouseout' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][5]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E38 [arrowhead="box"];
 	E38 -> 2;
 
-	E39 [label="'click' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][5]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E39 [label="'click' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][5]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E39 [arrowhead="box"];
 	E39 -> 2;
 
-	E40 [label="'click' on '#navfluid a.navbar-brand'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E40 [label="'click' on '#navfluid a.navbar-brand'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E40 [arrowhead="box"];
 	E40 -> 0;
 
-	E41 [label="'click' on '#navigationbar ul.na […] down-toggle.nav-link'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E41 [label="'click' on '#navigationbar ul.na […] down-toggle.nav-link'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E41 [arrowhead="box"];
 	E41 -> 2;
 
-	E42 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E42 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E42 [arrowhead="box"];
 	E42 -> 0;
 
-	E43 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E43 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E43 [arrowhead="box"];
 	E43 -> 2;
 
-	E44 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E44 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[3])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E44 [arrowhead="box"];
 	E44 -> 4;
 
-	E45 [label="'mousedown' on '#contextArc'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E45 [label="'mousedown' on '#contextArc'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E45 [arrowhead="box"];
 	E45 -> 3;
 
-	E46 [label="'mousedown' on '#contextHandleP0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][2]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E46 [label="'mousedown' on '#contextHandleP0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][2]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E46 [arrowhead="box"];
 	E46 -> 3;
 
-	E47 [label="'mousedown' on '#contextHandle0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][2]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E47 [label="'mousedown' on '#contextHandle0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][2]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E47 [arrowhead="box"];
 	E47 -> 3;
 
-	E48 [label="'mousemove' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E48 [label="'mousemove' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E48 [arrowhead="box"];
 	E48 -> 3;
 
-	E49 [label="'mouseout' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E49 [label="'mouseout' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E49 [arrowhead="box"];
 	E49 -> 3;
 
-	E50 [label="'wheel' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E50 [label="'wheel' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E50 [arrowhead="box"];
 	E50 -> 3;
 
-	E51 [label="'mousedown' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E51 [label="'mousedown' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E51 [arrowhead="box"];
 	E51 -> 3;
 
-	E52 [label="'dblclick' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E52 [label="'dblclick' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E52 [arrowhead="box"];
 	E52 -> 2;
 
-	E53 [label="'mousemove' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][5]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E53 [label="'mousemove' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][5]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E53 [arrowhead="box"];
 	E53 -> 3;
 
-	E54 [label="'mouseout' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][5]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E54 [label="'mouseout' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][5]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E54 [arrowhead="box"];
 	E54 -> 3;
 
-	E55 [label="'click' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][5]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E55 [label="'click' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][5]/*[name()='path'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E55 [arrowhead="box"];
 	E55 -> 2;
 
-	E56 [label="'click' on '#navfluid a.navbar-brand'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E56 [label="'click' on '#navfluid a.navbar-brand'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E56 [arrowhead="box"];
 	E56 -> 0;
 
-	E57 [label="'click' on '#navigationbar ul.na […] down-toggle.nav-link'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E57 [label="'click' on '#navigationbar ul.na […] down-toggle.nav-link'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E57 [arrowhead="box"];
 	E57 -> 5;
 
-	E58 [label="'mousemove' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E58 [label="'mousemove' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E58 [arrowhead="box"];
 	E58 -> 4;
 
-	E59 [label="'mouseout' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E59 [label="'mouseout' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E59 [arrowhead="box"];
 	E59 -> 4;
 
-	E60 [label="'contextmenu' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E60 [label="'contextmenu' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E60 [arrowhead="box"];
 	E60 -> 4;
 
-	E61 [label="'wheel' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E61 [label="'wheel' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E61 [arrowhead="box"];
 	E61 -> 4;
 
-	E62 [label="'mousedown' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E62 [label="'mousedown' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E62 [arrowhead="box"];
 	E62 -> 4;
 
-	E63 [label="'mousemove' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E63 [label="'mousemove' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E63 [arrowhead="box"];
 	E63 -> 4;
 
-	E64 [label="'mouseout' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E64 [label="'mouseout' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E64 [arrowhead="box"];
 	E64 -> 4;
 
-	E65 [label="'click' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E65 [label="'click' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E65 [arrowhead="box"];
 	E65 -> 4;
 
-	E66 [label="'click' on '#trail g polygon'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[3]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1]/*[name()='polygon'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E66 [label="'click' on '#trail g polygon'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[3]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1]/*[name()='polygon'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E66 [arrowhead="box"];
 	E66 -> 4;
 
-	E67 [label="'mousedown' on '#svg_context g.brush'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[5]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E67 [label="'mousedown' on '#svg_context g.brush'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[5]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E67 [arrowhead="box"];
 	E67 -> 4;
 
-	E68 [label="'click' on '#navfluid a.navbar-brand'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E68 [label="'click' on '#navfluid a.navbar-brand'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E68 [arrowhead="box"];
 	E68 -> 0;
 
-	E69 [label="'click' on '#navigationbar ul.na […] down-toggle.nav-link'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E69 [label="'click' on '#navigationbar ul.na […] down-toggle.nav-link'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E69 [arrowhead="box"];
 	E69 -> 4;
 
-	E70 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E70 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E70 [arrowhead="box"];
 	E70 -> 0;
 
-	E71 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[2])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E71 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E71 [arrowhead="box"];
 	E71 -> 2;
 
-	E72 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[3])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E72 [label="'click' on '#navigationbar ul.na […] menu a.dropdown-item'\n(/html[1]/body[1]/div[1]/nav[1]/div[1]/div[1]/ul[1]/li[1]/div[1]/a[3])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E72 [arrowhead="box"];
 	E72 -> 4;
 
-	E73 [label="'mousemove' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E73 [label="'mousemove' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E73 [arrowhead="box"];
 	E73 -> 5;
 
-	E74 [label="'mouseout' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E74 [label="'mouseout' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E74 [arrowhead="box"];
 	E74 -> 5;
 
-	E75 [label="'contextmenu' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E75 [label="'contextmenu' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E75 [arrowhead="box"];
 	E75 -> 5;
 
-	E76 [label="'wheel' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E76 [label="'wheel' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E76 [arrowhead="box"];
 	E76 -> 5;
 
-	E77 [label="'mousedown' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E77 [label="'mousedown' on '#zoom_rectangle'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E77 [arrowhead="box"];
 	E77 -> 5;
 
-	E78 [label="'mousemove' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E78 [label="'mousemove' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E78 [arrowhead="box"];
 	E78 -> 5;
 
-	E79 [label="'mouseout' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E79 [label="'mouseout' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E79 [arrowhead="box"];
 	E79 -> 5;
 
-	E80 [label="'click' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E80 [label="'click' on '#c_select0'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E80 [arrowhead="box"];
 	E80 -> 4;
 
-	E81 [label="'click' on '#trail g polygon'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[3]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1]/*[name()='polygon'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E81 [label="'click' on '#trail g polygon'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[3]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='g'][1]/*[name()='polygon'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E81 [arrowhead="box"];
 	E81 -> 4;
 
-	E82 [label="'mousedown' on '#svg_context g.brush'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[5]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#FFFFFF", fontcolor="#FFFFFF"];
+	E82 [label="'mousedown' on '#svg_context g.brush'\n(/html[1]/body[1]/div[2]/div[1]/div[2]/div[1]/div[5]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E82 [arrowhead="box"];
 	E82 -> 5;
 
