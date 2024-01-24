@@ -4,6 +4,7 @@ from flask_pymongo import PyMongo
 from flask_caching import Cache
 from configparser import ConfigParser
 import os, re
+import graphviz
 
 app = Flask(__name__,
             static_url_path='', 
@@ -17,6 +18,28 @@ cache = Cache(app, config={'CACHE_TYPE': 'simple'})
 config = ConfigParser()
 config.read('config.ini')
 
+#Removes XPath for now and sets font color to black
+def graph_layout(name):
+    input_file_path = 'static/files/statechartGV/' + name +'.gv'
+    output_file_path = 'static/files/statechartGVLayout/' + name + '.gv'
+
+    patternXPath = re.compile(r"\\n\([^)]*\)")
+    patternBlack = re.compile(r'fontcolor="#FFFFFF"')
+    replacement = 'fontcolor="#000000"'
+
+    with open(input_file_path, 'r') as input_file:
+        lines = input_file.readlines()
+    
+    modified_lines = [re.sub(patternXPath, "", line) for line in lines]
+    modified_lines = [re.sub(patternBlack, replacement, line) for line in modified_lines]
+
+
+    with open(output_file_path, 'w') as output_file:
+        output_file.writelines(modified_lines)
+
+    print(f"Modified content written to {output_file_path}")
+
+    return modified_lines
 
 @app.route("/")
 def home():
@@ -249,7 +272,8 @@ def get_statecharts():
             statecharts_data.append(statechart_info)
 
         print("Statecharts data collected successfully!")
-
+        
+       
     except Exception as e:
         print(f"Error: {e}")
         
@@ -284,15 +308,21 @@ def get_statecharts_gv():
 
             statechart_info = {
                 "name": name,
-                "svg": svg_data
+                "svg": graph_layout(name)
             }  
 
-            print(statechart_info)
-
+          
+            
             statecharts_data.append(statechart_info)
-            print(statechart_info)
+    
+
+            print(statechart_info["svg"])
 
         print("Statecharts data collected successfully!")
+
+        #Graph Layout
+
+            
 
     except Exception as e:
         print(f"Error: {e}")

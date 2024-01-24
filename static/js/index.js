@@ -357,9 +357,9 @@ function adjustIndicator(scale, currentX, currentY, event) {
 
 function graphLayout(svg) {
     var textElements = svg.querySelectorAll("g.node text");
-    var tooltip = document.getElementById("tooltip");
+    //var tooltip = document.getElementById("tooltip");
 
-    function adjustTooltipPosition() {
+    /* function adjustTooltipPosition() {
         var rect = tooltip.getBoundingClientRect();
         var maxX = window.innerWidth - rect.width;
         var maxY = window.innerHeight - rect.height;
@@ -368,14 +368,15 @@ function graphLayout(svg) {
         tooltip.style.left = x + 'px';
         tooltip.style.top = y + 'px';
     }
-
+ */
     textElements.forEach(function (textElement) {
         var node = textElement.parentElement;
-        var xPath = "";
+        //var xPath = "";
         //console.log(node)
 
         // Hide Xpath
         if (node.classList.contains("node")) {
+        /*
             if ((textElement.textContent.includes('[')) && (textElement.textContent.includes(']'))) {
                 xPath = textElement;
                 xPath.classList.add("xPath");
@@ -393,17 +394,17 @@ function graphLayout(svg) {
                     tooltip.style.display = 'none';
                     //console.log("mouseout detected")
                 });
-            }
+            } */
 
             // Increase font size of non-hidden text
-            if (textElement.innerHTML.length > 3) {
+            /* if (textElement.innerHTML.length > 3) {
                 var fontSize = parseFloat(textElement.style.fontSize) || 12; // Default font size is 12px
                 textElement.style.fontSize = (fontSize + 4) + 'px';
 
                 var textY = parseFloat(textElement.getAttribute("y"));
                 textElement.classList.add("nodeText");
                 textElement.setAttribute("y", textY + 8);
-            }
+            } */
 
             // Check for "mousemove" or "mouseup" and set child polygon's fill property accordingly
             var firstString = textElement.textContent.split(',')[0];

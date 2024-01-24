@@ -1,7 +1,26 @@
 digraph G {
 
-	rankdir="LR";
-	splines=ortho;
+	graph [
+		layout = neato
+		labelloc = b
+		fontname = "Helvetica,Arial,sans-serif"
+		start = regular
+		normalize = 0
+		overlap= prism;  // or scalexy, scale, prism, ortho, or compress
+
+	]
+	node [
+		shape = circle
+		style = filled
+		color = "#00000088"
+		fontname = "Helvetica,Arial,sans-serif"
+
+	]
+	edge [
+		len = 1
+		color = "#00000088"
+		fontname = "Helvetica,Arial,sans-serif"
+	]
 
 	E0 [label="'click' on '#count canvas.marks'\n(/html[1]/body[1]/div[2]/div[1]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
 	0 -> E0 [arrowhead="box"];
