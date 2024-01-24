@@ -39,10 +39,7 @@ window.onload = function () {
         sideBarCollapse.classList.toggle("active");
         document.getElementById("sidebar").classList.toggle("active");
     });
-
-    document.getElementById("slidersNum").style.color = color2;
-    document.getElementById("buttonsNum").style.color = color1;
-    document.getElementById("inputsNum").style.color = color9;
+    colorLegend();
 };
 
 
@@ -460,11 +457,14 @@ function graphLayout(svg) {
         }
     });
 }
+const eventTypes=["mouseover","click","brush","mousemove","mousedown","wheel","mouseout","mouseup","dblclick","facsimile_back"];
 
 // Function to get color based on event name
 function getColor(eventName) {
     if (eventName.includes("mouseover")) {
         return "#8e0152";
+    } else if (eventName.includes("dblclick")) {
+        return "#4d9221";
     } else if (eventName.includes("click")) {
         return "#c51b7d";
     } else if (eventName.includes("brush")) {
@@ -472,23 +472,58 @@ function getColor(eventName) {
     } else if (eventName.includes("mousemove")) {
         return "#f1b6da";
     } else if (eventName.includes("mousedown")) {
-        return "#b8e186";
-    }else if (eventName.includes("wheel")) {
         return "#fde0ef";
-    } else if (eventName.includes("mouseout")) {
+    }else if (eventName.includes("wheel")) {
         return "#e6f5d0";
+    } else if (eventName.includes("mouseout")) {
+        return "#b8e186";
     } else if (eventName.includes("mouseup")) {
-        return "#4d9221";
-    } else if (eventName.includes("dblclick")) {
-        return "#276419";
+        return "#7fbc41";
     } else if (eventName.includes("facsimile_back")) {
-        return "#072700";
+        return "#276419";
     } else {
         console.log(eventName);
         return "red";
     }
 }
 
+function colorLegend(){
+    const colorLegend = document.getElementById("colorLegend");
+
+    eventTypes.forEach(element => {
+        
+        let colorElementDiv = document.createElement("div");
+        colorElementDiv.classList.add("legendElementDiv");
+
+        let colorElementImg = document.createElement("div");
+        colorElementImg.classList.add("colorDiv");
+        colorElementImg.style.backgroundColor = getColor(element);
+
+        let colorElementText = document.createElement("p");
+        colorElementText.textContent=element;
+
+        colorElementDiv.appendChild(colorElementImg);
+        colorElementDiv.appendChild(colorElementText);
+
+        colorLegend.appendChild(colorElementDiv);
+    });
+
+}
+
+function toggleLegend(){
+    const colorLegend = document.getElementById("colorLegend");
+    const buttonImg = document.getElementById("colorLegendButton");
+    console.log(colorLegend.getAttribute("data-visible"));
+    if(colorLegend.getAttribute("data-visible")=="false"){
+        colorLegend.setAttribute("data-visible", "true");
+        buttonImg.style.transform = "rotate(0deg)";
+        colorLegend.style.height="310px";
+    }else{
+        colorLegend.setAttribute("data-visible","false");
+        buttonImg.style.transform = "rotate(180deg)";
+        colorLegend.style.height="31px";
+    }
+}
 function isNameInUrl(jsonData, systemUrl) {
     
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
@@ -647,3 +682,5 @@ function LoadSystem() {
 }
 
 //#endregion
+
+

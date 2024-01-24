@@ -9,7 +9,9 @@ var timeForAllTraces;
 window.onload = function () {
   loadingIcon = document.getElementById("loadingIcon");
   table = document.getElementById("table");
-
+  
+  //document.getElementById("colorLegend").classList.add("userTracesLegend");
+  colorLegend();
   getViolations();
   getTime();
   getUserTraces();
@@ -532,24 +534,65 @@ function getColor(eventName) {
     case "mousemove":
       return "#f1b6da";
     case "wheel":
-      return "#fde0ef";
-    case "mouseout":
       return "#e6f5d0";
-    case "mousedown":
+    case "mouseout":
       return "#b8e186";
+    case "mousedown":
+      return "#fde0ef";
     case "mousedown":
       return "#7fbc41";
     case "mouseup":
-      return "#4d9221";
+      return "#7fbc41";
     case "dblclick":
-      return "#276419";
+      return "#4d9221";
     case "Double Click":
       return "yellow";
     case "facsimile back":
-      return "#072700";
+      return "#276419";
     // Add more cases as needed
     default:
       console.log(eventName);
       return "red";
+  }
+}
+const eventTypesArray=["mouseover","click","brush","mousemove","mousedown","wheel","mouseout","mouseup","dblclick","facsimile_back"];
+function colorLegend(){
+  const colorLegend = document.getElementById("colorLegend");
+
+  eventTypesArray.forEach(element => {
+      
+      let colorElementDiv = document.createElement("div");
+      colorElementDiv.classList.add("legendElementDiv");
+
+      let colorElementImg = document.createElement("div");
+      colorElementImg.classList.add("colorDiv");
+      if(element=="facsimile_back")
+        colorElementImg.style.backgroundColor = getColor("facsimile back");
+      else
+        colorElementImg.style.backgroundColor = getColor(element);
+
+      let colorElementText = document.createElement("p");
+      colorElementText.textContent=element;
+
+      colorElementDiv.appendChild(colorElementImg);
+      colorElementDiv.appendChild(colorElementText);
+
+      colorLegend.appendChild(colorElementDiv);
+  });
+
+}
+
+function toggleLegend(){
+  const colorLegend = document.getElementById("colorLegend");
+  const buttonImg = document.getElementById("colorLegendButton");
+  console.log(colorLegend.getAttribute("data-visible"));
+  if(colorLegend.getAttribute("data-visible")=="false"){
+      colorLegend.setAttribute("data-visible", "true");
+      buttonImg.style.transform = "rotate(0deg)";
+      colorLegend.style.height="310px";
+  }else{
+      colorLegend.setAttribute("data-visible","false");
+      buttonImg.style.transform = "rotate(180deg)";
+      colorLegend.style.height="31px";
   }
 }

@@ -27,7 +27,7 @@
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
 
-    
+
     <script src="js/index.js"></script>
 </head>
 
@@ -37,16 +37,16 @@
         <nav id="sidebar" class="active">
             <div class="sidebar-header">
                 <p>System Statistics</p>
-                <button class="sidebarPin" id="sidebarPinButton" onclick="pinSidebar()"><img id="pinImg" src="images/pin.png" / width="20px"
-                        height="20px"></button>
+                <button class="sidebarPin" id="sidebarPinButton" onclick="pinSidebar()"><img id="pinImg"
+                        src="images/pin.png" / width="20px" height="20px"></button>
             </div>
             <ul class="list-unstyled components">
                 <li>
                     <div class="iconTitle">
-                        <img src="images/pathIcon.png" width="20px" height="20px"/>
+                        <img src="images/pathIcon.png" width="20px" height="20px" />
                         <p>Paths</p>
                     </div>
-                    
+
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
@@ -64,7 +64,7 @@
 
                 <li>
                     <div class="iconTitle">
-                        <img src="images/interactorIcon.png" width="20px" height="20px"/>
+                        <img src="images/interactorIcon.png" width="20px" height="20px" />
                         <p>Events</p>
                     </div>
                     <div class="form-check" style="color: #554e8d;">
@@ -121,7 +121,7 @@
                             Facsimile Back
                         </label>
                     </div>
-                    
+
                 </li>
 
             </ul>
@@ -204,17 +204,22 @@
                 </div>
                 <!-- <div class="dragLine" id="dragLine"></div> -->
                 <div class="statechart" id="statechartContainer">
-                <div id="tooltip" style="display: none"></div>
+                    <div id="tooltip" style="display: none"></div>
                     <div class="spinner-border" id="loadingIcon" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>
+                    <div id="colorLegend" data-visible="false">
+                        <button onclick="toggleLegend()">Legend 
+                        <img src="images/downArrow.png" id="colorLegendButton" width="20px" height="20px" style="transform: rotate(180deg);"/>
+                        </button>
+                    </div>
                     <div id="statechartSVG" style="display: none;" class="statechartSVG">
-                        
+
                         <div id="minimapContainer">
-                    
+
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -237,7 +242,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-    
+
     <script src=" 
     https://d3js.org/d3-color.v1.min.js">
     </script>
