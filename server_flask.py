@@ -31,7 +31,7 @@ def graph_layout(name):
         lines = input_file.readlines()
     
     modified_lines = [re.sub(patternXPath, "", line) for line in lines]
-    modified_lines = [re.sub(patternBlack, replacement, line) for line in lines]
+    modified_lines = [re.sub(patternBlack, replacement, line) for line in modified_lines]
 
 
     with open(output_file_path, 'w') as output_file:
