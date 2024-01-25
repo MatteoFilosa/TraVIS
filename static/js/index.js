@@ -10,7 +10,7 @@ var statechartContainer;
 var statechart;
 var lastStatechartUrl = "";
 var minimapHidden = false;
-var gelem;
+var statesCount = 0, edgesCount = 0, labelsCount = 0;
 var json, url;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0, currentX = 0, currentY = 0, translateX = 0, translateY = 0, minimapRatio = 0, scale = 1, svgWidth = 0, svgHeight = 0;
 
@@ -356,7 +356,13 @@ function adjustIndicator(scale, currentX, currentY, event) {
 //#region Statechart
 
 function graphLayout(svg) {
+    //labelsCount = 0;
     var textElements = svg.querySelectorAll("g.node text");
+    edgesCount = svg.querySelectorAll("g.edge").length
+    statesCount = svg.querySelectorAll("ellipse").length
+    document.getElementById("edges").innerHTML = edgesCount;
+    document.getElementById("states").innerHTML = statesCount;
+    document.getElementById("labels").innerHTML = edgesCount; //Each edge has one label!!!
     //var tooltip = document.getElementById("tooltip");
 
     /* function adjustTooltipPosition() {
@@ -373,6 +379,7 @@ function graphLayout(svg) {
         var node = textElement.parentElement;
         //var xPath = "";
         //console.log(node)
+
 
         // Hide Xpath
         if (node.classList.contains("node")) {
@@ -409,6 +416,8 @@ function graphLayout(svg) {
             // Check for "mousemove" or "mouseup" and set child polygon's fill property accordingly
             var firstString = textElement.textContent.split(',')[0];
             var polygon = node.querySelector('polygon');
+            //if (polygon) labelsCount++;
+          
 
             if (firstString.includes('mousemove')) {
                 if (polygon) {
@@ -457,6 +466,9 @@ function graphLayout(svg) {
             }
         }
     });
+
+  
+    
 }
 const eventTypes=["mouseover","click","brush","mousemove","mousedown","wheel","mouseout","mouseup","dblclick","facsimile_back"];
 
