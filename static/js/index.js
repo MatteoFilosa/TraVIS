@@ -40,6 +40,7 @@ window.onload = function () {
         document.getElementById("sidebar").classList.toggle("active");
     });
     colorLegend();
+    graphviz();
 };
 
 
@@ -358,8 +359,9 @@ function adjustIndicator(scale, currentX, currentY, event) {
 function graphLayout(svg) {
     //labelsCount = 0;
     var textElements = svg.querySelectorAll("g.node text");
-    edgesCount = svg.querySelectorAll("g.edge").length
-    statesCount = svg.querySelectorAll("ellipse").length
+    var edgesCount = svg.querySelectorAll("g.edge").length;
+    var statesCount = svg.querySelectorAll("ellipse").length;
+    
     document.getElementById("edges").innerHTML = edgesCount;
     document.getElementById("states").innerHTML = statesCount;
     document.getElementById("labels").innerHTML = edgesCount; //Each edge has one label!!!
@@ -554,33 +556,17 @@ function isNameInUrl(jsonData, systemUrl) {
         //console.log(originalSVG)
         lastStatechartUrl = systemURL;
 
-  
-        
-
         if (originalSVG) {
-
-
             graphLayout(originalSVG);
-
-        
-
             statechartSVG.appendChild(originalSVG);
-
-            
-            
             // Generate and set up the minimap
             generateMinimap(originalSVG);
-
             //Set the id of the originalSVG
             originalSVG.setAttribute("id", "originalSVG")
-
             //To avoid the cropping effect while zooming, I need to give the svg more height.
             if(originalHeight < originalWidth) originalSVG.height.baseVal.valueInSpecifiedUnits = originalWidth + 1000;
-            
-
             // Configure the handler to click on the minimap passing originalSVG as a parameter
             setupMinimapClickHandler(originalSVG);
-
 
             //I need to do this otherwise it selects the minimap instead of the big statechart ...
 
@@ -636,10 +622,34 @@ function graphviz() {
             loadButton.disabled = false;
             loadingIcon.style.display = "none";
             statecharts = json;
-            console.log("Get graphviz")
+            console.log("Get graphviz");
+            //visualizeStatechart();
+            //console.log((statecharts[10].svg).toString());
         });
 }
 
+function visualizeStatechart(){
+    var gvFile = statecharts[10].svg;
+   
+    url = `http://127.0.0.1:5000/visualizeStatechart`;
+    fetch(url,{
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ graphData: gvFile }),
+    })
+        .then(response => response.json())
+        .then(json => {
+            //console.log(json.svgContent);
+            statechartSVG.style.display = "block";
+            var parser = new DOMParser();
+        var doc = parser.parseFromString(json.svgContent, "image/svg+xml");
+        var originalSVG = doc.documentElement;
+            graphLayout(originalSVG);
+            statechartSVG.appendChild(originalSVG);
+        });
+}
 // Function to check if there is a corresponding statechart in the URL
 function CheckIfStatechartExists() {
     url = 'http://127.0.0.1:5000/get_statecharts';
@@ -680,7 +690,7 @@ function LoadSystem() {
     var minimapContainer = document.createElement("div");
     minimapContainer.id = "minimapContainer";
     statechartSVG.appendChild(minimapContainer);
-    console.log("ok")
+    //console.log("ok")
     loadButton.disabled = true;
     var websiteContainer = document.getElementById("website");
 

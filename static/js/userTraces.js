@@ -9,7 +9,7 @@ var timeForAllTraces;
 window.onload = function () {
   loadingIcon = document.getElementById("loadingIcon");
   table = document.getElementById("table");
-  
+
   //document.getElementById("colorLegend").classList.add("userTracesLegend");
   colorLegend();
   getViolations();
@@ -309,7 +309,7 @@ function showExtraInformation(userID) {
       if (value[key] > 0) {
         var eventElement = document.createElement("li");
         eventElement.textContent = `${key}: ${value[key]}`;
-        if(key=="dblclick")
+        if (key == "dblclick")
           eventElement.textContent = `Double click: ${value[key]}`;
         eventElement.style.textTransform = "capitalize";
         eventsList.append(eventElement);
@@ -555,44 +555,52 @@ function getColor(eventName) {
       return "red";
   }
 }
-const eventTypesArray=["mouseover","click","brush","mousemove","mousedown","wheel","mouseout","mouseup","dblclick","facsimile_back"];
-function colorLegend(){
+const eventTypesArray = [
+  "mouseover",
+  "click",
+  "brush",
+  "mousemove",
+  "mousedown",
+  "wheel",
+  "mouseout",
+  "mouseup",
+  "dblclick",
+  "facsimile_back",
+];
+function colorLegend() {
   const colorLegend = document.getElementById("colorLegend");
 
-  eventTypesArray.forEach(element => {
-      
-      let colorElementDiv = document.createElement("div");
-      colorElementDiv.classList.add("legendElementDiv");
+  eventTypesArray.forEach((element) => {
+    let colorElementDiv = document.createElement("div");
+    colorElementDiv.classList.add("legendElementDiv");
 
-      let colorElementImg = document.createElement("div");
-      colorElementImg.classList.add("colorDiv");
-      if(element=="facsimile_back")
-        colorElementImg.style.backgroundColor = getColor("facsimile back");
-      else
-        colorElementImg.style.backgroundColor = getColor(element);
+    let colorElementImg = document.createElement("div");
+    colorElementImg.classList.add("colorDiv");
+    if (element == "facsimile_back")
+      colorElementImg.style.backgroundColor = getColor("facsimile back");
+    else colorElementImg.style.backgroundColor = getColor(element);
 
-      let colorElementText = document.createElement("p");
-      colorElementText.textContent=element;
+    let colorElementText = document.createElement("p");
+    colorElementText.textContent = element;
 
-      colorElementDiv.appendChild(colorElementImg);
-      colorElementDiv.appendChild(colorElementText);
+    colorElementDiv.appendChild(colorElementImg);
+    colorElementDiv.appendChild(colorElementText);
 
-      colorLegend.appendChild(colorElementDiv);
+    colorLegend.appendChild(colorElementDiv);
   });
-
 }
 
-function toggleLegend(){
+function toggleLegend() {
   const colorLegend = document.getElementById("colorLegend");
   const buttonImg = document.getElementById("colorLegendButton");
   console.log(colorLegend.getAttribute("data-visible"));
-  if(colorLegend.getAttribute("data-visible")=="false"){
-      colorLegend.setAttribute("data-visible", "true");
-      buttonImg.style.transform = "rotate(0deg)";
-      colorLegend.style.height="310px";
-  }else{
-      colorLegend.setAttribute("data-visible","false");
-      buttonImg.style.transform = "rotate(180deg)";
-      colorLegend.style.height="31px";
+  if (colorLegend.getAttribute("data-visible") == "false") {
+    colorLegend.setAttribute("data-visible", "true");
+    buttonImg.style.transform = "rotate(0deg)";
+    colorLegend.style.height = "310px";
+  } else {
+    colorLegend.setAttribute("data-visible", "false");
+    buttonImg.style.transform = "rotate(180deg)";
+    colorLegend.style.height = "31px";
   }
 }

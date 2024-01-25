@@ -1,10 +1,11 @@
-from flask import Flask, render_template, jsonify, make_response
+from flask import Flask, render_template, jsonify, make_response, request,send_file
 from flask_cors import CORS
 from flask_pymongo import PyMongo
 from flask_caching import Cache
 from configparser import ConfigParser
 import os, re
 import graphviz
+import subprocess
 
 app = Flask(__name__,
             static_url_path='', 
@@ -40,6 +41,40 @@ def graph_layout(name):
     print(f"Modified content written to {output_file_path}")
 
     return modified_lines
+
+@app.route("/visualizeStatechart",methods=['POST'])
+def visualizeStatechart():
+    # Get the JSON data from the request body
+    request_data = request.get_json()
+
+    # Extract the graph data list from the JSON data
+    graph_data_list = request_data.get('graphData', [])
+
+    # Ensure graph_data_list is not empty
+    if not graph_data_list:
+        return jsonify({'error': 'Empty graph data list'})
+
+    # Construct the DOT content from the list
+    graph_content = '\n'.join(graph_data_list)
+
+    # Save the constructed graph content to a temporary file
+    with open('input_graph.gv', 'w') as graph_file:
+        graph_file.write(graph_content)
+
+    # Run the dot command to generate the SVG file
+    dot_command = "dot -Tsvg -o output.svg input_graph.gv"
+    subprocess.run(dot_command, shell=True)
+
+    # Read the generated SVG content
+    with open('output.svg', 'r') as svg_file:
+        svg_content = svg_file.read()
+
+    # Optionally, you can remove the generated SVG file if needed
+    # Uncomment the following line if you want to delete the file
+    os.remove('output.svg')
+
+    # Return the raw SVG content as a response
+    return jsonify({'svgContent': svg_content})
 
 @app.route("/")
 def home():
