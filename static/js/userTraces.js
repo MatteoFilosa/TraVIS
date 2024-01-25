@@ -175,6 +175,7 @@ function populateTable(data) {
     const eventsCell = document.createElement("td");
     var traceData = JSON.parse(element.user_trace);
     eventsCell.style.display = "flex";
+    eventsCell.style.marginTop="11px";
     eventTypes(extractedNumber).then(function (value) {
       eventsCell.appendChild(createEventsBar(value));
     });
@@ -184,8 +185,10 @@ function populateTable(data) {
     findViolations(extractedNumber).then(function (value) {
       // Add violations column
       const violationsCell = document.createElement("td");
-      const sum = Object.values(value).reduce((acc, curr) => acc + curr, 0);
-      violationsCell.textContent = sum;
+   
+      // const sum = Object.values(value).reduce((acc, curr) => acc + curr, 0);
+      // violationsCell.textContent = sum;
+      violationsCell.appendChild(createViolationsBar(value));
       row.appendChild(violationsCell);
     });
 
@@ -447,6 +450,57 @@ async function findViolations(userID) {
 }
 //#endregion
 
+function createViolationsBar(violations){
+  
+  const violationsRectangle = document.createElement("div");
+  violationsRectangle.style.display="flex";
+  violationsRectangle.style.width="95%";
+  violationsRectangle.id = "violationsRectangle";
+  violationsRectangle.innerHTML = "";
+
+  
+  // Calculate the percentage of each event type
+  const totalViolations = Object.values(violations).reduce(
+    (acc, count) => acc + count,
+    0
+  );
+  
+  var totalNum = document.createElement("p");
+  totalNum.textContent=totalViolations;
+  totalNum.style.marginRight="8px";
+  totalNum.style.color="black";
+  violationsRectangle.appendChild(totalNum);
+
+  const percentages = {};
+  for (const [violationName, count] of Object.entries(violations)) {
+    percentages[violationName] = (count / totalViolations) * 100;
+  }
+
+  const sortedPercentages = Object.entries(violations)
+    .map(([violationName, count]) => ({
+      violationName,
+      percentage: (count / totalViolations) * 100,
+    }))
+    .sort((a, b) => a.percentage - b.percentage);
+
+  for (const [violationName, count] of Object.entries(violations)) {
+    const eventDiv = document.createElement("div");
+    eventDiv.classList.add("eventColor");
+    eventDiv.style.height = "20px";
+    eventDiv.style.width = `${
+      (count / Object.values(violations).reduce((acc, count) => acc + count, 0)) *
+      100
+    }%`;
+    if(violationName.includes("1"))
+      eventDiv.style.backgroundColor = "#ffeda0";
+    if(violationName.includes("2"))
+      eventDiv.style.backgroundColor = "#feb24c";
+    if(violationName.includes("3"))
+      eventDiv.style.backgroundColor = "#f03b20";
+    violationsRectangle.appendChild(eventDiv);
+  }
+  return violationsRectangle;
+}
 function createEventsBar(events) {
   const eventRectangle = document.createElement("div");
   eventRectangle.id = "eventRectangle";

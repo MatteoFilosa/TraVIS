@@ -664,6 +664,8 @@ table.dataTable tbody td {
     width: 300px;
     height: 300px;
     position: relative;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #00000047;
 }
 .event-rectangle {
     display: inline-block;
