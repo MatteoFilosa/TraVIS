@@ -179,22 +179,22 @@ a:focus {
     transition: all 0.3s;
     position: absolute;
     height: 31px;
-    width: 155px;
+    width: 300px;
     border: 1px solid #0000003d;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     background-color: #efeeffe6;
     bottom: 32px;
-    right: 800px;
+    right: 34rem;
     display: grid;
     padding: 0.2%;
-    justify-content: space-evenly;
     overflow: hidden;
     border-radius: 7px;
     transition: all 0.3s ease-in-out;
     z-index: 1;
 }
+
 .userTracesLegend{
-    right: 607px !important;
+    right: 32%!important;
 }
 #colorLegend button{
     width: 100%;
@@ -508,7 +508,7 @@ a.dropdown-item {
     color: #554e8d;
     font-size: 1.5rem;
     font-weight: 700;
-    margin-bottom: 1%;
+    margin-bottom: -2%;
     height: 50px;
 }
 
@@ -602,6 +602,7 @@ th img {
     padding: 1%;
     height: fit-content;
     width: 30%;
+    font-size: 1.1rem;
 }
 .extrainfoDiv p {
     color:#000000 !important;
@@ -667,6 +668,11 @@ table.dataTable tbody td {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid #00000047;
 }
+#violationsHeatmap{
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #00000047;
+    margin-top: 20px;
+}
 .event-rectangle {
     display: inline-block;
     width: calc(100% / var(--columns));
@@ -676,7 +682,9 @@ table.dataTable tbody td {
   #extrainfoContent p{
     font-weight: 500;
   }
-
+.violationsDiv{
+    display: inline;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
@@ -693,4 +701,22 @@ table.dataTable tbody td {
     #sidebarCollapse span {
         display: none;
     }
+    
 }
+@media (max-width: 1610px) {
+    #colorLegend{
+        right: 30%;
+    }
+}
+@media (min-width: 1610px) and (max-width: 1770px) {
+    #colorLegend{
+        right: 31%;
+    }
+}
+
+@media (min-width: 1770px) and (max-width: 1920px) {
+    #colorLegend{
+        right: 34%;
+    }
+}
+
