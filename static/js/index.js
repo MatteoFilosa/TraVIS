@@ -364,7 +364,6 @@ function graphLayout(svg) {
     
     document.getElementById("edges").innerHTML = edgesCount;
     document.getElementById("states").innerHTML = statesCount;
-    document.getElementById("labels").innerHTML = edgesCount; //Each edge has one label!!!
     //var tooltip = document.getElementById("tooltip");
 
     /* function adjustTooltipPosition() {
