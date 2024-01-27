@@ -324,16 +324,45 @@ function showExtraInformation(userID) {
   findViolations(userID).then(function (value) {
     const violationsList = document.getElementById("violationsList");
     violationsList.innerHTML = "";
-    var level1 = document.createElement("li");
-    level1.textContent = "Level 1: " + value.level1;
-    var level2 = document.createElement("li");
-    level2.textContent = "Level 2: " + value.level2;
-    var level3 = document.createElement("li");
-    level3.textContent = "Level 3: " + value.level3;
+
+    var level1 = document.createElement("div");
+    level1.style.display="flex";
+    let level1colorDiv = document.createElement("div");
+    level1colorDiv.classList.add("violationsColorDiv");
+    level1colorDiv.style.backgroundColor="#f1a171";
+    level1.append(level1colorDiv);
+    level1.append("Low: " + value.level1);
+    
+
+    var level2 = document.createElement("div");
+    level2.style.display="flex";
+    let level2colorDiv = document.createElement("div");
+    level2colorDiv.classList.add("violationsColorDiv");
+    level2colorDiv.style.backgroundColor="#c24a6f";
+    level2.append(level2colorDiv);
+    level2.append("Medium: " + value.level2);
+
+    var level3 = document.createElement("div");
+    level3.style.display="flex";
+    let level3colorDiv = document.createElement("div");
+    level3colorDiv.classList.add("violationsColorDiv");
+    level3colorDiv.style.backgroundColor="#5b257e";
+    level3.append(level3colorDiv);
+    level3.append("High: " + value.level3);
+
+    var level4 = document.createElement("div");
+    level4.style.display="flex";
+    let level4colorDiv = document.createElement("div");
+    level4colorDiv.classList.add("violationsColorDiv");
+    level4colorDiv.style.backgroundColor="#000009";
+    level4.append(level4colorDiv);
+    level4.append("Critical: " + value.level4);
+
 
     violationsList.append(level1);
     violationsList.append(level2);
     violationsList.append(level3);
+    violationsList.append(level4);
     //generateViolationsHeatmap(value);
   });
   findTotalTime(userID).then(function (value) {
@@ -424,6 +453,7 @@ async function findViolations(userID) {
     level1: 0,
     level2: 0,
     level3: 0,
+    level4: 0,
   };
   for (const element of violationsForAllTraces) {
     let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
@@ -508,11 +538,13 @@ function createViolationsBar(violations){
 
       // Set different background colors based on violation level
       if (violationName.includes("1"))
-        eventDiv.style.backgroundColor = "#ffeda0";
+        eventDiv.style.backgroundColor = "#f1a171";
       else if (violationName.includes("2"))
-        eventDiv.style.backgroundColor = "#feb24c";
+        eventDiv.style.backgroundColor = "#c24a6f";
       else if (violationName.includes("3"))
-        eventDiv.style.backgroundColor = "#f03b20";
+        eventDiv.style.backgroundColor = "#5b257e";
+      else if (element.includes("4"))
+        colorElementImg.style.backgroundColor = "#000009";
 
       wrapperDiv.appendChild(eventDiv);
     }
@@ -591,7 +623,7 @@ function generateViolationsHeatmap(violations){
       100
     }%`;
     if(violationName.includes("1"))
-      eventDiv.style.backgroundColor = "#ffeda0";
+      eventDiv.style.backgroundColor = "#f1a171";
     if(violationName.includes("2"))
       eventDiv.style.backgroundColor = "#feb24c";
     if(violationName.includes("3"))
@@ -708,19 +740,21 @@ function colorLegend() {
     eventColumn.appendChild(colorElementDiv);
   });
 
-  const violations =["Level 1","Level 2","Level 3"];
+  const violations =["Low","Medium","High","Critical"];
   violations.forEach((element) => {
     let colorElementDiv = document.createElement("div");
     colorElementDiv.classList.add("legendElementDiv");
 
     let colorElementImg = document.createElement("div");
     colorElementImg.classList.add("colorDiv");
-    if (element.includes("1"))
-      colorElementImg.style.backgroundColor = "#ffeda0";
-    else if (element.includes("2"))
-      colorElementImg.style.backgroundColor = "#feb24c";
-    else if (element.includes("3"))
-      colorElementImg.style.backgroundColor = "#f03b20";
+    if (element.includes("Low"))
+      colorElementImg.style.backgroundColor = "#f1a171";
+    else if (element.includes("Medium"))
+      colorElementImg.style.backgroundColor = "#c24a6f";
+    else if (element.includes("High"))
+      colorElementImg.style.backgroundColor = "#5b257e";
+    else if (element.includes("Critical"))
+      colorElementImg.style.backgroundColor = "#000009";
 
     let colorElementText = document.createElement("p");
     colorElementText.textContent = element;

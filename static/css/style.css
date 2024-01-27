@@ -483,6 +483,12 @@ a.dropdown-item {
     cursor: move;
 }
 
+.violationsColorDiv{
+    width: 20px;
+    height: 20px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+}
 /* ---------------------------------------------------
     User Traces Page
 ----------------------------------------------------- */

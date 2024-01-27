@@ -81,7 +81,7 @@
             </nav>
 
             <div class="mainContainer">
-                
+
                 <div id="traceContainer">
                     <!-- <div class="filterSidebar">
                         <p>Sort by</p>
@@ -118,14 +118,15 @@
                             </tbody>
                         </table>
                         <div id="colorLegend" class="userTracesLegend" data-visible="false">
-                            <button onclick="toggleLegend()">Legend 
-                            <img src="images/downArrow.png" id="colorLegendButton" width="20px" height="20px" style="transform: rotate(180deg);"/>
+                            <button onclick="toggleLegend()">Legend
+                                <img src="images/downArrow.png" id="colorLegendButton" width="20px" height="20px"
+                                    style="transform: rotate(180deg);" />
                             </button>
                             <div style="display: flex;">
                                 <div id="eventColumn" style="height: 100%;width: 60%;"></div>
                                 <div id="violationsColumn" style="height: 100%;width: 40%;"></div>
                             </div>
-                            
+
                         </div>
                     </div>
                     <button class="selectTraceBtn" id="selectTraceBtn"></button>
@@ -144,17 +145,15 @@
                                 </div>
                                 <div id="heatmap"></div>
                             </div>
-                            <div style="display: flex;justify-content: space-between;align-items: center;">
-                                <div>
-                                    <p>Violations</p>
-                                    <ul id="violationsList">
-                                        <li>Level 1</li>
-                                        <li>Level 2</li>
-                                        <li>Level 3</li>
-                                    </ul>
+
+                            <div style="margin-bottom: 54px;">
+                                <p>Violations</p>
+                                <div id="violationsList">
+
                                 </div>
-                                <div id="violationsHeatmap"></div>
                             </div>
+                            <!-- <div id="violationsHeatmap"></div> -->
+
                             <div class="timeDiv">
                                 <p>Time</p>
                                 <ul id="timeList">
