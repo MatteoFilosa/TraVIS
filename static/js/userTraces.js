@@ -176,6 +176,7 @@ function populateTable(data) {
     var traceData = JSON.parse(element.user_trace);
     eventsCell.style.display = "flex";
     eventsCell.style.marginTop="11px";
+    eventsCell.style.justifyContent="space-between";
     eventTypes(extractedNumber).then(function (value) {
       eventsCell.appendChild(createEventsBar(value));
     });
@@ -333,6 +334,7 @@ function showExtraInformation(userID) {
     violationsList.append(level1);
     violationsList.append(level2);
     violationsList.append(level3);
+    //generateViolationsHeatmap(value);
   });
   findTotalTime(userID).then(function (value) {
     const timeList = document.getElementById("timeList");
@@ -454,7 +456,8 @@ function createViolationsBar(violations){
   
   const violationsRectangle = document.createElement("div");
   violationsRectangle.style.display="flex";
-  violationsRectangle.style.width="95%";
+  violationsRectangle.style.width="100%";
+  violationsRectangle.style.justifyContent="space-between";
   violationsRectangle.id = "violationsRectangle";
   violationsRectangle.innerHTML = "";
 
@@ -483,22 +486,40 @@ function createViolationsBar(violations){
     }))
     .sort((a, b) => a.percentage - b.percentage);
 
-  for (const [violationName, count] of Object.entries(violations)) {
-    const eventDiv = document.createElement("div");
-    eventDiv.classList.add("eventColor");
-    eventDiv.style.height = "20px";
-    eventDiv.style.width = `${
-      (count / Object.values(violations).reduce((acc, count) => acc + count, 0)) *
-      100
-    }%`;
-    if(violationName.includes("1"))
-      eventDiv.style.backgroundColor = "#ffeda0";
-    if(violationName.includes("2"))
-      eventDiv.style.backgroundColor = "#feb24c";
-    if(violationName.includes("3"))
-      eventDiv.style.backgroundColor = "#f03b20";
-    violationsRectangle.appendChild(eventDiv);
+  // Set a minimum width for the bar
+  const minWidth = 10;
+
+  // Create and append bars based on violation types
+  let wrapperDiv = document.createElement("div");
+  wrapperDiv.style.width = "80%";
+  wrapperDiv.style.display = "flex";
+  wrapperDiv.style.marginTop = "5px";
+
+  for (const { violationName, percentage } of sortedPercentages) {
+    // Check if the violation count is greater than 0
+    if (violations[violationName] > 0) {
+      const eventDiv = document.createElement("div");
+      eventDiv.classList.add("eventColor");
+      eventDiv.style.height = "20px";
+
+      // Calculate the width of the bar based on percentage
+      const barWidth = Math.max(minWidth, (percentage / 100) * (totalViolations / 10));
+      eventDiv.style.width = `${barWidth}%`;
+
+      // Set different background colors based on violation level
+      if (violationName.includes("1"))
+        eventDiv.style.backgroundColor = "#ffeda0";
+      else if (violationName.includes("2"))
+        eventDiv.style.backgroundColor = "#feb24c";
+      else if (violationName.includes("3"))
+        eventDiv.style.backgroundColor = "#f03b20";
+
+      wrapperDiv.appendChild(eventDiv);
+    }
   }
+
+
+  violationsRectangle.appendChild(wrapperDiv);
   return violationsRectangle;
 }
 function createEventsBar(events) {
@@ -537,6 +558,48 @@ function createEventsBar(events) {
   return eventRectangle;
 }
 
+function generateViolationsHeatmap(violations){
+  const violationsRectangle = document.getElementById("violationsHeatmap");
+  violationsRectangle.style.display="flex";
+  violationsRectangle.style.width="58%";
+  violationsRectangle.innerHTML = "";
+  
+  // Calculate the percentage of each event type
+  const totalViolations = Object.values(violations).reduce(
+    (acc, count) => acc + count,
+    0
+  );
+
+  const percentages = {};
+  for (const [violationName, count] of Object.entries(violations)) {
+    percentages[violationName] = (count / totalViolations) * 100;
+  }
+
+  const sortedPercentages = Object.entries(violations)
+    .map(([violationName, count]) => ({
+      violationName,
+      percentage: (count / totalViolations) * 100,
+    }))
+    .sort((a, b) => a.percentage - b.percentage);
+
+  for (const [violationName, count] of Object.entries(violations)) {
+    const eventDiv = document.createElement("div");
+    eventDiv.classList.add("eventColor");
+    eventDiv.style.height = "70px";
+    eventDiv.style.width = `${
+      (count / Object.values(violations).reduce((acc, count) => acc + count, 0)) *
+      100
+    }%`;
+    if(violationName.includes("1"))
+      eventDiv.style.backgroundColor = "#ffeda0";
+    if(violationName.includes("2"))
+      eventDiv.style.backgroundColor = "#feb24c";
+    if(violationName.includes("3"))
+      eventDiv.style.backgroundColor = "#f03b20";
+    violationsRectangle.appendChild(eventDiv);
+  }
+  return violationsRectangle;
+}
 function generateHeatmap(userID) {
   var mainDiv = document.getElementById("heatmap");
   mainDiv.innerHTML = "";
@@ -623,6 +686,8 @@ const eventTypesArray = [
 ];
 function colorLegend() {
   const colorLegend = document.getElementById("colorLegend");
+  const eventColumn = document.getElementById("eventColumn");
+  const violationsColumn = document.getElementById("violationsColumn");
 
   eventTypesArray.forEach((element) => {
     let colorElementDiv = document.createElement("div");
@@ -640,8 +705,32 @@ function colorLegend() {
     colorElementDiv.appendChild(colorElementImg);
     colorElementDiv.appendChild(colorElementText);
 
-    colorLegend.appendChild(colorElementDiv);
+    eventColumn.appendChild(colorElementDiv);
   });
+
+  const violations =["Level 1","Level 2","Level 3"];
+  violations.forEach((element) => {
+    let colorElementDiv = document.createElement("div");
+    colorElementDiv.classList.add("legendElementDiv");
+
+    let colorElementImg = document.createElement("div");
+    colorElementImg.classList.add("colorDiv");
+    if (element.includes("1"))
+      colorElementImg.style.backgroundColor = "#ffeda0";
+    else if (element.includes("2"))
+      colorElementImg.style.backgroundColor = "#feb24c";
+    else if (element.includes("3"))
+      colorElementImg.style.backgroundColor = "#f03b20";
+
+    let colorElementText = document.createElement("p");
+    colorElementText.textContent = element;
+
+    colorElementDiv.appendChild(colorElementImg);
+    colorElementDiv.appendChild(colorElementText);
+
+    violationsColumn.appendChild(colorElementDiv);
+  });
+
 }
 
 function toggleLegend() {
