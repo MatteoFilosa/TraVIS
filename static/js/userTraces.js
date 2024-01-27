@@ -284,9 +284,15 @@ function populateTable(data) {
       console.log(selectedTraces.size);
       if (selectedTraces.size != 0) {
         document.getElementById("selectTraceBtn").style.display = "block";
+        if(selectedTraces.size >1){
+          document.getElementById(
+            "selectTraceBtn"
+          ).innerHTML = `Replay ${selectedTraces.size} traces`;
+        }else
         document.getElementById(
           "selectTraceBtn"
-        ).innerHTML = `Replay ${selectedTraces.size} traces`;
+        ).innerHTML = `Replay ${selectedTraces.size} trace`;
+        
       } else {
         document.getElementById("selectTraceBtn").style.opacity = 0;
       }
