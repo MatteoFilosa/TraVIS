@@ -390,11 +390,13 @@ function highlightStatechart(interaction_types){
 function graphLayout(svg) {
     //labelsCount = 0;
     var textElements = svg.querySelectorAll("g.node text");
-    var edgesCount = svg.querySelectorAll("g.edge").length;
+    var edgesCount = svg.querySelectorAll("g.edge").length/2; //Divided 2 because the svg computes 2 edges: state ---(edge)--> label --(edge)--->. But the real edge is only 1.
     var statesCount = svg.querySelectorAll("ellipse").length;
     
     document.getElementById("edges").innerHTML = edgesCount;
     document.getElementById("states").innerHTML = statesCount;
+
+ 
     //var tooltip = document.getElementById("tooltip");
 
     /* function adjustTooltipPosition() {
@@ -408,6 +410,7 @@ function graphLayout(svg) {
     }
  */
     textElements.forEach(function (textElement) {
+        
         var node = textElement.parentElement;
         //var xPath = "";
         //console.log(node)
@@ -499,9 +502,81 @@ function graphLayout(svg) {
         }
     });
 
-  
-    
+    //GRAPH INFO
+
+    // Select all title elements within the SVG
+    var titles = svg.querySelectorAll("title");
+
+    // Create an object to keep track of the edge count for each node
+    var nodeEdgesCount = {};
+
+    // Iterate through each title element
+    titles.forEach(function (title) {
+        var titleText = title.innerHTML;
+
+        // Check if the title contains the format "[number]->E[number]"
+        if (titleText.includes("-&gt;E")) {
+            // Split the title text into parts based on the "->E" substring
+            var parts = titleText.split("-&gt;E");
+
+            // Extract the node number from the first part
+            var nodeNumber = parseInt(parts[0]);
+
+            // Add the node to the object or increment the edge count if the node already exists
+            nodeEdgesCount[nodeNumber] = (nodeEdgesCount[nodeNumber] || 0) + 1;
+        }
+    });
+
+    // Calculate the degree of each node and sum up all degrees
+    var totalDegrees = 0;
+    var totalNodes = 0;
+    var maxDegree = -1; // Initialize to a value lower than any possible degree
+    var minDegree = Infinity; // Initialize to a value higher than any possible degree
+    var nodeWithMaxDegree, nodeWithMinDegree;
+
+    for (var nodeNumber in nodeEdgesCount) {
+        var degree = nodeEdgesCount[nodeNumber];
+
+        // Print the number of edges for each node
+        console.log("Node " + nodeNumber + ": " + degree + " edges");
+
+        // Update max and min degrees along with corresponding nodes
+        if (degree > maxDegree) {
+            maxDegree = degree;
+            nodeWithMaxDegree = nodeNumber;
+        }
+
+        if (degree < minDegree) {
+            minDegree = degree;
+            nodeWithMinDegree = nodeNumber;
+        }
+
+        totalDegrees += degree;
+        totalNodes++;
+    }
+
+    // Calculate the average degree
+    var averageDegree = totalDegrees / totalNodes;
+
+    // Print the max and min degrees along with corresponding nodes
+    console.log("Max Degree: " + maxDegree + " (Node " + nodeWithMaxDegree + ")");
+    console.log("Min Degree: " + minDegree + " (Node " + nodeWithMinDegree + ")");
+
+    // Print the average degree
+    console.log("Average Degree: " + averageDegree);
+
+
+
+
+ 
+
 }
+
+    
+
+
+
+
 const eventTypes=["mouseover","click","brush","mousemove","mousedown","wheel","mouseout","mouseup","dblclick","facsimile_back"];
 
 // Function to get color based on event name
