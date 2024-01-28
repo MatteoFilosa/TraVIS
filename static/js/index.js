@@ -356,6 +356,37 @@ function adjustIndicator(scale, currentX, currentY, event) {
 
 //#region Statechart
 
+//user story 4!!!!!!!
+function highlightStatechart(interaction_types){
+
+    var interaction = ""
+    var nodes = d3.select("#originalSVG").selectAll(".node")
+    var polygons = nodes.selectAll("polygon")
+    var texts = nodes.selectAll("text")
+    polygons.style("fill", "gray");
+
+    for(let i = 0; i < interaction_types.length; i++){
+
+        interaction = interaction_types[i]
+
+        //Changes nodes' color!!!
+        polygons
+            .filter(function () {
+                return d3.select(this.parentNode).select("text").text().includes(interaction); //EX: "mouseout"
+            })
+            .style("fill", "yellow");
+
+        //Changes texts' color!!
+        texts
+            .filter(function () {
+                return d3.select(this).text().includes(interaction);
+            })
+            .style("fill", "black");
+
+        }
+
+}
+
 function graphLayout(svg) {
     //labelsCount = 0;
     var textElements = svg.querySelectorAll("g.node text");
