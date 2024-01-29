@@ -271,7 +271,20 @@ function setupMinimapClickHandler(originalSVG) {
     resetButton.style.right = "5px";
     resetButton.addEventListener("click", function () {
 
-        statechart.selectAll("g").attr("transform", "translate(0, 0) scale(1)");
+        var zoom = d3.zoom()
+            .scaleExtent([1, 8])
+            .on('zoom', function (event) {
+                statechart
+                    .selectAll("g")
+                    .attr('transform', event.transform);
+                console.log(event)
+                adjustIndicator(event.transform.k, event.transform.x, event.transform.y, event)
+            });
+        
+
+        statechart.transition()
+            .duration(500)  // Durata dell'animazione di reset, se desiderato
+            .call(zoom.transform, d3.zoomIdentity);
 
 
         indicator.style.width = minimapWidth + "px";
@@ -338,7 +351,10 @@ function adjustIndicator(scale, currentX, currentY, event) {
     newTop = Math.min(Math.max(newTop, 0), minimapContainer.clientHeight - indicator.clientHeight);
 
     //Needed otherwise the indicator goes in the opposite direction in the Y-axis
-    if (event.sourceEvent.type != "wheel") newTop = (minimapContainer.clientHeight - indicator.clientHeight) - newTop
+    if (event.sourceEvent != null){
+        if (event.sourceEvent.type != "wheel") newTop = (minimapContainer.clientHeight - indicator.clientHeight) - newTop
+    }
+    
   
     indicator.style.left = newLeft + "px";
     indicator.style.top = newTop + "px"; 
