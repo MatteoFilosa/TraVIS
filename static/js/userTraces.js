@@ -528,7 +528,7 @@ async function findViolations(userID) {
     if (extractedNumber === userID) {
       const userTrace = JSON.parse(element.user_trace);
       // Iterate through the JSON data
-
+      
       for (const key in userTrace) {
         var levelname = "level" + key;
         //levelCount[levelname]=userTrace[key].length;
@@ -725,6 +725,12 @@ function generateHeatmap(userID) {
         eventDiv.style.left = (i % columns) * (100 / columns) + "%";
         eventDiv.style.top = Math.floor(i / columns) * (100 / rows) + "%";
 
+//         if(checkIfThereisViolation(userID,obj.xpath)){
+// console.log("Found violation on: "+obj.xpath+obj.event);
+//         }
+        // var violationCircle = document.createElement("div");
+        // violationCircle.className="event-Violation";
+
         // Append the event div to the main div
         mainDiv.appendChild(eventDiv);
         cnt++;
@@ -735,6 +741,31 @@ function generateHeatmap(userID) {
       mainDiv.style.setProperty("--columns", columns);
     }
   });
+}
+
+function checkIfThereisViolation(userID,xpath){
+  for (const element of violationsForAllTraces) {
+    let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
+    // Extract the captured number from the file name
+    let extractedNumber = match ? match[1] : null;
+    //console.log(extractedNumber,number);
+    if (extractedNumber === userID) {
+      const userTrace = JSON.parse(element.user_trace);
+      console.log(userTrace);
+      for (var key in userTrace) {
+        if (userTrace.hasOwnProperty(key) && Array.isArray(userTrace[key])) {
+          // Check if the buttonName is present in the array
+          
+          if (userTrace[key].some(element => element.includes(xpath))) {
+            return true;
+          }
+        }
+      }
+      return false;
+    }
+  }
+
+  
 }
 // Function to get color based on event name
 function getColor(eventName) {
