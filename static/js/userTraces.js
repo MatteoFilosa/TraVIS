@@ -161,7 +161,7 @@ function populateTable(data) {
     checkboxCell.style.paddingLeft = "1%";
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.id = element.name;
+    checkbox.id = extractedNumber;
     checkboxCell.appendChild(checkbox);
     row.appendChild(checkboxCell);
 
@@ -245,7 +245,10 @@ function populateTable(data) {
             document
               .getElementById(`extrainfoDiv`)
               .setAttribute("data-activatedBy", numbersOnlyID);
-            showExtraInformation(numbersOnlyID);
+              clearExtraInformation().then(function (value) {
+                showExtraInformation(numbersOnlyID);
+              });
+            
           } else {
             iconImg.src = "images/moreInfo.png";
             document
@@ -270,18 +273,62 @@ function populateTable(data) {
 
     // Add event listener to each checkbox for changing row color
     checkbox.addEventListener("change", function () {
+      var numbersOnlyID = checkbox.id;
       if (checkbox.checked) {
         row.classList.add("table-selected");
         selectedTraces.add(checkbox.id);
         console.log(selectedTraces);
 
         document.getElementById("selectTraceBtn").style.opacity = 1;
-      } else {
-        row.classList.remove("table-selected");
-        selectedTraces.delete(checkbox.id);
-        console.log(selectedTraces);
+
+      //   if (
+      //     document
+      //       .getElementById(`extrainfoDiv`)
+      //       .getAttribute("data-visible") === "false"
+      //   ) {
+          
+      //     document
+      //       .getElementById(`extrainfoDiv`)
+      //       .setAttribute("data-visible", "true");
+      //     document
+      //       .getElementById(`extrainfoDiv`)
+      //       .setAttribute("data-activatedBy", numbersOnlyID);
+      //     showExtraInformation(numbersOnlyID);
+      //   } else {
+      //     const wasActivatedBy = document
+      //       .getElementById(`extrainfoDiv`)
+      //       .getAttribute("data-activatedBy");
+      //     //console.log(`Was activatedBy:${wasActivatedBy}, pressed by:${numbersOnlyID}`);
+      //     if (wasActivatedBy != 0 && wasActivatedBy != numbersOnlyID) {
+            
+      //       document
+      //         .getElementById(`extrainfoDiv`)
+      //         .setAttribute("data-activatedBy", numbersOnlyID);
+      //       showExtraInformation(numbersOnlyID);
+      //     } else {
+           
+      //       document
+      //         .getElementById(`button${numbersOnlyID}`)
+      //         .classList.remove("expandButtonPressed");
+      //       document
+      //         .getElementById(`extrainfoDiv`)
+      //         .setAttribute("data-visible", "false");
+      //       document
+      //         .getElementById(`extrainfoDiv`)
+      //         .setAttribute("data-activatedBy", 0);
+      //       clearExtraInformation();
+      //     }
+      //   }
+
+      // } else {
+      //   row.classList.remove("table-selected");
+      //   selectedTraces.delete(checkbox.id);
+      //   clearExtraInformation();
+      //   console.log(selectedTraces);
       }
-      console.log(selectedTraces.size);
+      
+
+
       if (selectedTraces.size != 0) {
         document.getElementById("selectTraceBtn").style.display = "block";
         if(selectedTraces.size >1){
@@ -303,16 +350,24 @@ function populateTable(data) {
 //#endregion
 
 //#region Select Trace
-
+var selectedTraceID;
 function showExtraInformation(userID) {
+  selectedTraceID=userID;
   document.getElementById("placeholderText").style.display = "none";
+  document.getElementById("previewTrace").style.display="block";
+
+  //MATEO - check this out
+  //maybe we have to open the index.html page differently.
+  document.getElementById("previewTrace").href=`index.html/?${selectedTraceID}`;
+  document.getElementById("previewTrace").id+=selectedTraceID;
+  
   document.getElementById("extrainfoContent").style.opacity = 1;
   document.getElementById(
     "traceInfoTitle"
-  ).innerHTML = `Trace Information: User ${userID}`;
+  ).innerHTML = `Trace Information: User ${selectedTraceID}`;
 
-  generateHeatmap(userID);
-  eventTypes(userID).then(function (value) {
+  generateHeatmap(selectedTraceID);
+  eventTypes(selectedTraceID).then(function (value) {
     const eventsList = document.getElementById("eventsList");
     eventsList.innerHTML = "";
     for (const key in value) {
@@ -327,7 +382,7 @@ function showExtraInformation(userID) {
     }
   });
 
-  findViolations(userID).then(function (value) {
+  findViolations(selectedTraceID).then(function (value) {
     const violationsList = document.getElementById("violationsList");
     violationsList.innerHTML = "";
 
@@ -371,7 +426,7 @@ function showExtraInformation(userID) {
     violationsList.append(level4);
     //generateViolationsHeatmap(value);
   });
-  findTotalTime(userID).then(function (value) {
+  findTotalTime(selectedTraceID).then(function (value) {
     const timeList = document.getElementById("timeList");
     timeList.innerHTML = "";
     var totalTime = document.createElement("li");
@@ -382,11 +437,15 @@ function showExtraInformation(userID) {
     timeList.append(totalTime);
     timeList.append(averageTime);
   });
+
 }
-function clearExtraInformation() {
+async function clearExtraInformation() {
+  document.getElementById(`previewTrace${selectedTraceID}`).style.display="none";
+  document.getElementById(`previewTrace${selectedTraceID}`).id="previewTrace";
   document.getElementById("placeholderText").style.display = "block";
   document.getElementById("extrainfoContent").style.opacity = 0;
   document.getElementById("traceInfoTitle").innerHTML = "Trace Information   ";
+  selectedTraceID=null;
 }
 
 //#endregion
@@ -786,4 +845,9 @@ function toggleLegend() {
     buttonImg.style.transform = "rotate(180deg)";
     colorLegend.style.height = "31px";
   }
+}
+
+
+function previewTrace(){
+
 }

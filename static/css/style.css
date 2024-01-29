@@ -691,6 +691,19 @@ table.dataTable tbody td {
 .violationsDiv{
     display: inline;
 }
+.newPageBtn{
+    display: none;
+    border-radius: 4px;
+    border: 1px solid #52b0c3;
+    height: 35px;
+    width: 35px;
+    background: transparent;
+    padding: 2px;
+}
+.newPageBtn img{
+    width: 25px;
+    height: 25px;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
