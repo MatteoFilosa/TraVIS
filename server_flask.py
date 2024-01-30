@@ -80,6 +80,10 @@ def visualizeStatechart():
 def home():
     return render_template('index.html')
 
+@app.route("/home")
+def index():
+    return render_template('index.html')
+
 @app.route("/userTraces")
 def userTraces():
     return render_template('userTraces.html')

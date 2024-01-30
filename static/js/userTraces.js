@@ -352,13 +352,14 @@ function populateTable(data) {
 //#region Select Trace
 var selectedTraceID;
 function showExtraInformation(userID) {
+  console.log(userID)
   selectedTraceID=userID;
   document.getElementById("placeholderText").style.display = "none";
   document.getElementById("previewTrace").style.display="block";
 
-  //MATEO - check this out
+  //MATTEO - check this out
   //maybe we have to open the index.html page differently.
-  document.getElementById("previewTrace").href=`index.html/?${selectedTraceID}`;
+  document.getElementById("previewTrace").href="home";
   document.getElementById("previewTrace").id+=selectedTraceID;
   
   document.getElementById("extrainfoContent").style.opacity = 1;
@@ -372,6 +373,7 @@ function showExtraInformation(userID) {
     eventsList.innerHTML = "";
     for (const key in value) {
       if (value[key] > 0) {
+        console.log(key, value)
         var eventElement = document.createElement("li");
         eventElement.textContent = `${key}: ${value[key]}`;
         if (key == "dblclick")
@@ -478,7 +480,7 @@ async function eventTypes(userID) {
 
     if (extractedNumber === userID) {
       let traceData = JSON.parse(element.user_trace);
-
+      
       traceData.forEach(function (obj) {
         Object.values(obj).forEach(function (value) {
           searchWords.forEach(function (searchWord) {
@@ -697,6 +699,7 @@ function generateViolationsHeatmap(violations){
   }
   return violationsRectangle;
 }
+
 function generateHeatmap(userID) {
   var mainDiv = document.getElementById("heatmap");
   mainDiv.innerHTML = "";
@@ -708,6 +711,7 @@ function generateHeatmap(userID) {
 
     if (extractedNumber === userID) {
       let traceData = JSON.parse(element.user_trace);
+      
       let cnt = 0;
 
       // Calculate the number of rows based on the length of the traceData array
@@ -740,7 +744,11 @@ function generateHeatmap(userID) {
       mainDiv.style.setProperty("--rows", rows);
       mainDiv.style.setProperty("--columns", columns);
     }
+
+    
   });
+
+  
 }
 
 function checkIfThereisViolation(userID,xpath){
