@@ -436,7 +436,7 @@ function highlightStatechart(interaction_types) {
 
         // Colora di grigio se non ci sono interazioni
         if (interaction === 0) {
-            return "gray";
+            return "#7373733b";
         }
 
         // Usa la scala di colore Viridis
@@ -622,10 +622,12 @@ function graphLayout(svg) {
     var averageDegree = totalDegrees / totalNodes;
 
     // Print the max and min degrees along with corresponding nodes
+    document.getElementById("maxDeg").innerHTML=`${maxDegree} in Node ${nodeWithMaxDegree}`;
     console.log("Max Degree: " + maxDegree + " (Node " + nodeWithMaxDegree + ")");
     console.log("Min Degree: " + minDegree + " (Node " + nodeWithMinDegree + ")");
 
     // Print the average degree
+    document.getElementById("avgDeg").innerHTML=`${averageDegree.toFixed(2)}`;
     console.log("Average Degree: " + averageDegree);
 
 
