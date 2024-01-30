@@ -4,6 +4,8 @@ var selectedTraces = new Set();
 var loadedTraces;
 var violationsForAllTraces;
 var timeForAllTraces;
+var selectedTraceID;
+var selectedTrace_RawValue;
 //#endregion
 
 window.onload = function () {
@@ -350,15 +352,25 @@ function populateTable(data) {
 //#endregion
 
 //#region Select Trace
-var selectedTraceID;
+
 function showExtraInformation(userID) {
   console.log(userID)
   selectedTraceID=userID;
+
+  loadedTraces.forEach((element, index) => {
+    let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
+    // Extract the captured number from the file name
+    let extractedNumber = match ? match[1] : null;
+
+    if (extractedNumber === userID) {
+      selectedTrace_RawValue = JSON.parse(element.user_trace);
+      console.log(selectedTrace_RawValue);
+    }
+  });
+
   document.getElementById("placeholderText").style.display = "none";
   document.getElementById("previewTrace").style.display="block";
 
-  //MATTEO - check this out
-  //maybe we have to open the index.html page differently.
   document.getElementById("previewTrace").href="home";
   document.getElementById("previewTrace").id+=selectedTraceID;
   
