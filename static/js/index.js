@@ -12,6 +12,7 @@ var lastStatechartUrl = "";
 var minimapHidden = false;
 var statesCount = 0, edgesCount = 0, labelsCount = 0;
 var json, url;
+var currentZoom = 1;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0, currentX = 0, currentY = 0, translateX = 0, translateY = 0, minimapRatio = 0, scale = 1, svgWidth = 0, svgHeight = 0;
 
 // Array of colors is given  
@@ -167,10 +168,13 @@ function indicatorDragged() {
     translateY -= deltaY * ((svgHeight / minimapHeight) / 2);
     console.log(translateX, translateY, deltaX, deltaY)
 
-    
+
+    //If...return!
+
     statechart.attr("transform", "translate(" + translateX + "," + translateY + ")");
 
-    
+
+
 
     
 
@@ -188,6 +192,7 @@ function indicatorDragEnded() {
     // Update the currentX and currentY values after dragging ends
     //currentX = translateX;
     //currentY = translateY;
+
 
     // Aggiorna anche la differenza in pixel
     console.log("Differenza X:", deltaX, "Differenza Y:", deltaY);
@@ -271,6 +276,9 @@ function setupMinimapClickHandler(originalSVG) {
     resetButton.style.right = "5px";
     resetButton.addEventListener("click", function () {
 
+
+    statechart.attr("transform", "translate(0 ," + originalHeight + ")");
+
         var zoom = d3.zoom()
             .scaleExtent([1, 8])
             .on('zoom', function (event) {
@@ -286,6 +294,7 @@ function setupMinimapClickHandler(originalSVG) {
             .duration(500)  // Durata dell'animazione di reset, se desiderato
             .call(zoom.transform, d3.zoomIdentity);
 
+        currentZoom = 1;
 
         indicator.style.width = minimapWidth + "px";
         indicator.style.height = (minimapRatio * 80) + "%";
@@ -711,6 +720,7 @@ function isNameInUrl(jsonData, systemUrl) {
                     .selectAll("g")
                     .attr('transform', event.transform);
                     console.log(event)
+                    currentZoom = event.transform.k
                     adjustIndicator(event.transform.k, event.transform.x, event.transform.y, event)
                 });
 
