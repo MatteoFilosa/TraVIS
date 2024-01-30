@@ -372,6 +372,7 @@ function showExtraInformation(userID) {
   document.getElementById("previewTrace").style.display="block";
 
   document.getElementById("previewTrace").href="home";
+  localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue) )
   document.getElementById("previewTrace").id+=selectedTraceID;
   
   document.getElementById("extrainfoContent").style.opacity = 1;

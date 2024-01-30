@@ -42,6 +42,14 @@ window.onload = function () {
     });
     colorLegend();
     graphviz();
+
+    // If the user wants to see the state chart highlighted from the user traces page
+    if(JSON.parse(localStorage.getItem("selectedTrace")) != null){
+        systemURL = "https://vega.github.io/falcon/flights/"
+        LoadSystem();
+        
+    }
+    
 };
 
 
@@ -382,35 +390,65 @@ function adjustIndicator(scale, currentX, currentY, event) {
 //#region Statechart
 
 //user story 4!!!!!!!
-function highlightStatechart(interaction_types){
+function highlightStatechart(interaction_types) {
+    console.log("ok");
+    document.getElementById("colorLegend").style.display = 'none';
 
-    var interaction = ""
-    var nodes = d3.select("#originalSVG").selectAll(".node")
-    var polygons = nodes.selectAll("polygon")
-    var texts = nodes.selectAll("text")
-    polygons.style("fill", "gray");
+    var nodes = d3.select("#originalSVG").selectAll(".node");
+    var polygons = nodes.selectAll("polygon");
+    var texts = nodes.selectAll("text");
 
-    for(let i = 0; i < interaction_types.length; i++){
+    var interactionFrequency = {}; // Contatore di frequenza delle interazioni
 
-        interaction = interaction_types[i]
+    for (let i = 0; i < interaction_types.length; i++) {
+        var event = "'" + interaction_types[i].event + "'";
+        var css = interaction_types[i].css;
 
-        //Changes nodes' color!!!
-        polygons
-            .filter(function () {
-                return d3.select(this.parentNode).select("text").text().includes(interaction); //EX: "mouseout"
-            })
-            .style("fill", "yellow");
+        var interaction = event + " on " + "'" + css + "'";
+        console.log(interaction);
 
-        //Changes texts' color!!
-        texts
-            .filter(function () {
-                return d3.select(this).text().includes(interaction);
-            })
-            .style("fill", "black");
+        if(interaction_types[i].event === "brush"){
+
+            var mousedownString = "'mousedown' on " + "'" + css + "'";
+            interactionFrequency[mousedownString] = (interactionFrequency[mousedownString] || 0) + 1;
+
+            var mousemoveString = "'mousemove' on " + "'" + css + "'"
+            interactionFrequency[mousemoveString] = (interactionFrequency[mousemoveString] || 0) + 1;
+
+            var mouseupString = "'mouseup' on " + "'" + css + "'"
+            interactionFrequency[mouseupString] = (interactionFrequency[mouseupString] || 0) + 1;
 
         }
+        
+        else{
+            interactionFrequency[interaction] = (interactionFrequency[interaction] || 0) + 1; // Aggiorna il contatore di frequenza
+        }
+        
+    }
 
+    // Crea la scala di colore Viridis in base alla frequenza massima
+    var maxFrequency = d3.max(Object.values(interactionFrequency));
+    var colorScale = d3.scaleSequential(d3.interpolateViridis).domain([0, maxFrequency]);
+
+    polygons.style("fill", function () {
+        var nodeText = d3.select(this.parentNode).select("text").text();
+        var interaction = interactionFrequency[nodeText] || 0;
+
+        // Colora di grigio se non ci sono interazioni
+        if (interaction === 0) {
+            return "gray";
+        }
+
+        // Usa la scala di colore Viridis
+        return colorScale(interaction);
+    });
+
+    texts.style("fill", "white"); // Imposta il colore del testo a bianco
+
+    localStorage.removeItem("selectedTrace");
 }
+
+
 
 function graphLayout(svg) {
     //labelsCount = 0;
@@ -685,10 +723,13 @@ function isNameInUrl(jsonData, systemUrl) {
         var originalSVG = doc.documentElement;
         //console.log(originalSVG)
         lastStatechartUrl = systemURL;
+        
 
         if (originalSVG) {
             graphLayout(originalSVG);
             statechartSVG.appendChild(originalSVG);
+
+            
             // Generate and set up the minimap
             generateMinimap(originalSVG);
             //Set the id of the originalSVG
@@ -727,11 +768,28 @@ function isNameInUrl(jsonData, systemUrl) {
             statechart.call(zoom)
 
 
+            //To see if the user wants the state chart highlighted!
+            if (JSON.parse(localStorage.getItem("selectedTrace")) != null) {
+
+
+
+                highlightStatechart(JSON.parse(localStorage.getItem("selectedTrace")));
+
+            }
+
+            localStorage.removeItem("selectedTrace")
+
+
             return true;
         } else {
             console.error("Invalid original SVG");
             return false;
         }
+
+
+        
+
+
     }else{
         if(!document.getElementById("notFoundText")){
             const notFoundtext = document.createElement("div");
@@ -828,10 +886,16 @@ function LoadSystem() {
     loadingIcon.style.display = "block";
     statechartSVG.style.display = "none";
 
+    if(JSON.parse(localStorage.getItem("selectedTrace")) == null){
 
-    systemURL = document.getElementById("insertedURL").value;
+        systemURL = document.getElementById("insertedURL").value;
+
+        
+        
+    }
 
     websiteContainer.src = systemURL;
+
     CheckIfStatechartExists();
 }
 
