@@ -76,6 +76,28 @@ def visualizeStatechart():
     # Return the raw SVG content as a response
     return jsonify({'svgContent': svg_content})
 
+
+@app.route("/changeLayout/<vis_name>/<layoutName>",methods=['POST'])
+def changeLayout():
+   
+    #Check vis name, take the .gv of that visualization, add a "header" with the chosen layout (for now just 2, the "normal" layout and the "circo" or "neato"), give the svg back
+    
+
+    # Run the dot command to generate the SVG file
+    dot_command = "dot -Tsvg -o output.svg input_graph.gv"
+    subprocess.run(dot_command, shell=True)
+
+    # Read the generated SVG content
+    with open('output.svg', 'r') as svg_file:
+        svg_content = svg_file.read()
+
+    # Optionally, you can remove the generated SVG file if needed
+    # Uncomment the following line if you want to delete the file
+    os.remove('output.svg')
+
+    # Return the raw SVG content as a response
+    return jsonify({'svgContent': svg_content})
+
 @app.route("/")
 def home():
     return render_template('index.html')

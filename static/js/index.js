@@ -394,11 +394,12 @@ function highlightStatechart(interaction_types) {
     console.log("ok");
     document.getElementById("colorLegend").style.display = 'none';
 
+    // Select nodes, polygons, and texts
     var nodes = d3.select("#originalSVG").selectAll(".node");
     var polygons = nodes.selectAll("polygon");
     var texts = nodes.selectAll("text");
 
-    var interactionFrequency = {}; // Contatore di frequenza delle interazioni
+    var interactionFrequency = {}; // Object to store interaction frequency
 
     for (let i = 0; i < interaction_types.length; i++) {
         var event = "'" + interaction_types[i].event + "'";
@@ -407,8 +408,8 @@ function highlightStatechart(interaction_types) {
         var interaction = event + " on " + "'" + css + "'";
         console.log(interaction);
 
-        if(interaction_types[i].event === "brush"){
-
+        // The brush interaction decomposes into three different interactions
+        if (interaction_types[i].event === "brush") {
             var mousedownString = "'mousedown' on " + "'" + css + "'";
             interactionFrequency[mousedownString] = (interactionFrequency[mousedownString] || 0) + 1;
 
@@ -417,35 +418,72 @@ function highlightStatechart(interaction_types) {
 
             var mouseupString = "'mouseup' on " + "'" + css + "'"
             interactionFrequency[mouseupString] = (interactionFrequency[mouseupString] || 0) + 1;
-
+        } else {
+            interactionFrequency[interaction] = (interactionFrequency[interaction] || 0) + 1; // Frequency 
         }
-        
-        else{
-            interactionFrequency[interaction] = (interactionFrequency[interaction] || 0) + 1; // Aggiorna il contatore di frequenza
-        }
-        
     }
 
-    // Crea la scala di colore Viridis in base alla frequenza massima
+    // Viridis frequency scale
     var maxFrequency = d3.max(Object.values(interactionFrequency));
     var colorScale = d3.scaleSequential(d3.interpolateViridis).domain([0, maxFrequency]);
 
+    // Update polygon fill colors based on interaction frequency
     polygons.style("fill", function () {
         var nodeText = d3.select(this.parentNode).select("text").text();
         var interaction = interactionFrequency[nodeText] || 0;
 
-        // Colora di grigio se non ci sono interazioni
+        // Color gray if there are no interactions
         if (interaction === 0) {
-            return "#7373733b";
+            return "#7373733b"; // or "grey"
         }
 
-        // Usa la scala di colore Viridis
+        // Use the Viridis color scale
         return colorScale(interaction);
     });
 
-    texts.style("fill", "white"); // Imposta il colore del testo a bianco
+    texts.style("fill", "white"); // Set text color to white
+
+    // Create and update traceInfo div using plain HTML
+    var traceInfoDiv = document.getElementById("traceInfo");
+    if (!traceInfoDiv) {
+        traceInfoDiv = document.createElement("div");
+        traceInfoDiv.id = "traceInfo";
+        traceInfoDiv.style.position = "absolute";
+        traceInfoDiv.style.top = "150px";
+        traceInfoDiv.style.right = "10px";
+        traceInfoDiv.style.background = "white";
+        traceInfoDiv.style.width = "180px";
+        traceInfoDiv.style.padding = "10px";
+        traceInfoDiv.style.display = "flex";
+        traceInfoDiv.style.flexDirection = "column";
+        traceInfoDiv.style.borderTop = "2px solid #554e8d";
+        traceInfoDiv.style.borderLeft = "2px solid #554e8d";
+        traceInfoDiv.style.borderRight = "2px solid #554e8d";
+        traceInfoDiv.style.borderBottom = "2px solid #554e8d";
+
+        // Add an image to the traceInfo div
+        var img = document.createElement("img");
+        img.src = "images/viridis.png";
+        img.alt = "Viridis Image";
+        img.style.maxWidth = "100%";
+        traceInfoDiv.appendChild(img);
+
+        // Add a small number representing the maximum number of interactions
+        var interactionCount = document.createElement("div");
+        interactionCount.className = "interaction-count";
+        interactionCount.style.color = "black";
+        interactionCount.textContent = "Max Interactions: " + maxFrequency;
+        traceInfoDiv.appendChild(interactionCount);
+
+        // Append the traceInfo div to the statechartContainer
+        document.getElementById("statechartContainer").appendChild(traceInfoDiv);
+    }
+
+    // Add content to the traceInfo div
+    traceInfoDiv.innerHTML += "Trace selected: " + JSON.parse(localStorage.getItem("selectedTraceID"));
 
     localStorage.removeItem("selectedTrace");
+    localStorage.removeItem("selectedTraceID");
 }
 
 
@@ -816,6 +854,28 @@ function graphviz() {
             console.log("Get graphviz");
             //visualizeStatechart();
             //console.log((statecharts[10].svg).toString());
+        });
+}
+
+
+function changeLayout(layoutName) {
+
+    var vis_name = ""
+
+    if(systemURL.includes("falcon")) vis_name = "falcon"
+    if (systemURL.includes("nemesis")) vis_name = "nemesis"
+    if (systemURL.includes("crumbs")) vis_name = "crumbs"
+    if (systemURL.includes("summit")) vis_name = "summit"
+    if (systemURL.includes("radviz")) vis_name = "radviz"
+
+    let url = `http://127.0.0.1:5000/changeLayout/${vis_name}/${layoutName}`;
+
+    fetch(url, {
+        method: 'POST', // Assicurati che la route accetti richieste POST
+    })
+        .then(response => response.json())
+        .then(json => {
+            // Append state chart
         });
 }
 
