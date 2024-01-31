@@ -81,51 +81,50 @@ def replace_string_in_file(file_path, output_path, old_string, new_string):
     with open(file_path, 'r') as file:
         file_content = file.read()
 
-    # Sostituisci la stringa
+    # Replace the string
     new_content = file_content.replace(old_string, new_string)
     print(new_content)
 
-    # Scrivi il nuovo contenuto nel file
+    # Write the new content to the file
     with open(output_path, 'w') as file:
         file.write(new_content)
 
 def generate_svg(file_path):
-    # Leggi il contenuto del file Graphviz prima della modifica
+    # Read the content of the Graphviz file before modification
     with open(file_path, 'r') as graphviz_file:
         graphviz_content = graphviz_file.read()
-        # Stampa il contenuto del file Graphviz nella console
-        #print("Graphviz content before transformation:")
-        #print(graphviz_content)
+        # Print the content of the Graphviz file in the console
+        # print("Graphviz content before transformation:")
+        # print(graphviz_content)
 
-    # Esegui il comando per generare l'SVG utilizzando Graphviz (dot)
+    # Execute the command to generate the SVG using Graphviz (dot)
     dot_command = f"dot -Tsvg -o output.svg {file_path}"
     subprocess.run(dot_command, shell=True)
 
 
 @app.route("/changeLayout/<vis_name>/<layoutName>", methods=['POST'])
 def change_layout(vis_name, layoutName):
-    # Costruisci il percorso del file basato su vis_name
+    # Build the file path based on vis_name
     file_path = os.path.join("static", "files", "statechartGV", f"{vis_name}.gv")
     output_path = os.path.join("static", "files", "statechartGVLayout", f"{vis_name}.gv")
-    # Verifica se il file esiste
+    # Check if the file exists
     if os.path.exists(file_path):
         print("okexists")
-        # Modifica il contenuto del file in base al layoutName, per esempio
+        # Modify the content of the file based on layoutName, for example
         if layoutName == "normal":
             print("oknormal")
-            # Fai qualcosa con il layout "normal"
+            # Do something with the "normal" layout
             generate_svg(file_path)
 
-            # Leggi il contenuto del file SVG
+            # Read the content of the SVG file
             with open('output.svg', 'r') as svg_file:
                 svg_content = svg_file.read()
 
-            # Restituisci il raw SVG content come risposta
-            
+            # Return the raw SVG content as a response
             return jsonify({'svgContent': svg_content})
     
         elif layoutName == "neato":
-            # Sostituisci la stringa specifica nel file
+            # Replace the specific string in the file
             old_string = 'rankdir="LR";'
             string_to_remove = "splines=ortho;"
             new_string = '''
@@ -152,20 +151,19 @@ edge [
             replace_string_in_file(file_path, output_path, string_to_remove, '')
             replace_string_in_file(file_path, output_path, old_string, new_string)
 
-        # Genera l'SVG dopo la modifica, se non esiste già
-       
+        # Generate the SVG after the modification, if it doesn't exist yet
         generate_svg(output_path)
 
-        # Leggi il contenuto del file SVG
+        # Read the content of the SVG file
         with open('output.svg', 'r') as svg_file:
             svg_content = svg_file.read()
 
-        # Restituisci il raw SVG content come risposta
-            
+        # Return the raw SVG content as a response
         return jsonify({'svgContent': svg_content})
     else:
-        # Se il file non esiste, restituisci un messaggio di errore
+        # If the file doesn't exist, return an error message
         return jsonify({'status': 'error', 'message': f"File for {vis_name} not found"})
+
 
 
 
