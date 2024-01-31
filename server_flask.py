@@ -77,26 +77,97 @@ def visualizeStatechart():
     return jsonify({'svgContent': svg_content})
 
 
-@app.route("/changeLayout/<vis_name>/<layoutName>",methods=['POST'])
-def changeLayout():
-   
-    #Check vis name, take the .gv of that visualization, add a "header" with the chosen layout (for now just 2, the "normal" layout and the "circo" or "neato"), give the svg back
-    
+def replace_string_in_file(file_path, output_path, old_string, new_string):
+    with open(file_path, 'r') as file:
+        file_content = file.read()
 
-    # Run the dot command to generate the SVG file
-    dot_command = "dot -Tsvg -o output.svg input_graph.gv"
+    # Sostituisci la stringa
+    new_content = file_content.replace(old_string, new_string)
+    print(new_content)
+
+    # Scrivi il nuovo contenuto nel file
+    with open(output_path, 'w') as file:
+        file.write(new_content)
+
+def generate_svg(file_path):
+    # Leggi il contenuto del file Graphviz prima della modifica
+    with open(file_path, 'r') as graphviz_file:
+        graphviz_content = graphviz_file.read()
+        # Stampa il contenuto del file Graphviz nella console
+        #print("Graphviz content before transformation:")
+        #print(graphviz_content)
+
+    # Esegui il comando per generare l'SVG utilizzando Graphviz (dot)
+    dot_command = f"dot -Tsvg -o output.svg {file_path}"
     subprocess.run(dot_command, shell=True)
 
-    # Read the generated SVG content
-    with open('output.svg', 'r') as svg_file:
-        svg_content = svg_file.read()
 
-    # Optionally, you can remove the generated SVG file if needed
-    # Uncomment the following line if you want to delete the file
-    os.remove('output.svg')
+@app.route("/changeLayout/<vis_name>/<layoutName>", methods=['POST'])
+def change_layout(vis_name, layoutName):
+    # Costruisci il percorso del file basato su vis_name
+    file_path = os.path.join("static", "files", "statechartGV", f"{vis_name}.gv")
+    output_path = os.path.join("static", "files", "statechartGVLayout", f"{vis_name}.gv")
+    # Verifica se il file esiste
+    if os.path.exists(file_path):
+        print("okexists")
+        # Modifica il contenuto del file in base al layoutName, per esempio
+        if layoutName == "normal":
+            print("oknormal")
+            # Fai qualcosa con il layout "normal"
+            generate_svg(file_path)
 
-    # Return the raw SVG content as a response
-    return jsonify({'svgContent': svg_content})
+            # Leggi il contenuto del file SVG
+            with open('output.svg', 'r') as svg_file:
+                svg_content = svg_file.read()
+
+            # Restituisci il raw SVG content come risposta
+            
+            return jsonify({'svgContent': svg_content})
+    
+        elif layoutName == "neato":
+            # Sostituisci la stringa specifica nel file
+            old_string = 'rankdir="LR";'
+            string_to_remove = "splines=ortho;"
+            new_string = '''
+graph [
+    layout = neato
+    labelloc = b
+    fontname = "Helvetica,Arial,sans-serif"
+    start = regular
+    normalize = 0
+    overlap = false;  // or scalexy, scale, prism, ortho, or compress
+]
+node [
+    shape = circle
+    style = filled
+    color = "#00000088"
+    fontname = "Helvetica,Arial,sans-serif"
+]
+edge [
+    len = 1
+    color = "#00000088"
+    fontname = "Helvetica,Arial,sans-serif"
+]'''
+
+            replace_string_in_file(file_path, output_path, string_to_remove, '')
+            replace_string_in_file(file_path, output_path, old_string, new_string)
+
+        # Genera l'SVG dopo la modifica, se non esiste già
+       
+        generate_svg(output_path)
+
+        # Leggi il contenuto del file SVG
+        with open('output.svg', 'r') as svg_file:
+            svg_content = svg_file.read()
+
+        # Restituisci il raw SVG content come risposta
+            
+        return jsonify({'svgContent': svg_content})
+    else:
+        # Se il file non esiste, restituisci un messaggio di errore
+        return jsonify({'status': 'error', 'message': f"File for {vis_name} not found"})
+
+
 
 @app.route("/")
 def home():

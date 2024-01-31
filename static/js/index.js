@@ -288,7 +288,7 @@ function setupMinimapClickHandler(originalSVG) {
     statechart.attr("transform", "translate(0 ," + originalHeight + ")");
 
         var zoom = d3.zoom()
-            .scaleExtent([1, 8])
+            .scaleExtent([1, 20])
             .on('zoom', function (event) {
                 statechart
                     .selectAll("g")
@@ -795,7 +795,7 @@ function isNameInUrl(jsonData, systemUrl) {
             
 
             var zoom = d3.zoom()
-                .scaleExtent([1, 8])
+                .scaleExtent([1, 20])
                 .on('zoom', function (event) {
                     statechart
                     .selectAll("g")
@@ -806,6 +806,33 @@ function isNameInUrl(jsonData, systemUrl) {
                 });
 
             statechart.call(zoom)
+
+
+            //Append change layout button
+
+            const changeLayoutButton = document.createElement("button");
+            changeLayoutButton.innerHTML = "Change Layout";
+            changeLayoutButton.className = "btn btn-info";
+            changeLayoutButton.style.position = "absolute";
+            changeLayoutButton.style.top = "12%"
+            changeLayoutButton.id = "changeLayoutButton"
+            changeLayoutButton.onclick = function () {
+                // Check if the button's innerHTML includes the string "Change"
+                if (changeLayoutButton.innerHTML.includes("Change")) {
+                    // If yes, call changeLayout with "neato"
+                    changeLayout("neato");
+                    changeLayoutButton.innerHTML = "Normal Layout"
+                    
+                } else {
+                    // If no, call changeLayout with "normal"
+                    changeLayout("normal");
+                    changeLayoutButton.innerHTML = "Change Layout"
+                }
+            };
+
+            document.getElementById("statechartContainer").appendChild(changeLayoutButton);
+
+
 
 
             //To see if the user wants the state chart highlighted!
@@ -859,25 +886,83 @@ function graphviz() {
 
 
 function changeLayout(layoutName) {
-
     var vis_name = ""
+    var changeLayoutButton = document.getElementById("changeLayoutButton")
 
-    if(systemURL.includes("falcon")) vis_name = "falcon"
+    if (systemURL.includes("falcon")) vis_name = "falcon"
     if (systemURL.includes("nemesis")) vis_name = "nemesis"
     if (systemURL.includes("crumbs")) vis_name = "crumbs"
     if (systemURL.includes("summit")) vis_name = "summit"
     if (systemURL.includes("radviz")) vis_name = "radviz"
 
+    console.log(systemURL)
+
     let url = `http://127.0.0.1:5000/changeLayout/${vis_name}/${layoutName}`;
 
     fetch(url, {
-        method: 'POST', // Assicurati che la route accetti richieste POST
+        method: 'POST',
     })
         .then(response => response.json())
         .then(json => {
-            // Append state chart
+            // Assuming the server response has an 'svgContent' property
+            const svgContent = json.svgContent;
+
+            // Create a new DOMParser
+            const parser = new DOMParser();
+
+            // Parse the SVG content string into a DOM document
+            const doc = parser.parseFromString(svgContent, 'image/svg+xml');
+
+            // Extract the root <svg> element from the document
+            const newOriginalSVG = doc.documentElement;
+
+            // Use newOriginalSVG in your existing code
+            statechartSVG.innerHTML = ""
+            statechartSVG.appendChild(document.createElement('div')).id = 'minimapContainer';
+
+            
+
+            graphLayout(newOriginalSVG);
+            statechartSVG.appendChild(newOriginalSVG);
+
+            // Generate and set up the minimap
+            generateMinimap(newOriginalSVG);
+            // Set the id of the newOriginalSVG
+            newOriginalSVG.setAttribute("id", "originalSVG")
+            // To avoid the cropping effect while zooming, give the svg more height.
+            if (originalHeight < originalWidth) newOriginalSVG.height.baseVal.valueInSpecifiedUnits = originalWidth + 1000;
+            // Configure the handler to click on the minimap passing newOriginalSVG as a parameter
+            setupMinimapClickHandler(newOriginalSVG);
+
+            //I need to do this otherwise it selects the minimap instead of the big statechart ...
+            statechart = d3.select(statechartSVG)
+                .selectAll("#graph0")
+                .filter(function () {
+                    return this.parentNode.id !== "minimapSVG";
+                });
+
+            // Initial scale values
+            scale = 1, currentX = 0, currentY = originalHeight, translateX = 0, translateY = currentY, minimapHidden = false;
+
+            var zoom = d3.zoom()
+                .scaleExtent([1, 20])
+                .on('zoom', function (event) {
+                    statechart
+                        .selectAll("g")
+                        .attr('transform', event.transform);
+                    console.log(event)
+                    currentZoom = event.transform.k
+                    adjustIndicator(event.transform.k, event.transform.x, event.transform.y, event)
+                });
+
+            statechart.call(zoom)
         });
+
+        
+
+
 }
+
 
 function visualizeStatechart(){
     var gvFile = statecharts[10].svg;
