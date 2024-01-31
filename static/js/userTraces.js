@@ -327,10 +327,12 @@ function populateTable(data) {
       //   selectedTraces.delete(checkbox.id);
       //   clearExtraInformation();
       //   console.log(selectedTraces);
+      } 
+      else {
+        row.classList.remove("table-selected");
+        selectedTraces.delete(checkbox.id);
+        console.log(selectedTraces);
       }
-      
-
-
       if (selectedTraces.size != 0) {
         document.getElementById("selectTraceBtn").style.display = "block";
         if(selectedTraces.size >1){
