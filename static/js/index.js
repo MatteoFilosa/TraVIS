@@ -821,12 +821,16 @@ function isNameInUrl(jsonData, systemUrl) {
                 if (changeLayoutButton.innerHTML.includes("Change")) {
                     // If yes, call changeLayout with "neato"
                     changeLayout("neato");
-                    changeLayoutButton.innerHTML = "Normal Layout"
+                    setTimeout(() => {
+                        changeLayoutButton.innerHTML = "Normal Layout";
+                    }, 500);
                     
                 } else {
                     // If no, call changeLayout with "normal"
                     changeLayout("normal");
-                    changeLayoutButton.innerHTML = "Change Layout"
+                    setTimeout(() => {
+                        changeLayoutButton.innerHTML = "Change Layout";
+                    }, 500);
                 }
             };
 

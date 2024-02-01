@@ -1,588 +1,569 @@
 digraph G {
 
-	
-graph [
-    layout = neato
-    labelloc = b
-    fontname = "Helvetica,Arial,sans-serif"
-    start = regular
-    normalize = 0
-    overlap = false;  // or scalexy, scale, prism, ortho, or compress
-]
-node [
-    shape = circle
-    style = filled
-    color = "#00000088"
-    fontname = "Helvetica,Arial,sans-serif"
-]
-edge [
-    len = 1
-    color = "#00000088"
-    fontname = "Helvetica,Arial,sans-serif"
-]
+	rankdir="LR";
 	splines=ortho;
 
-	E0 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E0 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E0 [arrowhead="box"];
 	E0 -> 1;
 
-	E1 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E1 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E1 [arrowhead="box"];
 	E1 -> 1;
 
-	E2 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E2 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E2 [arrowhead="box"];
 	E2 -> 22;
 
-	E3 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E3 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E3 [arrowhead="box"];
 	E3 -> 22;
 
-	E4 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E4 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E4 [arrowhead="box"];
 	E4 -> 23;
 
-	E5 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E5 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E5 [arrowhead="box"];
 	E5 -> 23;
 
-	E6 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E6 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E6 [arrowhead="box"];
 	E6 -> 24;
 
-	E7 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E7 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E7 [arrowhead="box"];
 	E7 -> 0;
 
-	E8 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E8 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E8 [arrowhead="box"];
 	E8 -> 0;
 
-	E9 [label="'click' on '#root div._2qavttz8u […] e.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E9 [label="'click' on '#root div._2qavttz8u […] e.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E9 [arrowhead="box"];
 	E9 -> 0;
 
-	E10 [label="'click' on '#cl3lujggq003i3460e98mg94z'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E10 [label="'click' on '#cl3lujggq003i3460e98mg94z'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E10 [arrowhead="box"];
 	E10 -> 2;
 
-	E11 [label="'click' on '#cl3lujghh007934603u6tiybj'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E11 [label="'click' on '#cl3lujghh007934603u6tiybj'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E11 [arrowhead="box"];
 	E11 -> 2;
 
-	E12 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E12 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E12 [arrowhead="box"];
 	E12 -> 22;
 
-	E13 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E13 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E13 [arrowhead="box"];
 	E13 -> 22;
 
-	E14 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E14 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E14 [arrowhead="box"];
 	E14 -> 23;
 
-	E15 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E15 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E15 [arrowhead="box"];
 	E15 -> 23;
 
-	E16 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E16 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E16 [arrowhead="box"];
 	E16 -> 24;
 
-	E17 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E17 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E17 [arrowhead="box"];
 	E17 -> 0;
 
-	E18 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E18 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E18 [arrowhead="box"];
 	E18 -> 3;
 
-	E19 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E19 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E19 [arrowhead="box"];
 	E19 -> 3;
 
-	E20 [label="'click' on '#root div._2qavttz8u […] left.attached.button'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E20 [label="'click' on '#root div._2qavttz8u […] left.attached.button'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E20 [arrowhead="box"];
 	E20 -> 2;
 
-	E21 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E21 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E21 [arrowhead="box"];
 	E21 -> 4;
 
-	E22 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E22 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E22 [arrowhead="box"];
 	E22 -> 4;
 
-	E23 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E23 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E23 [arrowhead="box"];
 	E23 -> 5;
 
-	E24 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E24 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E24 [arrowhead="box"];
 	E24 -> 5;
 
-	E25 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E25 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E25 [arrowhead="box"];
 	E25 -> 2;
 
-	E26 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E26 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E26 [arrowhead="box"];
 	E26 -> 2;
 
-	E27 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E27 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E27 [arrowhead="box"];
 	E27 -> 2;
 
-	E28 [label="'mousedown' on '#brush-panel svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/*[name()='svg'][1]/*[name()='g'][2]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E28 [label="'mousedown' on '#brush-panel svg g'='svg'][1]/*[name()='g'][2]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E28 [arrowhead="box"];
 	E28 -> 2;
 
-	E29 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[3]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E29 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E29 [arrowhead="box"];
 	E29 -> 2;
 
-	E30 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E30 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E30 [arrowhead="box"];
 	E30 -> 2;
 
-	E31 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[2]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E31 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E31 [arrowhead="box"];
 	E31 -> 2;
 
-	E32 [label="'mouseenter' on '#hierarchy svg.funcs-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E32 [label="'mouseenter' on '#hierarchy svg.funcs-svg g'='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E32 [arrowhead="box"];
 	E32 -> 19;
 
-	E33 [label="'mouseenter' on '#hierarchy svg.categories-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E33 [label="'mouseenter' on '#hierarchy svg.categories-svg g'='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E33 [arrowhead="box"];
 	E33 -> 20;
 
-	E34 [label="'mouseenter' on '#hierarchy svg.subcats-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E34 [label="'mouseenter' on '#hierarchy svg.subcats-svg g'='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E34 [arrowhead="box"];
 	E34 -> 21;
 
-	E35 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E35 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E35 [arrowhead="box"];
 	E35 -> 9;
 
-	E36 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E36 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E36 [arrowhead="box"];
 	E36 -> 2;
 
-	E37 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E37 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E37 [arrowhead="box"];
 	E37 -> 2;
 
-	E38 [label="'click' on '#root div._2qavttz8u […] e.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E38 [label="'click' on '#root div._2qavttz8u […] e.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E38 [arrowhead="box"];
 	E38 -> 2;
 
-	E39 [label="'click' on '#cl3luk2y6003i3460ht8a89yy'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E39 [label="'click' on '#cl3luk2y6003i3460ht8a89yy'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E39 [arrowhead="box"];
 	E39 -> 2;
 
-	E40 [label="'click' on '#cl3luk2yx00793460q4wl4qqc'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[3])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E40 [label="'click' on '#cl3luk2yx00793460q4wl4qqc'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E40 [arrowhead="box"];
 	E40 -> 2;
 
-	E41 [label="'click' on '#root div._2qavttz8u […] left.attached.button'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E41 [label="'click' on '#root div._2qavttz8u […] left.attached.button'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E41 [arrowhead="box"];
 	E41 -> 2;
 
-	E42 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E42 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E42 [arrowhead="box"];
 	E42 -> 4;
 
-	E43 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E43 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E43 [arrowhead="box"];
 	E43 -> 4;
 
-	E44 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E44 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E44 [arrowhead="box"];
 	E44 -> 5;
 
-	E45 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E45 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E45 [arrowhead="box"];
 	E45 -> 5;
 
-	E46 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E46 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E46 [arrowhead="box"];
 	E46 -> 2;
 
-	E47 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E47 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E47 [arrowhead="box"];
 	E47 -> 2;
 
-	E48 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E48 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E48 [arrowhead="box"];
 	E48 -> 2;
 
-	E49 [label="'mousedown' on '#brush-panel svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/*[name()='svg'][1]/*[name()='g'][2]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E49 [label="'mousedown' on '#brush-panel svg g'='svg'][1]/*[name()='g'][2]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E49 [arrowhead="box"];
 	E49 -> 2;
 
-	E50 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[3]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E50 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E50 [arrowhead="box"];
 	E50 -> 2;
 
-	E51 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E51 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E51 [arrowhead="box"];
 	E51 -> 2;
 
-	E52 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[2]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E52 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E52 [arrowhead="box"];
 	E52 -> 2;
 
-	E53 [label="'mouseenter' on '#hierarchy svg.funcs-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E53 [label="'mouseenter' on '#hierarchy svg.funcs-svg g'='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E53 [arrowhead="box"];
 	E53 -> 16;
 
-	E54 [label="'mouseenter' on '#hierarchy svg.categories-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E54 [label="'mouseenter' on '#hierarchy svg.categories-svg g'='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E54 [arrowhead="box"];
 	E54 -> 17;
 
-	E55 [label="'mouseenter' on '#hierarchy svg.subcats-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E55 [label="'mouseenter' on '#hierarchy svg.subcats-svg g'='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E55 [arrowhead="box"];
 	E55 -> 18;
 
-	E56 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E56 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E56 [arrowhead="box"];
 	E56 -> 9;
 
-	E57 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E57 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E57 [arrowhead="box"];
 	E57 -> 2;
 
-	E58 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E58 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E58 [arrowhead="box"];
 	E58 -> 3;
 
-	E59 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E59 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E59 [arrowhead="box"];
 	E59 -> 3;
 
-	E60 [label="'click' on '#root div._2qavttz8u […] left.attached.button'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E60 [label="'click' on '#root div._2qavttz8u […] left.attached.button'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E60 [arrowhead="box"];
 	E60 -> 2;
 
-	E61 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E61 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E61 [arrowhead="box"];
 	E61 -> 2;
 
-	E62 [label="'click' on '#root div._2qavttz8u […] e.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E62 [label="'click' on '#root div._2qavttz8u […] e.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E62 [arrowhead="box"];
 	E62 -> 2;
 
-	E63 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E63 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E63 [arrowhead="box"];
 	E63 -> 5;
 
-	E64 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E64 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E64 [arrowhead="box"];
 	E64 -> 5;
 
-	E65 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E65 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E65 [arrowhead="box"];
 	E65 -> 2;
 
-	E66 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E66 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E66 [arrowhead="box"];
 	E66 -> 2;
 
-	E67 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E67 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E67 [arrowhead="box"];
 	E67 -> 2;
 
-	E68 [label="'mousedown' on '#brush-panel svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/*[name()='svg'][1]/*[name()='g'][2]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E68 [label="'mousedown' on '#brush-panel svg g'='svg'][1]/*[name()='g'][2]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E68 [arrowhead="box"];
 	E68 -> 2;
 
-	E69 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[3]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E69 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E69 [arrowhead="box"];
 	E69 -> 2;
 
-	E70 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E70 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E70 [arrowhead="box"];
 	E70 -> 2;
 
-	E71 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[2]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E71 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E71 [arrowhead="box"];
 	E71 -> 2;
 
-	E72 [label="'mouseenter' on '#hierarchy svg.funcs-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E72 [label="'mouseenter' on '#hierarchy svg.funcs-svg g'='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E72 [arrowhead="box"];
 	E72 -> 13;
 
-	E73 [label="'mouseenter' on '#hierarchy svg.categories-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E73 [label="'mouseenter' on '#hierarchy svg.categories-svg g'='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E73 [arrowhead="box"];
 	E73 -> 14;
 
-	E74 [label="'mouseenter' on '#hierarchy svg.subcats-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E74 [label="'mouseenter' on '#hierarchy svg.subcats-svg g'='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E74 [arrowhead="box"];
 	E74 -> 15;
 
-	E75 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E75 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E75 [arrowhead="box"];
 	E75 -> 9;
 
-	E76 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E76 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E76 [arrowhead="box"];
 	E76 -> 2;
 
-	E77 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E77 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E77 [arrowhead="box"];
 	E77 -> 3;
 
-	E78 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E78 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E78 [arrowhead="box"];
 	E78 -> 3;
 
-	E79 [label="'click' on '#root div._2qavttz8u […] left.attached.button'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E79 [label="'click' on '#root div._2qavttz8u […] left.attached.button'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E79 [arrowhead="box"];
 	E79 -> 2;
 
-	E80 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E80 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E80 [arrowhead="box"];
 	E80 -> 4;
 
-	E81 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E81 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E81 [arrowhead="box"];
 	E81 -> 4;
 
-	E82 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E82 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E82 [arrowhead="box"];
 	E82 -> 2;
 
-	E83 [label="'click' on '#root div._2qavttz8u […] e.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E83 [label="'click' on '#root div._2qavttz8u […] e.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E83 [arrowhead="box"];
 	E83 -> 2;
 
-	E84 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E84 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E84 [arrowhead="box"];
 	E84 -> 2;
 
-	E85 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E85 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E85 [arrowhead="box"];
 	E85 -> 2;
 
-	E86 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E86 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E86 [arrowhead="box"];
 	E86 -> 2;
 
-	E87 [label="'mousedown' on '#brush-panel svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/*[name()='svg'][1]/*[name()='g'][2]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E87 [label="'mousedown' on '#brush-panel svg g'='svg'][1]/*[name()='g'][2]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E87 [arrowhead="box"];
 	E87 -> 2;
 
-	E88 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[3]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E88 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E88 [arrowhead="box"];
 	E88 -> 2;
 
-	E89 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E89 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E89 [arrowhead="box"];
 	E89 -> 2;
 
-	E90 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[2]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E90 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E90 [arrowhead="box"];
 	E90 -> 2;
 
-	E91 [label="'mouseenter' on '#hierarchy svg.funcs-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E91 [label="'mouseenter' on '#hierarchy svg.funcs-svg g'='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E91 [arrowhead="box"];
 	E91 -> 6;
 
-	E92 [label="'mouseenter' on '#hierarchy svg.categories-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E92 [label="'mouseenter' on '#hierarchy svg.categories-svg g'='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E92 [arrowhead="box"];
 	E92 -> 7;
 
-	E93 [label="'mouseenter' on '#hierarchy svg.subcats-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E93 [label="'mouseenter' on '#hierarchy svg.subcats-svg g'='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E93 [arrowhead="box"];
 	E93 -> 8;
 
-	E94 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E94 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E94 [arrowhead="box"];
 	E94 -> 9;
 
-	E95 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E95 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E95 [arrowhead="box"];
 	E95 -> 2;
 
-	E96 [label="'mouseleave' on '#hierarchy svg.funcs-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E96 [label="'mouseleave' on '#hierarchy svg.funcs-svg g'='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	6 -> E96 [arrowhead="box"];
 	E96 -> 5;
 
-	E97 [label="'mouseleave' on '#hierarchy svg.categories-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E97 [label="'mouseleave' on '#hierarchy svg.categories-svg g'='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	7 -> E97 [arrowhead="box"];
 	E97 -> 5;
 
-	E98 [label="'mouseleave' on '#hierarchy svg.subcats-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E98 [label="'mouseleave' on '#hierarchy svg.subcats-svg g'='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	8 -> E98 [arrowhead="box"];
 	E98 -> 5;
 
-	E99 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E99 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E99 [arrowhead="box"];
 	E99 -> 9;
 
-	E100 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[2]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E100 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E100 [arrowhead="box"];
 	E100 -> 9;
 
-	E101 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E101 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E101 [arrowhead="box"];
 	E101 -> 9;
 
-	E102 [label="'mousedown' on '#brush-panel svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/*[name()='svg'][1]/*[name()='g'][2]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E102 [label="'mousedown' on '#brush-panel svg g'='svg'][1]/*[name()='g'][2]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E102 [arrowhead="box"];
 	E102 -> 9;
 
-	E103 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[3]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E103 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E103 [arrowhead="box"];
 	E103 -> 9;
 
-	E104 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E104 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E104 [arrowhead="box"];
 	E104 -> 9;
 
-	E105 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[3]/div[2]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E105 [label="'click' on '#root div._2qavttz8u […] avigator-module-Icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E105 [arrowhead="box"];
 	E105 -> 9;
 
-	E106 [label="'mouseenter' on '#hierarchy svg.funcs-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E106 [label="'mouseenter' on '#hierarchy svg.funcs-svg g'='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E106 [arrowhead="box"];
 	E106 -> 10;
 
-	E107 [label="'mouseenter' on '#hierarchy svg.categories-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E107 [label="'mouseenter' on '#hierarchy svg.categories-svg g'='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E107 [arrowhead="box"];
 	E107 -> 11;
 
-	E108 [label="'mouseenter' on '#hierarchy svg.subcats-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E108 [label="'mouseenter' on '#hierarchy svg.subcats-svg g'='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E108 [arrowhead="box"];
 	E108 -> 12;
 
-	E109 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E109 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E109 [arrowhead="box"];
 	E109 -> 2;
 
-	E110 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E110 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E110 [arrowhead="box"];
 	E110 -> 9;
 
-	E111 [label="'mouseleave' on '#hierarchy svg.funcs-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E111 [label="'mouseleave' on '#hierarchy svg.funcs-svg g'='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	10 -> E111 [arrowhead="box"];
 	E111 -> 9;
 
-	E112 [label="'mouseleave' on '#hierarchy svg.categories-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E112 [label="'mouseleave' on '#hierarchy svg.categories-svg g'='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	11 -> E112 [arrowhead="box"];
 	E112 -> 9;
 
-	E113 [label="'mouseleave' on '#hierarchy svg.subcats-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E113 [label="'mouseleave' on '#hierarchy svg.subcats-svg g'='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	12 -> E113 [arrowhead="box"];
 	E113 -> 9;
 
-	E114 [label="'mouseleave' on '#hierarchy svg.funcs-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E114 [label="'mouseleave' on '#hierarchy svg.funcs-svg g'='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	13 -> E114 [arrowhead="box"];
 	E114 -> 4;
 
-	E115 [label="'mouseleave' on '#hierarchy svg.categories-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E115 [label="'mouseleave' on '#hierarchy svg.categories-svg g'='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	14 -> E115 [arrowhead="box"];
 	E115 -> 4;
 
-	E116 [label="'mouseleave' on '#hierarchy svg.subcats-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E116 [label="'mouseleave' on '#hierarchy svg.subcats-svg g'='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	15 -> E116 [arrowhead="box"];
 	E116 -> 4;
 
-	E117 [label="'mouseleave' on '#hierarchy svg.funcs-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E117 [label="'mouseleave' on '#hierarchy svg.funcs-svg g'='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	16 -> E117 [arrowhead="box"];
 	E117 -> 3;
 
-	E118 [label="'mouseleave' on '#hierarchy svg.categories-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E118 [label="'mouseleave' on '#hierarchy svg.categories-svg g'='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	17 -> E118 [arrowhead="box"];
 	E118 -> 3;
 
-	E119 [label="'mouseleave' on '#hierarchy svg.subcats-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E119 [label="'mouseleave' on '#hierarchy svg.subcats-svg g'='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E119 [arrowhead="box"];
 	E119 -> 3;
 
-	E120 [label="'mouseleave' on '#hierarchy svg.funcs-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E120 [label="'mouseleave' on '#hierarchy svg.funcs-svg g'='svg'][1]/*[name()='svg'][1]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	19 -> E120 [arrowhead="box"];
 	E120 -> 2;
 
-	E121 [label="'mouseleave' on '#hierarchy svg.categories-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E121 [label="'mouseleave' on '#hierarchy svg.categories-svg g'='svg'][1]/*[name()='svg'][2]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	20 -> E121 [arrowhead="box"];
 	E121 -> 2;
 
-	E122 [label="'mouseleave' on '#hierarchy svg.subcats-svg g'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[2]/div[1]/*[name()='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E122 [label="'mouseleave' on '#hierarchy svg.subcats-svg g'='svg'][1]/*[name()='svg'][3]/*[name()='g'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E122 [arrowhead="box"];
 	E122 -> 2;
 
-	E123 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E123 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	22 -> E123 [arrowhead="box"];
 	E123 -> 1;
 
-	E124 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E124 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	22 -> E124 [arrowhead="box"];
 	E124 -> 1;
 
-	E125 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E125 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	22 -> E125 [arrowhead="box"];
 	E125 -> 0;
 
-	E126 [label="'click' on '#root div._2qavttz8u […] e.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E126 [label="'click' on '#root div._2qavttz8u […] e.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	22 -> E126 [arrowhead="box"];
 	E126 -> 0;
 
-	E127 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E127 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	22 -> E127 [arrowhead="box"];
 	E127 -> 23;
 
-	E128 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E128 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	22 -> E128 [arrowhead="box"];
 	E128 -> 23;
 
-	E129 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E129 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	22 -> E129 [arrowhead="box"];
 	E129 -> 24;
 
-	E130 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E130 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	22 -> E130 [arrowhead="box"];
 	E130 -> 0;
 
-	E131 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E131 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	23 -> E131 [arrowhead="box"];
 	E131 -> 1;
 
-	E132 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E132 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	23 -> E132 [arrowhead="box"];
 	E132 -> 1;
 
-	E133 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E133 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	23 -> E133 [arrowhead="box"];
 	E133 -> 22;
 
-	E134 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E134 [label="'click' on '#root div._2qavttz8u […] t.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	23 -> E134 [arrowhead="box"];
 	E134 -> 22;
 
-	E135 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E135 [label="'click' on '#root div._2qavttz8u […] d.selection.dropdown'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	23 -> E135 [arrowhead="box"];
 	E135 -> 0;
 
-	E136 [label="'click' on '#root div._2qavttz8u […] e.ui i.dropdown.icon'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/i[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E136 [label="'click' on '#root div._2qavttz8u […] e.ui i.dropdown.icon'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	23 -> E136 [arrowhead="box"];
 	E136 -> 0;
 
-	E137 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E137 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	23 -> E137 [arrowhead="box"];
 	E137 -> 24;
 
-	E138 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E138 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	23 -> E138 [arrowhead="box"];
 	E138 -> 0;
 
-	E139 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[1]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E139 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	24 -> E139 [arrowhead="box"];
 	E139 -> 0;
 
-	E140 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'\n(/html[1]/body[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E140 [label="'click' on '#root div._2qavttz8u […] tted.toggle.checkbox'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	24 -> E140 [arrowhead="box"];
 	E140 -> 24;
 
