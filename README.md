@@ -10,17 +10,17 @@ Steps to run the server for the first time:
 1) Install the requirements running "pip install -r requirements.txt" (If you don't have pip installed, install it)
 2) Create a virtual environment by running the command "python -m venv <name_of_the_virtual_environment>" in the terminal
 
-3a) Run the runApp file contained in the main directory to start the app: python runApp.py <name_of_the_virtual_environment>
+3) Run the runApp file contained in the main directory to start the app: python runApp.py <name_of_the_virtual_environment>
 
-In order to run all the functionalities of the framework, download and install GraphViz: https://graphviz.org/download/source/
+4) In order to run all the functionalities of the framework, download and install GraphViz: https://graphviz.org/download/source/
 
-If these steps don't work, follow these: 
+How to run the main functionalities of the framework:
 
-3b) Activate the virtual environment by running <name_of_the_virtual_environment>\Scripts\activate 
-4) If an error appears in the console telling that the execution of Scripts is not allowed, open a Windows
-Powershell terminal in admin mode and enter the command "Set-ExecutionPolicy unrestricted". This will allow the policy of scripts execution in your machine to be unrestricted, so be careful
-5) In the terminal, execute the command " $env:FLASK_APP = "server_flask" "
-6) In the terminal, execute the command "flask run"
+1) In the static/files/URLs folder there's the sampleUrls file. Copy a URL from the file and put it in the "Load System" placeholder: the
+visualization system will be loaded on the left, the resulting state chart will be loaded on the right (for now, they are precomputed).
 
-The server should now be running in localhost. It should return the index.html page. Press the key combination "CTRL+C" to interrupt it. If it is not the first time running the server, follow instructions on points 3a) or 3b) to point 6). Points 3b) to 6) do not have to be followed if 3a) starts the application successfully.
+2) In the User Traces Tab you can see all user traces captured on the Falcon Visualization system and see other details.
+
+
+
 

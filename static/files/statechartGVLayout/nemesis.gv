@@ -1,680 +1,661 @@
 digraph G {
 
-	
-graph [
-    layout = neato
-    labelloc = b
-    fontname = "Helvetica,Arial,sans-serif"
-    start = regular
-    normalize = 0
-    overlap = false;  // or scalexy, scale, prism, ortho, or compress
-]
-node [
-    shape = circle
-    style = filled
-    color = "#00000088"
-    fontname = "Helvetica,Arial,sans-serif"
-]
-edge [
-    len = 1
-    color = "#00000088"
-    fontname = "Helvetica,Arial,sans-serif"
-]
+	rankdir="LR";
 	splines=ortho;
 
-	E0 [label="'mouseover' on '#131-125'\n(/html[1]/body[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E0 [label="'mouseover' on '#131-125'='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E0 [arrowhead="box"];
 	E0 -> 1;
 
-	E1 [label="'click' on '#svgM rect.legendSquare'\n(/html[1]/body[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E1 [label="'click' on '#svgM rect.legendSquare'='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E1 [arrowhead="box"];
 	E1 -> 0;
 
-	E2 [label="'mouseover' on '#svgS g circle.dot'\n(/html[1]/body[1]/div[2]/div[3]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E2 [label="'mouseover' on '#svgS g circle.dot'='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E2 [arrowhead="box"];
 	E2 -> 2;
 
-	E3 [label="'click' on '#all-only'\n(/html[1]/body[1]/div[2]/div[4]/div[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E3 [label="'click' on '#all-only'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E3 [arrowhead="box"];
 	E3 -> 0;
 
-	E4 [label="'change' on '#all-only'\n(/html[1]/body[1]/div[2]/div[4]/div[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E4 [label="'change' on '#all-only'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E4 [arrowhead="box"];
 	E4 -> 0;
 
-	E5 [label="'click' on '#list-area input'\n(/html[1]/body[1]/div[2]/div[4]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E5 [label="'click' on '#list-area input'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E5 [arrowhead="box"];
 	E5 -> 0;
 
-	E6 [label="'click' on '#list-area input'\n(/html[1]/body[1]/div[2]/div[4]/input[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E6 [label="'click' on '#list-area input'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E6 [arrowhead="box"];
 	E6 -> 3;
 
-	E7 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E7 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E7 [arrowhead="box"];
 	E7 -> 5;
 
-	E8 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E8 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E8 [arrowhead="box"];
 	E8 -> 7;
 
-	E9 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E9 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E9 [arrowhead="box"];
 	E9 -> 9;
 
-	E10 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E10 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E10 [arrowhead="box"];
 	E10 -> 11;
 
-	E11 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E11 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E11 [arrowhead="box"];
 	E11 -> 13;
 
-	E12 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[6]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E12 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E12 [arrowhead="box"];
 	E12 -> 15;
 
-	E13 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[7]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E13 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E13 [arrowhead="box"];
 	E13 -> 17;
 
-	E14 [label="'click' on '#cancdis'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/div[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E14 [label="'click' on '#cancdis'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E14 [arrowhead="box"];
 	E14 -> 0;
 
-	E15 [label="'click' on '#t5d1'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E15 [label="'click' on '#t5d1'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E15 [arrowhead="box"];
 	E15 -> 18;
 
-	E16 [label="'click' on '#t5d2'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/input[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E16 [label="'click' on '#t5d2'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E16 [arrowhead="box"];
 	E16 -> 18;
 
-	E17 [label="'click' on '#t5s'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/input[3])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E17 [label="'click' on '#t5s'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	0 -> E17 [arrowhead="box"];
 	E17 -> 18;
 
-	E18 [label="'mouseout' on '#131-125'\n(/html[1]/body[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E18 [label="'mouseout' on '#131-125'='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	1 -> E18 [arrowhead="box"];
 	E18 -> 0;
 
-	E19 [label="'mouseout' on '#svgS g circle.dot'\n(/html[1]/body[1]/div[2]/div[3]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E19 [label="'mouseout' on '#svgS g circle.dot'='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E19 [arrowhead="box"];
 	E19 -> 0;
 
-	E20 [label="'click' on '#svgS g circle.dot'\n(/html[1]/body[1]/div[2]/div[3]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E20 [label="'click' on '#svgS g circle.dot'='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	2 -> E20 [arrowhead="box"];
 	E20 -> 2;
 
-	E21 [label="'click' on '#all-only'\n(/html[1]/body[1]/div[2]/div[4]/div[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E21 [label="'click' on '#all-only'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E21 [arrowhead="box"];
 	E21 -> 3;
 
-	E22 [label="'change' on '#all-only'\n(/html[1]/body[1]/div[2]/div[4]/div[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E22 [label="'change' on '#all-only'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E22 [arrowhead="box"];
 	E22 -> 3;
 
-	E23 [label="'click' on '#list-area input'\n(/html[1]/body[1]/div[2]/div[4]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E23 [label="'click' on '#list-area input'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E23 [arrowhead="box"];
 	E23 -> 0;
 
-	E24 [label="'click' on '#list-area input'\n(/html[1]/body[1]/div[2]/div[4]/input[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E24 [label="'click' on '#list-area input'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E24 [arrowhead="box"];
 	E24 -> 3;
 
-	E25 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E25 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E25 [arrowhead="box"];
 	E25 -> 4;
 
-	E26 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E26 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E26 [arrowhead="box"];
 	E26 -> 6;
 
-	E27 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E27 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E27 [arrowhead="box"];
 	E27 -> 8;
 
-	E28 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E28 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E28 [arrowhead="box"];
 	E28 -> 10;
 
-	E29 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E29 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E29 [arrowhead="box"];
 	E29 -> 12;
 
-	E30 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[6]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E30 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E30 [arrowhead="box"];
 	E30 -> 14;
 
-	E31 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[7]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E31 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E31 [arrowhead="box"];
 	E31 -> 16;
 
-	E32 [label="'click' on '#cancdis'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/div[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E32 [label="'click' on '#cancdis'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E32 [arrowhead="box"];
 	E32 -> 0;
 
-	E33 [label="'click' on '#t5d1'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E33 [label="'click' on '#t5d1'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E33 [arrowhead="box"];
 	E33 -> 18;
 
-	E34 [label="'click' on '#t5d2'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/input[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E34 [label="'click' on '#t5d2'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E34 [arrowhead="box"];
 	E34 -> 18;
 
-	E35 [label="'click' on '#t5s'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/input[3])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E35 [label="'click' on '#t5s'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	3 -> E35 [arrowhead="box"];
 	E35 -> 18;
 
-	E36 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E36 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E36 [arrowhead="box"];
 	E36 -> 3;
 
-	E37 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E37 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E37 [arrowhead="box"];
 	E37 -> 4;
 
-	E38 [label="'click' on '#breast neoplasms '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E38 [label="'click' on '#breast neoplasms '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E38 [arrowhead="box"];
 	E38 -> 5;
 
-	E39 [label="'change' on '#breast neoplasms '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E39 [label="'change' on '#breast neoplasms '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	4 -> E39 [arrowhead="box"];
 	E39 -> 5;
 
-	E40 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E40 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E40 [arrowhead="box"];
 	E40 -> 0;
 
-	E41 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E41 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E41 [arrowhead="box"];
 	E41 -> 5;
 
-	E42 [label="'click' on '#breast neoplasms '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E42 [label="'click' on '#breast neoplasms '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E42 [arrowhead="box"];
 	E42 -> 4;
 
-	E43 [label="'change' on '#breast neoplasms '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E43 [label="'change' on '#breast neoplasms '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	5 -> E43 [arrowhead="box"];
 	E43 -> 4;
 
-	E44 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E44 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	6 -> E44 [arrowhead="box"];
 	E44 -> 3;
 
-	E45 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E45 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	6 -> E45 [arrowhead="box"];
 	E45 -> 6;
 
-	E46 [label="'click' on '#carcinoma renal cell '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E46 [label="'click' on '#carcinoma renal cell '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	6 -> E46 [arrowhead="box"];
 	E46 -> 7;
 
-	E47 [label="'change' on '#carcinoma renal cell '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E47 [label="'change' on '#carcinoma renal cell '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	6 -> E47 [arrowhead="box"];
 	E47 -> 7;
 
-	E48 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E48 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	7 -> E48 [arrowhead="box"];
 	E48 -> 0;
 
-	E49 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E49 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	7 -> E49 [arrowhead="box"];
 	E49 -> 7;
 
-	E50 [label="'click' on '#carcinoma renal cell '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E50 [label="'click' on '#carcinoma renal cell '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	7 -> E50 [arrowhead="box"];
 	E50 -> 6;
 
-	E51 [label="'change' on '#carcinoma renal cell '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E51 [label="'change' on '#carcinoma renal cell '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	7 -> E51 [arrowhead="box"];
 	E51 -> 6;
 
-	E52 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E52 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	8 -> E52 [arrowhead="box"];
 	E52 -> 3;
 
-	E53 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E53 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	8 -> E53 [arrowhead="box"];
 	E53 -> 8;
 
-	E54 [label="'click' on '#colorectal neoplasms '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E54 [label="'click' on '#colorectal neoplasms '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	8 -> E54 [arrowhead="box"];
 	E54 -> 9;
 
-	E55 [label="'change' on '#colorectal neoplasms '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E55 [label="'change' on '#colorectal neoplasms '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	8 -> E55 [arrowhead="box"];
 	E55 -> 9;
 
-	E56 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E56 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E56 [arrowhead="box"];
 	E56 -> 0;
 
-	E57 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E57 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E57 [arrowhead="box"];
 	E57 -> 9;
 
-	E58 [label="'click' on '#colorectal neoplasms '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E58 [label="'click' on '#colorectal neoplasms '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E58 [arrowhead="box"];
 	E58 -> 8;
 
-	E59 [label="'change' on '#colorectal neoplasms '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E59 [label="'change' on '#colorectal neoplasms '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	9 -> E59 [arrowhead="box"];
 	E59 -> 8;
 
-	E60 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E60 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	10 -> E60 [arrowhead="box"];
 	E60 -> 3;
 
-	E61 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E61 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	10 -> E61 [arrowhead="box"];
 	E61 -> 10;
 
-	E62 [label="'click' on '#head and neck neoplasms '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E62 [label="'click' on '#head and neck neoplasms '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	10 -> E62 [arrowhead="box"];
 	E62 -> 11;
 
-	E63 [label="'change' on '#head and neck neoplasms '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E63 [label="'change' on '#head and neck neoplasms '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	10 -> E63 [arrowhead="box"];
 	E63 -> 11;
 
-	E64 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E64 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	11 -> E64 [arrowhead="box"];
 	E64 -> 0;
 
-	E65 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E65 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	11 -> E65 [arrowhead="box"];
 	E65 -> 11;
 
-	E66 [label="'click' on '#head and neck neoplasms '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E66 [label="'click' on '#head and neck neoplasms '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	11 -> E66 [arrowhead="box"];
 	E66 -> 10;
 
-	E67 [label="'change' on '#head and neck neoplasms '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E67 [label="'change' on '#head and neck neoplasms '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	11 -> E67 [arrowhead="box"];
 	E67 -> 10;
 
-	E68 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E68 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	12 -> E68 [arrowhead="box"];
 	E68 -> 3;
 
-	E69 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E69 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	12 -> E69 [arrowhead="box"];
 	E69 -> 12;
 
-	E70 [label="'click' on '#leukemia b-cell '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E70 [label="'click' on '#leukemia b-cell '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	12 -> E70 [arrowhead="box"];
 	E70 -> 13;
 
-	E71 [label="'change' on '#leukemia b-cell '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E71 [label="'change' on '#leukemia b-cell '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	12 -> E71 [arrowhead="box"];
 	E71 -> 13;
 
-	E72 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E72 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	13 -> E72 [arrowhead="box"];
 	E72 -> 0;
 
-	E73 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E73 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	13 -> E73 [arrowhead="box"];
 	E73 -> 13;
 
-	E74 [label="'click' on '#leukemia b-cell '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E74 [label="'click' on '#leukemia b-cell '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	13 -> E74 [arrowhead="box"];
 	E74 -> 12;
 
-	E75 [label="'change' on '#leukemia b-cell '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E75 [label="'change' on '#leukemia b-cell '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	13 -> E75 [arrowhead="box"];
 	E75 -> 12;
 
-	E76 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[6]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E76 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	14 -> E76 [arrowhead="box"];
 	E76 -> 3;
 
-	E77 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[6]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E77 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	14 -> E77 [arrowhead="box"];
 	E77 -> 14;
 
-	E78 [label="'click' on '#leukemia myeloid '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[6]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E78 [label="'click' on '#leukemia myeloid '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	14 -> E78 [arrowhead="box"];
 	E78 -> 15;
 
-	E79 [label="'change' on '#leukemia myeloid '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[6]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E79 [label="'change' on '#leukemia myeloid '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	14 -> E79 [arrowhead="box"];
 	E79 -> 15;
 
-	E80 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[6]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E80 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	15 -> E80 [arrowhead="box"];
 	E80 -> 0;
 
-	E81 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[6]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E81 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	15 -> E81 [arrowhead="box"];
 	E81 -> 15;
 
-	E82 [label="'click' on '#leukemia myeloid '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[6]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E82 [label="'click' on '#leukemia myeloid '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	15 -> E82 [arrowhead="box"];
 	E82 -> 14;
 
-	E83 [label="'change' on '#leukemia myeloid '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[6]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E83 [label="'change' on '#leukemia myeloid '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	15 -> E83 [arrowhead="box"];
 	E83 -> 14;
 
-	E84 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[7]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E84 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	16 -> E84 [arrowhead="box"];
 	E84 -> 3;
 
-	E85 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[7]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E85 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	16 -> E85 [arrowhead="box"];
 	E85 -> 16;
 
-	E86 [label="'click' on '#lymphoma '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[7]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E86 [label="'click' on '#lymphoma '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	16 -> E86 [arrowhead="box"];
 	E86 -> 17;
 
-	E87 [label="'change' on '#lymphoma '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[7]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E87 [label="'change' on '#lymphoma '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	16 -> E87 [arrowhead="box"];
 	E87 -> 17;
 
-	E88 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[7]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E88 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	17 -> E88 [arrowhead="box"];
 	E88 -> 0;
 
-	E89 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[7]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E89 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	17 -> E89 [arrowhead="box"];
 	E89 -> 17;
 
-	E90 [label="'click' on '#lymphoma '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[7]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E90 [label="'click' on '#lymphoma '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	17 -> E90 [arrowhead="box"];
 	E90 -> 16;
 
-	E91 [label="'change' on '#lymphoma '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[7]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E91 [label="'change' on '#lymphoma '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	17 -> E91 [arrowhead="box"];
 	E91 -> 16;
 
-	E92 [label="'mouseover' on '#718-629'\n(/html[1]/body[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E92 [label="'mouseover' on '#718-629'='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E92 [arrowhead="box"];
 	E92 -> 19;
 
-	E93 [label="'click' on '#svgM rect.legendSquare'\n(/html[1]/body[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E93 [label="'click' on '#svgM rect.legendSquare'='svg'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E93 [arrowhead="box"];
 	E93 -> 18;
 
-	E94 [label="'mouseover' on '#svgS g circle.dot'\n(/html[1]/body[1]/div[2]/div[3]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E94 [label="'mouseover' on '#svgS g circle.dot'='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E94 [arrowhead="box"];
 	E94 -> 20;
 
-	E95 [label="'click' on '#all-only'\n(/html[1]/body[1]/div[2]/div[4]/div[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E95 [label="'click' on '#all-only'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E95 [arrowhead="box"];
 	E95 -> 18;
 
-	E96 [label="'change' on '#all-only'\n(/html[1]/body[1]/div[2]/div[4]/div[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E96 [label="'change' on '#all-only'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E96 [arrowhead="box"];
 	E96 -> 18;
 
-	E97 [label="'click' on '#list-area input'\n(/html[1]/body[1]/div[2]/div[4]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E97 [label="'click' on '#list-area input'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E97 [arrowhead="box"];
 	E97 -> 18;
 
-	E98 [label="'click' on '#list-area input'\n(/html[1]/body[1]/div[2]/div[4]/input[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E98 [label="'click' on '#list-area input'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E98 [arrowhead="box"];
 	E98 -> 21;
 
-	E99 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E99 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E99 [arrowhead="box"];
 	E99 -> 23;
 
-	E100 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E100 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E100 [arrowhead="box"];
 	E100 -> 25;
 
-	E101 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E101 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E101 [arrowhead="box"];
 	E101 -> 27;
 
-	E102 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E102 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E102 [arrowhead="box"];
 	E102 -> 29;
 
-	E103 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E103 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E103 [arrowhead="box"];
 	E103 -> 31;
 
-	E104 [label="'click' on '#cancdis'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/div[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E104 [label="'click' on '#cancdis'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E104 [arrowhead="box"];
 	E104 -> 0;
 
-	E105 [label="'click' on '#t5d1'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E105 [label="'click' on '#t5d1'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E105 [arrowhead="box"];
 	E105 -> 18;
 
-	E106 [label="'click' on '#t5d2'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/input[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E106 [label="'click' on '#t5d2'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E106 [arrowhead="box"];
 	E106 -> 18;
 
-	E107 [label="'click' on '#t5s'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/input[3])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E107 [label="'click' on '#t5s'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	18 -> E107 [arrowhead="box"];
 	E107 -> 18;
 
-	E108 [label="'mouseout' on '#718-629'\n(/html[1]/body[1]/div[2]/div[2]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E108 [label="'mouseout' on '#718-629'='svg'][1]/*[name()='g'][1]/*[name()='rect'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	19 -> E108 [arrowhead="box"];
 	E108 -> 18;
 
-	E109 [label="'mouseout' on '#svgS g circle.dot'\n(/html[1]/body[1]/div[2]/div[3]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E109 [label="'mouseout' on '#svgS g circle.dot'='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	20 -> E109 [arrowhead="box"];
 	E109 -> 18;
 
-	E110 [label="'click' on '#svgS g circle.dot'\n(/html[1]/body[1]/div[2]/div[3]/*[name()='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E110 [label="'click' on '#svgS g circle.dot'='svg'][1]/*[name()='g'][1]/*[name()='circle'][1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	20 -> E110 [arrowhead="box"];
 	E110 -> 20;
 
-	E111 [label="'click' on '#all-only'\n(/html[1]/body[1]/div[2]/div[4]/div[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E111 [label="'click' on '#all-only'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E111 [arrowhead="box"];
 	E111 -> 21;
 
-	E112 [label="'change' on '#all-only'\n(/html[1]/body[1]/div[2]/div[4]/div[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E112 [label="'change' on '#all-only'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E112 [arrowhead="box"];
 	E112 -> 21;
 
-	E113 [label="'click' on '#list-area input'\n(/html[1]/body[1]/div[2]/div[4]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E113 [label="'click' on '#list-area input'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E113 [arrowhead="box"];
 	E113 -> 18;
 
-	E114 [label="'click' on '#list-area input'\n(/html[1]/body[1]/div[2]/div[4]/input[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E114 [label="'click' on '#list-area input'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E114 [arrowhead="box"];
 	E114 -> 21;
 
-	E115 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E115 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E115 [arrowhead="box"];
 	E115 -> 22;
 
-	E116 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E116 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E116 [arrowhead="box"];
 	E116 -> 24;
 
-	E117 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E117 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E117 [arrowhead="box"];
 	E117 -> 26;
 
-	E118 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E118 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E118 [arrowhead="box"];
 	E118 -> 28;
 
-	E119 [label="'mouseover' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E119 [label="'mouseover' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E119 [arrowhead="box"];
 	E119 -> 30;
 
-	E120 [label="'click' on '#cancdis'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/div[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E120 [label="'click' on '#cancdis'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E120 [arrowhead="box"];
 	E120 -> 0;
 
-	E121 [label="'click' on '#t5d1'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E121 [label="'click' on '#t5d1'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E121 [arrowhead="box"];
 	E121 -> 18;
 
-	E122 [label="'click' on '#t5d2'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/input[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E122 [label="'click' on '#t5d2'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E122 [arrowhead="box"];
 	E122 -> 18;
 
-	E123 [label="'click' on '#t5s'\n(/html[1]/body[1]/div[2]/div[4]/div[2]/input[3])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E123 [label="'click' on '#t5s'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	21 -> E123 [arrowhead="box"];
 	E123 -> 18;
 
-	E124 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E124 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	22 -> E124 [arrowhead="box"];
 	E124 -> 21;
 
-	E125 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E125 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	22 -> E125 [arrowhead="box"];
 	E125 -> 22;
 
-	E126 [label="'click' on '#anemia aplastic '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E126 [label="'click' on '#anemia aplastic '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	22 -> E126 [arrowhead="box"];
 	E126 -> 23;
 
-	E127 [label="'change' on '#anemia aplastic '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E127 [label="'change' on '#anemia aplastic '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	22 -> E127 [arrowhead="box"];
 	E127 -> 23;
 
-	E128 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E128 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	23 -> E128 [arrowhead="box"];
 	E128 -> 18;
 
-	E129 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E129 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	23 -> E129 [arrowhead="box"];
 	E129 -> 23;
 
-	E130 [label="'click' on '#anemia aplastic '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E130 [label="'click' on '#anemia aplastic '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	23 -> E130 [arrowhead="box"];
 	E130 -> 22;
 
-	E131 [label="'change' on '#anemia aplastic '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[1]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E131 [label="'change' on '#anemia aplastic '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	23 -> E131 [arrowhead="box"];
 	E131 -> 22;
 
-	E132 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E132 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	24 -> E132 [arrowhead="box"];
 	E132 -> 21;
 
-	E133 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E133 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	24 -> E133 [arrowhead="box"];
 	E133 -> 24;
 
-	E134 [label="'click' on '#blood coagulation disorders '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E134 [label="'click' on '#blood coagulation disorders '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	24 -> E134 [arrowhead="box"];
 	E134 -> 25;
 
-	E135 [label="'change' on '#blood coagulation disorders '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E135 [label="'change' on '#blood coagulation disorders '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	24 -> E135 [arrowhead="box"];
 	E135 -> 25;
 
-	E136 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E136 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	25 -> E136 [arrowhead="box"];
 	E136 -> 18;
 
-	E137 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E137 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	25 -> E137 [arrowhead="box"];
 	E137 -> 25;
 
-	E138 [label="'click' on '#blood coagulation disorders '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E138 [label="'click' on '#blood coagulation disorders '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	25 -> E138 [arrowhead="box"];
 	E138 -> 24;
 
-	E139 [label="'change' on '#blood coagulation disorders '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[2]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E139 [label="'change' on '#blood coagulation disorders '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	25 -> E139 [arrowhead="box"];
 	E139 -> 24;
 
-	E140 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E140 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	26 -> E140 [arrowhead="box"];
 	E140 -> 21;
 
-	E141 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E141 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	26 -> E141 [arrowhead="box"];
 	E141 -> 26;
 
-	E142 [label="'click' on '#blood platelet disorders '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E142 [label="'click' on '#blood platelet disorders '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	26 -> E142 [arrowhead="box"];
 	E142 -> 27;
 
-	E143 [label="'change' on '#blood platelet disorders '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E143 [label="'change' on '#blood platelet disorders '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	26 -> E143 [arrowhead="box"];
 	E143 -> 27;
 
-	E144 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E144 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	27 -> E144 [arrowhead="box"];
 	E144 -> 18;
 
-	E145 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E145 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	27 -> E145 [arrowhead="box"];
 	E145 -> 27;
 
-	E146 [label="'click' on '#blood platelet disorders '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E146 [label="'click' on '#blood platelet disorders '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	27 -> E146 [arrowhead="box"];
 	E146 -> 26;
 
-	E147 [label="'change' on '#blood platelet disorders '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[3]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E147 [label="'change' on '#blood platelet disorders '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	27 -> E147 [arrowhead="box"];
 	E147 -> 26;
 
-	E148 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E148 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	28 -> E148 [arrowhead="box"];
 	E148 -> 21;
 
-	E149 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E149 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	28 -> E149 [arrowhead="box"];
 	E149 -> 28;
 
-	E150 [label="'click' on '#exophthalmos '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E150 [label="'click' on '#exophthalmos '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	28 -> E150 [arrowhead="box"];
 	E150 -> 29;
 
-	E151 [label="'change' on '#exophthalmos '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E151 [label="'change' on '#exophthalmos '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	28 -> E151 [arrowhead="box"];
 	E151 -> 29;
 
-	E152 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E152 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	29 -> E152 [arrowhead="box"];
 	E152 -> 18;
 
-	E153 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E153 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	29 -> E153 [arrowhead="box"];
 	E153 -> 29;
 
-	E154 [label="'click' on '#exophthalmos '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E154 [label="'click' on '#exophthalmos '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	29 -> E154 [arrowhead="box"];
 	E154 -> 28;
 
-	E155 [label="'change' on '#exophthalmos '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[4]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E155 [label="'change' on '#exophthalmos '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	29 -> E155 [arrowhead="box"];
 	E155 -> 28;
 
-	E156 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E156 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	30 -> E156 [arrowhead="box"];
 	E156 -> 21;
 
-	E157 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E157 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	30 -> E157 [arrowhead="box"];
 	E157 -> 30;
 
-	E158 [label="'click' on '#graves disease '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E158 [label="'click' on '#graves disease '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	30 -> E158 [arrowhead="box"];
 	E158 -> 31;
 
-	E159 [label="'change' on '#graves disease '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E159 [label="'change' on '#graves disease '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	30 -> E159 [arrowhead="box"];
 	E159 -> 31;
 
-	E160 [label="'mouseout' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E160 [label="'mouseout' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	31 -> E160 [arrowhead="box"];
 	E160 -> 18;
 
-	E161 [label="'click' on '#list-area table tbody tr td.atd'\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E161 [label="'click' on '#list-area table tbody tr td.atd'", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	31 -> E161 [arrowhead="box"];
 	E161 -> 31;
 
-	E162 [label="'click' on '#graves disease '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E162 [label="'click' on '#graves disease '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	31 -> E162 [arrowhead="box"];
 	E162 -> 30;
 
-	E163 [label="'change' on '#graves disease '\n(/html[1]/body[1]/div[2]/div[4]/table[1]/tbody[1]/tr[5]/td[1]/input[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E163 [label="'change' on '#graves disease '", shape="box", style="filled", fillcolor="#000000", fontcolor="#000000"];
 	31 -> E163 [arrowhead="box"];
 	E163 -> 30;
 
