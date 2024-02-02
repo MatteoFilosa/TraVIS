@@ -12,7 +12,9 @@ Steps to run the server for the first time:
 
 3a) Run the runApp file contained in the main directory to start the app: python runApp.py <name_of_the_virtual_environment>
 
-OR 
+In order to run all the functionalities of the framework, download and install GraphViz: https://graphviz.org/download/source/
+
+If these steps don't work, follow these: 
 
 3b) Activate the virtual environment by running <name_of_the_virtual_environment>\Scripts\activate 
 4) If an error appears in the console telling that the execution of Scripts is not allowed, open a Windows
