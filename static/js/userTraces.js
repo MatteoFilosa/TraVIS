@@ -349,6 +349,9 @@ function populateTable(data) {
       }
     });
   });
+
+  //Applying sliders
+
 }
 
 //#endregion
