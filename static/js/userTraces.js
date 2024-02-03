@@ -391,7 +391,7 @@ function showExtraInformation(userID) {
   document.getElementById("placeholderText").style.display = "none";
   document.getElementById("previewTrace").style.display="block";
 
-  document.getElementById("previewTrace").href="home";
+  document.getElementById("previewTrace").href="replay";
   localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue) )
   localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID))
   document.getElementById("previewTrace").id+=selectedTraceID;

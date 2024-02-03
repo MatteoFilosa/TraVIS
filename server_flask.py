@@ -470,12 +470,10 @@ def get_statecharts_gv():
 
 # Handle replay of a user trace - Francesco
 @app.route("/replay")
-def replay_user_trace(id) :
-    
-    print("Start replay user trace number: " + id)
+def replay_user_trace() :
 
     try:
-        result = subprocess.run(['python', 'UserTraceSimulator.py'], capture_output=True, text=True, check=True)
+        result = subprocess.run(['py', 'UserTraceSimulator.py'])
     except subprocess.CalledProcessError as e:
         # Gestisci eventuali errori durante l'esecuzione
         output = f'Errore durante l\'esecuzione del programma esterno: {e.stderr}'

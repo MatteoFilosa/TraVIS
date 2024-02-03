@@ -1039,6 +1039,7 @@ function LoadSystem() {
 
     if(JSON.parse(localStorage.getItem("selectedTrace")) == null){
         systemURL = document.getElementById("insertedURL").value;
+        systemURL = "https://vega.github.io/falcon/flights/";
     }
 
     websiteContainer.src = "https://vega.github.io/falcon/flights/";

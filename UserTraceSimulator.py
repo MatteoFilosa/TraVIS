@@ -1080,12 +1080,14 @@ if __name__ == "__main__":
 
         originalWindow = driver.current_window_handle
 
+        time.sleep(10)
+
         for transition in explorationSequence:
 
             #if(len(driver.window_handles) != 1):
             #    driver.switch_to.window(originalWindow)
 
-            time.sleep(10)
+            time.sleep(0.5)
 
             mouseOutElement = driver.find_element(By.CSS_SELECTOR,"body")
             actions = ActionChains(driver,duration = 0)
