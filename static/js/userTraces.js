@@ -8,6 +8,10 @@ var selectedTraceID;
 var selectedTrace_RawValue;
 //#endregion
 
+//Gloabl Variables - Francesco
+let selectedCheckboxTrace;
+//End Global Variables - Francesco
+
 window.onload = function () {
   loadingIcon = document.getElementById("loadingIcon");
   table = document.getElementById("table");
@@ -49,6 +53,13 @@ window.onload = function () {
         document.getElementById("selectTraceBtn").style.display = "none";
       }
     });
+
+  // Function to handle the replay of a selected trace - Francesco
+  //document.getElementById("selectTraceBtn").addEventListener("click", () => { window.location.href = `/replay?vis=&trace_id=${selectedCheckboxTrace}` });
+  document.getElementById("selectTraceBtn").addEventListener("click", () => {
+    localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue));
+    localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
+  });
 };
 
 function getUserTraces() {
@@ -275,6 +286,10 @@ function populateTable(data) {
 
     // Add event listener to each checkbox for changing row color
     checkbox.addEventListener("change", function () {
+
+      //Save ID of the trace in a global variable - in order to use for replay later - Francesco
+      selectedCheckboxTrace = this.id;
+
       var numbersOnlyID = checkbox.id;
       if (checkbox.checked) {
         row.classList.add("table-selected");
