@@ -467,5 +467,37 @@ def get_statecharts_gv():
 
     return response
 
+
+
+# TODO MATTEO
+# Call the generalization function to create the initial statechart.
+# In order to do so, we take in POST the url of the vis so that we can 
+# write it in the 'system_url.txt' file beforehand.
+@app.route("/call_generalization", methods=['POST'])
+def call_generalization():
+    # We write the current vis URL (inputted via POST) in the 'system_url.txt' file.
+    request_data = request.get_json()
+    graph_data_list = request_data.get('newUrl')
+    system_url_file = open("./static/js/material/system_url.txt", "w")
+    system_url_file.write(graph_data_list)
+    system_url_file.close()
+
+    # We call the generalization function via Node JS.
+    generalization_command = "node ./static/js/generalization.js"
+    subprocess.call(generalization_command, shell=True)
+
+    return "finished generalization"
+
+
+
+# TODO MATTEO
+# Call the bovi function to create the final statechart.
+# FORSE PERÒ SI PUÒ CHIAMARE QUESTA FUNZIONE DIRETTAMENTE DENTRO A CALL GENERALIZATION...
+@app.route("/call_bovi")
+def call_bovi():
+    return "finished bovi"
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
