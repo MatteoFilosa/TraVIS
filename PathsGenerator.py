@@ -757,6 +757,8 @@ def statechartPreProcessing(statechart):
 #Function used to generate the paths for the exploration
 def VisitAllEdges(state,exploration):
 
+    print(graph)
+
     graph[str(state)]["visited"] = 1
 
     for transition in graph[str(state)]["transitions"]:
@@ -810,28 +812,35 @@ def SubList(query, base):
             return True
     return False
 
-
-graph = {}
+#graph = {}
 EventList = []
-if(__name__=="__main__"):
+def configFunction():
 
-    configuration = open("conf.json")
-    confJSON=json.load(configuration)
+    #configuration = open("conf.json")
+    #confJSON=json.load(configuration)
 
-    nameVis = confJSON["name"]
-    repetition = confJSON["repetitions"]
+    #nameVis = confJSON["name"]
+    #repetition = confJSON["repetitions"]
+
+    repetition = 1
     
     #open the statechart json file
-    statechart=open('statecharts/statechart_'+nameVis+'.json')
+    statechart=open('static/js/material/statechart.json')
 
     #returns the JSON object as a dictionary
     statechartJSON=json.load(statechart)
 
+    print(statechartJSON)
+
     #Data structure for that will contain the graph
+    global graph
+    graph = {}
     graph = statechartPreProcessing(statechartJSON)
 
+    print(graph)
+
     #Save graph on a file
-    with open('ppstatecharts/ppstatechart_'+nameVis+'.json', 'w') as fp:
+    with open('static/js/material/statechart_final.json', 'w') as fp:
         json.dump(graph, fp,  indent=4)
 
     explorationGraph = []
@@ -878,7 +887,13 @@ if(__name__=="__main__"):
     print("Transitions Self-Loops: " + str(counter_self))
 
     #Save exploration sequence that will be passed to Selenium
-    with open('explorations/exploration_'+nameVis+'.json', 'w') as fp:
+    with open('static/js/material/exploration.json', 'w') as fp:
         json.dump(allSequences, fp,  indent=4)
 
     print("--------------  FINISH  ----------------")
+
+
+#if(__name__=="__main__"):
+
+#    configFunction()
+    

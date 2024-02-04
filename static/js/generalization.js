@@ -3479,7 +3479,7 @@ function obtainStatechartGraphviz(statechart) {
 
 
   // The resulting string 'graphString' is stored inside a gv file
-  fs.writeFile("./static/js/material/statechart_graphviz.gv", graphString, function(err) {
+  fs.writeFile("./static/files/statechartGV/statechart_graphviz.gv", graphString, function(err) {
     if(err) {
         return console.log(err);
     }

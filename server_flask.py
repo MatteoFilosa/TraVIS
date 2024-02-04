@@ -7,6 +7,9 @@ import os, re
 import graphviz
 import subprocess
 
+from PathsGenerator import *
+from PathsSimulator import *
+
 app = Flask(__name__,
             static_url_path='', 
             static_folder='static',
@@ -486,16 +489,42 @@ def call_generalization():
     generalization_command = "node ./static/js/generalization.js"
     subprocess.call(generalization_command, shell=True)
 
+    database_name = "visualizations"  # You can change db name here
+    mongo_uri = config['DATABASES'][database_name]
+    app.config["MONGO_URI"] = mongo_uri
+    mongo = PyMongo(app)
+    svg_folder = "static/files/statechartGV"
+    collection_name = "graphviz"
+
+    svg_path = os.path.join(svg_folder, f"statechart_graphviz.gv")
+
+    # Verifying if the state chart was already added to the db
+    existing_document = mongo.db[collection_name].find_one({"name": graph_data_list})
+
+    if existing_document:
+        print(f"{graph_data_list} is already in the database. Skipping...")
+    else:
+        with open(svg_path, "r") as file:
+            svg_data = file.read()
+
+        # Inserisci il documento nella collezione
+        documento = {"name": graph_data_list, "svg": svg_data}
+        mongo.db[collection_name].insert_one(documento)
+        print(f"{graph_data_list} inserted into the database.")
+
+    print("\n\n\n Before configFunction \n\n\n")
+
+    print(graph_data_list)
+
+    configFunction()
+
+    try:
+        result = subprocess.run(['py', 'PathsSimulator.py'])
+    except subprocess.CalledProcessError as e:
+        # Gestisci eventuali errori durante l'esecuzione
+        output = f'Errore durante l\'esecuzione del programma esterno: {e.stderr}'
+
     return "finished generalization"
-
-
-
-# TODO MATTEO
-# Call the bovi function to create the final statechart.
-# FORSE PERÒ SI PUÒ CHIAMARE QUESTA FUNZIONE DIRETTAMENTE DENTRO A CALL GENERALIZATION...
-@app.route("/call_bovi")
-def call_bovi():
-    return "finished bovi"
 
 
 
