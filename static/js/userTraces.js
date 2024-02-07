@@ -214,54 +214,30 @@ function populateTable(data) {
       iconButton.addEventListener("click", () => {
         var numbersOnlyID = iconButton.id.replace(/\D/g, "");
 
-        if (
-          document
-            .getElementById(`extrainfoDiv`)
-            .getAttribute("data-visible") === "false"
-        ) {
+        if (document.getElementById(`extrainfoDiv`).getAttribute("data-visible") === "false") {
           iconImg.src = "images/moreInfo_pressed.png";
           iconButton.classList.add("expandButtonPressed");
-          document
-            .getElementById(`extrainfoDiv`)
-            .setAttribute("data-visible", "true");
-          document
-            .getElementById(`extrainfoDiv`)
-            .setAttribute("data-activatedBy", numbersOnlyID);
+          document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "true");
+          document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", numbersOnlyID);
           showExtraInformation(numbersOnlyID);
         } else {
-          const wasActivatedBy = document
-            .getElementById(`extrainfoDiv`)
-            .getAttribute("data-activatedBy");
+          const wasActivatedBy = document.getElementById(`extrainfoDiv`).getAttribute("data-activatedBy");
           //console.log(`Was activatedBy:${wasActivatedBy}, pressed by:${numbersOnlyID}`);
           if (wasActivatedBy != 0 && wasActivatedBy != numbersOnlyID) {
-            document.getElementById(`buttonImg${wasActivatedBy}`).src =
-              "images/moreInfo.png";
-            document
-              .getElementById(`button${wasActivatedBy}`)
-              .classList.remove("expandButtonPressed");
-            document.getElementById(`buttonImg${numbersOnlyID}`).src =
-              "images/moreInfo_pressed.png";
-            document
-              .getElementById(`button${numbersOnlyID}`)
-              .classList.add("expandButtonPressed");
-            document
-              .getElementById(`extrainfoDiv`)
-              .setAttribute("data-activatedBy", numbersOnlyID);
+            document.getElementById(`buttonImg${wasActivatedBy}`).src ="images/moreInfo.png";
+            document.getElementById(`button${wasActivatedBy}`).classList.remove("expandButtonPressed");
+            document.getElementById(`buttonImg${numbersOnlyID}`).src ="images/moreInfo_pressed.png";
+            document.getElementById(`button${numbersOnlyID}`).classList.add("expandButtonPressed");
+            document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", numbersOnlyID);
               clearExtraInformation().then(function (value) {
                 showExtraInformation(numbersOnlyID);
               });
             
           } else {
             iconImg.src = "images/moreInfo.png";
-            document
-              .getElementById(`button${numbersOnlyID}`)
-              .classList.remove("expandButtonPressed");
-            document
-              .getElementById(`extrainfoDiv`)
-              .setAttribute("data-visible", "false");
-            document
-              .getElementById(`extrainfoDiv`)
-              .setAttribute("data-activatedBy", 0);
+            document.getElementById(`button${numbersOnlyID}`).classList.remove("expandButtonPressed");
+            document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "false");
+            document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", 0);
             clearExtraInformation();
           }
         }
@@ -273,7 +249,6 @@ function populateTable(data) {
       tableBody.appendChild(row);
     });
 
-    // Add event listener to each checkbox for changing row color
     checkbox.addEventListener("change", function () {
       var numbersOnlyID = checkbox.id;
       if (checkbox.checked) {
@@ -282,56 +257,41 @@ function populateTable(data) {
         console.log(selectedTraces);
 
         document.getElementById("selectTraceBtn").style.opacity = 1;
+        ExtraInfo();
 
-      //   if (
-      //     document
-      //       .getElementById(`extrainfoDiv`)
-      //       .getAttribute("data-visible") === "false"
-      //   ) {
-          
-      //     document
-      //       .getElementById(`extrainfoDiv`)
-      //       .setAttribute("data-visible", "true");
-      //     document
-      //       .getElementById(`extrainfoDiv`)
-      //       .setAttribute("data-activatedBy", numbersOnlyID);
-      //     showExtraInformation(numbersOnlyID);
-      //   } else {
-      //     const wasActivatedBy = document
-      //       .getElementById(`extrainfoDiv`)
-      //       .getAttribute("data-activatedBy");
-      //     //console.log(`Was activatedBy:${wasActivatedBy}, pressed by:${numbersOnlyID}`);
-      //     if (wasActivatedBy != 0 && wasActivatedBy != numbersOnlyID) {
+        // if (document.getElementById(`extrainfoDiv`).getAttribute("data-visible") === "false") {
+        //   document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "true");
+        //   //document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", numbersOnlyID);
+        //   showExtraInformation(numbersOnlyID);
+        // } else {
+        //   const wasActivatedBy = document.getElementById(`extrainfoDiv`).getAttribute("data-activatedBy");
+        //   // console.log(`Was activatedBy:${wasActivatedBy}, pressed by:${numbersOnlyID}`);
+        //   if (wasActivatedBy != 0 && wasActivatedBy != numbersOnlyID) {
             
-      //       document
-      //         .getElementById(`extrainfoDiv`)
-      //         .setAttribute("data-activatedBy", numbersOnlyID);
-      //       showExtraInformation(numbersOnlyID);
-      //     } else {
-           
-      //       document
-      //         .getElementById(`button${numbersOnlyID}`)
-      //         .classList.remove("expandButtonPressed");
-      //       document
-      //         .getElementById(`extrainfoDiv`)
-      //         .setAttribute("data-visible", "false");
-      //       document
-      //         .getElementById(`extrainfoDiv`)
-      //         .setAttribute("data-activatedBy", 0);
-      //       clearExtraInformation();
-      //     }
-      //   }
+        //     document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", numbersOnlyID);
+        //     showExtraInformation(numbersOnlyID);
+        //   } else {
+        //     document.getElementById(`button${numbersOnlyID}`).classList.remove("expandButtonPressed");
+        //     document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "false");
+        //     document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", 0);
+        //     clearExtraInformation();
+        //   }
+        // }
 
-      // } else {
-      //   row.classList.remove("table-selected");
-      //   selectedTraces.delete(checkbox.id);
-      //   clearExtraInformation();
-      //   console.log(selectedTraces);
       } 
       else {
         row.classList.remove("table-selected");
         selectedTraces.delete(checkbox.id);
         console.log(selectedTraces);
+        if(document.getElementById(`previewTrace${selectedTraceID}`)){
+          document.getElementById(`previewTrace${selectedTraceID}`).id="previewTrace";
+        }
+        document.getElementById(`previewTrace`).style.display="none";
+        ExtraInfo();
+        // document.getElementById(`button${numbersOnlyID}`).classList.remove("expandButtonPressed");
+        // document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "false");
+        // document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", 0);
+        // clearExtraInformation();
       }
       if (selectedTraces.size != 0) {
         document.getElementById("selectTraceBtn").style.display = "block";
@@ -358,6 +318,128 @@ function populateTable(data) {
 
 //#region Select Trace
 
+function ExtraInfo(){
+  document.getElementById("extrainfoContent").style.opacity = 1;
+  document.getElementById("placeholderText").style.display = "none";
+
+  //For now, preview only one selected trace
+  if(selectedTraces.size==1){
+    const [userNum] = selectedTraces;
+    selectedTraceID = userNum;
+    document.getElementById("traceInfoTitle").innerHTML = `Trace Information: User ${[userNum]}`;
+    document.getElementById("previewTrace").style.display="block";
+
+    document.getElementById("previewTrace").href="home";
+
+    loadedTraces.forEach((element, index) => {
+      let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
+      // Extract the captured number from the file name
+      let extractedNumber = match ? match[1] : null;
+  
+      if (extractedNumber === userNum) {
+        selectedTrace_RawValue = JSON.parse(element.user_trace);
+        console.log(selectedTrace_RawValue);
+      }
+    });
+
+    localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue) )
+    localStorage.setItem("selectedTraceID", JSON.stringify(userNum))
+    document.getElementById("previewTrace").id+=userNum;
+
+    generateHeatmap(selectedTraceID);
+  eventTypes(selectedTraceID).then(function (value) {
+    const eventsList = document.getElementById("eventsList");
+    eventsList.innerHTML = "";
+    for (const key in value) {
+      if (value[key] > 0) {
+        console.log(key, value)
+        var eventElement = document.createElement("li");
+        eventElement.textContent = `${key}: ${value[key]}`;
+        if (key == "dblclick")
+          eventElement.textContent = `Double click: ${value[key]}`;
+        eventElement.style.textTransform = "capitalize";
+        eventsList.append(eventElement);
+      }
+    }
+  });
+
+  findViolations(selectedTraceID).then(function (value) {
+    const violationsList = document.getElementById("violationsList");
+    violationsList.innerHTML = "";
+
+    var level1 = document.createElement("div");
+    level1.style.display="flex";
+    let level1colorDiv = document.createElement("div");
+    level1colorDiv.classList.add("violationsColorDiv");
+    level1colorDiv.style.backgroundColor="#f1a171";
+    level1.append(level1colorDiv);
+    level1.append("Low: " + value.level1);
+    
+
+    var level2 = document.createElement("div");
+    level2.style.display="flex";
+    let level2colorDiv = document.createElement("div");
+    level2colorDiv.classList.add("violationsColorDiv");
+    level2colorDiv.style.backgroundColor="#c24a6f";
+    level2.append(level2colorDiv);
+    level2.append("Medium: " + value.level2);
+
+    var level3 = document.createElement("div");
+    level3.style.display="flex";
+    let level3colorDiv = document.createElement("div");
+    level3colorDiv.classList.add("violationsColorDiv");
+    level3colorDiv.style.backgroundColor="#5b257e";
+    level3.append(level3colorDiv);
+    level3.append("High: " + value.level3);
+
+    var level4 = document.createElement("div");
+    level4.style.display="flex";
+    let level4colorDiv = document.createElement("div");
+    level4colorDiv.classList.add("violationsColorDiv");
+    level4colorDiv.style.backgroundColor="#000009";
+    level4.append(level4colorDiv);
+    level4.append("Critical: " + value.level4);
+
+
+    violationsList.append(level1);
+    violationsList.append(level2);
+    violationsList.append(level3);
+    violationsList.append(level4);
+    //generateViolationsHeatmap(value);
+  });
+  findTotalTime(selectedTraceID).then(function (value) {
+    const timeList = document.getElementById("timeList");
+    timeList.innerHTML = "";
+    var totalTime = document.createElement("li");
+    totalTime.textContent = `Total time: ${value.totalTime} seconds`;
+    var averageTime = document.createElement("li");
+    averageTime.textContent = `Average time: ${value.averageTime} seconds`;
+
+    timeList.append(totalTime);
+    timeList.append(averageTime);
+  });
+  
+  }
+  else{
+    let traces = Array.from(selectedTraces);
+    traces=traces.sort();
+    let selectedNums=traces.join(", ");
+    document.getElementById("traceInfoTitle").innerHTML = `Trace Information: Users ${selectedNums}`;
+    
+    if(document.getElementById(`previewTrace${selectedTraceID}`)){
+      document.getElementById(`previewTrace${selectedTraceID}`).id="previewTrace";
+    }
+
+    document.getElementById(`previewTrace`).style.display="none";
+    
+    traces.forEach(element => {
+      eventTypes(element).then(function (value) {console.log(value)});
+    });
+
+
+  }
+ 
+}
 function showExtraInformation(userID) {
   console.log(userID)
   selectedTraceID=userID;
@@ -460,6 +542,8 @@ function showExtraInformation(userID) {
   });
 
 }
+
+
 async function clearExtraInformation() {
   document.getElementById(`previewTrace${selectedTraceID}`).style.display="none";
   document.getElementById(`previewTrace${selectedTraceID}`).id="previewTrace";
