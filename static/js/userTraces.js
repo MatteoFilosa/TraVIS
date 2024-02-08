@@ -6,6 +6,7 @@ var violationsForAllTraces;
 var timeForAllTraces;
 var selectedTraceID;
 var selectedTrace_RawValue;
+var maxInteractionsValue, maxTotalTimeValue, maxViolationsValue;
 //#endregion
 
 window.onload = function () {
@@ -51,6 +52,42 @@ window.onload = function () {
     });
 };
 
+function createSliders() {
+  // maxViolationsValue
+  const violationsSlider = document.createElement("input");
+  violationsSlider.type = "range";
+  violationsSlider.min = 0;
+  violationsSlider.max = maxViolationsValue;
+  violationsSlider.value = maxViolationsValue;
+  violationsSlider.id = "violationsSlider";
+
+  // maxInteractionsValue
+  const interactionsSlider = document.createElement("input");
+  interactionsSlider.type = "range";
+  interactionsSlider.min = 0;
+  interactionsSlider.max = maxInteractionsValue;
+  interactionsSlider.value = maxInteractionsValue;
+  interactionsSlider.id = "interactionsSlider";
+
+  // maxTotalTimeValue
+  const totalTimeSlider = document.createElement("input");
+  totalTimeSlider.type = "range";
+  totalTimeSlider.min = 0;
+  totalTimeSlider.max = maxTotalTimeValue;
+  totalTimeSlider.value = maxTotalTimeValue;
+  totalTimeSlider.id = "totalTimeSlider";
+
+  // Add sliders
+  document.getElementById("filtersRow").appendChild(violationsSlider);
+  document.getElementById("filtersRow").appendChild(interactionsSlider);
+  document.getElementById("filtersRow").appendChild(totalTimeSlider);
+
+  //Add the other two checkboxes (violation types, task division), can be done later
+
+  //We need to add a function for filtering the table
+}
+
+
 function getUserTraces() {
   const url = "http://127.0.0.1:5000/get_user_traces";
   fetch(url)
@@ -63,12 +100,14 @@ function getUserTraces() {
       document.getElementById("tracesNum").innerHTML =
         "Loaded User Traces: " + tracesNum;
       populateTable(loadedTraces);
+
+      
     })
     .then(() => {
-      //enable filtering for table
+      // Enable filtering for table
       var table = new DataTable("#table", {
         columnDefs: [
-          //exclude first and last row from filtering and sorting
+          // exclude first and last row from filtering and sorting
           { orderable: false, targets: [0, 5] },
           { searchable: false, targets: [0, 5] },
         ],
@@ -76,52 +115,16 @@ function getUserTraces() {
         order: [[1, "asc"]],
         orderCellsTop: true,
         fixedHeader: true,
-        // initComplete: function () {
-        //     var api = this.api();
-
-        //     // For each column
-        //     api.columns().eq(0).each(function (colIdx) {
-        //         // Skip the first and last columns
-        //         if (colIdx !== 0 && colIdx !== api.columns().eq(0).length - 1) {
-        //             // Set the header cell to contain the input element
-        //             var cell = $('.filters th').eq(
-        //                 $(api.column(colIdx).header()).index()
-        //             );
-        //             var title = $(cell).text();
-        //             $(cell).html('<input type="text" placeholder="' + title + ' " style="width: 120px;height:24px;border:none;font-size:14px"" />');
-
-        //             // On every keypress in this input
-        //             $(
-        //                 'input',
-        //                 $('.filters th').eq($(api.column(colIdx).header()).index())
-        //             )
-        //                 .off('keyup change')
-        //                 .on('change', function (e) {
-        //                     // Get the search value
-        //                     $(this).attr('title', $(this).val());
-        //                     var regexr = '^{search}$';
-
-        //                     // Search the column for that value
-        //                     api
-        //                         .column(colIdx)
-        //                         .search(
-        //                             this.value != ''
-        //                                 ? regexr.replace('{search}', '(((' + this.value + ')))')
-        //                                 : '',
-        //                             this.value != '',
-        //                             this.value == ''
-        //                         )
-        //                         .draw();
-        //                 })
-        //                 .on('keyup', function (e) {
-        //                     e.stopPropagation();
-
-        //                     $(this).trigger('change');
-        //                 });
-        //         }
-        //     });
-        //},
       });
+
+      /* // ALEXANDRA: I'm trying to create sliders but I get an error.
+      const tableHead = document.createElement("thead");
+      const filtersRow = document.createElement("tr");
+      filtersRow.id = "filtersRow";
+      tableHead.appendChild(filtersRow);
+      document.getElementById("table").appendChild(tableHead);
+
+      createSliders(); */
     });
 }
 
@@ -142,14 +145,18 @@ function getTime() {
     });
 }
 
+
+
+
 //#region Update Table
 // Function to truncate a string and add ellipsis
 function truncateString(str, maxLength) {
   return str.length > maxLength ? str.substring(0, maxLength) + " [...]" : str;
 }
-// Function to populate the table with JSON data
 function populateTable(data) {
   const tableBody = document.getElementById("tracesTable");
+  console.log(data)
+
 
   data.forEach((element, index) => {
     let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
@@ -177,22 +184,50 @@ function populateTable(data) {
     const eventsCell = document.createElement("td");
     var traceData = JSON.parse(element.user_trace);
     eventsCell.style.display = "flex";
-    eventsCell.style.marginTop="11px";
-    eventsCell.style.justifyContent="space-between";
+    eventsCell.style.marginTop = "11px";
+    eventsCell.style.justifyContent = "space-between";
+
     eventTypes(extractedNumber).then(function (value) {
       eventsCell.appendChild(createEventsBar(value));
+
+      const interactionsValue = Object.values(value).reduce(
+        (acc, count) => acc + count,
+        0
+      );
+
+
+
+      if (interactionsValue > maxInteractionsValue || maxInteractionsValue === undefined) {
+        maxInteractionsValue = interactionsValue;
+      }
     });
+
+    //console.log("Il valore più grande di interactionsValue è:", maxInteractionsValue);
+
     eventsCell.textContent = traceData.length;
     row.appendChild(eventsCell);
 
     findViolations(extractedNumber).then(function (value) {
       // Add violations column
       const violationsCell = document.createElement("td");
-   
-      // const sum = Object.values(value).reduce((acc, curr) => acc + curr, 0);
-      // violationsCell.textContent = sum;
+
+      console.log(value)
+
+      const violationsValue = Object.values(value).reduce(
+        (acc, count) => acc + count,
+        0
+      );
+
+      // Aggiorna la variabile maxViolationsValue se violationsValue è maggiore
+      if (violationsValue > maxViolationsValue || maxViolationsValue === undefined) {
+        maxViolationsValue = violationsValue;
+      }
+
       violationsCell.appendChild(createViolationsBar(value));
       row.appendChild(violationsCell);
+
+      // Qui puoi usare il valore più grande di maxViolationsValue
+
     });
 
     findTotalTime(extractedNumber).then(function (value) {
@@ -200,6 +235,10 @@ function populateTable(data) {
       const timeCell = document.createElement("td");
       timeCell.textContent = value.totalTime + " seconds";
       row.appendChild(timeCell);
+
+      if (value.totalTime > maxTotalTimeValue || maxTotalTimeValue === undefined) {
+        maxTotalTimeValue = value.totalTime;
+      }
 
       // Add button on last column
       const iconCell = document.createElement("td");
@@ -224,15 +263,15 @@ function populateTable(data) {
           const wasActivatedBy = document.getElementById(`extrainfoDiv`).getAttribute("data-activatedBy");
           //console.log(`Was activatedBy:${wasActivatedBy}, pressed by:${numbersOnlyID}`);
           if (wasActivatedBy != 0 && wasActivatedBy != numbersOnlyID) {
-            document.getElementById(`buttonImg${wasActivatedBy}`).src ="images/moreInfo.png";
+            document.getElementById(`buttonImg${wasActivatedBy}`).src = "images/moreInfo.png";
             document.getElementById(`button${wasActivatedBy}`).classList.remove("expandButtonPressed");
-            document.getElementById(`buttonImg${numbersOnlyID}`).src ="images/moreInfo_pressed.png";
+            document.getElementById(`buttonImg${numbersOnlyID}`).src = "images/moreInfo_pressed.png";
             document.getElementById(`button${numbersOnlyID}`).classList.add("expandButtonPressed");
             document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", numbersOnlyID);
-              clearExtraInformation().then(function (value) {
-                showExtraInformation(numbersOnlyID);
-              });
-            
+            clearExtraInformation().then(function (value) {
+              showExtraInformation(numbersOnlyID);
+            });
+
           } else {
             iconImg.src = "images/moreInfo.png";
             document.getElementById(`button${numbersOnlyID}`).classList.remove("expandButtonPressed");
@@ -247,6 +286,11 @@ function populateTable(data) {
 
       // Add the row to the table
       tableBody.appendChild(row);
+
+      console.log("maxInteractionsValue è:", maxInteractionsValue);
+      console.log("maxViolationsValue è:", maxViolationsValue);
+      console.log("maxTotalTime è:", maxTotalTimeValue);
+
     });
 
     checkbox.addEventListener("change", function () {
@@ -267,7 +311,7 @@ function populateTable(data) {
         //   const wasActivatedBy = document.getElementById(`extrainfoDiv`).getAttribute("data-activatedBy");
         //   // console.log(`Was activatedBy:${wasActivatedBy}, pressed by:${numbersOnlyID}`);
         //   if (wasActivatedBy != 0 && wasActivatedBy != numbersOnlyID) {
-            
+
         //     document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", numbersOnlyID);
         //     showExtraInformation(numbersOnlyID);
         //   } else {
@@ -278,15 +322,15 @@ function populateTable(data) {
         //   }
         // }
 
-      } 
+      }
       else {
         row.classList.remove("table-selected");
         selectedTraces.delete(checkbox.id);
         console.log(selectedTraces);
-        if(document.getElementById(`previewTrace${selectedTraceID}`)){
-          document.getElementById(`previewTrace${selectedTraceID}`).id="previewTrace";
+        if (document.getElementById(`previewTrace${selectedTraceID}`)) {
+          document.getElementById(`previewTrace${selectedTraceID}`).id = "previewTrace";
         }
-        document.getElementById(`previewTrace`).style.display="none";
+        document.getElementById(`previewTrace`).style.display = "none";
         ExtraInfo();
         // document.getElementById(`button${numbersOnlyID}`).classList.remove("expandButtonPressed");
         // document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "false");
@@ -295,22 +339,21 @@ function populateTable(data) {
       }
       if (selectedTraces.size != 0) {
         document.getElementById("selectTraceBtn").style.display = "block";
-        if(selectedTraces.size >1){
+        if (selectedTraces.size > 1) {
           document.getElementById(
             "selectTraceBtn"
           ).innerHTML = `Replay ${selectedTraces.size} traces`;
-        }else
-        document.getElementById(
-          "selectTraceBtn"
-        ).innerHTML = `Replay ${selectedTraces.size} trace`;
-        
+        } else
+          document.getElementById(
+            "selectTraceBtn"
+          ).innerHTML = `Replay ${selectedTraces.size} trace`;
+
       } else {
         document.getElementById("selectTraceBtn").style.opacity = 0;
       }
     });
   });
 
-  //Applying sliders
 
 }
 
