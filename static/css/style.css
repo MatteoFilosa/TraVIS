@@ -356,6 +356,33 @@ a.dropdown-item {
     justify-content: space-evenly;
 }
 
+#filtersContainer {
+    padding: 0 10px;
+    padding-top: 100px;
+    /* Aggiunto padding a sinistra e a destra */
+}
+
+.filterSpan {
+    text-align: center;
+    margin-bottom: 15px;
+    /* Aggiunto spazio verticale tra gli sliders e i label */
+}
+
+input[type="range"] {
+    width: 100%;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+span {
+    display: block;
+    margin-top: 5px;
+    font-size: 12px;
+}
+
 /* .dragLine{
     cursor: w-resize;
     height: 100%;

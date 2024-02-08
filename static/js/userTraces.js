@@ -54,37 +54,112 @@ window.onload = function () {
 
 function createSliders() {
   // maxViolationsValue
-  const violationsSlider = document.createElement("input");
-  violationsSlider.type = "range";
-  violationsSlider.min = 0;
-  violationsSlider.max = maxViolationsValue;
-  violationsSlider.value = maxViolationsValue;
-  violationsSlider.id = "violationsSlider";
+  const violationsSlider = createSlider("violationsSlider", "Total Violations", maxViolationsValue);
 
   // maxInteractionsValue
-  const interactionsSlider = document.createElement("input");
-  interactionsSlider.type = "range";
-  interactionsSlider.min = 0;
-  interactionsSlider.max = maxInteractionsValue;
-  interactionsSlider.value = maxInteractionsValue;
-  interactionsSlider.id = "interactionsSlider";
+  const interactionsSlider = createSlider("interactionsSlider", "Events", maxInteractionsValue);
 
   // maxTotalTimeValue
-  const totalTimeSlider = document.createElement("input");
-  totalTimeSlider.type = "range";
-  totalTimeSlider.min = 0;
-  totalTimeSlider.max = maxTotalTimeValue;
-  totalTimeSlider.value = maxTotalTimeValue;
-  totalTimeSlider.id = "totalTimeSlider";
+  const totalTimeSlider = createSlider("totalTimeSlider", "Time", maxTotalTimeValue);
 
   // Add sliders
-  document.getElementById("filtersRow").appendChild(violationsSlider);
-  document.getElementById("filtersRow").appendChild(interactionsSlider);
-  document.getElementById("filtersRow").appendChild(totalTimeSlider);
+  document.getElementById("violationsFilter").appendChild(violationsSlider);
+  document.getElementById("eventsFilter").appendChild(interactionsSlider);
+  document.getElementById("totalTimeFilter").appendChild(totalTimeSlider);
 
-  //Add the other two checkboxes (violation types, task division), can be done later
+  // Add the other two checkboxes (violation types, task division), can be done later
 
-  //We need to add a function for filtering the table
+  // We need to add a function for filtering the table
+}
+
+function createSlider(id, label, maxValue) {
+  const sliderContainer = document.createElement("div");
+
+  // Create label for the slider
+  /* const labelElement = document.createElement("label");
+  labelElement.textContent = label;
+  sliderContainer.appendChild(labelElement); */
+
+  if (id === "totalTimeSlider") {
+    maxValue = Math.ceil(maxValue);
+  }
+  // Create slider
+  const slider = document.createElement("input");
+  slider.type = "range";
+  slider.min = 0;
+  slider.max = maxValue;
+  slider.value = maxValue;
+  slider.id = id;
+
+  // Create element to display current value
+  const valueDisplay = document.createElement("span");
+  valueDisplay.textContent = maxValue;
+
+  // Append slider and value display to the container
+  sliderContainer.appendChild(slider);
+  sliderContainer.appendChild(valueDisplay);
+
+
+
+  //sliderContainer.setAttribute("data-filter", dataFilter);
+
+  // Attach an event listener to update the displayed value when the slider changes
+  
+  slider.addEventListener("input", () => {
+    valueDisplay.textContent = slider.value;
+    applyTableFilter();
+  });
+
+  return sliderContainer;
+
+}
+//a a a a a a a a  a a a
+
+function applyTableFilter() {
+     // Ottenere i valori degli slider
+    const violationsFilterValue = document.getElementById("violationsSlider").value;
+    const eventsFilterValue = document.getElementById("interactionsSlider").value;
+    const totalTimeFilterValue = parseFloat(document.getElementById("totalTimeSlider").value);
+
+    // Loop attraverso le righe della tabella
+    const tableRows = document.getElementById("tracesTable").getElementsByTagName("tr");
+
+  for (let i = 0; i < tableRows.length; i++) {
+    const row = tableRows[i];
+
+    // Ottenere i valori dai figli utilizzando gli id specificati
+    const violationsValue = parseFloat(row.querySelector("#violationsCell").innerHTML);
+    const eventsValue = parseFloat(row.querySelector("#eventCell").innerHTML);
+    var totalTimeValue = parseFloat(row.querySelector("#timeCell").innerHTML);
+
+  
+
+    console.log(violationsValue, eventsValue, totalTimeValue);
+
+    // Controlla se la riga soddisfa i criteri di filtro
+    const showRow =
+      !isNaN(violationsValue) &&
+      !isNaN(eventsValue) &&
+      !isNaN(totalTimeValue) &&
+      violationsValue <= violationsFilterValue &&
+      eventsValue <= eventsFilterValue &&
+      totalTimeValue <= totalTimeFilterValue;
+
+    // Mostra/nascondi la riga in base al filtro
+    row.style.display = showRow ? "" : "none";
+  }
+
+  let rowCount = 0;
+  for (let i = 0; i < tableRows.length; i++) {
+    if (tableRows[i].style.display !== "none") {
+      rowCount++;
+    }
+  }
+
+  // Aggiorna l'innerHTML dell'elemento "tracesNum"
+  document.getElementById("tracesNum").innerHTML = "Loaded User Traces: " + rowCount;
+
+    
 }
 
 
@@ -117,14 +192,9 @@ function getUserTraces() {
         fixedHeader: true,
       });
 
-      /* // ALEXANDRA: I'm trying to create sliders but I get an error.
-      const tableHead = document.createElement("thead");
-      const filtersRow = document.createElement("tr");
-      filtersRow.id = "filtersRow";
-      tableHead.appendChild(filtersRow);
-      document.getElementById("table").appendChild(tableHead);
+  
 
-      createSliders(); */
+      createSliders(); 
     });
 }
 
@@ -186,6 +256,7 @@ function populateTable(data) {
     eventsCell.style.display = "flex";
     eventsCell.style.marginTop = "11px";
     eventsCell.style.justifyContent = "space-between";
+    eventsCell.id = "eventCell";
 
     eventTypes(extractedNumber).then(function (value) {
       eventsCell.appendChild(createEventsBar(value));
@@ -210,6 +281,7 @@ function populateTable(data) {
     findViolations(extractedNumber).then(function (value) {
       // Add violations column
       const violationsCell = document.createElement("td");
+      //violationsCell.id = "violationsCell";
 
       console.log(value)
 
@@ -233,11 +305,12 @@ function populateTable(data) {
     findTotalTime(extractedNumber).then(function (value) {
       // Add time column
       const timeCell = document.createElement("td");
+      timeCell.id = "timeCell"
       timeCell.textContent = value.totalTime + " seconds";
       row.appendChild(timeCell);
-
-      if (value.totalTime > maxTotalTimeValue || maxTotalTimeValue === undefined) {
-        maxTotalTimeValue = value.totalTime;
+      console.log(value.totalTime)
+      if (parseFloat(value.totalTime) > maxTotalTimeValue || maxTotalTimeValue === undefined) {
+        maxTotalTimeValue = parseFloat(value.totalTime);
       }
 
       // Add button on last column
@@ -286,7 +359,7 @@ function populateTable(data) {
 
       // Add the row to the table
       tableBody.appendChild(row);
-
+      
       console.log("maxInteractionsValue è:", maxInteractionsValue);
       console.log("maxViolationsValue è:", maxViolationsValue);
       console.log("maxTotalTime è:", maxTotalTimeValue);
@@ -715,6 +788,7 @@ function createViolationsBar(violations){
   totalNum.textContent=totalViolations;
   totalNum.style.marginRight="8px";
   totalNum.style.color="black";
+  totalNum.id = "violationsCell"
   violationsRectangle.appendChild(totalNum);
 
   const percentages = {};
