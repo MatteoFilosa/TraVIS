@@ -100,6 +100,8 @@ def generate_svg(file_path):
         # print("Graphviz content before transformation:")
         # print(graphviz_content)
 
+    #print(graphviz_content)
+
     # Execute the command to generate the SVG using Graphviz (dot)
     dot_command = f"dot -Tsvg -o output.svg {file_path}"
     subprocess.run(dot_command, shell=True)
@@ -374,9 +376,10 @@ def get_userTraceTime():
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
 
+'''
 if __name__ == "__main__":
     app.run(debug=True)
-
+'''
 
 @app.route("/get_statecharts")
 def get_statecharts():
@@ -400,7 +403,7 @@ def get_statecharts():
                 "svg": svg_data
             }  
 
-            print(statechart_info)
+            #print(statechart_info)
 
             statecharts_data.append(statechart_info)
 
@@ -449,7 +452,7 @@ def get_statecharts_gv():
             statecharts_data.append(statechart_info)
     
 
-            print(statechart_info["svg"])
+            #print(statechart_info["svg"])
 
         print("Statecharts data collected successfully!")
 
@@ -486,20 +489,24 @@ def create_statechart_files():
     system_url_file.close()
 
     # We call the generalization function via Node JS.
-    subprocess.call("node ./static/js/generalization.js", shell=True)
+    #subprocess.call("node ./static/js/generalization.js", shell=True)
 
     # We call the first validation function via Python.
     configFunction()
 
     # We call the second validation function via a Python subprocess.
-    subprocess.run(['py', 'PathsSimulator.py'])
+    subprocess.run(['python3', 'PathsSimulator.py'])
 
-    # The graphviz file is saved in the db.
-    mongo = PyMongo(app)
-    collection_name = "graphviz"
+
+
+
+    
     database_name = "visualizations"
     mongo_uri = config['DATABASES'][database_name]
     app.config["MONGO_URI"] = mongo_uri
+    # The graphviz file is saved in the db.
+    mongo = PyMongo(app)
+    collection_name = "graphviz"
     
     gv_folder = "static/files/statechartGV"
     gv_path = os.path.join(gv_folder, f"statechart_graphviz.gv")
@@ -516,6 +523,30 @@ def create_statechart_files():
         documento = {"name": system_url, "svg": gv_data}
         mongo.db[collection_name].insert_one(documento)
         print(f"{system_url} inserted into the database.")
+
+
+
+    #gv_folder = "static/files/statechartGV"
+    gv_path = os.path.join(gv_folder, "statechart_graphviz.gv")
+    generate_svg(gv_path)
+    collection_name = "state_charts"
+
+    # Verifying if the state chart was already added to the db
+    existing_document = mongo.db[collection_name].find_one({"name": system_url})
+
+    if existing_document:
+        print(f"{system_url} is already in the database. Skipping...")
+    else:
+        with open("./output.svg", "r") as file:
+            gv_data = file.read()
+
+        documento = {"name": system_url, "svg": gv_data}
+        mongo.db[collection_name].insert_one(documento)
+        print(f"{system_url} inserted into the database.")
+    
+
+
+
 
     # Here you will also save the other generated statecharts when the db will support them.
     

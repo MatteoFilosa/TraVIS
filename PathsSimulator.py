@@ -1066,7 +1066,8 @@ if __name__ == "__main__":
     options = webdriver.ChromeOptions()
     options.add_argument('ignore-certificate-errors')
     options.add_argument('--ignore-ssl-errors')
-    driver = webdriver.Chrome(executable_path='C:\Webdriver\chromedriver.exe')
+    #driver = webdriver.Chrome(executable_path='C:\Webdriver\chromedriver.exe')
+    driver = webdriver.Chrome(executable_path='/home/user/Scrivania/paper/Webdriver/chromedriver')
     driver = webdriver.Chrome(chrome_options=options)
 
     try:

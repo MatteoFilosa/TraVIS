@@ -41,7 +41,7 @@ window.onload = function () {
         document.getElementById("sidebar").classList.toggle("active");
     });
     colorLegend();
-    graphviz();
+    //graphviz();
 
     // If the user wants to see the state chart highlighted from the user traces page
     if(JSON.parse(localStorage.getItem("selectedTrace")) != null){
@@ -752,7 +752,7 @@ function isNameInUrl(jsonData, systemUrl) {
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
 
     if (matchingElement) {
-       if(document.getElementById("notFoundText")){
+        if(document.getElementById("notFoundText")){
         document.getElementById("notFoundText").remove();
        }
         matchingName = matchingElement.name;
@@ -900,7 +900,8 @@ function isNameInUrl(jsonData, systemUrl) {
                 }
             )
             .then(response => console.log(response))
-            .then(loadButton.disabled = false);
+            .then(loadButton.disabled = false)
+            .then(setTimeout(CheckIfStatechartExists, 5000));
     }
     return false;
 }
