@@ -2,8 +2,6 @@ from re import S
 from xml.dom.minidom import Element
 from matplotlib.style import use
 from selenium import webdriver
-from selenium.webdriver.firefox.service import Service as FirefoxService
-from webdriver_manager.firefox import GeckoDriverManager
 import time
 import random
 from random import choice
@@ -876,6 +874,7 @@ def EventHandle(eventName,state,driver,pathNumber,pathElement):
 
         finalSummary[pathNumber].append([pathElement,"brush mouseup",state["info"][0],latency[-1] , resultLatency])
 
+        '''
         print("Pan start")
 
         latency = PanBrush(state["info"][1],driver)
@@ -944,6 +943,8 @@ def EventHandle(eventName,state,driver,pathNumber,pathElement):
 
         finalSummary[pathNumber].append([pathElement,"panzoom mouseup",state["info"][1],latency[-1] , resultLatency])
 
+    '''
+        
     elif(eventName == "wheel"):
 
         latency = Zoom(state["info"],driver)
@@ -1056,12 +1057,17 @@ if __name__ == "__main__":
     siblingPercentage = 10
 
     #open the statechart json file
-    explorationSequence = open('./static/js/material/exploration.json')
+    explorationSequence = open('./static/js/material/exploration_user.json')
 
     #returns the JSON object as a dictionary
     explorationSequence = json.load(explorationSequence)
 
-    driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+    #driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+    options = webdriver.ChromeOptions()
+    options.add_argument('ignore-certificate-errors')
+    options.add_argument('--ignore-ssl-errors')
+    driver = webdriver.Chrome(executable_path='C:\Webdriver\chromedriver.exe')
+    driver = webdriver.Chrome(chrome_options=options)
 
     try:
 
@@ -1069,8 +1075,8 @@ if __name__ == "__main__":
         urlVis = system_url_file.read()
         system_url_file.close()
 
-        driver.maximize_window()
         driver.get(urlVis)
+        driver.maximize_window()
 
     except Exception as e:
 
@@ -1132,7 +1138,7 @@ if __name__ == "__main__":
 
                         xpath = transition["xpath"]
                         event = transition["event"]
-                        siblings = int((transition["siblings"]*siblingPercentage)/100)
+                        siblings = int((int(transition["siblings"])*siblingPercentage)/100)
                         starting = transition["startingPath"]
                     
 
