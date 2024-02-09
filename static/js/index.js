@@ -873,11 +873,11 @@ function isNameInUrl(jsonData, systemUrl) {
         notFoundtext.innerHTML = `
             <div align="center">
                 <div>
-                    No statechart found for inserted URL.
+                    No statechart found for inserted URL. Please wait while it gets created.
                     <br>
-                    Please wait while it gets created. This may take a while.
+                    This may take a while. A new browser page may also be opened in order to perform the creation process correctly; please do not interact with it, it will be automatically closed at the end.
                     <br>
-                    It will be automatically loaded when it is ready.
+                    The statechart will be automatically loaded when it is ready.
                 </div>
                 <br>
                 <div class="spinner-border" id="spinnerId" role="status" style="display: block;"></div>
@@ -889,7 +889,7 @@ function isNameInUrl(jsonData, systemUrl) {
 
         // We use Python to call the backend functions needed for creating the statechart files
         // and to save it in the db. Finally we try to load it.
-        url = 'http://127.0.0.1:5000/call_generalization';
+        url = 'http://127.0.0.1:5000/create_statechart_files';
         fetch
             (
                 url,

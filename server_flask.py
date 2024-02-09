@@ -473,58 +473,53 @@ def get_statecharts_gv():
 
 
 # TODO MATTEO
-# Call the generalization function to create the initial statechart.
+# Call the functions to create the statechart.
 # In order to do so, we take in POST the url of the vis so that we can 
 # write it in the 'system_url.txt' file beforehand.
-@app.route("/call_generalization", methods=['POST'])
-def call_generalization():
+@app.route("/create_statechart_files", methods=['POST'])
+def create_statechart_files():
     # We write the current vis URL (inputted via POST) in the 'system_url.txt' file.
     request_data = request.get_json()
-    graph_data_list = request_data.get('newUrl')
+    system_url = request_data.get('newUrl')
     system_url_file = open("./static/js/material/system_url.txt", "w")
-    system_url_file.write(graph_data_list)
+    system_url_file.write(system_url)
     system_url_file.close()
 
     # We call the generalization function via Node JS.
-    generalization_command = "node ./static/js/generalization.js"
-    subprocess.call(generalization_command, shell=True)
+    subprocess.call("node ./static/js/generalization.js", shell=True)
 
-    database_name = "visualizations"  # You can change db name here
-    mongo_uri = config['DATABASES'][database_name]
-    app.config["MONGO_URI"] = mongo_uri
-    mongo = PyMongo(app)
-    svg_folder = "static/files/statechartGV"
-    collection_name = "graphviz"
-
-    svg_path = os.path.join(svg_folder, f"statechart_graphviz.gv")
-
-    # Verifying if the state chart was already added to the db
-    existing_document = mongo.db[collection_name].find_one({"name": graph_data_list})
-
-    if existing_document:
-        print(f"{graph_data_list} is already in the database. Skipping...")
-    else:
-        with open(svg_path, "r") as file:
-            svg_data = file.read()
-
-        # Inserisci il documento nella collezione
-        documento = {"name": graph_data_list, "svg": svg_data}
-        mongo.db[collection_name].insert_one(documento)
-        print(f"{graph_data_list} inserted into the database.")
-
-    print("\n\n\n Before configFunction \n\n\n")
-
-    print(graph_data_list)
-
+    # We call the first validation function via Python.
     configFunction()
 
-    try:
-        result = subprocess.run(['py', 'PathsSimulator.py'])
-    except subprocess.CalledProcessError as e:
-        # Gestisci eventuali errori durante l'esecuzione
-        output = f'Errore durante l\'esecuzione del programma esterno: {e.stderr}'
+    # We call the second validation function via a Python subprocess.
+    subprocess.run(['py', 'PathsSimulator.py'])
 
-    return "finished generalization"
+    # The graphviz file is saved in the db.
+    mongo = PyMongo(app)
+    collection_name = "graphviz"
+    database_name = "visualizations"
+    mongo_uri = config['DATABASES'][database_name]
+    app.config["MONGO_URI"] = mongo_uri
+    
+    gv_folder = "static/files/statechartGV"
+    gv_path = os.path.join(gv_folder, f"statechart_graphviz.gv")
+
+    # Verifying if the state chart was already added to the db
+    existing_document = mongo.db[collection_name].find_one({"name": system_url})
+
+    if existing_document:
+        print(f"{system_url} is already in the database. Skipping...")
+    else:
+        with open(gv_path, "r") as file:
+            gv_data = file.read()
+
+        documento = {"name": system_url, "svg": gv_data}
+        mongo.db[collection_name].insert_one(documento)
+        print(f"{system_url} inserted into the database.")
+
+    # Here you will also save the other generated statecharts when the db will support them.
+    
+    return "finished statechart files creation"
 
 
 
