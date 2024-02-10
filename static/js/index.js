@@ -44,8 +44,9 @@ window.onload = function () {
     //graphviz();
 
     // If the user wants to see the state chart highlighted from the user traces page
-    //if(JSON.parse(localStorage.getItem("selectedTrace")) != null){
-    if(JSON.parse(localStorage.getItem("selectedTrace")) == null){    
+    if(localStorage.getItem("selectedTrace") != null){
+    //if(JSON.parse(localStorage.getItem("selectedTrace")) == null){
+
         systemURL = "https://vega.github.io/falcon/flights/"
         LoadSystem();
         
@@ -483,8 +484,8 @@ function highlightStatechart(interaction_types) {
     // Add content to the traceInfo div
     traceInfoDiv.innerHTML += "Trace selected: " + JSON.parse(localStorage.getItem("selectedTraceID"));
 
-    //localStorage.removeItem("selectedTrace");
-    //localStorage.removeItem("selectedTraceID");
+    localStorage.removeItem("selectedTrace");
+    localStorage.removeItem("selectedTraceID");
 }
 
 
@@ -850,7 +851,7 @@ function isNameInUrl(jsonData, systemUrl) {
 
             }
 
-            //localStorage.removeItem("selectedTrace")
+            localStorage.removeItem("selectedTrace")
             return true;
         }
         else {

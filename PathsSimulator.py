@@ -1045,7 +1045,14 @@ problemsFound =  {}
 element = None
 pathElement = ""
 
-if __name__ == "__main__":
+def pathsSimulatorContainer(explorationSequence):
+
+    global element
+    global actionSequence
+    global finalSummary
+    global problemsFound
+    global pathElement
+    global timeOut
 
     nameVis = "Falcon"
 
@@ -1056,18 +1063,17 @@ if __name__ == "__main__":
 
     #open the statechart json file
     #explorationSequence = open('./static/js/material/exploration_user.json')
-    explorationSequence = open('user_trace_flights.json')
+    #explorationSequence = open('user_trace_flights.json')
 
     #returns the JSON object as a dictionary
-    explorationSequence = json.load(explorationSequence)
+    explorationSequence = json.loads(explorationSequence)
 
     #driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
     options = webdriver.ChromeOptions()
     options.add_argument('ignore-certificate-errors')
     options.add_argument('--ignore-ssl-errors')
-    driver = webdriver.Chrome(executable_path='C:\Webdriver\chromedriver.exe')
+    driver = webdriver.Chrome(executable_path='C:\Webdriver\chromedriver.exe', chrome_options=options)
     #driver = webdriver.Chrome(executable_path='/home/user/Scrivania/paper/Webdriver/chromedriver')
-    driver = webdriver.Chrome(chrome_options=options)
 
     try:
 
@@ -1077,8 +1083,12 @@ if __name__ == "__main__":
 
         driver.maximize_window()
         driver.get("http://127.0.0.1:5000/home")
-        iframe = driver.find_element(By.ID, "website")
 
+        script = "localStorage.setItem('selectedTrace', '[]');"
+        driver.execute_script(script)
+        driver.refresh()
+
+        iframe = driver.find_element(By.ID, "website")
         driver.switch_to.frame(iframe)
 
     except Exception as e:
@@ -1094,7 +1104,7 @@ if __name__ == "__main__":
 
         time.sleep(10)
 
-        for transition in explorationSequence[0]:
+        for transition in explorationSequence:
 
             #if(len(driver.window_handles) != 1):
             #    driver.switch_to.window(originalWindow)

@@ -54,13 +54,6 @@ window.onload = function () {
         document.getElementById("selectTraceBtn").style.display = "none";
       }
     });
-
-    // Function to handle the replay of a selected trace - Francesco
-    //document.getElementById("selectTraceBtn").addEventListener("click", () => { window.location.href = `/replay?vis=&trace_id=${selectedCheckboxTrace}` });
-    document.getElementById("selectTraceBtn").addEventListener("click", () => {
-      localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue));
-      localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
-    });
 };
 
 function getUserTraces() {
@@ -297,7 +290,7 @@ function populateTable(data) {
         selectedTraces.add(checkbox.id);
         console.log(selectedTraces);
 
-        document.getElementById("selectTraceBtn").style.opacity = 1;
+        //document.getElementById("selectTraceBtn").style.opacity = 1;
 
       //   if (
       //     document
@@ -392,8 +385,28 @@ function showExtraInformation(userID) {
   document.getElementById("placeholderText").style.display = "none";
   document.getElementById("previewTrace").style.display="block";
 
+  let selectTraceBtnElem = document.getElementById("selectTraceBtn");
+  selectTraceBtnElem.innerHTML = `Replay selected trace`;
+  selectTraceBtnElem.style.opacity = 1;
+  selectTraceBtnElem.style.display = "block";
+
+  document.getElementById("selectTraceBtn").addEventListener("click", function () {
+    
+    url = 'http://127.0.0.1:5000/replay';
+    fetch
+        (
+            url,
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ current_trace: JSON.stringify(selectedTrace_RawValue) })
+            }
+        )
+        .then(response => console.log(response));
+  });
+
   //document.getElementById("previewTrace").href="home";
-  document.getElementById("previewTrace").href="replay";
+  //document.getElementById("previewTrace").href="replay";
   localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue) )
   localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID))
   document.getElementById("previewTrace").id+=selectedTraceID;
