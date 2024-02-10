@@ -552,6 +552,14 @@ def create_statechart_files():
     
     return "finished statechart files creation"
 
+@app.route("/replay")
+def replay_user_trace():
+
+    try:
+        result = subprocess.run(['py', 'PathsSimulator.py'])
+    except subprocess.CalledProcessError as e:
+        # Gestisci eventuali errori durante l'esecuzione
+        output = f'Errore durante l\'esecuzione del programma esterno: {e.stderr}'
 
 
 if __name__ == "__main__":
