@@ -41,17 +41,22 @@ window.onload = function () {
         document.getElementById("sidebar").classList.toggle("active");
     });
     colorLegend();
-    //graphviz();
+    //graphviz();   //THIS IS NOT NEEDED!
 
     // If the user wants to see the state chart highlighted from the user traces page
     if(localStorage.getItem("selectedTrace") != null){
-    //if(JSON.parse(localStorage.getItem("selectedTrace")) == null){
 
         systemURL = "https://vega.github.io/falcon/flights/"
         LoadSystem();
         
     }
-    
+
+    // TODO MATTEO
+    // If we are replaying the user traces (domain url "/home"), we must show the replay icons.
+    clientUrl = window.location.href;
+    if( clientUrl.includes("/home") ) {
+        document.getElementById("replayIconsID").style.display = "block";
+    }
 };
 
 
@@ -669,12 +674,6 @@ function graphLayout(svg) {
     // Print the average degree
     document.getElementById("avgDeg").innerHTML=`${averageDegree.toFixed(2)}`;
     console.log("Average Degree: " + averageDegree);
-
-
-
-
- 
-
 }
 
     
@@ -749,6 +748,7 @@ function toggleLegend(){
         colorLegend.style.height="31px";
     }
 }
+
 function isNameInUrl(jsonData, systemUrl) {
     
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
@@ -1020,8 +1020,8 @@ function visualizeStatechart(){
             //console.log(json.svgContent);
             statechartSVG.style.display = "block";
             var parser = new DOMParser();
-        var doc = parser.parseFromString(json.svgContent, "image/svg+xml");
-        var originalSVG = doc.documentElement;
+            var doc = parser.parseFromString(json.svgContent, "image/svg+xml");
+            var originalSVG = doc.documentElement;
             graphLayout(originalSVG);
             statechartSVG.appendChild(originalSVG);
         });
@@ -1095,5 +1095,45 @@ function LoadSystem() {
 }
 
 //#endregion
+
+
+
+// TODO MATTEO
+// Function to change the replay state.
+function changeReplayState(newState)
+{
+    if
+    (
+        (newState.localeCompare("stop")  != 0) &&
+        (newState.localeCompare("pause") != 0) &&
+        (newState.localeCompare("play")  != 0) &&
+        (newState.localeCompare("step")  != 0)
+    ) {
+        newState = "stop";
+        console.log("ERROR: INVALID 'changeReplayState' INPUT! STATE SET TO STOP!");
+    }
+
+    replayButtons = document.getElementsByClassName("replayButtonClass");
+    for(let i = 0; i < replayButtons.length; i++) {
+        replayButtons[i].style.color = "rgb(255, 255, 255)";
+    }
+    document.getElementById("replayID_" + newState).style.color = "rgb(0, 255, 0)";
+
+
+    url = `http://127.0.0.1:5000/change_replay_state`;
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ new_state: newState }),
+    })
+        .then(response => {
+            if(newState.localeCompare("step") == 0) {
+                document.getElementById("replayID_step").style.color = "rgb(255, 255, 255)";
+                document.getElementById("replayID_pause").style.color = "rgb(0, 255, 0)";
+            }
+        });
+}
 
 

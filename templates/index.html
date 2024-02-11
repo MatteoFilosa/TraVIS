@@ -20,6 +20,7 @@
 
 
     <!-- Font Awesome JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js"
         integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ"
         crossorigin="anonymous"></script>
@@ -198,6 +199,23 @@
                 </li>
 
                 <div class="layoutButtons">
+                    <!-- TODO MATTEO -->
+                    <!--
+                        The replay icons.
+                        Initially they are not shown unless we are in the replay domain url "/home".
+                        The current action is green, the others are white.
+                        Clicking on them will change the replay state.
+                    -->
+                    <ul id="replayIconsID" style="display: none;">
+                        <li class="replayButtons" class="nav-item">
+                            <p><i id="replayID_stop" class="fa fa-stop replayButtonClass" style="color: rgb(255, 255, 255);" onclick="changeReplayState('stop');"></i></p>
+                            <p><i id="replayID_pause" class="fa fa-pause replayButtonClass" style="color: rgb(255, 255, 255);" onclick="changeReplayState('pause');"></i></p>
+                            <p><i id="replayID_play" class="fa fa-play replayButtonClass" style="color: rgb(0, 255, 0);" onclick="changeReplayState('play');"></i></p>
+                            <p><i id="replayID_step" class="fa fa-step-forward replayButtonClass" style="color: rgb(255, 255, 255);" onclick="changeReplayState('step');"></i></p>
+                            <div style="border-left: 1px solid #ffffffd9; height: 27px;"></div>
+                        </li>
+                    </ul>
+
                     <button onclick="resizeContainers('statechart')"><img src="images/statechartLayout.png" /></button>
                     <button onclick="resizeContainers()"><img src="images/defaultLayout.png" /></button>
                     <button onclick="resizeContainers('website')"><img src="images/websiteLayout.png" /></button>

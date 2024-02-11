@@ -488,19 +488,19 @@ def create_statechart_files():
     system_url_file.write(system_url)
     system_url_file.close()
 
+    # DA DECOMMENTARE PER GENERARE IL GRAPHVIZ
     # We call the generalization function via Node JS.
     #subprocess.call("node ./static/js/generalization.js", shell=True)
 
+    # DA TENERE?
     # We call the first validation function via Python.
-    configFunction()
+    #configFunction()
 
+    # DA TENERE?
     # We call the second validation function via a Python subprocess.
-    subprocess.run(['python3', 'PathsSimulator.py'])
+    #subprocess.run(['python3', 'PathsSimulator.py'])
+    #pathsSimulatorContainer([])
 
-
-
-
-    
     database_name = "visualizations"
     mongo_uri = config['DATABASES'][database_name]
     app.config["MONGO_URI"] = mongo_uri
@@ -524,8 +524,6 @@ def create_statechart_files():
         mongo.db[collection_name].insert_one(documento)
         print(f"{system_url} inserted into the database.")
 
-
-
     #gv_folder = "static/files/statechartGV"
     gv_path = os.path.join(gv_folder, "statechart_graphviz.gv")
     generate_svg(gv_path)
@@ -544,13 +542,9 @@ def create_statechart_files():
         mongo.db[collection_name].insert_one(documento)
         print(f"{system_url} inserted into the database.")
     
-
-
-
-
-    # Here you will also save the other generated statecharts when the db will support them.
-    
     return "finished statechart files creation"
+
+
 
 @app.route("/replay", methods=['POST'])
 def replay_user_trace():
@@ -567,6 +561,21 @@ def replay_user_trace():
     except subprocess.CalledProcessError as e:
         # Gestisci eventuali errori durante l'esecuzione
         output = f'Errore durante l\'esecuzione del programma esterno: {e.stderr}'
+
+
+
+# TODO MATTEO
+@app.route("/change_replay_state", methods=['POST'])
+def change_replay_state():
+    request_data = request.get_json()
+    newState = request_data.get('new_state')
+    try:
+        PathSimulator_changeReplayState(newState)
+        output = "change_replay_state - OK"
+    except Exception as e:
+        output = "change_replay_state - KO"
+    return output
+
 
 
 if __name__ == "__main__":
