@@ -357,18 +357,22 @@ a.dropdown-item {
 }
 
 #filtersContainer {
-    padding: 0 10px;
-    padding-top: 100px;
-
+    display: none;
+    justify-content: space-between;
+    padding-top: 30px;
+    padding-left: 9px;
+    align-items: center;
 }
 
 .filterSpan {
-    text-align: center;
     margin-bottom: 15px;
 
 }
 
-
+.dropdown button{
+    background-color: #554e8d;
+    color: white;
+}
 
 input[type="range"] {
     width: 100%;

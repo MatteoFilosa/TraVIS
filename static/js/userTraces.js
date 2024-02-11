@@ -8,9 +8,11 @@ var selectedTraceID;
 var selectedTrace_RawValue;
 var maxInteractionsValue, maxTotalTimeValue, maxViolationsValue;
 var globalViolationsData = [];
+var filtersContainer;
 //#endregion
 
 window.onload = function () {
+  filtersContainer = document.getElementById("filtersContainer");
   loadingIcon = document.getElementById("loadingIcon");
   table = document.getElementById("table");
 
@@ -54,9 +56,6 @@ window.onload = function () {
 };
 
 function createCheckboxes() {
-
-
-
   for (let i = 1; i <= tracesNum; i++) {
     console.log(typeof(String(i)))
     findViolations(String(i)).then(violationsTmp => {
@@ -68,36 +67,44 @@ function createCheckboxes() {
   }
 
   console.log(globalViolationsData)
-  // Ottieni l'elemento "filtersContainer"
-  var filtersContainer = document.getElementById("filtersContainer");
 
-  // Creazione del label "Violation types"
-  var labelViolationTypes = document.createElement("label");
-  labelViolationTypes.textContent = "Violation types";
-  filtersContainer.appendChild(labelViolationTypes);
+  var violationFilterDiv = document.createElement("div");
+  // // Creazione del label "Violation types"
+  // var labelViolationTypes = document.createElement("label");
+  // labelViolationTypes.textContent = "Violation types";
+  // violationFilterDiv.appendChild(labelViolationTypes);
 
-  // Array di testo per i livelli dei checkbox
   var checkboxLabels = ["Low", "Medium", "High", "Critical"];
 
-  // Creazione dei checkbox e aggiunta all'elemento "filtersContainer"
+  var horizontalDiv = document.createElement("div");
+  horizontalDiv.style.display="flex";
+  horizontalDiv.style.width="250px";
+  horizontalDiv.style.justifyContent="space-between";
+  
   for (var i = 0; i < checkboxLabels.length; i++) {
+    let containerDiv = document.createElement("div");
+    containerDiv.style.display="flex";
     var checkbox = document.createElement("input");
+    checkbox.style.marginLeft="10px";
     checkbox.type = "checkbox";
     checkbox.id = "checkbox" + (i + 1);
 
     var label = document.createElement("label");
+    label.style.marginLeft="10px";
+    label.style.marginBottom="0px";
     label.textContent = checkboxLabels[i];
     label.setAttribute("for", "checkbox" + (i + 1));
 
-    filtersContainer.appendChild(checkbox);
-    filtersContainer.appendChild(label);
-
+    containerDiv.appendChild(checkbox);
+    containerDiv.appendChild(label);
+    
+    document.getElementById("violationsDropdown").appendChild(containerDiv);
     checkbox.addEventListener("change", applyCheckboxFilter);
   }
-
+  violationFilterDiv.appendChild(horizontalDiv);
+  filtersContainer.appendChild(violationFilterDiv);
 
 } 
-
 
 function applyCheckboxFilter() {
   // Ottieni i valori selezionati dalle checkbox
@@ -159,9 +166,6 @@ function applyCheckboxFilter() {
   document.getElementById("tracesNum").innerHTML = "Loaded User Traces: " + visibleRowCount;
 }
 
-
-
-
 // Funzione per verificare se un ID ha almeno una violazione per ciascun livello specificato
 function hasViolationsLevel(userID, levels) {
   // Cerca l'utente nella globalViolationsData
@@ -175,10 +179,6 @@ function hasViolationsLevel(userID, levels) {
   // Verifica se l'utente ha almeno una violazione per ciascun livello specificato
   return levels.every(level => userData.violations[level] > 0);
 }
-
-
-
-
 
 function createSliders() {
   // maxViolationsValue
@@ -213,6 +213,7 @@ function createSlider(id, label, maxValue) {
   }
   // Create slider
   const slider = document.createElement("input");
+  slider.style.accentColor="#554e8d";
   slider.type = "range";
   slider.min = 0;
   slider.max = maxValue;
@@ -304,8 +305,6 @@ function applyTableFilter() {
   document.getElementById("tracesNum").innerHTML = "Loaded User Traces: " + visibleRowCount;
 }
 
-
-
 function getUserTraces() {
   const url = "http://127.0.0.1:5000/get_user_traces";
   fetch(url)
@@ -314,6 +313,7 @@ function getUserTraces() {
       loadedTraces = json;
       tracesNum = json.length;
       loadingIcon.style.display = "none";
+      filtersContainer.style.display="flex";
       table.style.display = "block";
       document.getElementById("tracesNum").innerHTML =
         "Loaded User Traces: " + tracesNum;
@@ -324,10 +324,10 @@ function getUserTraces() {
     .then(() => {
       // Enable filtering for table
       var table = new DataTable("#table", {
+        searching: false,
         columnDefs: [
           // exclude first and last row from filtering and sorting
           { orderable: false, targets: [0, 5] },
-          { searchable: false, targets: [0, 5] },
         ],
         paging: false,
         order: [[1, "asc"]],
@@ -360,9 +360,6 @@ function getTime() {
       timeForAllTraces = json;
     });
 }
-
-
-
 
 //#region Update Table
 // Function to truncate a string and add ellipsis
