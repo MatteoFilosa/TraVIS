@@ -452,7 +452,7 @@ function populateTable(data) {
       // Add time column
       const timeCell = document.createElement("td");
       timeCell.id = "timeCell"
-      timeCell.textContent = value.totalTime + " seconds";
+      timeCell.textContent = value.totalTime;
       row.appendChild(timeCell);
       console.log(value.totalTime)
       if (parseFloat(value.totalTime) > maxTotalTimeValue || maxTotalTimeValue === undefined) {
