@@ -1155,29 +1155,27 @@ function checkIfThereisViolation(userID,xpath){
 function getColor(eventName) {
   switch (eventName) {
     case "mouseover":
-      return "#8e0152";
+      return "#1f77b4";
     case "click":
-      return "#c51b7d";
+      return "#ff7f0e";
     case "brush":
-      return "#de77ae";
+      return "#ffbb78";
     case "mousemove":
-      return "#f1b6da";
+      return "#2ca02c";
     case "wheel":
-      return "#e6f5d0";
+      return "#8c564b";
     case "mouseout":
-      return "#b8e186";
+      return "#ff9896";
     case "mousedown":
-      return "#fde0ef";
-    case "mousedown":
-      return "#7fbc41";
+      return "#98df8a";
     case "mouseup":
-      return "#7fbc41";
+      return "#9467bd";
     case "dblclick":
-      return "#4d9221";
+      return "#aec7e8";
     case "Double Click":
-      return "yellow";
+      return "#aec7e8";
     case "facsimile back":
-      return "#276419";
+      return "#c5b0d5";
     // Add more cases as needed
     default:
       console.log(eventName);

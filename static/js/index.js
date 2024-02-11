@@ -681,29 +681,29 @@ function graphLayout(svg) {
 
 
 const eventTypes=["mouseover","click","brush","mousemove","mousedown","wheel","mouseout","mouseup","dblclick","facsimile_back"];
-
+// more available colors: c49c94,e377c2,f7b6d2,7f7f7f,c7c7c7,bcbd22,dbdb8d,17becf,9edae5
 // Function to get color based on event name
 function getColor(eventName) {
     if (eventName.includes("mouseover")) {
-        return "#8e0152";
+        return "#1f77b4";
     } else if (eventName.includes("dblclick")) {
-        return "#4d9221";
+        return "#aec7e8";
     } else if (eventName.includes("click")) {
-        return "#c51b7d";
+        return "#ff7f0e";
     } else if (eventName.includes("brush")) {
-        return "#de77ae";
+        return "#ffbb78";
     } else if (eventName.includes("mousemove")) {
-        return "#f1b6da";
+        return "#2ca02c";
     } else if (eventName.includes("mousedown")) {
-        return "#fde0ef";
+        return "#98df8a";
     }else if (eventName.includes("wheel")) {
-        return "#e6f5d0";
+        return "#8c564b";
     } else if (eventName.includes("mouseout")) {
-        return "#b8e186";
+        return "#ff9896";
     } else if (eventName.includes("mouseup")) {
-        return "#7fbc41";
+        return "#9467bd";
     } else if (eventName.includes("facsimile_back")) {
-        return "#276419";
+        return "#c5b0d5";
     } else {
         console.log(eventName);
         return "red";
