@@ -359,14 +359,16 @@ a.dropdown-item {
 #filtersContainer {
     padding: 0 10px;
     padding-top: 100px;
-    /* Aggiunto padding a sinistra e a destra */
+
 }
 
 .filterSpan {
     text-align: center;
     margin-bottom: 15px;
-    /* Aggiunto spazio verticale tra gli sliders e i label */
+
 }
+
+
 
 input[type="range"] {
     width: 100%;
