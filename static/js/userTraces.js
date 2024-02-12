@@ -107,43 +107,43 @@ function createCheckboxes() {
 } 
 
 function applyCheckboxFilter() {
-  // Ottieni i valori selezionati dalle checkbox
+  // Get values selected from checkboxes
   const checkbox1Checked = document.getElementById("checkbox1").checked;
   const checkbox2Checked = document.getElementById("checkbox2").checked;
   const checkbox3Checked = document.getElementById("checkbox3").checked;
   const checkbox4Checked = document.getElementById("checkbox4").checked;
 
-  // Ottieni i valori degli slider
+  // Get values from sliders
   const violationsFilterValue = parseFloat(document.getElementById("violationsSlider").value);
   const eventsFilterValue = parseFloat(document.getElementById("interactionsSlider").value);
   const totalTimeFilterValue = parseFloat(document.getElementById("totalTimeSlider").value);
 
-  // Definisci l'array selectedLevels
+  // Define selectedLevels array
   const selectedLevels = [];
 
-  // Aggiungi livelli selezionati all'array
+  // Add selected levels to the array
   if (checkbox1Checked) selectedLevels.push("level1");
   if (checkbox2Checked) selectedLevels.push("level2");
   if (checkbox3Checked) selectedLevels.push("level3");
   if (checkbox4Checked) selectedLevels.push("level4");
 
-  // Loop attraverso le righe della tabella
+  // Loop through table rows
   const tableRows = document.getElementById("tracesTable").getElementsByTagName("tr");
   let visibleRowCount = 0;
 
   for (let i = 0; i < tableRows.length; i++) {
     const row = tableRows[i];
 
-    // Ottenere i valori dai figli utilizzando gli id specificati
+    // Get values from children using specified ids
     const violationsValue = parseFloat(row.querySelector("#violationsCell").innerHTML);
     const eventsValue = parseFloat(row.querySelector("#eventCell").innerHTML);
     const totalTimeValue = parseFloat(row.querySelector("#timeCell").innerHTML);
 
-    // Ottenere l'ID dalla riga
+    // Get ID from the row
     const userIDElement = row.querySelector(".sorting_1");
     const rowID = userIDElement ? userIDElement.innerHTML : null;
 
-    // Verifica se l'ID ha almeno una violazione per ciascun livello selezionato
+    // Check if the ID has at least one violation for each selected level
     const showRow =
       hasViolationsLevel(rowID, selectedLevels) &&
       !isNaN(violationsValue) &&
@@ -153,30 +153,30 @@ function applyCheckboxFilter() {
       eventsValue <= eventsFilterValue &&
       totalTimeValue <= totalTimeFilterValue;
 
-    // Mostra/nascondi la riga in base al filtro delle checkbox e degli slider
+    // Show/hide row based on checkbox and slider filters
     row.style.display = showRow ? "" : "none";
 
-    // Incrementa il conteggio delle righe visibili
+    // Increment count of visible rows
     if (showRow) {
       visibleRowCount++;
     }
   }
 
-  // Aggiorna l'innerHTML dell'elemento "tracesNum"
+  // Update innerHTML of "tracesNum" element
   document.getElementById("tracesNum").innerHTML = "Loaded User Traces: " + visibleRowCount;
 }
 
-// Funzione per verificare se un ID ha almeno una violazione per ciascun livello specificato
+// Function to check if an ID has at least one violation for each specified level
 function hasViolationsLevel(userID, levels) {
-  // Cerca l'utente nella globalViolationsData
+  // Search for the user in globalViolationsData
   const userData = globalViolationsData.find(data => data.user === userID);
 
-  // Se l'utente non è trovato, restituisci false
+  // If the user is not found, return false
   if (!userData) {
     return false;
   }
 
-  // Verifica se l'utente ha almeno una violazione per ciascun livello specificato
+  // Check if the user has at least one violation for each specified level
   return levels.every(level => userData.violations[level] > 0);
 }
 
@@ -213,7 +213,7 @@ function createSlider(id, label, maxValue) {
   }
   // Create slider
   const slider = document.createElement("input");
-  slider.style.accentColor="#554e8d";
+  slider.style.accentColor = "#554e8d";
   slider.type = "range";
   slider.min = 0;
   slider.max = maxValue;
@@ -228,61 +228,57 @@ function createSlider(id, label, maxValue) {
   sliderContainer.appendChild(slider);
   sliderContainer.appendChild(valueDisplay);
 
-
-
   //sliderContainer.setAttribute("data-filter", dataFilter);
 
   // Attach an event listener to update the displayed value when the slider changes
-  
   slider.addEventListener("input", () => {
     valueDisplay.textContent = slider.value;
     applyTableFilter();
   });
 
   return sliderContainer;
-
 }
-//a a a a a a a a  a a a
 
+// Function to apply table filter
 function applyTableFilter() {
-  // Ottenere i valori degli slider
+  // Get values from sliders
   const violationsFilterValue = document.getElementById("violationsSlider").value;
   const eventsFilterValue = document.getElementById("interactionsSlider").value;
   const totalTimeFilterValue = parseFloat(document.getElementById("totalTimeSlider").value);
 
-  // Ottenere i valori selezionati dalle checkbox
+  // Get values selected from checkboxes
   const checkbox1Checked = document.getElementById("checkbox1").checked;
   const checkbox2Checked = document.getElementById("checkbox2").checked;
   const checkbox3Checked = document.getElementById("checkbox3").checked;
   const checkbox4Checked = document.getElementById("checkbox4").checked;
 
-  // Verifica se almeno una checkbox è selezionata
+  // Check if at least one checkbox is selected
   const anyCheckboxChecked = checkbox1Checked || checkbox2Checked || checkbox3Checked || checkbox4Checked;
 
-  // Loop attraverso le righe della tabella
+  // Loop through table rows
   const tableRows = document.getElementById("tracesTable").getElementsByTagName("tr");
   let visibleRowCount = 0;
 
   for (let i = 0; i < tableRows.length; i++) {
     const row = tableRows[i];
 
-    // Ottenere i valori dai figli utilizzando gli id specificati
+    // Get values from children using specified ids
     const violationsValue = parseFloat(row.querySelector("#violationsCell").innerHTML);
     const eventsValue = parseFloat(row.querySelector("#eventCell").innerHTML);
     var totalTimeValue = parseFloat(row.querySelector("#timeCell").innerHTML);
 
-    // Ottenere l'ID dalla riga
+    // Get ID from the row
     const userIDElement = row.querySelector(".sorting_1");
     const rowID = userIDElement ? userIDElement.innerHTML : null;
 
-    // Verifica se almeno una checkbox è selezionata o se tutte sono untickate
+    // Check if at least one checkbox is selected or if all are unticked
     const checkboxFilterCondition = !anyCheckboxChecked ||
       ((checkbox1Checked && hasViolationsLevel(rowID, ["level1"])) ||
         (checkbox2Checked && hasViolationsLevel(rowID, ["level2"])) ||
         (checkbox3Checked && hasViolationsLevel(rowID, ["level3"])) ||
         (checkbox4Checked && hasViolationsLevel(rowID, ["level4"])));
 
-    // Verifica se l'ID ha almeno una violazione per ciascun livello selezionato e soddisfa i filtri degli slider
+    // Check if the ID has at least one violation for each selected level and satisfies slider filters
     const showRow =
       !isNaN(violationsValue) &&
       !isNaN(eventsValue) &&
@@ -292,18 +288,19 @@ function applyTableFilter() {
       totalTimeValue <= totalTimeFilterValue &&
       checkboxFilterCondition;
 
-    // Mostra/nascondi la riga in base al filtro
+    // Show/hide row based on the filter
     row.style.display = showRow ? "" : "none";
 
-    // Incrementa il conteggio delle righe visibili
+    // Increment count of visible rows
     if (showRow) {
       visibleRowCount++;
     }
   }
 
-  // Aggiorna l'innerHTML dell'elemento "tracesNum"
+  // Update innerHTML of "tracesNum" element
   document.getElementById("tracesNum").innerHTML = "Loaded User Traces: " + visibleRowCount;
 }
+
 
 function getUserTraces() {
   const url = "http://127.0.0.1:5000/get_user_traces";
