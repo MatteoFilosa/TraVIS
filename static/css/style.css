@@ -374,6 +374,20 @@ a.dropdown-item {
     color: white;
 }
 
+#demographicFilter{
+    display: flex;
+    margin-bottom: 28px;
+}
+#demographicFilter div{
+    margin-right: 10px;
+}
+#demographicFilter div select{
+    background-color: white;
+    color: black;
+    border-radius: 5px;
+    border: 2px solid #554e8d;
+}
+
 input[type="range"] {
     width: 100%;
 }

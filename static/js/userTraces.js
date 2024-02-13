@@ -102,7 +102,7 @@ function createCheckboxes() {
     document.getElementById("violationsDropdown").appendChild(containerDiv);
     checkbox.addEventListener("change", applyCheckboxFilter);
   }
-  violationFilterDiv.appendChild(horizontalDiv);
+  // violationFilterDiv.appendChild(horizontalDiv);
   filtersContainer.appendChild(violationFilterDiv);
 
 } 
@@ -368,7 +368,7 @@ function createSelectFilter(id, label, options) {
   
   const select = document.createElement('select');
   select.id = id;
-
+  select.classList.add("form-select");
 
   options.forEach(optionValue => {
     const option = document.createElement('option');
@@ -905,7 +905,7 @@ function showExtraInformation(userID) {
     level1.style.display="flex";
     let level1colorDiv = document.createElement("div");
     level1colorDiv.classList.add("violationsColorDiv");
-    level1colorDiv.style.backgroundColor="#f1a171";
+    level1colorDiv.style.backgroundColor="#c7c7c7";
     level1.append(level1colorDiv);
     level1.append("Low: " + value.level1);
     
@@ -914,7 +914,7 @@ function showExtraInformation(userID) {
     level2.style.display="flex";
     let level2colorDiv = document.createElement("div");
     level2colorDiv.classList.add("violationsColorDiv");
-    level2colorDiv.style.backgroundColor="#c24a6f";
+    level2colorDiv.style.backgroundColor="#7f7f7f";
     level2.append(level2colorDiv);
     level2.append("Medium: " + value.level2);
 
@@ -922,7 +922,7 @@ function showExtraInformation(userID) {
     level3.style.display="flex";
     let level3colorDiv = document.createElement("div");
     level3colorDiv.classList.add("violationsColorDiv");
-    level3colorDiv.style.backgroundColor="#5b257e";
+    level3colorDiv.style.backgroundColor="#dbdb8d";
     level3.append(level3colorDiv);
     level3.append("High: " + value.level3);
 
@@ -930,7 +930,7 @@ function showExtraInformation(userID) {
     level4.style.display="flex";
     let level4colorDiv = document.createElement("div");
     level4colorDiv.classList.add("violationsColorDiv");
-    level4colorDiv.style.backgroundColor="#000009";
+    level4colorDiv.style.backgroundColor="#17becf";
     level4.append(level4colorDiv);
     level4.append("Critical: " + value.level4);
 
