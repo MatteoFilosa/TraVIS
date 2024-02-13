@@ -1130,13 +1130,13 @@ function createViolationsBar(violations){
 
       // Set different background colors based on violation level
       if (violationName.includes("1"))
-        eventDiv.style.backgroundColor = "#f1a171";
+        eventDiv.style.backgroundColor = "#c7c7c7";
       else if (violationName.includes("2"))
-        eventDiv.style.backgroundColor = "#c24a6f";
+        eventDiv.style.backgroundColor = "#7f7f7f";
       else if (violationName.includes("3"))
-        eventDiv.style.backgroundColor = "#5b257e";
+        eventDiv.style.backgroundColor = "#dbdb8d";
       else if (element.includes("4"))
-        colorElementImg.style.backgroundColor = "#000009";
+        colorElementImg.style.backgroundColor = "#17becf";
 
       wrapperDiv.appendChild(eventDiv);
     }
@@ -1375,13 +1375,13 @@ function colorLegend() {
     let colorElementImg = document.createElement("div");
     colorElementImg.classList.add("colorDiv");
     if (element.includes("Low"))
-      colorElementImg.style.backgroundColor = "#f1a171";
+      colorElementImg.style.backgroundColor = "#c7c7c7";
     else if (element.includes("Medium"))
-      colorElementImg.style.backgroundColor = "#c24a6f";
+      colorElementImg.style.backgroundColor = "#7f7f7f";
     else if (element.includes("High"))
-      colorElementImg.style.backgroundColor = "#5b257e";
+      colorElementImg.style.backgroundColor = "#dbdb8d";
     else if (element.includes("Critical"))
-      colorElementImg.style.backgroundColor = "#000009";
+      colorElementImg.style.backgroundColor = "#17becf";
 
     let colorElementText = document.createElement("p");
     colorElementText.textContent = element;
