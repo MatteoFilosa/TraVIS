@@ -1134,6 +1134,12 @@ def pathsSimulatorContainer(explorationSequence):
             #if(len(driver.window_handles) != 1):
             #    driver.switch_to.window(originalWindow)
 
+            # TODO - COLORAZIONE SVG   
+            #script2 = "document.getElementById('replayID_stop').style.color = 'rgb(0, 0, 255)'; document.getElementById('replayID_step').style.color = 'rgb(0, 0, 255)';"
+            #driver.switch_to.default_content()
+            #driver.execute_script(script2)
+            #driver.switch_to.frame(iframe)
+
             time.sleep(0.5)
 
             mouseOutElement = driver.find_element(By.CSS_SELECTOR,"body")
