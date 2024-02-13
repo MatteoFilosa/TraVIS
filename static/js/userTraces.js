@@ -9,6 +9,7 @@ var selectedTrace_RawValue;
 var maxInteractionsValue, maxTotalTimeValue, maxViolationsValue;
 var globalViolationsData = [];
 var filtersContainer;
+var demographicData;
 //#endregion
 
 window.onload = function () {
@@ -118,6 +119,11 @@ function applyCheckboxFilter() {
   const eventsFilterValue = parseFloat(document.getElementById("interactionsSlider").value);
   const totalTimeFilterValue = parseFloat(document.getElementById("totalTimeSlider").value);
 
+  // Get values selected from demographic filters
+  const selectedAge = document.getElementById('AgeFilter').value;
+  const selectedGender = document.getElementById('GenderFilter').value;
+  const selectedStudyTitle = document.getElementById('StudyTitleFilter').value;
+
   // Define selectedLevels array
   const selectedLevels = [];
 
@@ -137,15 +143,21 @@ function applyCheckboxFilter() {
     // Get values from children using specified ids
     const violationsValue = parseFloat(row.querySelector("#violationsCell").innerHTML);
     const eventsValue = parseFloat(row.querySelector("#eventCell").innerHTML);
-    const totalTimeValue = parseFloat(row.querySelector("#timeCell").innerHTML);
+    var totalTimeValue = parseFloat(row.querySelector("#timeCell").innerHTML);
 
     // Get ID from the row
     const userIDElement = row.querySelector(".sorting_1");
     const rowID = userIDElement ? userIDElement.innerHTML : null;
 
+    // Cerca le informazioni demografiche per l'utente corrente
+    const userDemographicInfo = demographicData.find(item => item.User === rowID);
+
     // Check if the ID has at least one violation for each selected level
     const showRow =
       hasViolationsLevel(rowID, selectedLevels) &&
+      (!selectedAge || userDemographicInfo.Age === selectedAge) &&
+      (!selectedGender || userDemographicInfo.Gender === selectedGender) &&
+      (!selectedStudyTitle || userDemographicInfo['Study Title'] === selectedStudyTitle) &&
       !isNaN(violationsValue) &&
       !isNaN(eventsValue) &&
       !isNaN(totalTimeValue) &&
@@ -239,7 +251,6 @@ function createSlider(id, label, maxValue) {
   return sliderContainer;
 }
 
-// Function to apply table filter
 function applyTableFilter() {
   // Get values from sliders
   const violationsFilterValue = document.getElementById("violationsSlider").value;
@@ -251,6 +262,11 @@ function applyTableFilter() {
   const checkbox2Checked = document.getElementById("checkbox2").checked;
   const checkbox3Checked = document.getElementById("checkbox3").checked;
   const checkbox4Checked = document.getElementById("checkbox4").checked;
+
+  // Get values selected from demographic filters
+  const selectedAge = document.getElementById('AgeFilter').value;
+  const selectedGender = document.getElementById('GenderFilter').value;
+  const selectedStudyTitle = document.getElementById('StudyTitleFilter').value;
 
   // Check if at least one checkbox is selected
   const anyCheckboxChecked = checkbox1Checked || checkbox2Checked || checkbox3Checked || checkbox4Checked;
@@ -271,6 +287,9 @@ function applyTableFilter() {
     const userIDElement = row.querySelector(".sorting_1");
     const rowID = userIDElement ? userIDElement.innerHTML : null;
 
+    // Cerca le informazioni demografiche per l'utente corrente
+    const userDemographicInfo = demographicData.find(item => item.User === rowID);
+
     // Check if at least one checkbox is selected or if all are unticked
     const checkboxFilterCondition = !anyCheckboxChecked ||
       ((checkbox1Checked && hasViolationsLevel(rowID, ["level1"])) ||
@@ -286,7 +305,10 @@ function applyTableFilter() {
       violationsValue <= violationsFilterValue &&
       eventsValue <= eventsFilterValue &&
       totalTimeValue <= totalTimeFilterValue &&
-      checkboxFilterCondition;
+      checkboxFilterCondition &&
+      (!selectedAge || userDemographicInfo.Age === selectedAge) &&
+      (!selectedGender || userDemographicInfo.Gender === selectedGender) &&
+      (!selectedStudyTitle || userDemographicInfo['Study Title'] === selectedStudyTitle);
 
     // Show/hide row based on the filter
     row.style.display = showRow ? "" : "none";
@@ -300,6 +322,132 @@ function applyTableFilter() {
   // Update innerHTML of "tracesNum" element
   document.getElementById("tracesNum").innerHTML = "Loaded User Traces: " + visibleRowCount;
 }
+
+function createDemographicFilter(data) {
+  demographicData = data;
+
+  // Get unique values for age, gender, and study title
+  const uniqueAges = [...new Set(demographicData.map(item => item.Age))].sort((a, b) => ageSortOrder.indexOf(a) - ageSortOrder.indexOf(b));
+  const uniqueGenders = [...new Set(demographicData.map(item => item.Gender))].sort((a, b) => genderSortOrder.indexOf(a) - genderSortOrder.indexOf(b));
+
+  // Define the order for study titles directly
+  const uniqueStudyTitles = ['High School', 'Bachelor Degree', 'Master Degree', 'PhD'];
+
+  // Create filter for age
+  const ageFilter = createSelectFilter('AgeFilter', 'Age', uniqueAges);
+  document.getElementById('demographicFilter').appendChild(ageFilter);
+
+  // Create filter for gender
+  const genderFilter = createSelectFilter('GenderFilter', 'Gender', uniqueGenders);
+  document.getElementById('demographicFilter').appendChild(genderFilter);
+
+  // Create filter for study title
+  const studyTitleFilter = createSelectFilter('StudyTitleFilter', 'Study Title', uniqueStudyTitles);
+  document.getElementById('demographicFilter').appendChild(studyTitleFilter);
+
+  // Add listener to filter elements to apply the filter function
+  ageFilter.addEventListener('change', applyDemographicFilter);
+  genderFilter.addEventListener('change', applyDemographicFilter);
+  studyTitleFilter.addEventListener('change', applyDemographicFilter);
+}
+
+// No need for studyTitleSortOrder in this case
+const ageSortOrder = ['18-24', '25-34', '35-44', '45-54'];
+const genderSortOrder = ['Male', 'Female', 'Other', 'Prefer not to say'];
+
+
+
+function createSelectFilter(id, label, options) {
+  const selectContainer = document.createElement('div');
+
+  // labels
+  const labelElement = document.createElement('label');
+  labelElement.textContent = label;
+  selectContainer.appendChild(labelElement);
+
+  
+  const select = document.createElement('select');
+  select.id = id;
+
+
+  options.forEach(optionValue => {
+    const option = document.createElement('option');
+    option.value = optionValue;
+    option.text = optionValue;
+    select.appendChild(option);
+  });
+
+
+  selectContainer.appendChild(select);
+
+  return selectContainer;
+}
+
+function applyDemographicFilter() {
+
+  const selectedAge = document.getElementById('AgeFilter').value;
+  const selectedGender = document.getElementById('GenderFilter').value;
+  const selectedStudyTitle = document.getElementById('StudyTitleFilter').value;
+
+  // Get values from sliders
+  const violationsFilterValue = parseFloat(document.getElementById("violationsSlider").value);
+  const eventsFilterValue = parseFloat(document.getElementById("interactionsSlider").value);
+  const totalTimeFilterValue = parseFloat(document.getElementById("totalTimeSlider").value);
+
+  // Get values selected from checkboxes
+  const checkbox1Checked = document.getElementById("checkbox1").checked;
+  const checkbox2Checked = document.getElementById("checkbox2").checked;
+  const checkbox3Checked = document.getElementById("checkbox3").checked;
+  const checkbox4Checked = document.getElementById("checkbox4").checked;
+
+  // Check if at least one checkbox is selected
+  const anyCheckboxChecked = checkbox1Checked || checkbox2Checked || checkbox3Checked || checkbox4Checked;
+
+  // Loop attraverso le righe della tabella
+  const tableRows = document.getElementById('tracesTable').getElementsByTagName('tr');
+  let visibleRowCount = 0;
+
+  for (let i = 0; i < tableRows.length; i++) {
+    const row = tableRows[i];
+
+  
+    const userIDElement = row.querySelector('.sorting_1');
+    const rowID = userIDElement ? userIDElement.innerHTML : null;
+
+    const userDemographicInfo = demographicData.find(item => item.User === rowID);
+
+
+    const violationsValue = parseFloat(row.querySelector("#violationsCell").innerHTML);
+    const eventsValue = parseFloat(row.querySelector("#eventCell").innerHTML);
+    var totalTimeValue = parseFloat(row.querySelector("#timeCell").innerHTML);
+
+    // All the filters considered
+    const showRow =
+      (!selectedAge || userDemographicInfo.Age === selectedAge) &&
+      (!selectedGender || userDemographicInfo.Gender === selectedGender) &&
+      (!selectedStudyTitle || userDemographicInfo['Study Title'] === selectedStudyTitle) &&
+      (!isNaN(violationsValue) && violationsValue <= violationsFilterValue) &&
+      (!isNaN(eventsValue) && eventsValue <= eventsFilterValue) &&
+      (!isNaN(totalTimeValue) && totalTimeValue <= totalTimeFilterValue) &&
+      (!anyCheckboxChecked ||
+        ((checkbox1Checked && hasViolationsLevel(rowID, ["level1"])) ||
+          (checkbox2Checked && hasViolationsLevel(rowID, ["level2"])) ||
+          (checkbox3Checked && hasViolationsLevel(rowID, ["level3"])) ||
+          (checkbox4Checked && hasViolationsLevel(rowID, ["level4"]))));
+
+    // Hide/show row
+    row.style.display = showRow ? '' : 'none';
+
+   
+    if (showRow) {
+      visibleRowCount++;
+    }
+  }
+
+  // "tracesNum"
+  document.getElementById('tracesNum').innerHTML = 'Loaded User Traces: ' + visibleRowCount;
+}
+
 
 
 function getUserTraces() {
@@ -333,10 +481,17 @@ function getUserTraces() {
       });
 
   
-
+      //Filters creation
       createSliders(); 
       createCheckboxes();
-      
+      // Local JSON file
+      fetch('/files/user_traces/demographic_info/demographic_info.json')
+        .then(response => response.json())
+        .then(data => {
+          
+          
+          createDemographicFilter(data);
+        });
 
     });
 }
