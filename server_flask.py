@@ -4,8 +4,8 @@ from flask_pymongo import PyMongo
 from flask_caching import Cache
 from configparser import ConfigParser
 import os, re
-import graphviz
 import subprocess
+import json
 
 app = Flask(__name__,
             static_url_path='', 
@@ -112,7 +112,7 @@ def change_layout(vis_name, layoutName):
         print("okexists")
         # Modify the content of the file based on layoutName, for example
         if layoutName == "normal":
-            print("oknormal")
+            
             # Do something with the "normal" layout
             generate_svg(file_path)
 
@@ -165,19 +165,41 @@ edge [
         return jsonify({'status': 'error', 'message': f"File for {vis_name} not found"})
 
 
+@app.route("/upload_tasks")
+def upload_tasks():
+    database_name = "user_traces"  # You can change db name here
+    mongo_uri = config['DATABASES'][database_name]
+    app.config["MONGO_URI"] = mongo_uri
+    mongo = PyMongo(app)
+
+    folder = "static/files/user_traces/task_division"
+    collection_name = "task_division"
+
+    # Connect to the MongoDB collection
+    db = mongo.db[collection_name]
+
+    # Iterate through files in the folder
+    for filename in os.listdir(folder):
+        if filename.endswith(".json"):
+            file_path = os.path.join(folder, filename)
+            
+            # Read the JSON data from the file
+            with open(file_path, 'r') as file:
+                data = json.load(file)
+            
+            # Insert the data into the MongoDB collection
+            db.insert_one(data)
+            
+    return "Traces uploaded!"
 
 
-@app.route("/")
-def home():
-    return render_template('index.html')
+@app.route("/get_user_tasks")
+def get_user_tasks():
+   
 
-@app.route("/home")
-def index():
-    return render_template('index.html')
+    return 
 
-@app.route("/userTraces")
-def userTraces():
-    return render_template('userTraces.html')
+
 
 @app.route("/upload_statechart") #Function that uploads all the statecharts
 def upload_statechart():
@@ -466,6 +488,22 @@ def get_statecharts_gv():
     response.headers["Cache-Control"] = "max-age=3600"
 
     return response
+
+@app.route("/")
+def home():
+    return render_template('index.html')
+
+@app.route("/home")
+def index():
+    return render_template('index.html')
+
+@app.route("/userTraces")
+def userTraces():
+    return render_template('userTraces.html')
+
+@app.route("/userTasks")
+def userTasks():
+    return render_template('userTasks.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

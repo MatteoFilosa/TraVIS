@@ -1,0 +1,32 @@
+{
+    "0": [
+        "mousemove on delay",
+        "mousemove on departure",
+        "mousemove on departure",
+        "brush on departure",
+        "mousemove on distance"
+    ],
+    "1": [
+        "mousemove on airtime",
+        "mousemove on arrival",
+        "brush on arrival",
+        "brush on arrival",
+        "click on arrival",
+        "mousemove on airtime",
+        "brush on airtime"
+    ],
+    "2": [
+        "brush on departure",
+        "brush on departure"
+    ],
+    "3": [
+        "brush on departure"
+    ],
+    "4": [
+        "brush on airtime",
+        "brush on departure",
+        "brush on departure",
+        "dblclick on departure",
+        "brush on delay"
+    ]
+}

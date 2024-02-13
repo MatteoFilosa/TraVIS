@@ -1,0 +1,49 @@
+{
+    "0": [
+        "mousemove on arrival",
+        "mousemove on arrival",
+        "brush on arrival",
+        "click on arrival",
+        "mousemove on departure",
+        "dblclick on departure",
+        "mousemove on departure",
+        "brush on departure",
+        "brush on departure",
+        "brush on departure"
+    ],
+    "1": [
+        "mousemove on airtime",
+        "brush on airtime",
+        "mousemove on airtime",
+        "brush on airtime"
+    ],
+    "2": [
+        "mousemove on distance",
+        "mousemove on delay",
+        "brush on distance",
+        "brush on departure",
+        "click on arrival",
+        "mousemove on airtime",
+        "brush on airtime"
+    ],
+    "3": [
+        "brush on departure",
+        "brush on distance",
+        "brush on distance",
+        "brush on airtime",
+        "brush on arrival",
+        "click on delay",
+        "mousemove on delay",
+        "mousemove on delay",
+        "brush on delay"
+    ],
+    "4": [
+        "brush on distance",
+        "brush on departure",
+        "brush on departure",
+        "click on arrival",
+        "mousemove on airtime",
+        "brush on airtime",
+        "brush on airtime"
+    ]
+}

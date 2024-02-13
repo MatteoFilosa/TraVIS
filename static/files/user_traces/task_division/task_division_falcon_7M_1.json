@@ -1,0 +1,25 @@
+{
+    "0": [],
+    "1": [
+        "mousemove on delay",
+        "mousemove on distance",
+        "mousemove on airtime",
+        "mousemove on departure",
+        "brush on departure"
+    ],
+    "2": [
+        "brush on airtime"
+    ],
+    "3": [
+        "brush on arrival"
+    ],
+    "4": [
+        "brush on delay",
+        "brush on delay",
+        "brush on delay",
+        "brush on delay",
+        "brush on delay",
+        "brush on delay",
+        "brush on delay"
+    ]
+}
