@@ -1053,7 +1053,7 @@ pathElement = ""
     "play"
     "step"
 '''
-global replayState
+replayState = "play"
 
 
 
@@ -1065,6 +1065,7 @@ def pathsSimulatorContainer(explorationSequence):
     global problemsFound
     global pathElement
     global timeOut
+    global replayState
     replayState = "play"
 
     nameVis = "Falcon"
@@ -1085,8 +1086,8 @@ def pathsSimulatorContainer(explorationSequence):
     options = webdriver.ChromeOptions()
     options.add_argument('ignore-certificate-errors')
     options.add_argument('--ignore-ssl-errors')
-    #driver = webdriver.Chrome(executable_path='C:\Webdriver\chromedriver.exe', chrome_options=options)
-    driver = webdriver.Chrome(executable_path='/home/user/Scrivania/paper/Webdriver/chromedriver')
+    driver = webdriver.Chrome(executable_path='C:\Webdriver\chromedriver.exe', chrome_options=options)
+    #driver = webdriver.Chrome(executable_path='/home/user/Scrivania/paper/Webdriver/chromedriver')
 
     try:
 
@@ -1119,16 +1120,16 @@ def pathsSimulatorContainer(explorationSequence):
 
         for transition in explorationSequence:
 
-            # TODO
-            '''
+            print("Stato: " + replayState + "\n")
+
             while replayState == "pause":
                 pass
 
             if replayState == "stop":
+                driver.close()
                 return
             elif replayState == "step":
                 replayState = "pause"
-            '''
 
             #if(len(driver.window_handles) != 1):
             #    driver.switch_to.window(originalWindow)
@@ -1207,8 +1208,10 @@ def pathsSimulatorContainer(explorationSequence):
 
 # Function to change the replayState value.
 def PathSimulator_changeReplayState(newState):
+    global replayState
     if ((newState != "stop") and (newState != "pause") and (newState != "play") and (newState != "step")):
         newState = "stop"
         print("ERROR: INVALID 'changeReplayState' INPUT! STATE SET TO STOP!")
     replayState = newState
+    print("Stato cambiato: " + replayState + "\n")
 

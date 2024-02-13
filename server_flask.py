@@ -558,13 +558,14 @@ def replay_user_trace():
 
         #result = subprocess.run(['py', 'PathsSimulator.py'])
         pathsSimulatorContainer(current_trace)
+        output = "Simulation finished"
     except subprocess.CalledProcessError as e:
         # Gestisci eventuali errori durante l'esecuzione
         output = f'Errore durante l\'esecuzione del programma esterno: {e.stderr}'
+    
+    return output
 
 
-
-# TODO MATTEO
 @app.route("/change_replay_state", methods=['POST'])
 def change_replay_state():
     request_data = request.get_json()
