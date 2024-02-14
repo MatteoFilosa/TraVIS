@@ -472,7 +472,7 @@ function getUserTraces() {
         searching: false,
         columnDefs: [
           // exclude first and last row from filtering and sorting
-          { orderable: false, targets: [0, 5] },
+          { orderable: false, targets: [0] },
         ],
         paging: false,
         order: [[1, "asc"]],
@@ -608,49 +608,49 @@ function populateTable(data) {
         maxTotalTimeValue = parseFloat(value.totalTime);
       }
 
-      // Add button on last column
-      const iconCell = document.createElement("td");
-      const iconButton = document.createElement("button");
-      iconButton.classList.add("expandButton");
-      iconButton.id = `button${extractedNumber}`;
-      const iconImg = document.createElement("img");
-      iconImg.src = "images/moreInfo.png";
-      iconImg.id = `buttonImg${extractedNumber}`;
-      iconButton.appendChild(iconImg);
+      // // Add button on last column
+      // const iconCell = document.createElement("td");
+      // const iconButton = document.createElement("button");
+      // iconButton.classList.add("expandButton");
+      // iconButton.id = `button${extractedNumber}`;
+      // const iconImg = document.createElement("img");
+      // iconImg.src = "images/moreInfo.png";
+      // iconImg.id = `buttonImg${extractedNumber}`;
+      // iconButton.appendChild(iconImg);
 
-      iconButton.addEventListener("click", () => {
-        var numbersOnlyID = iconButton.id.replace(/\D/g, "");
+      // iconButton.addEventListener("click", () => {
+      //   var numbersOnlyID = iconButton.id.replace(/\D/g, "");
 
-        if (document.getElementById(`extrainfoDiv`).getAttribute("data-visible") === "false") {
-          iconImg.src = "images/moreInfo_pressed.png";
-          iconButton.classList.add("expandButtonPressed");
-          document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "true");
-          document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", numbersOnlyID);
-          showExtraInformation(numbersOnlyID);
-        } else {
-          const wasActivatedBy = document.getElementById(`extrainfoDiv`).getAttribute("data-activatedBy");
-          //console.log(`Was activatedBy:${wasActivatedBy}, pressed by:${numbersOnlyID}`);
-          if (wasActivatedBy != 0 && wasActivatedBy != numbersOnlyID) {
-            document.getElementById(`buttonImg${wasActivatedBy}`).src = "images/moreInfo.png";
-            document.getElementById(`button${wasActivatedBy}`).classList.remove("expandButtonPressed");
-            document.getElementById(`buttonImg${numbersOnlyID}`).src = "images/moreInfo_pressed.png";
-            document.getElementById(`button${numbersOnlyID}`).classList.add("expandButtonPressed");
-            document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", numbersOnlyID);
-            clearExtraInformation().then(function (value) {
-              showExtraInformation(numbersOnlyID);
-            });
+      //   if (document.getElementById(`extrainfoDiv`).getAttribute("data-visible") === "false") {
+      //     iconImg.src = "images/moreInfo_pressed.png";
+      //     iconButton.classList.add("expandButtonPressed");
+      //     document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "true");
+      //     document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", numbersOnlyID);
+      //     showExtraInformation(numbersOnlyID);
+      //   } else {
+      //     const wasActivatedBy = document.getElementById(`extrainfoDiv`).getAttribute("data-activatedBy");
+      //     //console.log(`Was activatedBy:${wasActivatedBy}, pressed by:${numbersOnlyID}`);
+      //     if (wasActivatedBy != 0 && wasActivatedBy != numbersOnlyID) {
+      //       document.getElementById(`buttonImg${wasActivatedBy}`).src = "images/moreInfo.png";
+      //       document.getElementById(`button${wasActivatedBy}`).classList.remove("expandButtonPressed");
+      //       document.getElementById(`buttonImg${numbersOnlyID}`).src = "images/moreInfo_pressed.png";
+      //       document.getElementById(`button${numbersOnlyID}`).classList.add("expandButtonPressed");
+      //       document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", numbersOnlyID);
+      //       clearExtraInformation().then(function (value) {
+      //         showExtraInformation(numbersOnlyID);
+      //       });
 
-          } else {
-            iconImg.src = "images/moreInfo.png";
-            document.getElementById(`button${numbersOnlyID}`).classList.remove("expandButtonPressed");
-            document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "false");
-            document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", 0);
-            clearExtraInformation();
-          }
-        }
-      });
-      iconCell.appendChild(iconButton);
-      row.appendChild(iconCell);
+      //     } else {
+      //       iconImg.src = "images/moreInfo.png";
+      //       document.getElementById(`button${numbersOnlyID}`).classList.remove("expandButtonPressed");
+      //       document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "false");
+      //       document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", 0);
+      //       clearExtraInformation();
+      //     }
+      //   }
+      // });
+      // iconCell.appendChild(iconButton);
+      // row.appendChild(iconCell);
 
       // Add the row to the table
       tableBody.appendChild(row);
