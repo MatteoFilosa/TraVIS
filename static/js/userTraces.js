@@ -607,51 +607,6 @@ function populateTable(data) {
       if (parseFloat(value.totalTime) > maxTotalTimeValue || maxTotalTimeValue === undefined) {
         maxTotalTimeValue = parseFloat(value.totalTime);
       }
-
-      // // Add button on last column
-      // const iconCell = document.createElement("td");
-      // const iconButton = document.createElement("button");
-      // iconButton.classList.add("expandButton");
-      // iconButton.id = `button${extractedNumber}`;
-      // const iconImg = document.createElement("img");
-      // iconImg.src = "images/moreInfo.png";
-      // iconImg.id = `buttonImg${extractedNumber}`;
-      // iconButton.appendChild(iconImg);
-
-      // iconButton.addEventListener("click", () => {
-      //   var numbersOnlyID = iconButton.id.replace(/\D/g, "");
-
-      //   if (document.getElementById(`extrainfoDiv`).getAttribute("data-visible") === "false") {
-      //     iconImg.src = "images/moreInfo_pressed.png";
-      //     iconButton.classList.add("expandButtonPressed");
-      //     document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "true");
-      //     document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", numbersOnlyID);
-      //     showExtraInformation(numbersOnlyID);
-      //   } else {
-      //     const wasActivatedBy = document.getElementById(`extrainfoDiv`).getAttribute("data-activatedBy");
-      //     //console.log(`Was activatedBy:${wasActivatedBy}, pressed by:${numbersOnlyID}`);
-      //     if (wasActivatedBy != 0 && wasActivatedBy != numbersOnlyID) {
-      //       document.getElementById(`buttonImg${wasActivatedBy}`).src = "images/moreInfo.png";
-      //       document.getElementById(`button${wasActivatedBy}`).classList.remove("expandButtonPressed");
-      //       document.getElementById(`buttonImg${numbersOnlyID}`).src = "images/moreInfo_pressed.png";
-      //       document.getElementById(`button${numbersOnlyID}`).classList.add("expandButtonPressed");
-      //       document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", numbersOnlyID);
-      //       clearExtraInformation().then(function (value) {
-      //         showExtraInformation(numbersOnlyID);
-      //       });
-
-      //     } else {
-      //       iconImg.src = "images/moreInfo.png";
-      //       document.getElementById(`button${numbersOnlyID}`).classList.remove("expandButtonPressed");
-      //       document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "false");
-      //       document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", 0);
-      //       clearExtraInformation();
-      //     }
-      //   }
-      // });
-      // iconCell.appendChild(iconButton);
-      // row.appendChild(iconCell);
-
       // Add the row to the table
       tableBody.appendChild(row);
       
@@ -752,7 +707,7 @@ function ExtraInfo(){
   
       if (extractedNumber === userNum) {
         selectedTrace_RawValue = JSON.parse(element.user_trace);
-        console.log(selectedTrace_RawValue);
+        //console.log(selectedTrace_RawValue);
       }
     });
 
@@ -761,12 +716,15 @@ function ExtraInfo(){
     document.getElementById("previewTrace").id+=userNum;
 
     generateHeatmap(selectedTraceID);
+
+
   eventTypes(selectedTraceID).then(function (value) {
     const eventsList = document.getElementById("eventsList");
     eventsList.innerHTML = "";
+    var eventsTotal=0;
     for (const key in value) {
       if (value[key] > 0) {
-        console.log(key, value)
+        eventsTotal+=value[key];
         var eventElement = document.createElement("li");
         eventElement.textContent = `${key}: ${value[key]}`;
         if (key == "dblclick")
@@ -775,6 +733,7 @@ function ExtraInfo(){
         eventsList.append(eventElement);
       }
     }
+    document.getElementById("eventsTotal").innerHTML=`Events: ${eventsTotal}`;
   });
 
   findViolations(selectedTraceID).then(function (value) {
@@ -846,10 +805,19 @@ function ExtraInfo(){
 
     document.getElementById(`previewTrace`).style.display="none";
     
+    let sumOfEventTypes = {};
+    var i=0;
     traces.forEach(element => {
-      eventTypes(element).then(function (value) {console.log(value)});
+      eventTypes(element).then(function (value) {
+        sumOfEventTypes[`trace${i}`]=value;
+        //console.log(sumOfEventTypes);
+        i++;
+        if(i==selectedTraces.size)
+          sumEventTypes(sumOfEventTypes);
+      });
+      
     });
-
+    
 
   }
  
@@ -970,6 +938,45 @@ async function clearExtraInformation() {
 //#endregion
 
 //#region Extract trace info
+
+function sumEventTypes(objectContainer) {
+  // Initialize an object to store the summed values
+  let summedObject = {};
+
+  // Iterate over each object in the object container
+  for (const objKey in objectContainer) {
+      const obj = objectContainer[objKey];
+      // Iterate over each key in the object
+      for (const key in obj) {
+          // Check if the key already exists in the summedObject
+          if (summedObject.hasOwnProperty(key)) {
+              // If the key exists, add the value from the current object to the summedObject
+              summedObject[key] += obj[key] || 0; // Adding 0 if the property is undefined
+          } else {
+              // If the key doesn't exist, initialize it with the value from the current object
+              summedObject[key] = obj[key];
+          }
+      }
+  }
+  var eventsTotal=0;
+  const eventsList = document.getElementById("eventsList");
+    eventsList.innerHTML = "";
+    for (const key in summedObject) {
+      if (summedObject[key] > 0) {
+        eventsTotal+=summedObject[key];
+        //console.log(key, value)
+        var eventElement = document.createElement("li");
+        eventElement.textContent = `${key}: ${summedObject[key]}`;
+        if (key == "dblclick")
+          eventElement.textContent = `Double click: ${summedObject[key]}`;
+        eventElement.style.textTransform = "capitalize";
+        eventsList.append(eventElement);
+      }
+    }
+    document.getElementById("eventsTotal").innerHTML=`Events: ${eventsTotal}`;
+}
+
+
 async function eventTypes(userID) {
   var searchWords = [
     "mousemove",
@@ -1033,7 +1040,7 @@ async function findTotalTime(userID) {
 
 async function findViolations(userID) {
  
-  console.log(userID)
+  //console.log(userID)
   // Initialize level counters
   const levelCount = {
     level1: 0,
@@ -1045,7 +1052,7 @@ async function findViolations(userID) {
     let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
     // Extract the captured number from the file name
     let extractedNumber = match ? match[1] : null;
-    console.log(extractedNumber, userID)
+    //console.log(extractedNumber, userID)
     //console.log(extractedNumber,number);
     if (extractedNumber === userID) {
       const userTrace = JSON.parse(element.user_trace);
@@ -1070,7 +1077,7 @@ async function findViolations(userID) {
     userID: userID,
     violations: levelCount,
   }); */
-  console.log(levelCount)
+  //console.log(levelCount)
   return levelCount;
 }
 //#endregion
