@@ -737,8 +737,14 @@ function ExtraInfo(){
   });
 
   findViolations(selectedTraceID).then(function (value) {
+    var violationTotal=0;
+    for (const key in value) {
+      violationTotal += value[key];
+    }
     const violationsList = document.getElementById("violationsList");
     violationsList.innerHTML = "";
+
+    document.getElementById("violationsTotal").innerHTML=`Violations: ${violationTotal}`;
 
     var level1 = document.createElement("div");
     level1.style.display="flex";
@@ -806,7 +812,8 @@ function ExtraInfo(){
     document.getElementById(`previewTrace`).style.display="none";
     
     let sumOfEventTypes = {};
-    var i=0;
+    let sumOfViolations = {};
+    var i=0,j=0;
     traces.forEach(element => {
       eventTypes(element).then(function (value) {
         sumOfEventTypes[`trace${i}`]=value;
@@ -815,8 +822,16 @@ function ExtraInfo(){
         if(i==selectedTraces.size)
           sumEventTypes(sumOfEventTypes);
       });
+      findViolations(element).then(function (value) {
+        sumOfViolations[`trace${j}`]=value;
+        //console.log(sumOfViolations);
+        j++;
+        if(j==selectedTraces.size)
+          sumViolations(sumOfViolations);
+      });
       
     });
+    
     
 
   }
@@ -974,6 +989,76 @@ function sumEventTypes(objectContainer) {
       }
     }
     document.getElementById("eventsTotal").innerHTML=`Events: ${eventsTotal}`;
+}
+
+function sumViolations(objectContainer) {
+  // Initialize an object to store the summed values
+  let summedObject = {};
+
+  var violationTotal=0;
+  // Iterate over each object in the object container
+  for (const objKey in objectContainer) {
+      const obj = objectContainer[objKey];
+      // Iterate over each key in the object
+      for (const key in obj) {
+          // Check if the key already exists in the summedObject
+          if (summedObject.hasOwnProperty(key)) {
+              // If the key exists, add the value from the current object to the summedObject
+              summedObject[key] += obj[key] || 0; // Adding 0 if the property is undefined
+              
+              console.log(violationTotal);
+          } else {
+              // If the key doesn't exist, initialize it with the value from the current object
+              summedObject[key] = obj[key];
+          }
+          violationTotal+=obj[key];
+      }
+  }
+  const violationsList = document.getElementById("violationsList");
+    violationsList.innerHTML = "";
+
+    document.getElementById("violationsTotal").innerHTML=`Violations: ${violationTotal}`;
+    
+    var level1 = document.createElement("div");
+    level1.style.display="flex";
+    let level1colorDiv = document.createElement("div");
+    level1colorDiv.classList.add("violationsColorDiv");
+    level1colorDiv.style.backgroundColor="#c7c7c7";
+    level1.append(level1colorDiv);
+    level1.append("Low: " + summedObject.level1);
+    
+
+    var level2 = document.createElement("div");
+    level2.style.display="flex";
+    let level2colorDiv = document.createElement("div");
+    level2colorDiv.classList.add("violationsColorDiv");
+    level2colorDiv.style.backgroundColor="#7f7f7f";
+    level2.append(level2colorDiv);
+    level2.append("Medium: " + summedObject.level2);
+
+    var level3 = document.createElement("div");
+    level3.style.display="flex";
+    let level3colorDiv = document.createElement("div");
+    level3colorDiv.classList.add("violationsColorDiv");
+    level3colorDiv.style.backgroundColor="#dbdb8d";
+    level3.append(level3colorDiv);
+    level3.append("High: " + summedObject.level3);
+
+    var level4 = document.createElement("div");
+    level4.style.display="flex";
+    let level4colorDiv = document.createElement("div");
+    level4colorDiv.classList.add("violationsColorDiv");
+    level4colorDiv.style.backgroundColor="#17becf";
+    level4.append(level4colorDiv);
+    level4.append("Critical: " + summedObject.level4);
+
+
+    violationsList.append(level1);
+    violationsList.append(level2);
+    violationsList.append(level3);
+    violationsList.append(level4);
+
+    
 }
 
 
