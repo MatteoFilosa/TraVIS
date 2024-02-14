@@ -192,12 +192,37 @@ def upload_tasks():
             
     return "Traces uploaded!"
 
+   
 
 @app.route("/get_user_tasks")
 def get_user_tasks():
-   
+    # Database configuration
+    database_name = "visualizations"
+    mongo_uri = config['DATABASES'][database_name]
+    app.config["MONGO_URI"] = mongo_uri
+    mongo = PyMongo(app)
 
-    return 
+    # Collection name
+    collection_name = "task_division"
+
+    # Retrieve data from the MongoDB collection
+    tasks = mongo.db[collection_name].find()
+
+    # Convert ObjectId to string and convert the cursor to a list of dictionaries
+    tasks_list = [{**task, '_id': str(task['_id'])} for task in tasks]
+
+    # Convert data to JSON
+    response_data = jsonify(tasks_list)
+
+    # Set Cache-Control header to enable browser caching for 1 hour (3600 seconds)
+    response = make_response(response_data)
+    response.headers["Cache-Control"] = "max-age=3600"
+
+    return response
+
+
+
+
 
 
 
