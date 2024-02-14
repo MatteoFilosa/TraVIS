@@ -58,16 +58,16 @@ window.onload = function () {
 
 function createCheckboxes() {
   for (let i = 1; i <= tracesNum; i++) {
-    console.log(typeof(String(i)))
-    findViolations(String(i)).then(violationsTmp => {
+    console.log(typeof String(i));
+    findViolations(String(i)).then((violationsTmp) => {
       globalViolationsData.push({
         user: String(i),
-        violations: violationsTmp
+        violations: violationsTmp,
       });
     });
   }
 
-  console.log(globalViolationsData)
+  console.log(globalViolationsData);
 
   var violationFilterDiv = document.createElement("div");
   // // Creazione del label "Violation types"
@@ -78,34 +78,33 @@ function createCheckboxes() {
   var checkboxLabels = ["Low", "Medium", "High", "Critical"];
 
   var horizontalDiv = document.createElement("div");
-  horizontalDiv.style.display="flex";
-  horizontalDiv.style.width="250px";
-  horizontalDiv.style.justifyContent="space-between";
-  
+  horizontalDiv.style.display = "flex";
+  horizontalDiv.style.width = "250px";
+  horizontalDiv.style.justifyContent = "space-between";
+
   for (var i = 0; i < checkboxLabels.length; i++) {
     let containerDiv = document.createElement("div");
-    containerDiv.style.display="flex";
+    containerDiv.style.display = "flex";
     var checkbox = document.createElement("input");
-    checkbox.style.marginLeft="10px";
+    checkbox.style.marginLeft = "10px";
     checkbox.type = "checkbox";
     checkbox.id = "checkbox" + (i + 1);
 
     var label = document.createElement("label");
-    label.style.marginLeft="10px";
-    label.style.marginBottom="0px";
+    label.style.marginLeft = "10px";
+    label.style.marginBottom = "0px";
     label.textContent = checkboxLabels[i];
     label.setAttribute("for", "checkbox" + (i + 1));
 
     containerDiv.appendChild(checkbox);
     containerDiv.appendChild(label);
-    
+
     document.getElementById("violationsDropdown").appendChild(containerDiv);
     checkbox.addEventListener("change", applyCheckboxFilter);
   }
   // violationFilterDiv.appendChild(horizontalDiv);
   filtersContainer.appendChild(violationFilterDiv);
-
-} 
+}
 
 function applyCheckboxFilter() {
   // Get values selected from checkboxes
@@ -115,14 +114,20 @@ function applyCheckboxFilter() {
   const checkbox4Checked = document.getElementById("checkbox4").checked;
 
   // Get values from sliders
-  const violationsFilterValue = parseFloat(document.getElementById("violationsSlider").value);
-  const eventsFilterValue = parseFloat(document.getElementById("interactionsSlider").value);
-  const totalTimeFilterValue = parseFloat(document.getElementById("totalTimeSlider").value);
+  const violationsFilterValue = parseFloat(
+    document.getElementById("violationsSlider").value
+  );
+  const eventsFilterValue = parseFloat(
+    document.getElementById("interactionsSlider").value
+  );
+  const totalTimeFilterValue = parseFloat(
+    document.getElementById("totalTimeSlider").value
+  );
 
   // Get values selected from demographic filters
-  const selectedAge = document.getElementById('AgeFilter').value;
-  const selectedGender = document.getElementById('GenderFilter').value;
-  const selectedStudyTitle = document.getElementById('StudyTitleFilter').value;
+  const selectedAge = document.getElementById("AgeFilter").value;
+  const selectedGender = document.getElementById("GenderFilter").value;
+  const selectedStudyTitle = document.getElementById("StudyTitleFilter").value;
 
   // Define selectedLevels array
   const selectedLevels = [];
@@ -134,14 +139,18 @@ function applyCheckboxFilter() {
   if (checkbox4Checked) selectedLevels.push("level4");
 
   // Loop through table rows
-  const tableRows = document.getElementById("tracesTable").getElementsByTagName("tr");
+  const tableRows = document
+    .getElementById("tracesTable")
+    .getElementsByTagName("tr");
   let visibleRowCount = 0;
 
   for (let i = 0; i < tableRows.length; i++) {
     const row = tableRows[i];
 
     // Get values from children using specified ids
-    const violationsValue = parseFloat(row.querySelector("#violationsCell").innerHTML);
+    const violationsValue = parseFloat(
+      row.querySelector("#violationsCell").innerHTML
+    );
     const eventsValue = parseFloat(row.querySelector("#eventCell").innerHTML);
     var totalTimeValue = parseFloat(row.querySelector("#timeCell").innerHTML);
 
@@ -150,14 +159,17 @@ function applyCheckboxFilter() {
     const rowID = userIDElement ? userIDElement.innerHTML : null;
 
     // Cerca le informazioni demografiche per l'utente corrente
-    const userDemographicInfo = demographicData.find(item => item.User === rowID);
+    const userDemographicInfo = demographicData.find(
+      (item) => item.User === rowID
+    );
 
     // Check if the ID has at least one violation for each selected level
     const showRow =
       hasViolationsLevel(rowID, selectedLevels) &&
       (!selectedAge || userDemographicInfo.Age === selectedAge) &&
       (!selectedGender || userDemographicInfo.Gender === selectedGender) &&
-      (!selectedStudyTitle || userDemographicInfo['Study Title'] === selectedStudyTitle) &&
+      (!selectedStudyTitle ||
+        userDemographicInfo["Study Title"] === selectedStudyTitle) &&
       !isNaN(violationsValue) &&
       !isNaN(eventsValue) &&
       !isNaN(totalTimeValue) &&
@@ -175,13 +187,14 @@ function applyCheckboxFilter() {
   }
 
   // Update innerHTML of "tracesNum" element
-  document.getElementById("tracesNum").innerHTML = "Loaded User Traces: " + visibleRowCount;
+  document.getElementById("tracesNum").innerHTML =
+    "Loaded User Traces: " + visibleRowCount;
 }
 
 // Function to check if an ID has at least one violation for each specified level
 function hasViolationsLevel(userID, levels) {
   // Search for the user in globalViolationsData
-  const userData = globalViolationsData.find(data => data.user === userID);
+  const userData = globalViolationsData.find((data) => data.user === userID);
 
   // If the user is not found, return false
   if (!userData) {
@@ -189,18 +202,30 @@ function hasViolationsLevel(userID, levels) {
   }
 
   // Check if the user has at least one violation for each specified level
-  return levels.every(level => userData.violations[level] > 0);
+  return levels.every((level) => userData.violations[level] > 0);
 }
 
 function createSliders() {
   // maxViolationsValue
-  const violationsSlider = createSlider("violationsSlider", "Total Violations", maxViolationsValue);
+  const violationsSlider = createSlider(
+    "violationsSlider",
+    "Total Violations",
+    maxViolationsValue
+  );
 
   // maxInteractionsValue
-  const interactionsSlider = createSlider("interactionsSlider", "Events", maxInteractionsValue);
+  const interactionsSlider = createSlider(
+    "interactionsSlider",
+    "Events",
+    maxInteractionsValue
+  );
 
   // maxTotalTimeValue
-  const totalTimeSlider = createSlider("totalTimeSlider", "Time", maxTotalTimeValue);
+  const totalTimeSlider = createSlider(
+    "totalTimeSlider",
+    "Time",
+    maxTotalTimeValue
+  );
 
   // Add sliders
   document.getElementById("violationsFilter").appendChild(violationsSlider);
@@ -253,9 +278,12 @@ function createSlider(id, label, maxValue) {
 
 function applyTableFilter() {
   // Get values from sliders
-  const violationsFilterValue = document.getElementById("violationsSlider").value;
+  const violationsFilterValue =
+    document.getElementById("violationsSlider").value;
   const eventsFilterValue = document.getElementById("interactionsSlider").value;
-  const totalTimeFilterValue = parseFloat(document.getElementById("totalTimeSlider").value);
+  const totalTimeFilterValue = parseFloat(
+    document.getElementById("totalTimeSlider").value
+  );
 
   // Get values selected from checkboxes
   const checkbox1Checked = document.getElementById("checkbox1").checked;
@@ -264,22 +292,30 @@ function applyTableFilter() {
   const checkbox4Checked = document.getElementById("checkbox4").checked;
 
   // Get values selected from demographic filters
-  const selectedAge = document.getElementById('AgeFilter').value;
-  const selectedGender = document.getElementById('GenderFilter').value;
-  const selectedStudyTitle = document.getElementById('StudyTitleFilter').value;
+  const selectedAge = document.getElementById("AgeFilter").value;
+  const selectedGender = document.getElementById("GenderFilter").value;
+  const selectedStudyTitle = document.getElementById("StudyTitleFilter").value;
 
   // Check if at least one checkbox is selected
-  const anyCheckboxChecked = checkbox1Checked || checkbox2Checked || checkbox3Checked || checkbox4Checked;
+  const anyCheckboxChecked =
+    checkbox1Checked ||
+    checkbox2Checked ||
+    checkbox3Checked ||
+    checkbox4Checked;
 
   // Loop through table rows
-  const tableRows = document.getElementById("tracesTable").getElementsByTagName("tr");
+  const tableRows = document
+    .getElementById("tracesTable")
+    .getElementsByTagName("tr");
   let visibleRowCount = 0;
 
   for (let i = 0; i < tableRows.length; i++) {
     const row = tableRows[i];
 
     // Get values from children using specified ids
-    const violationsValue = parseFloat(row.querySelector("#violationsCell").innerHTML);
+    const violationsValue = parseFloat(
+      row.querySelector("#violationsCell").innerHTML
+    );
     const eventsValue = parseFloat(row.querySelector("#eventCell").innerHTML);
     var totalTimeValue = parseFloat(row.querySelector("#timeCell").innerHTML);
 
@@ -288,14 +324,17 @@ function applyTableFilter() {
     const rowID = userIDElement ? userIDElement.innerHTML : null;
 
     // Cerca le informazioni demografiche per l'utente corrente
-    const userDemographicInfo = demographicData.find(item => item.User === rowID);
+    const userDemographicInfo = demographicData.find(
+      (item) => item.User === rowID
+    );
 
     // Check if at least one checkbox is selected or if all are unticked
-    const checkboxFilterCondition = !anyCheckboxChecked ||
-      ((checkbox1Checked && hasViolationsLevel(rowID, ["level1"])) ||
-        (checkbox2Checked && hasViolationsLevel(rowID, ["level2"])) ||
-        (checkbox3Checked && hasViolationsLevel(rowID, ["level3"])) ||
-        (checkbox4Checked && hasViolationsLevel(rowID, ["level4"])));
+    const checkboxFilterCondition =
+      !anyCheckboxChecked ||
+      (checkbox1Checked && hasViolationsLevel(rowID, ["level1"])) ||
+      (checkbox2Checked && hasViolationsLevel(rowID, ["level2"])) ||
+      (checkbox3Checked && hasViolationsLevel(rowID, ["level3"])) ||
+      (checkbox4Checked && hasViolationsLevel(rowID, ["level4"]));
 
     // Check if the ID has at least one violation for each selected level and satisfies slider filters
     const showRow =
@@ -308,7 +347,8 @@ function applyTableFilter() {
       checkboxFilterCondition &&
       (!selectedAge || userDemographicInfo.Age === selectedAge) &&
       (!selectedGender || userDemographicInfo.Gender === selectedGender) &&
-      (!selectedStudyTitle || userDemographicInfo['Study Title'] === selectedStudyTitle);
+      (!selectedStudyTitle ||
+        userDemographicInfo["Study Title"] === selectedStudyTitle);
 
     // Show/hide row based on the filter
     row.style.display = showRow ? "" : "none";
@@ -320,63 +360,77 @@ function applyTableFilter() {
   }
 
   // Update innerHTML of "tracesNum" element
-  document.getElementById("tracesNum").innerHTML = "Loaded User Traces: " + visibleRowCount;
+  document.getElementById("tracesNum").innerHTML =
+    "Loaded User Traces: " + visibleRowCount;
 }
 
 function createDemographicFilter(data) {
   demographicData = data;
 
   // Get unique values for age, gender, and study title
-  const uniqueAges = [...new Set(demographicData.map(item => item.Age))].sort((a, b) => ageSortOrder.indexOf(a) - ageSortOrder.indexOf(b));
-  const uniqueGenders = [...new Set(demographicData.map(item => item.Gender))].sort((a, b) => genderSortOrder.indexOf(a) - genderSortOrder.indexOf(b));
+  const uniqueAges = [...new Set(demographicData.map((item) => item.Age))].sort(
+    (a, b) => ageSortOrder.indexOf(a) - ageSortOrder.indexOf(b)
+  );
+  const uniqueGenders = [
+    ...new Set(demographicData.map((item) => item.Gender)),
+  ].sort((a, b) => genderSortOrder.indexOf(a) - genderSortOrder.indexOf(b));
 
   // Define the order for study titles directly
-  const uniqueStudyTitles = ['High School', 'Bachelor Degree', 'Master Degree', 'PhD'];
+  const uniqueStudyTitles = [
+    "High School",
+    "Bachelor Degree",
+    "Master Degree",
+    "PhD",
+  ];
 
   // Create filter for age
-  const ageFilter = createSelectFilter('AgeFilter', 'Age', uniqueAges);
-  document.getElementById('demographicFilter').appendChild(ageFilter);
+  const ageFilter = createSelectFilter("AgeFilter", "Age", uniqueAges);
+  document.getElementById("demographicFilter").appendChild(ageFilter);
 
   // Create filter for gender
-  const genderFilter = createSelectFilter('GenderFilter', 'Gender', uniqueGenders);
-  document.getElementById('demographicFilter').appendChild(genderFilter);
+  const genderFilter = createSelectFilter(
+    "GenderFilter",
+    "Gender",
+    uniqueGenders
+  );
+  document.getElementById("demographicFilter").appendChild(genderFilter);
 
   // Create filter for study title
-  const studyTitleFilter = createSelectFilter('StudyTitleFilter', 'Study Title', uniqueStudyTitles);
-  document.getElementById('demographicFilter').appendChild(studyTitleFilter);
+  const studyTitleFilter = createSelectFilter(
+    "StudyTitleFilter",
+    "Study Title",
+    uniqueStudyTitles
+  );
+  document.getElementById("demographicFilter").appendChild(studyTitleFilter);
 
   // Add listener to filter elements to apply the filter function
-  ageFilter.addEventListener('change', applyDemographicFilter);
-  genderFilter.addEventListener('change', applyDemographicFilter);
-  studyTitleFilter.addEventListener('change', applyDemographicFilter);
+  ageFilter.addEventListener("change", applyDemographicFilter);
+  genderFilter.addEventListener("change", applyDemographicFilter);
+  studyTitleFilter.addEventListener("change", applyDemographicFilter);
 }
 
 // No need for studyTitleSortOrder in this case
-const ageSortOrder = ['18-24', '25-34', '35-44', '45-54'];
-const genderSortOrder = ['Male', 'Female', 'Other', 'Prefer not to say'];
-
-
+const ageSortOrder = ["18-24", "25-34", "35-44", "45-54"];
+const genderSortOrder = ["Male", "Female", "Other", "Prefer not to say"];
 
 function createSelectFilter(id, label, options) {
-  const selectContainer = document.createElement('div');
+  const selectContainer = document.createElement("div");
 
   // labels
-  const labelElement = document.createElement('label');
+  const labelElement = document.createElement("label");
   labelElement.textContent = label;
   selectContainer.appendChild(labelElement);
 
-  
-  const select = document.createElement('select');
+  const select = document.createElement("select");
   select.id = id;
   select.classList.add("form-select");
 
-  options.forEach(optionValue => {
-    const option = document.createElement('option');
+  options.forEach((optionValue) => {
+    const option = document.createElement("option");
     option.value = optionValue;
     option.text = optionValue;
     select.appendChild(option);
   });
-
 
   selectContainer.appendChild(select);
 
@@ -384,15 +438,20 @@ function createSelectFilter(id, label, options) {
 }
 
 function applyDemographicFilter() {
-
-  const selectedAge = document.getElementById('AgeFilter').value;
-  const selectedGender = document.getElementById('GenderFilter').value;
-  const selectedStudyTitle = document.getElementById('StudyTitleFilter').value;
+  const selectedAge = document.getElementById("AgeFilter").value;
+  const selectedGender = document.getElementById("GenderFilter").value;
+  const selectedStudyTitle = document.getElementById("StudyTitleFilter").value;
 
   // Get values from sliders
-  const violationsFilterValue = parseFloat(document.getElementById("violationsSlider").value);
-  const eventsFilterValue = parseFloat(document.getElementById("interactionsSlider").value);
-  const totalTimeFilterValue = parseFloat(document.getElementById("totalTimeSlider").value);
+  const violationsFilterValue = parseFloat(
+    document.getElementById("violationsSlider").value
+  );
+  const eventsFilterValue = parseFloat(
+    document.getElementById("interactionsSlider").value
+  );
+  const totalTimeFilterValue = parseFloat(
+    document.getElementById("totalTimeSlider").value
+  );
 
   // Get values selected from checkboxes
   const checkbox1Checked = document.getElementById("checkbox1").checked;
@@ -401,23 +460,31 @@ function applyDemographicFilter() {
   const checkbox4Checked = document.getElementById("checkbox4").checked;
 
   // Check if at least one checkbox is selected
-  const anyCheckboxChecked = checkbox1Checked || checkbox2Checked || checkbox3Checked || checkbox4Checked;
+  const anyCheckboxChecked =
+    checkbox1Checked ||
+    checkbox2Checked ||
+    checkbox3Checked ||
+    checkbox4Checked;
 
   // Loop attraverso le righe della tabella
-  const tableRows = document.getElementById('tracesTable').getElementsByTagName('tr');
+  const tableRows = document
+    .getElementById("tracesTable")
+    .getElementsByTagName("tr");
   let visibleRowCount = 0;
 
   for (let i = 0; i < tableRows.length; i++) {
     const row = tableRows[i];
 
-  
-    const userIDElement = row.querySelector('.sorting_1');
+    const userIDElement = row.querySelector(".sorting_1");
     const rowID = userIDElement ? userIDElement.innerHTML : null;
 
-    const userDemographicInfo = demographicData.find(item => item.User === rowID);
+    const userDemographicInfo = demographicData.find(
+      (item) => item.User === rowID
+    );
 
-
-    const violationsValue = parseFloat(row.querySelector("#violationsCell").innerHTML);
+    const violationsValue = parseFloat(
+      row.querySelector("#violationsCell").innerHTML
+    );
     const eventsValue = parseFloat(row.querySelector("#eventCell").innerHTML);
     var totalTimeValue = parseFloat(row.querySelector("#timeCell").innerHTML);
 
@@ -425,30 +492,32 @@ function applyDemographicFilter() {
     const showRow =
       (!selectedAge || userDemographicInfo.Age === selectedAge) &&
       (!selectedGender || userDemographicInfo.Gender === selectedGender) &&
-      (!selectedStudyTitle || userDemographicInfo['Study Title'] === selectedStudyTitle) &&
-      (!isNaN(violationsValue) && violationsValue <= violationsFilterValue) &&
-      (!isNaN(eventsValue) && eventsValue <= eventsFilterValue) &&
-      (!isNaN(totalTimeValue) && totalTimeValue <= totalTimeFilterValue) &&
+      (!selectedStudyTitle ||
+        userDemographicInfo["Study Title"] === selectedStudyTitle) &&
+      !isNaN(violationsValue) &&
+      violationsValue <= violationsFilterValue &&
+      !isNaN(eventsValue) &&
+      eventsValue <= eventsFilterValue &&
+      !isNaN(totalTimeValue) &&
+      totalTimeValue <= totalTimeFilterValue &&
       (!anyCheckboxChecked ||
-        ((checkbox1Checked && hasViolationsLevel(rowID, ["level1"])) ||
-          (checkbox2Checked && hasViolationsLevel(rowID, ["level2"])) ||
-          (checkbox3Checked && hasViolationsLevel(rowID, ["level3"])) ||
-          (checkbox4Checked && hasViolationsLevel(rowID, ["level4"]))));
+        (checkbox1Checked && hasViolationsLevel(rowID, ["level1"])) ||
+        (checkbox2Checked && hasViolationsLevel(rowID, ["level2"])) ||
+        (checkbox3Checked && hasViolationsLevel(rowID, ["level3"])) ||
+        (checkbox4Checked && hasViolationsLevel(rowID, ["level4"])));
 
     // Hide/show row
-    row.style.display = showRow ? '' : 'none';
+    row.style.display = showRow ? "" : "none";
 
-   
     if (showRow) {
       visibleRowCount++;
     }
   }
 
   // "tracesNum"
-  document.getElementById('tracesNum').innerHTML = 'Loaded User Traces: ' + visibleRowCount;
+  document.getElementById("tracesNum").innerHTML =
+    "Loaded User Traces: " + visibleRowCount;
 }
-
-
 
 function getUserTraces() {
   const url = "http://127.0.0.1:5000/get_user_traces";
@@ -458,13 +527,11 @@ function getUserTraces() {
       loadedTraces = json;
       tracesNum = json.length;
       loadingIcon.style.display = "none";
-      filtersContainer.style.display="flex";
+      filtersContainer.style.display = "flex";
       table.style.display = "block";
       document.getElementById("tracesNum").innerHTML =
         "Loaded User Traces: " + tracesNum;
       populateTable(loadedTraces);
-
-      
     })
     .then(() => {
       // Enable filtering for table
@@ -480,19 +547,15 @@ function getUserTraces() {
         fixedHeader: true,
       });
 
-  
       //Filters creation
-      createSliders(); 
+      createSliders();
       createCheckboxes();
       // Local JSON file
-      fetch('/files/user_traces/demographic_info/demographic_info.json')
-        .then(response => response.json())
-        .then(data => {
-          
-          
+      fetch("/files/user_traces/demographic_info/demographic_info.json")
+        .then((response) => response.json())
+        .then((data) => {
           createDemographicFilter(data);
         });
-
     });
 }
 
@@ -520,8 +583,7 @@ function truncateString(str, maxLength) {
 }
 function populateTable(data) {
   const tableBody = document.getElementById("tracesTable");
-  console.log(data)
-
+  //console.log(data)
 
   data.forEach((element, index) => {
     let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
@@ -561,9 +623,10 @@ function populateTable(data) {
         0
       );
 
-
-
-      if (interactionsValue > maxInteractionsValue || maxInteractionsValue === undefined) {
+      if (
+        interactionsValue > maxInteractionsValue ||
+        maxInteractionsValue === undefined
+      ) {
         maxInteractionsValue = interactionsValue;
       }
     });
@@ -578,7 +641,7 @@ function populateTable(data) {
       const violationsCell = document.createElement("td");
       //violationsCell.id = "violationsCell";
 
-      console.log(value)
+      console.log(value);
 
       const violationsValue = Object.values(value).reduce(
         (acc, count) => acc + count,
@@ -586,7 +649,10 @@ function populateTable(data) {
       );
 
       // Aggiorna la variabile maxViolationsValue se violationsValue è maggiore
-      if (violationsValue > maxViolationsValue || maxViolationsValue === undefined) {
+      if (
+        violationsValue > maxViolationsValue ||
+        maxViolationsValue === undefined
+      ) {
         maxViolationsValue = violationsValue;
       }
 
@@ -594,26 +660,27 @@ function populateTable(data) {
       row.appendChild(violationsCell);
 
       // Qui puoi usare il valore più grande di maxViolationsValue
-
     });
 
     findTotalTime(extractedNumber).then(function (value) {
       // Add time column
       const timeCell = document.createElement("td");
-      timeCell.id = "timeCell"
+      timeCell.id = "timeCell";
       timeCell.textContent = value.totalTime;
       row.appendChild(timeCell);
-      console.log(value.totalTime)
-      if (parseFloat(value.totalTime) > maxTotalTimeValue || maxTotalTimeValue === undefined) {
+      console.log(value.totalTime);
+      if (
+        parseFloat(value.totalTime) > maxTotalTimeValue ||
+        maxTotalTimeValue === undefined
+      ) {
         maxTotalTimeValue = parseFloat(value.totalTime);
       }
       // Add the row to the table
       tableBody.appendChild(row);
-      
+
       console.log("maxInteractionsValue è:", maxInteractionsValue);
       console.log("maxViolationsValue è:", maxViolationsValue);
       console.log("maxTotalTime è:", maxTotalTimeValue);
-
     });
 
     checkbox.addEventListener("change", function () {
@@ -644,24 +711,21 @@ function populateTable(data) {
         //     clearExtraInformation();
         //   }
         // }
-
-      }
-      else {
+      } else {
         row.classList.remove("table-selected");
         selectedTraces.delete(checkbox.id);
         console.log(selectedTraces);
         if (document.getElementById(`previewTrace${selectedTraceID}`)) {
-          document.getElementById(`previewTrace${selectedTraceID}`).id = "previewTrace";
+          document.getElementById(`previewTrace${selectedTraceID}`).id =
+            "previewTrace";
         }
         document.getElementById(`previewTrace`).style.display = "none";
-        
+
         // document.getElementById(`button${numbersOnlyID}`).classList.remove("expandButtonPressed");
         // document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "false");
         // document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", 0);
-        if(selectedTraces.size>0)
-          ExtraInfo();
-        else
-          clearExtraInformation();
+        if (selectedTraces.size > 0) ExtraInfo();
+        else clearExtraInformation();
       }
       if (selectedTraces.size != 0) {
         document.getElementById("selectTraceBtn").style.display = "block";
@@ -673,173 +737,180 @@ function populateTable(data) {
           document.getElementById(
             "selectTraceBtn"
           ).innerHTML = `Replay ${selectedTraces.size} trace`;
-
       } else {
         document.getElementById("selectTraceBtn").style.opacity = 0;
       }
     });
   });
-
-
 }
 
 //#endregion
 
 //#region Select Trace
 
-function ExtraInfo(){
+function ExtraInfo() {
   document.getElementById("extrainfoContent").style.opacity = 1;
   document.getElementById("placeholderText").style.display = "none";
 
   //For now, preview only one selected trace
-  if(selectedTraces.size==1){
+  if (selectedTraces.size == 1) {
     const [userNum] = selectedTraces;
     selectedTraceID = userNum;
-    document.getElementById("traceInfoTitle").innerHTML = `Trace Information: User ${[userNum]}`;
-    document.getElementById("previewTrace").style.display="block";
+    document.getElementById(
+      "traceInfoTitle"
+    ).innerHTML = `Trace Information: User ${[userNum]}`;
+    document.getElementById("previewTrace").style.display = "block";
 
-    document.getElementById("previewTrace").href="home";
+    document.getElementById("previewTrace").href = "home";
 
     loadedTraces.forEach((element, index) => {
       let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
       // Extract the captured number from the file name
       let extractedNumber = match ? match[1] : null;
-  
+
       if (extractedNumber === userNum) {
         selectedTrace_RawValue = JSON.parse(element.user_trace);
         //console.log(selectedTrace_RawValue);
       }
     });
 
-    localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue) )
-    localStorage.setItem("selectedTraceID", JSON.stringify(userNum))
-    document.getElementById("previewTrace").id+=userNum;
+    localStorage.setItem(
+      "selectedTrace",
+      JSON.stringify(selectedTrace_RawValue)
+    );
+    localStorage.setItem("selectedTraceID", JSON.stringify(userNum));
+    document.getElementById("previewTrace").id += userNum;
 
     generateHeatmap(selectedTraceID);
 
-
-  eventTypes(selectedTraceID).then(function (value) {
-    const eventsList = document.getElementById("eventsList");
-    eventsList.innerHTML = "";
-    var eventsTotal=0;
-    for (const key in value) {
-      if (value[key] > 0) {
-        eventsTotal+=value[key];
-        var eventElement = document.createElement("li");
-        eventElement.textContent = `${key}: ${value[key]}`;
-        if (key == "dblclick")
-          eventElement.textContent = `Double click: ${value[key]}`;
-        eventElement.style.textTransform = "capitalize";
-        eventsList.append(eventElement);
+    eventTypes(selectedTraceID).then(function (value) {
+      const eventsList = document.getElementById("eventsList");
+      eventsList.innerHTML = "";
+      var eventsTotal = 0;
+      for (const key in value) {
+        if (value[key] > 0) {
+          eventsTotal += value[key];
+          var eventElement = document.createElement("li");
+          eventElement.textContent = `${key}: ${value[key]}`;
+          if (key == "dblclick")
+            eventElement.textContent = `Double click: ${value[key]}`;
+          eventElement.style.textTransform = "capitalize";
+          eventsList.append(eventElement);
+        }
       }
-    }
-    document.getElementById("eventsTotal").innerHTML=`Events: ${eventsTotal}`;
-  });
+      document.getElementById(
+        "eventsTotal"
+      ).innerHTML = `Events: ${eventsTotal}`;
+    });
 
-  findViolations(selectedTraceID).then(function (value) {
-    var violationTotal=0;
-    for (const key in value) {
-      violationTotal += value[key];
-    }
-    const violationsList = document.getElementById("violationsList");
-    violationsList.innerHTML = "";
+    findViolations(selectedTraceID).then(function (value) {
+      var violationTotal = 0;
+      for (const key in value) {
+        violationTotal += value[key];
+      }
+      const violationsList = document.getElementById("violationsList");
+      violationsList.innerHTML = "";
 
-    document.getElementById("violationsTotal").innerHTML=`Violations: ${violationTotal}`;
+      document.getElementById(
+        "violationsTotal"
+      ).innerHTML = `Violations: ${violationTotal}`;
 
-    var level1 = document.createElement("div");
-    level1.style.display="flex";
-    let level1colorDiv = document.createElement("div");
-    level1colorDiv.classList.add("violationsColorDiv");
-    level1colorDiv.style.backgroundColor="#c7c7c7";
-    level1.append(level1colorDiv);
-    level1.append("Low: " + value.level1);
-    
+      var level1 = document.createElement("div");
+      level1.style.display = "flex";
+      let level1colorDiv = document.createElement("div");
+      level1colorDiv.classList.add("violationsColorDiv");
+      level1colorDiv.style.backgroundColor = "#c7c7c7";
+      level1.append(level1colorDiv);
+      level1.append("Low: " + value.level1);
 
-    var level2 = document.createElement("div");
-    level2.style.display="flex";
-    let level2colorDiv = document.createElement("div");
-    level2colorDiv.classList.add("violationsColorDiv");
-    level2colorDiv.style.backgroundColor="#7f7f7f";
-    level2.append(level2colorDiv);
-    level2.append("Medium: " + value.level2);
+      var level2 = document.createElement("div");
+      level2.style.display = "flex";
+      let level2colorDiv = document.createElement("div");
+      level2colorDiv.classList.add("violationsColorDiv");
+      level2colorDiv.style.backgroundColor = "#7f7f7f";
+      level2.append(level2colorDiv);
+      level2.append("Medium: " + value.level2);
 
-    var level3 = document.createElement("div");
-    level3.style.display="flex";
-    let level3colorDiv = document.createElement("div");
-    level3colorDiv.classList.add("violationsColorDiv");
-    level3colorDiv.style.backgroundColor="#dbdb8d";
-    level3.append(level3colorDiv);
-    level3.append("High: " + value.level3);
+      var level3 = document.createElement("div");
+      level3.style.display = "flex";
+      let level3colorDiv = document.createElement("div");
+      level3colorDiv.classList.add("violationsColorDiv");
+      level3colorDiv.style.backgroundColor = "#dbdb8d";
+      level3.append(level3colorDiv);
+      level3.append("High: " + value.level3);
 
-    var level4 = document.createElement("div");
-    level4.style.display="flex";
-    let level4colorDiv = document.createElement("div");
-    level4colorDiv.classList.add("violationsColorDiv");
-    level4colorDiv.style.backgroundColor="#17becf";
-    level4.append(level4colorDiv);
-    level4.append("Critical: " + value.level4);
+      var level4 = document.createElement("div");
+      level4.style.display = "flex";
+      let level4colorDiv = document.createElement("div");
+      level4colorDiv.classList.add("violationsColorDiv");
+      level4colorDiv.style.backgroundColor = "#17becf";
+      level4.append(level4colorDiv);
+      level4.append("Critical: " + value.level4);
 
+      violationsList.append(level1);
+      violationsList.append(level2);
+      violationsList.append(level3);
+      violationsList.append(level4);
+      //generateViolationsHeatmap(value);
+    });
+    findTotalTime(selectedTraceID).then(function (value) {
+      const timeList = document.getElementById("timeList");
+      timeList.innerHTML = "";
+      var totalTime = document.createElement("li");
+      totalTime.textContent = `Total time: ${value.totalTime} seconds`;
+      var averageTime = document.createElement("li");
+      averageTime.textContent = `Average time: ${value.averageTime} seconds`;
 
-    violationsList.append(level1);
-    violationsList.append(level2);
-    violationsList.append(level3);
-    violationsList.append(level4);
-    //generateViolationsHeatmap(value);
-  });
-  findTotalTime(selectedTraceID).then(function (value) {
-    const timeList = document.getElementById("timeList");
-    timeList.innerHTML = "";
-    var totalTime = document.createElement("li");
-    totalTime.textContent = `Total time: ${value.totalTime} seconds`;
-    var averageTime = document.createElement("li");
-    averageTime.textContent = `Average time: ${value.averageTime} seconds`;
-
-    timeList.append(totalTime);
-    timeList.append(averageTime);
-  });
-  
-  }
-  else{
+      timeList.append(totalTime);
+      timeList.append(averageTime);
+    });
+  } else {
     let traces = Array.from(selectedTraces);
-    traces=traces.sort();
-    let selectedNums=traces.join(", ");
-    document.getElementById("traceInfoTitle").innerHTML = `Trace Information: Users ${selectedNums}`;
-    
-    if(document.getElementById(`previewTrace${selectedTraceID}`)){
-      document.getElementById(`previewTrace${selectedTraceID}`).id="previewTrace";
+    traces = traces.sort();
+    let selectedNums = traces.join(", ");
+    document.getElementById(
+      "traceInfoTitle"
+    ).innerHTML = `Trace Information: Users ${selectedNums}`;
+
+    if (document.getElementById(`previewTrace${selectedTraceID}`)) {
+      document.getElementById(`previewTrace${selectedTraceID}`).id =
+        "previewTrace";
     }
 
-    document.getElementById(`previewTrace`).style.display="none";
-    
+    document.getElementById(`previewTrace`).style.display = "none";
+
     let sumOfEventTypes = {};
     let sumOfViolations = {};
-    var i=0,j=0;
-    traces.forEach(element => {
+    let sumOfTimes = {};
+    var i = 0,
+      j = 0,
+      k = 0;
+    traces.forEach((element) => {
       eventTypes(element).then(function (value) {
-        sumOfEventTypes[`trace${i}`]=value;
+        sumOfEventTypes[`trace${i}`] = value;
         //console.log(sumOfEventTypes);
         i++;
-        if(i==selectedTraces.size)
-          sumEventTypes(sumOfEventTypes);
+        if (i == selectedTraces.size) sumEventTypes(sumOfEventTypes);
       });
       findViolations(element).then(function (value) {
-        sumOfViolations[`trace${j}`]=value;
+        sumOfViolations[`trace${j}`] = value;
         //console.log(sumOfViolations);
         j++;
-        if(j==selectedTraces.size)
-          sumViolations(sumOfViolations);
+        if (j == selectedTraces.size) sumViolations(sumOfViolations);
       });
-      
+      findTotalTime(element).then(function (value) {
+        sumOfTimes[`trace${k}`] = value;
+        k++;
+        if (k == selectedTraces.size) {
+          sumTimes(sumOfTimes);
+        }
+      });
     });
-    
-    
-
   }
- 
 }
 function showExtraInformation(userID) {
   //console.log(userID)
-  selectedTraceID=userID;
+  selectedTraceID = userID;
 
   loadedTraces.forEach((element, index) => {
     let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
@@ -853,13 +924,13 @@ function showExtraInformation(userID) {
   });
 
   document.getElementById("placeholderText").style.display = "none";
-  document.getElementById("previewTrace").style.display="block";
+  document.getElementById("previewTrace").style.display = "block";
 
-  document.getElementById("previewTrace").href="home";
-  localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue) )
-  localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID))
-  document.getElementById("previewTrace").id+=selectedTraceID;
-  
+  document.getElementById("previewTrace").href = "home";
+  localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue));
+  localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
+  document.getElementById("previewTrace").id += selectedTraceID;
+
   document.getElementById("extrainfoContent").style.opacity = 1;
   document.getElementById(
     "traceInfoTitle"
@@ -871,7 +942,7 @@ function showExtraInformation(userID) {
     eventsList.innerHTML = "";
     for (const key in value) {
       if (value[key] > 0) {
-        console.log(key, value)
+        console.log(key, value);
         var eventElement = document.createElement("li");
         eventElement.textContent = `${key}: ${value[key]}`;
         if (key == "dblclick")
@@ -883,43 +954,41 @@ function showExtraInformation(userID) {
   });
 
   findViolations(selectedTraceID).then(function (value) {
-    console.log(typeof(selectedTraceID))
+    console.log(typeof selectedTraceID);
     const violationsList = document.getElementById("violationsList");
     violationsList.innerHTML = "";
 
     var level1 = document.createElement("div");
-    level1.style.display="flex";
+    level1.style.display = "flex";
     let level1colorDiv = document.createElement("div");
     level1colorDiv.classList.add("violationsColorDiv");
-    level1colorDiv.style.backgroundColor="#c7c7c7";
+    level1colorDiv.style.backgroundColor = "#c7c7c7";
     level1.append(level1colorDiv);
     level1.append("Low: " + value.level1);
-    
 
     var level2 = document.createElement("div");
-    level2.style.display="flex";
+    level2.style.display = "flex";
     let level2colorDiv = document.createElement("div");
     level2colorDiv.classList.add("violationsColorDiv");
-    level2colorDiv.style.backgroundColor="#7f7f7f";
+    level2colorDiv.style.backgroundColor = "#7f7f7f";
     level2.append(level2colorDiv);
     level2.append("Medium: " + value.level2);
 
     var level3 = document.createElement("div");
-    level3.style.display="flex";
+    level3.style.display = "flex";
     let level3colorDiv = document.createElement("div");
     level3colorDiv.classList.add("violationsColorDiv");
-    level3colorDiv.style.backgroundColor="#dbdb8d";
+    level3colorDiv.style.backgroundColor = "#dbdb8d";
     level3.append(level3colorDiv);
     level3.append("High: " + value.level3);
 
     var level4 = document.createElement("div");
-    level4.style.display="flex";
+    level4.style.display = "flex";
     let level4colorDiv = document.createElement("div");
     level4colorDiv.classList.add("violationsColorDiv");
-    level4colorDiv.style.backgroundColor="#17becf";
+    level4colorDiv.style.backgroundColor = "#17becf";
     level4.append(level4colorDiv);
     level4.append("Critical: " + value.level4);
-
 
     violationsList.append(level1);
     violationsList.append(level2);
@@ -938,16 +1007,14 @@ function showExtraInformation(userID) {
     timeList.append(totalTime);
     timeList.append(averageTime);
   });
-
 }
 
-
 async function clearExtraInformation() {
-  document.getElementById(`previewTrace`).style.display="none";
+  document.getElementById(`previewTrace`).style.display = "none";
   document.getElementById("placeholderText").style.display = "block";
   document.getElementById("extrainfoContent").style.opacity = 0;
   document.getElementById("traceInfoTitle").innerHTML = "Trace Information   ";
-  selectedTraceID=null;
+  selectedTraceID = null;
 }
 
 //#endregion
@@ -955,112 +1022,130 @@ async function clearExtraInformation() {
 //#region Extract trace info
 
 function sumEventTypes(objectContainer) {
-  // Initialize an object to store the summed values
   let summedObject = {};
 
-  // Iterate over each object in the object container
   for (const objKey in objectContainer) {
-      const obj = objectContainer[objKey];
-      // Iterate over each key in the object
-      for (const key in obj) {
-          // Check if the key already exists in the summedObject
-          if (summedObject.hasOwnProperty(key)) {
-              // If the key exists, add the value from the current object to the summedObject
-              summedObject[key] += obj[key] || 0; // Adding 0 if the property is undefined
-          } else {
-              // If the key doesn't exist, initialize it with the value from the current object
-              summedObject[key] = obj[key];
-          }
-      }
-  }
-  var eventsTotal=0;
-  const eventsList = document.getElementById("eventsList");
-    eventsList.innerHTML = "";
-    for (const key in summedObject) {
-      if (summedObject[key] > 0) {
-        eventsTotal+=summedObject[key];
-        //console.log(key, value)
-        var eventElement = document.createElement("li");
-        eventElement.textContent = `${key}: ${summedObject[key]}`;
-        if (key == "dblclick")
-          eventElement.textContent = `Double click: ${summedObject[key]}`;
-        eventElement.style.textTransform = "capitalize";
-        eventsList.append(eventElement);
+    const obj = objectContainer[objKey];
+    for (const key in obj) {
+      if (summedObject.hasOwnProperty(key)) {
+        summedObject[key] += obj[key] || 0; // Adding 0 if the property is undefined
+      } else {
+        summedObject[key] = obj[key];
       }
     }
-    document.getElementById("eventsTotal").innerHTML=`Events: ${eventsTotal}`;
+  }
+  var eventsTotal = 0;
+  const eventsList = document.getElementById("eventsList");
+  eventsList.innerHTML = "";
+  for (const key in summedObject) {
+    if (summedObject[key] > 0) {
+      eventsTotal += summedObject[key];
+      //console.log(key, value)
+      var eventElement = document.createElement("li");
+      eventElement.textContent = `${key}: ${summedObject[key]}`;
+      if (key == "dblclick")
+        eventElement.textContent = `Double click: ${summedObject[key]}`;
+      eventElement.style.textTransform = "capitalize";
+      eventsList.append(eventElement);
+    }
+  }
+  document.getElementById("eventsTotal").innerHTML = `Events: ${eventsTotal}`;
 }
 
 function sumViolations(objectContainer) {
-  // Initialize an object to store the summed values
   let summedObject = {};
-
-  var violationTotal=0;
-  // Iterate over each object in the object container
+  var violationTotal = 0;
   for (const objKey in objectContainer) {
-      const obj = objectContainer[objKey];
-      // Iterate over each key in the object
-      for (const key in obj) {
-          // Check if the key already exists in the summedObject
-          if (summedObject.hasOwnProperty(key)) {
-              // If the key exists, add the value from the current object to the summedObject
-              summedObject[key] += obj[key] || 0; // Adding 0 if the property is undefined
-              
-              console.log(violationTotal);
-          } else {
-              // If the key doesn't exist, initialize it with the value from the current object
-              summedObject[key] = obj[key];
-          }
-          violationTotal+=obj[key];
+    const obj = objectContainer[objKey];
+    for (const key in obj) {
+      if (summedObject.hasOwnProperty(key)) {
+        summedObject[key] += obj[key] || 0; // Adding 0 if the property is undefined
+        //console.log(violationTotal);
+      } else {
+        summedObject[key] = obj[key];
       }
+      violationTotal += obj[key];
+    }
   }
   const violationsList = document.getElementById("violationsList");
-    violationsList.innerHTML = "";
+  violationsList.innerHTML = "";
 
-    document.getElementById("violationsTotal").innerHTML=`Violations: ${violationTotal}`;
-    
-    var level1 = document.createElement("div");
-    level1.style.display="flex";
-    let level1colorDiv = document.createElement("div");
-    level1colorDiv.classList.add("violationsColorDiv");
-    level1colorDiv.style.backgroundColor="#c7c7c7";
-    level1.append(level1colorDiv);
-    level1.append("Low: " + summedObject.level1);
-    
+  document.getElementById(
+    "violationsTotal"
+  ).innerHTML = `Violations: ${violationTotal}`;
 
-    var level2 = document.createElement("div");
-    level2.style.display="flex";
-    let level2colorDiv = document.createElement("div");
-    level2colorDiv.classList.add("violationsColorDiv");
-    level2colorDiv.style.backgroundColor="#7f7f7f";
-    level2.append(level2colorDiv);
-    level2.append("Medium: " + summedObject.level2);
+  var level1 = document.createElement("div");
+  level1.style.display = "flex";
+  let level1colorDiv = document.createElement("div");
+  level1colorDiv.classList.add("violationsColorDiv");
+  level1colorDiv.style.backgroundColor = "#c7c7c7";
+  level1.append(level1colorDiv);
+  level1.append("Low: " + summedObject.level1);
 
-    var level3 = document.createElement("div");
-    level3.style.display="flex";
-    let level3colorDiv = document.createElement("div");
-    level3colorDiv.classList.add("violationsColorDiv");
-    level3colorDiv.style.backgroundColor="#dbdb8d";
-    level3.append(level3colorDiv);
-    level3.append("High: " + summedObject.level3);
+  var level2 = document.createElement("div");
+  level2.style.display = "flex";
+  let level2colorDiv = document.createElement("div");
+  level2colorDiv.classList.add("violationsColorDiv");
+  level2colorDiv.style.backgroundColor = "#7f7f7f";
+  level2.append(level2colorDiv);
+  level2.append("Medium: " + summedObject.level2);
 
-    var level4 = document.createElement("div");
-    level4.style.display="flex";
-    let level4colorDiv = document.createElement("div");
-    level4colorDiv.classList.add("violationsColorDiv");
-    level4colorDiv.style.backgroundColor="#17becf";
-    level4.append(level4colorDiv);
-    level4.append("Critical: " + summedObject.level4);
+  var level3 = document.createElement("div");
+  level3.style.display = "flex";
+  let level3colorDiv = document.createElement("div");
+  level3colorDiv.classList.add("violationsColorDiv");
+  level3colorDiv.style.backgroundColor = "#dbdb8d";
+  level3.append(level3colorDiv);
+  level3.append("High: " + summedObject.level3);
 
+  var level4 = document.createElement("div");
+  level4.style.display = "flex";
+  let level4colorDiv = document.createElement("div");
+  level4colorDiv.classList.add("violationsColorDiv");
+  level4colorDiv.style.backgroundColor = "#17becf";
+  level4.append(level4colorDiv);
+  level4.append("Critical: " + summedObject.level4);
 
-    violationsList.append(level1);
-    violationsList.append(level2);
-    violationsList.append(level3);
-    violationsList.append(level4);
-
-    
+  violationsList.append(level1);
+  violationsList.append(level2);
+  violationsList.append(level3);
+  violationsList.append(level4);
 }
 
+function sumTimes(objectContainer) {
+  let summedObject = {};
+  let objectCount = 0;
+  let summedAvgTime = 0;
+
+  for (const objKey in objectContainer) {
+    const obj = objectContainer[objKey];
+    objectCount++;
+
+    for (const key in obj) {
+      
+      if (key === "averageTime") {
+        summedAvgTime += Number(obj[key]);
+      } else {
+        if (summedObject.hasOwnProperty(key)) {
+          summedObject[key] += Number(obj[key]) || 0;
+        } else {
+          summedObject[key] = Number(obj[key]);
+        }
+      }
+    }
+  }
+  summedObject["averageTime"]=(summedAvgTime/objectCount);
+
+  const timeList = document.getElementById("timeList");
+  timeList.innerHTML = "";
+  var totalTime = document.createElement("li");
+  totalTime.textContent = `Total time: ${summedObject.totalTime} seconds`;
+  var averageTime = document.createElement("li");
+  averageTime.textContent = `Average time: ${summedObject.averageTime} seconds`;
+
+  timeList.append(totalTime);
+  timeList.append(averageTime);
+}
 
 async function eventTypes(userID) {
   var searchWords = [
@@ -1089,7 +1174,7 @@ async function eventTypes(userID) {
 
     if (extractedNumber === userID) {
       let traceData = JSON.parse(element.user_trace);
-      
+
       traceData.forEach(function (obj) {
         Object.values(obj).forEach(function (value) {
           searchWords.forEach(function (searchWord) {
@@ -1124,9 +1209,6 @@ async function findTotalTime(userID) {
 }
 
 async function findViolations(userID) {
- 
-  //console.log(userID)
-  // Initialize level counters
   const levelCount = {
     level1: 0,
     level2: 0,
@@ -1135,23 +1217,15 @@ async function findViolations(userID) {
   };
   for (const element of violationsForAllTraces) {
     let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
-    // Extract the captured number from the file name
     let extractedNumber = match ? match[1] : null;
-    //console.log(extractedNumber, userID)
-    //console.log(extractedNumber,number);
     if (extractedNumber === userID) {
       const userTrace = JSON.parse(element.user_trace);
-      
-      // Iterate through the JSON data
-      
       for (const key in userTrace) {
         var levelname = "level" + key;
-        //levelCount[levelname]=userTrace[key].length;
         for (const violationString of userTrace[key]) {
           const match = violationString.match(/violation of level (\d+)/);
           if (match) {
             const level = `level${match[1]}`;
-            // Increment the corresponding level counter
             levelCount[level]++;
           }
         }
@@ -1167,27 +1241,25 @@ async function findViolations(userID) {
 }
 //#endregion
 
-function createViolationsBar(violations){
-  
+function createViolationsBar(violations) {
   const violationsRectangle = document.createElement("div");
-  violationsRectangle.style.display="flex";
-  violationsRectangle.style.width="100%";
-  violationsRectangle.style.justifyContent="space-between";
+  violationsRectangle.style.display = "flex";
+  violationsRectangle.style.width = "100%";
+  violationsRectangle.style.justifyContent = "space-between";
   violationsRectangle.id = "violationsRectangle";
   violationsRectangle.innerHTML = "";
 
-  
   // Calculate the percentage of each event type
   const totalViolations = Object.values(violations).reduce(
     (acc, count) => acc + count,
     0
   );
-  
+
   var totalNum = document.createElement("p");
-  totalNum.textContent=totalViolations;
-  totalNum.style.marginRight="8px";
-  totalNum.style.color="black";
-  totalNum.id = "violationsCell"
+  totalNum.textContent = totalViolations;
+  totalNum.style.marginRight = "8px";
+  totalNum.style.color = "black";
+  totalNum.id = "violationsCell";
   violationsRectangle.appendChild(totalNum);
 
   const percentages = {};
@@ -1219,7 +1291,10 @@ function createViolationsBar(violations){
       eventDiv.style.height = "20px";
 
       // Calculate the width of the bar based on percentage
-      const barWidth = Math.max(minWidth, (percentage / 100) * (totalViolations / 10));
+      const barWidth = Math.max(
+        minWidth,
+        (percentage / 100) * (totalViolations / 10)
+      );
       eventDiv.style.width = `${barWidth}%`;
 
       // Set different background colors based on violation level
@@ -1235,7 +1310,6 @@ function createViolationsBar(violations){
       wrapperDiv.appendChild(eventDiv);
     }
   }
-
 
   violationsRectangle.appendChild(wrapperDiv);
   return violationsRectangle;
@@ -1276,12 +1350,12 @@ function createEventsBar(events) {
   return eventRectangle;
 }
 
-function generateViolationsHeatmap(violations){
+function generateViolationsHeatmap(violations) {
   const violationsRectangle = document.getElementById("violationsHeatmap");
-  violationsRectangle.style.display="flex";
-  violationsRectangle.style.width="58%";
+  violationsRectangle.style.display = "flex";
+  violationsRectangle.style.width = "58%";
   violationsRectangle.innerHTML = "";
-  
+
   // Calculate the percentage of each event type
   const totalViolations = Object.values(violations).reduce(
     (acc, count) => acc + count,
@@ -1305,15 +1379,13 @@ function generateViolationsHeatmap(violations){
     eventDiv.classList.add("eventColor");
     eventDiv.style.height = "70px";
     eventDiv.style.width = `${
-      (count / Object.values(violations).reduce((acc, count) => acc + count, 0)) *
+      (count /
+        Object.values(violations).reduce((acc, count) => acc + count, 0)) *
       100
     }%`;
-    if(violationName.includes("1"))
-      eventDiv.style.backgroundColor = "#f1a171";
-    if(violationName.includes("2"))
-      eventDiv.style.backgroundColor = "#feb24c";
-    if(violationName.includes("3"))
-      eventDiv.style.backgroundColor = "#f03b20";
+    if (violationName.includes("1")) eventDiv.style.backgroundColor = "#f1a171";
+    if (violationName.includes("2")) eventDiv.style.backgroundColor = "#feb24c";
+    if (violationName.includes("3")) eventDiv.style.backgroundColor = "#f03b20";
     violationsRectangle.appendChild(eventDiv);
   }
   return violationsRectangle;
@@ -1330,7 +1402,7 @@ function generateHeatmap(userID) {
 
     if (extractedNumber === userID) {
       let traceData = JSON.parse(element.user_trace);
-      
+
       let cnt = 0;
 
       // Calculate the number of rows based on the length of the traceData array
@@ -1348,9 +1420,9 @@ function generateHeatmap(userID) {
         eventDiv.style.left = (i % columns) * (100 / columns) + "%";
         eventDiv.style.top = Math.floor(i / columns) * (100 / rows) + "%";
 
-//         if(checkIfThereisViolation(userID,obj.xpath)){
-// console.log("Found violation on: "+obj.xpath+obj.event);
-//         }
+        //         if(checkIfThereisViolation(userID,obj.xpath)){
+        // console.log("Found violation on: "+obj.xpath+obj.event);
+        //         }
         // var violationCircle = document.createElement("div");
         // violationCircle.className="event-Violation";
 
@@ -1363,14 +1435,10 @@ function generateHeatmap(userID) {
       mainDiv.style.setProperty("--rows", rows);
       mainDiv.style.setProperty("--columns", columns);
     }
-
-    
   });
-
-  
 }
 
-function checkIfThereisViolation(userID,xpath){
+function checkIfThereisViolation(userID, xpath) {
   for (const element of violationsForAllTraces) {
     let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
     // Extract the captured number from the file name
@@ -1382,8 +1450,8 @@ function checkIfThereisViolation(userID,xpath){
       for (var key in userTrace) {
         if (userTrace.hasOwnProperty(key) && Array.isArray(userTrace[key])) {
           // Check if the buttonName is present in the array
-          
-          if (userTrace[key].some(element => element.includes(xpath))) {
+
+          if (userTrace[key].some((element) => element.includes(xpath))) {
             return true;
           }
         }
@@ -1391,8 +1459,6 @@ function checkIfThereisViolation(userID,xpath){
       return false;
     }
   }
-
-  
 }
 // Function to get color based on event name
 function getColor(eventName) {
@@ -1461,7 +1527,7 @@ function colorLegend() {
     eventColumn.appendChild(colorElementDiv);
   });
 
-  const violations =["Low","Medium","High","Critical"];
+  const violations = ["Low", "Medium", "High", "Critical"];
   violations.forEach((element) => {
     let colorElementDiv = document.createElement("div");
     colorElementDiv.classList.add("legendElementDiv");
@@ -1485,7 +1551,6 @@ function colorLegend() {
 
     violationsColumn.appendChild(colorElementDiv);
   });
-
 }
 
 function toggleLegend() {
@@ -1503,7 +1568,4 @@ function toggleLegend() {
   }
 }
 
-
-function previewTrace(){
-
-}
+function previewTrace() {}
