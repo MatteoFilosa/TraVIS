@@ -699,11 +699,14 @@ function populateTable(data) {
           document.getElementById(`previewTrace${selectedTraceID}`).id = "previewTrace";
         }
         document.getElementById(`previewTrace`).style.display = "none";
-        ExtraInfo();
+        
         // document.getElementById(`button${numbersOnlyID}`).classList.remove("expandButtonPressed");
         // document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "false");
         // document.getElementById(`extrainfoDiv`).setAttribute("data-activatedBy", 0);
-        // clearExtraInformation();
+        if(selectedTraces.size>0)
+          ExtraInfo();
+        else
+          clearExtraInformation();
       }
       if (selectedTraces.size != 0) {
         document.getElementById("selectTraceBtn").style.display = "block";
@@ -782,7 +785,7 @@ function ExtraInfo(){
     level1.style.display="flex";
     let level1colorDiv = document.createElement("div");
     level1colorDiv.classList.add("violationsColorDiv");
-    level1colorDiv.style.backgroundColor="#f1a171";
+    level1colorDiv.style.backgroundColor="#c7c7c7";
     level1.append(level1colorDiv);
     level1.append("Low: " + value.level1);
     
@@ -791,7 +794,7 @@ function ExtraInfo(){
     level2.style.display="flex";
     let level2colorDiv = document.createElement("div");
     level2colorDiv.classList.add("violationsColorDiv");
-    level2colorDiv.style.backgroundColor="#c24a6f";
+    level2colorDiv.style.backgroundColor="#7f7f7f";
     level2.append(level2colorDiv);
     level2.append("Medium: " + value.level2);
 
@@ -799,7 +802,7 @@ function ExtraInfo(){
     level3.style.display="flex";
     let level3colorDiv = document.createElement("div");
     level3colorDiv.classList.add("violationsColorDiv");
-    level3colorDiv.style.backgroundColor="#5b257e";
+    level3colorDiv.style.backgroundColor="#dbdb8d";
     level3.append(level3colorDiv);
     level3.append("High: " + value.level3);
 
@@ -807,7 +810,7 @@ function ExtraInfo(){
     level4.style.display="flex";
     let level4colorDiv = document.createElement("div");
     level4colorDiv.classList.add("violationsColorDiv");
-    level4colorDiv.style.backgroundColor="#000009";
+    level4colorDiv.style.backgroundColor="#17becf";
     level4.append(level4colorDiv);
     level4.append("Critical: " + value.level4);
 
@@ -852,7 +855,7 @@ function ExtraInfo(){
  
 }
 function showExtraInformation(userID) {
-  console.log(userID)
+  //console.log(userID)
   selectedTraceID=userID;
 
   loadedTraces.forEach((element, index) => {
@@ -862,7 +865,7 @@ function showExtraInformation(userID) {
 
     if (extractedNumber === userID) {
       selectedTrace_RawValue = JSON.parse(element.user_trace);
-      console.log(selectedTrace_RawValue);
+      //console.log(selectedTrace_RawValue);
     }
   });
 
@@ -957,8 +960,7 @@ function showExtraInformation(userID) {
 
 
 async function clearExtraInformation() {
-  document.getElementById(`previewTrace${selectedTraceID}`).style.display="none";
-  document.getElementById(`previewTrace${selectedTraceID}`).id="previewTrace";
+  document.getElementById(`previewTrace`).style.display="none";
   document.getElementById("placeholderText").style.display = "block";
   document.getElementById("extrainfoContent").style.opacity = 0;
   document.getElementById("traceInfoTitle").innerHTML = "Trace Information   ";
