@@ -103,7 +103,11 @@
                     <div id="tableDiv" style="display: block;
                     width: 70%;
                     padding: 0.5%;transition: all 0.3s;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">
+                    <div style="display: flex;justify-content: space-between;">
                         <h1 id="tracesNum">Loading User Traces... </h1>
+                        <button id="resetButton" onclick="resetFilters()">Reset Filters</button>
+                    </div>
+                        
                         <div class="spinner-border" id="loadingIcon" role="status" style="display: block;margin-left: 50%;
                         margin-top: 22%;">
                             <span class="sr-only">Loading...</span>
@@ -132,7 +136,7 @@
                             </div>
                         
                         </div>
-                        <button id="resetButton" onclick="resetFilters()">Reset Filters</button>
+                        
                         <table class="table-responsive table-hover" id="table">
                             <thead>
                                 <tr>
