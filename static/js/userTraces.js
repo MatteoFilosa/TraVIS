@@ -804,6 +804,8 @@ function ExtraInfo() {
     localStorage.setItem("selectedTraceID", JSON.stringify(userNum));
     document.getElementById("previewTrace").id += userNum;
 
+    document.getElementById("heatmap").style.display="block";
+    document.getElementById("combinedHeatmaps").style.display="none";
     generateHeatmap(selectedTraceID);
 
     eventTypes(selectedTraceID).then(function (value) {
@@ -901,7 +903,9 @@ function ExtraInfo() {
     }
 
     document.getElementById(`previewTrace`).style.display = "none";
-
+    document.getElementById("heatmap").style.display="none";
+    document.getElementById("combinedHeatmaps").innerHTML="";
+    document.getElementById("combinedHeatmaps").style.display="grid";
     let sumOfEventTypes = {};
     let sumOfViolations = {};
     let sumOfTimes = {};
@@ -909,6 +913,8 @@ function ExtraInfo() {
       j = 0,
       k = 0;
     traces.forEach((element) => {
+      document.getElementById("combinedHeatmaps").appendChild(generateHeatmap(element));
+      
       eventTypes(element).then(function (value) {
         sumOfEventTypes[`trace${i}`] = value;
         //console.log(sumOfEventTypes);
@@ -1415,8 +1421,14 @@ function generateViolationsHeatmap(violations) {
 }
 
 function generateHeatmap(userID) {
-  var mainDiv = document.getElementById("heatmap");
-  mainDiv.innerHTML = "";
+  var mainDiv;
+  if(selectedTraces.size==1){
+    mainDiv = document.getElementById("heatmap");
+    mainDiv.innerHTML = "";
+  }else{
+    mainDiv = document.createElement("div");
+    mainDiv.style.position="relative";
+  }
 
   loadedTraces.forEach((element, index) => {
     let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
@@ -1449,16 +1461,20 @@ function generateHeatmap(userID) {
         // var violationCircle = document.createElement("div");
         // violationCircle.className="event-Violation";
 
-        // Append the event div to the main div
-        mainDiv.appendChild(eventDiv);
+          // Append the event div to the main div
+          mainDiv.appendChild(eventDiv);
+        
+        
         cnt++;
       });
 
-      // Set the number of rows and columns as CSS variables for the main div
-      mainDiv.style.setProperty("--rows", rows);
-      mainDiv.style.setProperty("--columns", columns);
+        // Set the number of rows and columns as CSS variables for the main div
+        mainDiv.style.setProperty("--rows", rows);
+        mainDiv.style.setProperty("--columns", columns);
+      
     }
   });
+  return mainDiv;
 }
 
 function checkIfThereisViolation(userID, xpath) {

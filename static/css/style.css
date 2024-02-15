@@ -721,6 +721,17 @@ table.dataTable tbody td {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid #00000047;
 }
+#combinedHeatmaps{
+    display: none;
+    grid-template-columns: auto auto;
+    gap: 15px 10px;
+    padding: 5px;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #00000047;
+}
 #violationsHeatmap{
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid #00000047;
@@ -785,4 +796,5 @@ table.dataTable tbody td {
         right: 34%;
     }
 }
+
 
