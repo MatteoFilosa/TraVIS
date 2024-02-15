@@ -384,23 +384,15 @@ function createDemographicFilter(data) {
   ];
 
   // Create filter for age
-  const ageFilter = createSelectFilter("AgeFilter", "Age", uniqueAges);
+  const ageFilter = createSelectFilter("AgeFilter", "Age", uniqueAges, "Select Age");
   document.getElementById("demographicFilter").appendChild(ageFilter);
 
-  // Create filter for gender
-  const genderFilter = createSelectFilter(
-    "GenderFilter",
-    "Gender",
-    uniqueGenders
-  );
+  // Create filter for gender with placeholder "Select Gender"
+  const genderFilter = createSelectFilter("GenderFilter", "Gender", uniqueGenders, "Select Gender");
   document.getElementById("demographicFilter").appendChild(genderFilter);
 
-  // Create filter for study title
-  const studyTitleFilter = createSelectFilter(
-    "StudyTitleFilter",
-    "Study Title",
-    uniqueStudyTitles
-  );
+  // Create filter for study title with placeholder "Select Study Title"
+  const studyTitleFilter = createSelectFilter("StudyTitleFilter", "Study Title", uniqueStudyTitles, "Select Study Title");
   document.getElementById("demographicFilter").appendChild(studyTitleFilter);
 
   // Add listener to filter elements to apply the filter function
@@ -413,7 +405,7 @@ function createDemographicFilter(data) {
 const ageSortOrder = ["18-24", "25-34", "35-44", "45-54"];
 const genderSortOrder = ["Male", "Female", "Other", "Prefer not to say"];
 
-function createSelectFilter(id, label, options) {
+function createSelectFilter(id, label, options, placeholder = "Select") {
   const selectContainer = document.createElement("div");
 
   // labels
@@ -424,6 +416,14 @@ function createSelectFilter(id, label, options) {
   const select = document.createElement("select");
   select.id = id;
   select.classList.add("form-select");
+
+  // Add a placeholder option
+  const placeholderOption = document.createElement("option");
+  placeholderOption.value = "";
+  placeholderOption.text = placeholder;
+  placeholderOption.disabled = true;
+  placeholderOption.selected = true;
+  select.appendChild(placeholderOption);
 
   options.forEach((optionValue) => {
     const option = document.createElement("option");
@@ -436,6 +436,7 @@ function createSelectFilter(id, label, options) {
 
   return selectContainer;
 }
+
 
 function applyDemographicFilter() {
   const selectedAge = document.getElementById("AgeFilter").value;
@@ -518,6 +519,28 @@ function applyDemographicFilter() {
   document.getElementById("tracesNum").innerHTML =
     "Loaded User Traces: " + visibleRowCount;
 }
+
+function resetFilters() {
+  // Reset sliders to their maximum values
+  document.getElementById("violationsSlider").value = maxViolationsValue;
+  document.getElementById("interactionsSlider").value = maxInteractionsValue;
+  document.getElementById("totalTimeSlider").value = maxTotalTimeValue;
+
+  // Uncheck all checkboxes
+  document.getElementById("checkbox1").checked = false;
+  document.getElementById("checkbox2").checked = false;
+  document.getElementById("checkbox3").checked = false;
+  document.getElementById("checkbox4").checked = false;
+
+  // Reset demographic filters to their default values
+  document.getElementById("AgeFilter").value = "";
+  document.getElementById("GenderFilter").value = "";
+  document.getElementById("StudyTitleFilter").value = "";
+
+  // Apply the reset to update the table
+  applyTableFilter();
+}
+
 
 function getUserTraces() {
   const url = "http://127.0.0.1:5000/get_user_traces";
