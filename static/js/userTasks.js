@@ -52,8 +52,13 @@ function getUserTasks() {
             // Display aggregated info in the mainContainer
             Object.keys(aggregatedInfo).forEach((number) => {
                 const infoDiv = document.createElement("div");
-                const interactionsList = Object.entries(aggregatedInfo[number].interactions).map(([interaction, count]) => `${interaction}: ${count}`).join(", ");
-                infoDiv.textContent = `${number} : Most performed event: ${aggregatedInfo[number].mostPerformedEvent} - Total interactions: ${aggregatedInfo[number].count} - All Interactions: ${interactionsList}`;
+
+                // Sort interactions by the number of interactions
+                const sortedInteractions = Object.entries(aggregatedInfo[number].interactions)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([interaction, count]) => `${interaction}: ${count}`);
+
+                infoDiv.textContent = `${number} : Most performed event: ${aggregatedInfo[number].mostPerformedEvent} - Total interactions: ${aggregatedInfo[number].count} - All Interactions: ${sortedInteractions.join(", ")}`;
                 mainContainer.appendChild(infoDiv);
             });
         })
@@ -61,6 +66,7 @@ function getUserTasks() {
             console.error("Error fetching data:", error);
         });
 }
+
 
 function getUserTasksTime() {
     const url = "http://127.0.0.1:5000/get_userTraceTime";
@@ -75,36 +81,41 @@ function getUserTasksTime() {
         .then((json) => {
             const mainContainer = document.getElementById("mainContainerTime");
             mainContainer.innerHTML = "";
-            console.log(JSON.parse(json[0].user_trace))
 
-            if (json && json.groups) {  // Change here
+            // Verifica se la proprietà 'groups' è presente nella risposta JSON
+            if (json && json.groups) {
                 const groupSum = {};
                 const groupCount = {};
 
-                // Iterate through each group in the file
-                Object.keys(json.groups).forEach((group) => {  // Change here
-                    // Update the sum for the current group
+                // Itera attraverso ogni gruppo nel file
+                Object.keys(json.groups).forEach((group) => {
+                    // Aggiorna la somma per il gruppo corrente
                     if (!groupSum[group]) {
                         groupSum[group] = 0;
                         groupCount[group] = 0;
                     }
 
-                    groupSum[group] += json.groups[group].total_time;  // Change here
+                    groupSum[group] += json.groups[group].total_time;
                     groupCount[group]++;
                 });
 
-                // Display the results in the mainContainerTime
+                // Visualizza i risultati in mainContainerTime
                 Object.keys(groupSum).forEach((group) => {
-                    const averageTime = (groupSum[group] / (groupCount[group] * 1000)).toFixed(2); // Convert milliseconds to seconds
+                    const averageTime = (groupSum[group] / (groupCount[group] * 1000)).toFixed(2); // Converti millisecondi in secondi
                     const infoDiv = document.createElement("div");
-                    infoDiv.textContent = `${group} : Sum of Total Time: ${groupSum[group] / 1000} seconds - Average Time: ${averageTime} seconds`;
+                    infoDiv.textContent = `${group} : Somma del Tempo Totale: ${groupSum[group] / 1000} secondi - Tempo Medio: ${averageTime} secondi`;
                     mainContainer.appendChild(infoDiv);
                 });
             } else {
-                console.error("Error: 'groups' property is undefined or null in the JSON response.");  // Change here
+                console.error("Errore: la proprietà 'groups' è indefinita o nulla nella risposta JSON.");
             }
         })
-    }
+        .catch((error) => {
+            console.error("Errore durante il recupero dei dati:", error);
+        });
+}
+
+
 
 getUserTasks();
 getUserTasksTime();

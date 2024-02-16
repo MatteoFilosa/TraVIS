@@ -49,7 +49,7 @@ window.onload = function () {
         document.getElementById("selectTraceBtn").style.display = "block";
         document.getElementById(
           "selectTraceBtn"
-        ).innerHTML = `Replay ${selectedTraces.size} traces`;
+        ).innerHTML = `View ${selectedTraces.size} traces`;
       } else {
         document.getElementById("selectTraceBtn").style.display = "none";
       }
@@ -753,9 +753,16 @@ function populateTable(data) {
       if (selectedTraces.size != 0) {
         document.getElementById("selectTraceBtn").style.display = "block";
         if (selectedTraces.size > 1) {
-          document.getElementById(
-            "selectTraceBtn"
-          ).innerHTML = `Replay ${selectedTraces.size} traces`;
+          document.getElementById("selectTraceBtn").innerHTML = `View ${selectedTraces.size} traces`;
+
+     
+          document.getElementById("selectTraceBtn").onclick = function () {
+         
+            window.location.href = "home";
+
+        
+            localStorage.setItem("loadedTraces", JSON.stringify(loadedTraces));
+          };
         } else
           document.getElementById(
             "selectTraceBtn"
@@ -890,6 +897,7 @@ function ExtraInfo() {
       timeList.append(averageTime);
     });
   } else {
+    console.log(selectedTraces)
     let traces = Array.from(selectedTraces);
     traces = traces.sort();
     let selectedNums = traces.join(", ");
@@ -901,6 +909,7 @@ function ExtraInfo() {
       document.getElementById(`previewTrace${selectedTraceID}`).id =
         "previewTrace";
     }
+    console.log(selectedTraces)
 
     document.getElementById(`previewTrace`).style.display = "none";
     document.getElementById("heatmap").style.display="none";
@@ -913,6 +922,7 @@ function ExtraInfo() {
       j = 0,
       k = 0;
     traces.forEach((element) => {
+      
       document.getElementById("combinedHeatmaps").appendChild(generateHeatmap(element));
       
       eventTypes(element).then(function (value) {
