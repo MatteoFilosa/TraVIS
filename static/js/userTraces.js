@@ -760,7 +760,7 @@ function populateTable(data) {
          
             window.location.href = "home";
 
-        
+            localStorage.setItem("selectedTraces", JSON.stringify(selectedTraces));
             localStorage.setItem("loadedTraces", JSON.stringify(loadedTraces));
           };
         } else

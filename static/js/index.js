@@ -391,7 +391,7 @@ function adjustIndicator(scale, currentX, currentY, event) {
 
 //user story 4!!!!!!!
 function highlightStatechart(interaction_types) {
-    console.log("ok");
+    
     document.getElementById("colorLegend").style.display = 'none';
 
     // Select nodes, polygons, and texts
@@ -484,6 +484,86 @@ function highlightStatechart(interaction_types) {
 
     localStorage.removeItem("selectedTrace");
     localStorage.removeItem("selectedTraceID");
+    localStorage.removeItem("selectedTraces");
+    localStorage.removeItem("loadedTraces")
+}
+
+
+function highlightStatechartMultiple(loadedTraces, selectedTraces) {
+    console.log("multipleOK");
+    document.getElementById("colorLegend").style.display = 'none';
+
+    // Select nodes, polygons, and texts
+    var nodes = d3.select("#originalSVG").selectAll(".node");
+    var polygons = nodes.selectAll("polygon");
+    var texts = nodes.selectAll("text");
+
+    // Initialize an object to store interaction frequency for each trace
+    var traceInteractionFrequencies = {};
+
+    // Iterate over selected traces
+    selectedTraces.forEach(function (traceID) {
+        var traceData = loadedTraces.find(function (trace) {
+            return trace.id === traceID;
+        });
+
+        // Skip if trace data is not found
+        if (!traceData || !traceData.user_trace) {
+            return;
+        }
+
+        // Calculate interaction frequency for the current trace
+        var interactionFrequency = {};
+
+        traceData.user_trace.forEach(function (interaction) {
+            var event = "'" + interaction.event + "'";
+            var css = interaction.css;
+            var interactionKey = event + " on " + "'" + css + "'";
+
+            if (interaction.event === "brush") {
+                var mousedownString = "'mousedown' on " + "'" + css + "'";
+                interactionFrequency[mousedownString] = (interactionFrequency[mousedownString] || 0) + 1;
+
+                var mousemoveString = "'mousemove' on " + "'" + css + "'";
+                interactionFrequency[mousemoveString] = (interactionFrequency[mousemoveString] || 0) + 1;
+
+                var mouseupString = "'mouseup' on " + "'" + css + "'";
+                interactionFrequency[mouseupString] = (interactionFrequency[mouseupString] || 0) + 1;
+            } else {
+                interactionFrequency[interactionKey] = (interactionFrequency[interactionKey] || 0) + 1;
+            }
+        });
+
+        traceInteractionFrequencies[traceID] = interactionFrequency;
+    });
+
+    // Iterate over selected traces again to update colors
+    selectedTraces.forEach(function (traceID) {
+        var interactionFrequency = traceInteractionFrequencies[traceID];
+
+        if (!interactionFrequency) {
+            return;
+        }
+
+        var maxFrequency = d3.max(Object.values(interactionFrequency));
+        var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, maxFrequency]);
+
+        // Update polygon fill colors based on interaction frequency for the current trace
+        polygons.style("fill", function () {
+            var nodeText = d3.select(this.parentNode).select("text").text();
+            var interaction = interactionFrequency[nodeText] || 0;
+
+            // Color gray if there are no interactions
+            if (interaction === 0) {
+                return "#7373733b"; // or "grey"
+            }
+
+            // Use the Blues color scale
+            return colorScale(interaction);
+        });
+    });
+
+    texts.style("fill", "white"); // Set text color to white
 }
 
 
@@ -848,7 +928,18 @@ function isNameInUrl(jsonData, systemUrl) {
 
             }
 
-            localStorage.removeItem("selectedTrace")
+            else if (JSON.parse(localStorage.getItem("loadedTraces")) != null) {
+
+
+                console.log("check")
+                highlightStatechartMultiple(JSON.parse(localStorage.getItem("loadedTraces")), JSON.parse(localStorage.getItem("selectedTraces")));
+
+            }
+
+            localStorage.removeItem("selectedTrace");
+            localStorage.removeItem("selectedTraceID");
+            localStorage.removeItem("selectedTraces");
+            localStorage.removeItem("loadedTraces")
 
 
             return true;
