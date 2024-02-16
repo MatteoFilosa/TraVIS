@@ -399,7 +399,7 @@ function showExtraInformation(userID) {
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ current_trace: JSON.stringify(selectedTrace_RawValue) })
+                body: JSON.stringify({ current_trace: JSON.stringify(selectedTrace_RawValue), name: "falcon" })
             }
         )
         .then(response => console.log(response));

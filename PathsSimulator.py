@@ -1056,8 +1056,12 @@ pathElement = ""
 replayState = "play"
 
 
+currentState = 0
+currentEdge = "E-1"
 
-def pathsSimulatorContainer(explorationSequence):
+
+
+def pathsSimulatorContainer(explorationSequence, replayJson):
 
     global element
     global actionSequence
@@ -1067,6 +1071,10 @@ def pathsSimulatorContainer(explorationSequence):
     global timeOut
     global replayState
     replayState = "play"
+    global currentState
+    currentState = 0
+    global currentEdge
+    currentEdge = "E-1"
 
     nameVis = "Falcon"
 
@@ -1119,6 +1127,13 @@ def pathsSimulatorContainer(explorationSequence):
         time.sleep(10)
 
         for transition in explorationSequence:
+            # TODO - COLORAZIONE SVG  
+            #if(len(driver.window_handles) != 1):
+            #    driver.switch_to.window(originalWindow) 
+            #script2 = "document.getElementById('svg_node_id_0').style.fill = 'rgb(0, 0, 255)'; document.getElementById('replayID_step').style.color = 'rgb(0, 0, 255)';"
+            #driver.switch_to.default_content()
+            #driver.execute_script(script2)
+            #driver.switch_to.frame(iframe)
 
             print("Stato: " + replayState + "\n")
 
@@ -1130,15 +1145,6 @@ def pathsSimulatorContainer(explorationSequence):
                 return
             elif replayState == "step":
                 replayState = "pause"
-
-            #if(len(driver.window_handles) != 1):
-            #    driver.switch_to.window(originalWindow)
-
-            # TODO - COLORAZIONE SVG   
-            #script2 = "document.getElementById('replayID_stop').style.color = 'rgb(0, 0, 255)'; document.getElementById('replayID_step').style.color = 'rgb(0, 0, 255)';"
-            #driver.switch_to.default_content()
-            #driver.execute_script(script2)
-            #driver.switch_to.frame(iframe)
 
             time.sleep(0.5)
 

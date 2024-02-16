@@ -9,6 +9,7 @@ import subprocess
 
 from PathsGenerator import *
 from PathsSimulator import *
+from modifySvgApp import *
 
 app = Flask(__name__,
             static_url_path='', 
@@ -527,9 +528,10 @@ def create_statechart_files():
     #gv_folder = "static/files/statechartGV"
     gv_path = os.path.join(gv_folder, "statechart_graphviz.gv")
     generate_svg(gv_path)
-    collection_name = "state_charts"
+    modifySvg()
 
     # Verifying if the state chart was already added to the db
+    collection_name = "state_charts"
     existing_document = mongo.db[collection_name].find_one({"name": system_url})
 
     if existing_document:
@@ -541,7 +543,21 @@ def create_statechart_files():
         documento = {"name": system_url, "svg": gv_data}
         mongo.db[collection_name].insert_one(documento)
         print(f"{system_url} inserted into the database.")
-    
+
+    # Verifying if the state chart was already added to the db
+    collection_name = "replay_json"
+    existing_document = mongo.db[collection_name].find_one({"name": system_url})
+
+    if existing_document:
+        print(f"{system_url} is already in the database. Skipping...")
+    else:
+        with open("./output.json", "r") as file:
+            gv_data = file.read()
+
+        documento = {"name": system_url, "json": gv_data}
+        mongo.db[collection_name].insert_one(documento)
+        print(f"{system_url} inserted into the database.")
+
     return "finished statechart files creation"
 
 
@@ -550,14 +566,24 @@ def create_statechart_files():
 def replay_user_trace():
     request_data = request.get_json()
     current_trace = request_data.get('current_trace')
+    current_name = request_data.get('name')
 
     try:
         current_trace_file = open("./static/files/user_traces/current_trace.json", "w")
         current_trace_file.write(current_trace)
         current_trace_file.close()
 
+        # Take replay json from db.
+        database_name = "visualizations"  # You can change db name here
+        mongo_uri = config['DATABASES'][database_name]
+        app.config["MONGO_URI"] = mongo_uri
+        mongo = PyMongo(app)
+        collection_name = "replay_json"
+        replayJsons = mongo.db[collection_name].find({ "name": current_name })
+        replayJsonified = jsonify(replayJsons[0])
+
         #result = subprocess.run(['py', 'PathsSimulator.py'])
-        pathsSimulatorContainer(current_trace)
+        pathsSimulatorContainer(current_trace, replayJsonified)
         output = "Simulation finished"
     except subprocess.CalledProcessError as e:
         # Gestisci eventuali errori durante l'esecuzione
