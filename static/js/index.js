@@ -44,7 +44,8 @@ window.onload = function () {
     graphviz();
 
     // If the user wants to see the state chart highlighted from the user traces page
-    if(JSON.parse(localStorage.getItem("selectedTrace")) != null){
+    if ((JSON.parse(localStorage.getItem("selectedTrace")) != null) || (JSON.parse(localStorage.getItem("loadedTraces")) != null)){
+        console.log("eh")
         systemURL = "https://vega.github.io/falcon/flights/"
         LoadSystem();
         
@@ -484,87 +485,96 @@ function highlightStatechart(interaction_types) {
 
     localStorage.removeItem("selectedTrace");
     localStorage.removeItem("selectedTraceID");
-    localStorage.removeItem("selectedTraces");
-    localStorage.removeItem("loadedTraces")
+    
 }
 
 
 function highlightStatechartMultiple(loadedTraces, selectedTraces) {
-    console.log("multipleOK");
     document.getElementById("colorLegend").style.display = 'none';
 
     // Select nodes, polygons, and texts
     var nodes = d3.select("#originalSVG").selectAll(".node");
     var polygons = nodes.selectAll("polygon");
-    var texts = nodes.selectAll("text");
+    var texts = document.querySelectorAll("#originalSVG .node text");
+    var traceIndex = 0;
 
-    // Initialize an object to store interaction frequency for each trace
+    // Initialize interactionColors and colorScales outside the loop
+    var interactionColors = {};
+    var colorScales = {};
+
+    // Initialize traceInteractionFrequencies
     var traceInteractionFrequencies = {};
 
-    // Iterate over selected traces
-    selectedTraces.forEach(function (traceID) {
-        var traceData = loadedTraces.find(function (trace) {
-            return trace.id === traceID;
-        });
+    for (let i = 0; i < loadedTraces.length; i++) {
 
-        // Skip if trace data is not found
-        if (!traceData || !traceData.user_trace) {
-            return;
-        }
+        if (loadedTraces[i].name.includes(selectedTraces[traceIndex])) {
 
-        // Calculate interaction frequency for the current trace
-        var interactionFrequency = {};
-
-        traceData.user_trace.forEach(function (interaction) {
-            var event = "'" + interaction.event + "'";
-            var css = interaction.css;
-            var interactionKey = event + " on " + "'" + css + "'";
-
-            if (interaction.event === "brush") {
-                var mousedownString = "'mousedown' on " + "'" + css + "'";
-                interactionFrequency[mousedownString] = (interactionFrequency[mousedownString] || 0) + 1;
-
-                var mousemoveString = "'mousemove' on " + "'" + css + "'";
-                interactionFrequency[mousemoveString] = (interactionFrequency[mousemoveString] || 0) + 1;
-
-                var mouseupString = "'mouseup' on " + "'" + css + "'";
-                interactionFrequency[mouseupString] = (interactionFrequency[mouseupString] || 0) + 1;
-            } else {
-                interactionFrequency[interactionKey] = (interactionFrequency[interactionKey] || 0) + 1;
-            }
-        });
-
-        traceInteractionFrequencies[traceID] = interactionFrequency;
-    });
-
-    // Iterate over selected traces again to update colors
-    selectedTraces.forEach(function (traceID) {
-        var interactionFrequency = traceInteractionFrequencies[traceID];
-
-        if (!interactionFrequency) {
-            return;
-        }
-
-        var maxFrequency = d3.max(Object.values(interactionFrequency));
-        var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, maxFrequency]);
-
-        // Update polygon fill colors based on interaction frequency for the current trace
-        polygons.style("fill", function () {
-            var nodeText = d3.select(this.parentNode).select("text").text();
-            var interaction = interactionFrequency[nodeText] || 0;
-
-            // Color gray if there are no interactions
-            if (interaction === 0) {
-                return "#7373733b"; // or "grey"
+            // Initialize color scale for the current trace
+            if (!colorScales[selectedTraces[traceIndex]]) {
+                colorScales[selectedTraces[traceIndex]] = d3.scaleSequential(d3.interpolateBlues).domain([0, selectedTraces.length]);
             }
 
-            // Use the Blues color scale
-            return colorScale(interaction);
-        });
-    });
+            try {
+                var userTraceArray = JSON.parse(loadedTraces[i].user_trace);
 
-    texts.style("fill", "white"); // Set text color to white
+                // Initialize traceInteractionFrequencies for the current trace
+                traceInteractionFrequencies[selectedTraces[traceIndex]] = {};
+
+                // Iterate over user_trace events in the current trace
+                userTraceArray.forEach(function (interaction) {
+                    var eventName = interaction.event;
+
+                    // Color gray if there are no interactions
+                    if (!interactionColors[eventName]) {
+                        interactionColors[eventName] = colorScales[selectedTraces[traceIndex]](Object.keys(interactionColors).length + 1);
+                    }
+
+                    // Store interaction frequency for the current trace
+                    traceInteractionFrequencies[selectedTraces[traceIndex]][eventName] = interactionColors[eventName];
+                    console.log(traceInteractionFrequencies);
+                });
+
+                // Update polygon fill colors based on interaction frequency for the current trace
+                polygons.each(function () {
+                    
+                    var nodeText = d3.select(this.parentNode).select("text").text();
+                    var interactionColor = traceInteractionFrequencies[selectedTraces[traceIndex]][nodeText];
+                    console.log(interactionColor)
+                    if (interactionColor) {
+                        console.log("lastCheck")
+                        d3.select(this).style("fill", interactionColor);
+                    }
+                });
+
+                // Set text color to white
+                texts.forEach(function (text) {
+                    text.style.fill = "white";
+                });
+
+                // Increment traceIndex for the next selected trace
+                traceIndex += 1;
+            } catch (error) {
+                console.error("Error parsing JSON:", error);
+            }
+        }
+    }
+
+    localStorage.removeItem("selectedTraces");
+    localStorage.removeItem("loadedTraces");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -923,23 +933,20 @@ function isNameInUrl(jsonData, systemUrl) {
             if (JSON.parse(localStorage.getItem("selectedTrace")) != null) {
 
 
-
+                console.log("selectedTrace != null")
                 highlightStatechart(JSON.parse(localStorage.getItem("selectedTrace")));
 
             }
+            
+            if (JSON.parse(localStorage.getItem("loadedTraces")) != null) {
 
-            else if (JSON.parse(localStorage.getItem("loadedTraces")) != null) {
 
-
-                console.log("check")
+                console.log("loadedTraces != null")
                 highlightStatechartMultiple(JSON.parse(localStorage.getItem("loadedTraces")), JSON.parse(localStorage.getItem("selectedTraces")));
 
             }
 
-            localStorage.removeItem("selectedTrace");
-            localStorage.removeItem("selectedTraceID");
-            localStorage.removeItem("selectedTraces");
-            localStorage.removeItem("loadedTraces")
+
 
 
             return true;
@@ -1128,11 +1135,10 @@ function LoadSystem() {
     loadingIcon.style.display = "block";
     statechartSVG.style.display = "none";
 
-    if(JSON.parse(localStorage.getItem("selectedTrace")) == null){
+    if ((JSON.parse(localStorage.getItem("selectedTrace")) == null) && (JSON.parse(localStorage.getItem("loadedTraces")) == null)){
 
         systemURL = document.getElementById("insertedURL").value;
 
-        
         
     }
 

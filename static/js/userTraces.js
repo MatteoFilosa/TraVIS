@@ -759,9 +759,12 @@ function populateTable(data) {
           document.getElementById("selectTraceBtn").onclick = function () {
          
             window.location.href = "home";
-
-            localStorage.setItem("selectedTraces", JSON.stringify(selectedTraces));
+            console.log(selectedTraces)
+            localStorage.removeItem("selectedTrace")
+            localStorage.removeItem("selectedTraceID")
+            
             localStorage.setItem("loadedTraces", JSON.stringify(loadedTraces));
+            
           };
         } else
           document.getElementById(
@@ -900,6 +903,7 @@ function ExtraInfo() {
     console.log(selectedTraces)
     let traces = Array.from(selectedTraces);
     traces = traces.sort();
+    console.log(traces)
     let selectedNums = traces.join(", ");
     document.getElementById(
       "traceInfoTitle"
@@ -909,7 +913,8 @@ function ExtraInfo() {
       document.getElementById(`previewTrace${selectedTraceID}`).id =
         "previewTrace";
     }
-    console.log(selectedTraces)
+    localStorage.removeItem("selectedTraces")
+    localStorage.setItem("selectedTraces", JSON.stringify(traces));
 
     document.getElementById(`previewTrace`).style.display = "none";
     document.getElementById("heatmap").style.display="none";
@@ -965,9 +970,18 @@ function showExtraInformation(userID) {
   document.getElementById("placeholderText").style.display = "none";
   document.getElementById("previewTrace").style.display = "block";
 
-  document.getElementById("previewTrace").href = "home";
-  localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue));
-  localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
+  var previewTraceElement = document.getElementById("previewTrace");
+
+
+  previewTraceElement.addEventListener("click", function () {
+
+    localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue));
+    localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
+
+
+    previewTraceElement.href = "home";
+  });
+
   document.getElementById("previewTrace").id += selectedTraceID;
 
   document.getElementById("extrainfoContent").style.opacity = 1;
