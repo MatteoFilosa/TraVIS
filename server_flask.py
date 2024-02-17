@@ -489,9 +489,8 @@ def create_statechart_files():
     system_url_file.write(system_url)
     system_url_file.close()
 
-    # DA DECOMMENTARE PER GENERARE IL GRAPHVIZ
     # We call the generalization function via Node JS.
-    #subprocess.call("node ./static/js/generalization.js", shell=True)
+    subprocess.call("node ./static/js/generalization.js", shell=True)
 
     # DA TENERE?
     # We call the first validation function via Python.
@@ -562,6 +561,7 @@ def create_statechart_files():
 
 
 
+# The route to start the replay.
 @app.route("/replay", methods=['POST'])
 def replay_user_trace():
     request_data = request.get_json()
@@ -592,6 +592,8 @@ def replay_user_trace():
     return output
 
 
+
+# The route to change the replay state.
 @app.route("/change_replay_state", methods=['POST'])
 def change_replay_state():
     request_data = request.get_json()

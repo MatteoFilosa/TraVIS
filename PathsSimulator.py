@@ -1039,11 +1039,14 @@ def EventHandle(eventName,state,driver,pathNumber,pathElement):
         actionSequence.append([eventName,latency])
 
 
+
 actionSequence = []
 finalSummary = {}
 problemsFound =  {}
 element = None
 pathElement = ""
+currentState = -1
+currentEdge = "E-1"
 
 '''
     Global variable indicating the replay state.
@@ -1056,11 +1059,50 @@ pathElement = ""
 replayState = "play"
 
 
-currentState = 0
-currentEdge = "E-1"
+
+# Function that changes the color of the replay path.
+def changeStateChartColors(transition, replayJson, driver):
+    global currentState
+    global currentEdge
+
+    # We will add here the scripts to execute on the inputted driver.
+    totalScript = ""
+
+    # We are in the first ever transition. 'currentState' is 0 and we only need to find the 'currentEdge'.
+    if -1 == currentState and "E-1" == currentEdge:
+        currentState = 0
+
+        for edge in replayJson:
+            if (
+                ( replayJson[edge]["from_node"] == currentState )        and 
+                ( replayJson[edge]["event"]     == transition["event"] ) and 
+                ( replayJson[edge]["xpath"]     == transition["xpath"] )
+            ):
+                currentEdge = edge
+                break
+
+    # In any other transition we compute the new 'currentState' and 'currentEdge', after having filled the old
+    # ones in blue.
+    else:
+        totalScript += "document.getElementById('svg_node_id_" + currentState + "').style.fill = 'rgb(0, 0, 255)'; document.getElementById('svg_edge_id_" + currentEdge + "').style.fill = 'rgb(0, 0, 255)'; "
+
+        for edge in replayJson:
+            if (
+                ( replayJson[edge]["from_node"] == currentState )        and 
+                ( replayJson[edge]["event"]     == transition["event"] ) and 
+                ( replayJson[edge]["xpath"]     == transition["xpath"] )
+            ):
+                currentState = replayJson[edge]["to_node"]
+                currentEdge = edge
+                break
+
+    # The current transition is filled in red and the whole script is executed.
+    totalScript += "document.getElementById('svg_node_id_" + currentState + "').style.fill = 'rgb(255, 0, 0)'; document.getElementById('svg_edge_id_" + currentEdge + "').style.fill = 'rgb(255, 0, 0)';"
+    driver.execute_script(totalScript)
 
 
 
+# The main container.
 def pathsSimulatorContainer(explorationSequence, replayJson):
 
     global element
@@ -1120,7 +1162,7 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
         driver.close()
         exit
 
-    else:
+    else:   # ELSE NON NECESSARIO(?)
 
         originalWindow = driver.current_window_handle
 
@@ -1128,18 +1170,18 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
 
         for transition in explorationSequence:
             # TODO - COLORAZIONE SVG  
+            # Here we handle the changing colors of the replay SVG.
             #if(len(driver.window_handles) != 1):
             #    driver.switch_to.window(originalWindow) 
-            #script2 = "document.getElementById('svg_node_id_0').style.fill = 'rgb(0, 0, 255)'; document.getElementById('replayID_step').style.color = 'rgb(0, 0, 255)';"
             #driver.switch_to.default_content()
-            #driver.execute_script(script2)
+            #changeStateChartColors(transition, replayJson, driver)
             #driver.switch_to.frame(iframe)
 
-            print("Stato: " + replayState + "\n")
-
-            while replayState == "pause":
-                pass
-
+            # Here we handle the replay state.
+            # We close and return in case of "stop", we wait in case of "pause", we continue in case of "play"
+            # and we move forward of one transition in case of "step".
+            print("Replay state: " + replayState)
+            while replayState == "pause": pass
             if replayState == "stop":
                 driver.close()
                 return
@@ -1225,5 +1267,4 @@ def PathSimulator_changeReplayState(newState):
         newState = "stop"
         print("ERROR: INVALID 'changeReplayState' INPUT! STATE SET TO STOP!")
     replayState = newState
-    print("Stato cambiato: " + replayState + "\n")
-
+    print("Replay state changed: " + replayState)
