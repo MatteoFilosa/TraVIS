@@ -579,8 +579,8 @@ def replay_user_trace():
         app.config["MONGO_URI"] = mongo_uri
         mongo = PyMongo(app)
         collection_name = "replay_json"
-        replayJsons = mongo.db[collection_name].find({ "name": current_name })
-        replayJsonified = jsonify(replayJsons[0])
+        replayJsons = mongo.db[collection_name].find_one({ "name": current_name })
+        replayJsonified = json.loads(replayJsons['replay'])
 
         #result = subprocess.run(['py', 'PathsSimulator.py'])
         pathsSimulatorContainer(current_trace, replayJsonified)

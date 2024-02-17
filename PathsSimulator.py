@@ -1070,6 +1070,7 @@ def changeStateChartColors(transition, replayJson, driver):
 
     # We are in the first ever transition. 'currentState' is 0 and we only need to find the 'currentEdge'.
     if -1 == currentState and "E-1" == currentEdge:
+        print("ANCORA PRIMA: "  + currentEdge + ", " + str(currentState))
         currentState = 0
 
         for edge in replayJson:
@@ -1079,12 +1080,13 @@ def changeStateChartColors(transition, replayJson, driver):
                 ( replayJson[edge]["xpath"]     == transition["xpath"] )
             ):
                 currentEdge = edge
+                print("PRIMA: " + currentEdge + ", " + str(currentState))
                 break
 
     # In any other transition we compute the new 'currentState' and 'currentEdge', after having filled the old
     # ones in blue.
     else:
-        totalScript += "document.getElementById('svg_node_id_" + currentState + "').style.fill = 'rgb(0, 0, 255)'; document.getElementById('svg_edge_id_" + currentEdge + "').style.fill = 'rgb(0, 0, 255)'; "
+        totalScript += "document.querySelector('#originalSVG #svg_node_id_" + str(currentState) + "').style.fill = 'rgb(0, 0, 255)'; document.querySelector('#originalSVG #svg_edge_id_" + currentEdge + "').style.fill = 'rgb(0, 0, 255)'; "
 
         for edge in replayJson:
             if (
@@ -1096,8 +1098,10 @@ def changeStateChartColors(transition, replayJson, driver):
                 currentEdge = edge
                 break
 
+    print("SECONDA: " + currentEdge + ", " + str(currentState))
+
     # The current transition is filled in red and the whole script is executed.
-    totalScript += "document.getElementById('svg_node_id_" + currentState + "').style.fill = 'rgb(255, 0, 0)'; document.getElementById('svg_edge_id_" + currentEdge + "').style.fill = 'rgb(255, 0, 0)';"
+    totalScript += "document.querySelector('#originalSVG #svg_node_id_" + str(currentState) + "').style.fill = 'rgb(255, 0, 0)'; document.querySelector('#originalSVG #svg_edge_id_" + currentEdge + "').style.fill = 'rgb(255, 0, 0)';"
     driver.execute_script(totalScript)
 
 
@@ -1114,7 +1118,7 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
     global replayState
     replayState = "play"
     global currentState
-    currentState = 0
+    currentState = -1
     global currentEdge
     currentEdge = "E-1"
 
@@ -1162,7 +1166,7 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
         driver.close()
         exit
 
-    else:   # ELSE NON NECESSARIO(?)
+    else:
 
         originalWindow = driver.current_window_handle
 
@@ -1173,9 +1177,9 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
             # Here we handle the changing colors of the replay SVG.
             #if(len(driver.window_handles) != 1):
             #    driver.switch_to.window(originalWindow) 
-            #driver.switch_to.default_content()
-            #changeStateChartColors(transition, replayJson, driver)
-            #driver.switch_to.frame(iframe)
+            driver.switch_to.default_content()
+            changeStateChartColors(transition, replayJson, driver)
+            driver.switch_to.frame(iframe)
 
             # Here we handle the replay state.
             # We close and return in case of "stop", we wait in case of "pause", we continue in case of "play"
