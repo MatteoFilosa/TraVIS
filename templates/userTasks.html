@@ -30,61 +30,175 @@
 
     <script src="js/userTasks.js"></script>
 </head>
+
 <body>
-<div class="wrapper">
+    <div class="wrapper">
 
-    <!-- Page Content  -->
-    <div id="content" style="overflow-y: scroll;">
-        <!-- Main Nav Bar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 3.2em">
+        <!-- Page Content  -->
+        <div id="content" style="overflow-y: scroll;">
+            <!-- Main Nav Bar -->
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 3.2em">
 
 
 
-            <div class="container-fluid">
+                <div class="container-fluid">
 
-                <!-- <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <!-- <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
                     </button> -->
-                <a class="navbar-brand" href="/" style="color: #52b0c3">YATF</a>
-                <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
-                    <ul class="nav navbar-nav">
+                    <a class="navbar-brand" href="/" style="color: #52b0c3">YATF</a>
+                    <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav">
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">System Overview</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/">Statechart</a>
-                                <a class="dropdown-item" href="#">Interactive Elements</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/userTraces">User Traces</a>
-                        </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/userTasks">User Tasks</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Version History</a>
-                        </li>
-                    </ul>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">System Overview</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/">Statechart</a>
+                                    <a class="dropdown-item" href="#">Interactive Elements</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/userTraces">User Traces</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="/userTasks">User Tasks</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Version History</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="width: 250px;"></div>
+
+
                 </div>
+            </nav>
+            <div class="mainContainer">
 
-                <div style="width: 250px;"></div>
+                <div id="traceContainer">
+                    <div id="tableDiv" style="display: block;
+                    width: 70%;
+                    padding: 0.5%;transition: all 0.3s;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">
+                        <div style="display: flex;justify-content: space-between;">
+                            <h1 id="tracesNum" style="margin-bottom: 5%;">Loading User Traces... </h1>
+                            <button id="resetButton" onclick="resetFilters()">Clear Filters</button>
+                        </div>
+
+                        <div class="spinner-border" id="loadingIcon" role="status" style="display: block;margin-left: 50%;
+                        margin-top: 22%;">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <!-- <div id="filtersContainer">
+                            <span id="eventsFilter" class="filterSpan">
+                                <label for="interactionsSlider">Events:</label>
+                            </span>
+                            <span id="violationsFilter" class="filterSpan">
+                                <label for="violationsSlider">Total Violations:</label>
+                            </span>
+                            <span id="totalTimeFilter" class="filterSpan">
+                                <label for="totalTimeSlider">Time:</label>
+                            </span>
+                            <div class="dropdown">
+                                <button type="button" class="btn dropdown-toggle" data-bs-toggle='dropdown'>
+                                    Violation Types
+                                </button>
+                                <div class="dropdown-menu" id="violationsDropdown">
+
+                                </div>
+                            </div>
+                            <div id="demographicFilter">
+
+
+                            </div>
+
+                        </div> -->
+
+                        <table class="table-responsive table-hover" id="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" style="width: 0.5%;padding-left: 1%;"><input type="checkbox"
+                                            id="selectAllCheckbox"></th>
+                                    <th scope="col" style="width: 2%;"><img src="images/task.png" width="20px"
+                                            height="20px" />Task</th>
+                                    <th scope="col" style="width: 2%;"><img src="images/idea.png" width="20px"
+                                            height="20px" />Idea</th>
+                                    <th scope="col" style="width: 2%;"><img src="images/category.png" width="20px"
+                                            height="20px" />Category</th>
+                                    <th scope="col" style="width: 2%;"><img src="images/trace.png" width="20px"
+                                            height="20px" />Traces</th>
+                                    <th scope="col" style="width: 2%;"><img src="images/correct.png" width="20px"
+                                            height="20px" />Ideal Trace</th>
+                                    <!-- <th scope="col" style="width: 0.1%;"> </th> -->
+
+                                </tr>
+                            </thead>
+
+
+                            <tbody id="tracesTable">
+                                <!-- Table rows will be dynamically added here -->
+                            </tbody>
+                        </table>
+                        <div id="colorLegend" class="userTracesLegend" data-visible="false">
+                            <button onclick="toggleLegend()">Legend
+                                <img src="images/downArrow.png" id="colorLegendButton" width="20px" height="20px"
+                                    style="transform: rotate(180deg);" />
+                            </button>
+                            <div style="display: flex;">
+                                <div id="eventColumn" style="height: 100%;width: 60%;"></div>
+                                <div id="violationsColumn" style="height: 100%;width: 40%;"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <button class="selectTraceBtn" id="selectTraceBtn"></button>
+                    <div class="extrainfoDiv" id="extrainfoDiv" data-visible="false">
+                        <div style="display: flex;justify-content: space-between;">
+                            <h1 id="traceInfoTitle">Trace Information </h1>
+                            <a class="newPageBtn" href="#" target="_blank" id="previewTrace"><img
+                                    src="images/newPage.png" /></a>
+                        </div>
+
+                        <div id="placeholderText">Select a trace to view more information</div>
+                        <div id="extrainfoContent" style="opacity: 0;transition: all 0.3s">
+                            <div style="display: flex;justify-content: space-between;margin-bottom: 44px;">
+                                <div class="eventsDiv">
+                                    <p id="eventsTotal"></p>
+                                    <ul id="eventsList">
+                                        <li>item 1</li>
+                                        <li>item 2</li>
+                                        <li>item 3</li>
+                                    </ul>
+                                </div>
+                                <div id="heatmap"></div>
+                                <div id="combinedHeatmaps"></div>
+                            </div>
+
+                            <div style="margin-bottom: 54px;">
+                                <p id="violationsTotal"></p>
+                                <div id="violationsList">
+
+                                </div>
+                            </div>
+                            <!-- <div id="violationsHeatmap"></div> -->
+
+                            <div class="timeDiv">
+                                <p>Time</p>
+                                <ul id="timeList">
+                                    <li>Total time</li>
+                                    <li>Average time</li>
+                                </ul>
+                            </div>
+                            <div id="eventRectangle"></div>
+                        </div>
+
+                    </div>
+
+
+                </div>
 
 
             </div>
-        </nav>
-
-        <div class="mainContainer" id ="mainContainer">
-
-            
-
-        </div>
-
-        <div class="mainContainerTime" id="mainContainerTime">
-        
-        
-        
-        </div>
 
 </body>
