@@ -15,17 +15,22 @@ var json, url;
 var currentZoom = 1;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0, currentX = 0, currentY = 0, translateX = 0, translateY = 0, minimapRatio = 0, scale = 1, svgWidth = 0, svgHeight = 0;
 
-// Array of colors is given  
-/* let color1 = d3.schemeCategory10[0];
-let color2 = d3.schemeCategory10[1];
-let color3 = d3.schemeCategory10[2];
-let color4 = d3.schemeCategory10[3];
-let color5 = d3.schemeCategory10[4];
-let color6 = d3.schemeCategory10[5];
-let color7 = d3.schemeCategory10[6];
-let color8 = d3.schemeCategory10[7];
-let color9 = d3.schemeCategory10[8];
-let color10 = d3.schemeCategory10[9]; */
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
+// Create an array to store random colors
+let colorArray = [];
+for (let i = 0; i < 10; i++) {
+    colorArray.push(getRandomColor());
+}
+
 
 //#endregion
 
@@ -489,6 +494,9 @@ function highlightStatechart(interaction_types) {
 }
 
 
+// Create a single color scale outside the loop
+//var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+
 function highlightStatechartMultiple(loadedTraces, selectedTraces) {
     document.getElementById("colorLegend").style.display = 'none';
 
@@ -496,72 +504,84 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
     var nodes = d3.select("#originalSVG").selectAll(".node");
     var polygons = nodes.selectAll("polygon");
     var texts = document.querySelectorAll("#originalSVG .node text");
-    var traceIndex = 0;
 
-    // Initialize interactionColors and colorScales outside the loop
-    var interactionColors = {};
-    var colorScales = {};
+    // Create an array to store interaction frequency for each trace
+    var interactionFrequency = [];
 
-    // Initialize traceInteractionFrequencies
-    var traceInteractionFrequencies = {};
+    try {
+        for (let i = 0; i < selectedTraces.length; i++) {
+            var userTraceArray = JSON.parse(loadedTraces[i].user_trace);
+            console.log(userTraceArray);
 
-    for (let i = 0; i < loadedTraces.length; i++) {
+            // Initialize interaction frequency object for the current trace
+            var traceInteractionFrequency = {};
 
-        if (loadedTraces[i].name.includes(selectedTraces[traceIndex])) {
+            // Iterate over user_trace events in the current trace
+            userTraceArray.forEach(function (interaction) {
+                var eventName = "'" + interaction.event + "'";
+                var css = interaction.css;
+                var fullString = eventName + " on " + "'" + css + "'";
 
-            // Initialize color scale for the current trace
-            if (!colorScales[selectedTraces[traceIndex]]) {
-                colorScales[selectedTraces[traceIndex]] = d3.scaleSequential(d3.interpolateBlues).domain([0, selectedTraces.length]);
-            }
+                // The brush interaction decomposes into three different interactions
+                if (eventName.includes("brush")) {
+                    var mousedownString = "'mousedown' on " + "'" + css + "'";
+                    var mousemoveString = "'mousemove' on " + "'" + css + "'";
+                    var mouseupString = "'mouseup' on " + "'" + css + "'";
 
-            try {
-                var userTraceArray = JSON.parse(loadedTraces[i].user_trace);
+                    traceInteractionFrequency[mousedownString] = (traceInteractionFrequency[mousedownString] || 0) + 1;
+                    traceInteractionFrequency[mousemoveString] = (traceInteractionFrequency[mousemoveString] || 0) + 1;
+                    traceInteractionFrequency[mouseupString] = (traceInteractionFrequency[mouseupString] || 0) + 1;
+                } else {
+                    traceInteractionFrequency[fullString] = (traceInteractionFrequency[fullString] || 0) + 1; // Frequency
+                }
+            });
 
-                // Initialize traceInteractionFrequencies for the current trace
-                traceInteractionFrequencies[selectedTraces[traceIndex]] = {};
+            // Set interaction frequency for the current trace in the array
+            interactionFrequency.push(traceInteractionFrequency);
 
-                // Iterate over user_trace events in the current trace
-                userTraceArray.forEach(function (interaction) {
-                    var eventName = interaction.event;
+            // Set text color to white
+            texts.forEach(function (text) {
+                text.style.fill = "white";
+            });
 
-                    // Color gray if there are no interactions
-                    if (!interactionColors[eventName]) {
-                        interactionColors[eventName] = colorScales[selectedTraces[traceIndex]](Object.keys(interactionColors).length + 1);
-                    }
-
-                    // Store interaction frequency for the current trace
-                    traceInteractionFrequencies[selectedTraces[traceIndex]][eventName] = interactionColors[eventName];
-                    console.log(traceInteractionFrequencies);
-                });
-
-                // Update polygon fill colors based on interaction frequency for the current trace
-                polygons.each(function () {
-                    
-                    var nodeText = d3.select(this.parentNode).select("text").text();
-                    var interactionColor = traceInteractionFrequencies[selectedTraces[traceIndex]][nodeText];
-                    console.log(interactionColor)
-                    if (interactionColor) {
-                        console.log("lastCheck")
-                        d3.select(this).style("fill", interactionColor);
-                    }
-                });
-
-                // Set text color to white
-                texts.forEach(function (text) {
-                    text.style.fill = "white";
-                });
-
-                // Increment traceIndex for the next selected trace
-                traceIndex += 1;
-            } catch (error) {
-                console.error("Error parsing JSON:", error);
-            }
+            console.log(traceInteractionFrequency);
         }
+    } catch (error) {
+        console.error("Error parsing JSON:", error);
     }
+
+    for (let j = 0; j < interactionFrequency.length; j++) {
+
+        var color = colorArray[j];
+
+        polygons.style("fill", function () {
+            var nodeText = d3.select(this.parentNode).select("text").text();
+            var interaction = interactionFrequency[j][nodeText] || 0;
+
+            // Color gray if there are no interactions
+            if (interaction === 0) {
+                return "#7373733b"; // or "grey"
+            }
+
+            // Use the current color from the array
+            return color;
+        });
+        console.log(color, j)
+    }
+
 
     localStorage.removeItem("selectedTraces");
     localStorage.removeItem("loadedTraces");
+    console.log(interactionFrequency);
 }
+
+
+
+
+
+
+
+
 
 
 
