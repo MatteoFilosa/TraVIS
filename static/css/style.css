@@ -606,6 +606,9 @@ tr {
     height: 2rem;
 }
 
+#tasktable tr{
+    height: 6rem;
+}
 tbody tr:hover {
     background-color: #d5d4e5 !important;
 }

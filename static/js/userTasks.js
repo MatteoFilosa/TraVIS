@@ -74,6 +74,19 @@ function getUserTasks() {
         //mainContainer.appendChild(infoDiv);
       });
       populateTable(aggregatedInfo);
+    }).then(()=>{
+        // Enable filtering for table
+      var table = new DataTable("#tasktable", {
+        searching: false,
+        columnDefs: [
+          // exclude first and last row from filtering and sorting
+          { orderable: false, targets: [0] },
+        ],
+        paging: false,
+        order: [[1, "asc"]],
+        orderCellsTop: true,
+        fixedHeader: true,
+      });
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -146,15 +159,13 @@ function getUserTasksViolations() {
 window.onload = function () {
   filtersContainer = document.getElementById("filtersContainer");
   loadingIcon = document.getElementById("loadingIcon");
-  table = document.getElementById("table");
+  table = document.getElementById("tasktable");
 
   getUserTasks();
   //getUserTasksTime();
 };
 
-function truncateString(str, maxLength) {
-  return str.length > maxLength ? str.substring(0, maxLength) + " [...]" : str;
-}
+
 function populateTable(data) {
   const tableBody = document.getElementById("tracesTable");
   //console.log(data);
