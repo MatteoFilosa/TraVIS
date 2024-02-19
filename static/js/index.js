@@ -16,20 +16,13 @@ var currentZoom = 1;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0, currentX = 0, currentY = 0, translateX = 0, translateY = 0, minimapRatio = 0, scale = 1, svgWidth = 0, svgHeight = 0;
 
 
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-}
+
 
 // Create an array to store random colors
-let colorArray = [];
-for (let i = 0; i < 10; i++) {
-    colorArray.push(getRandomColor());
-}
+let colorArray = ["red", "green", "blue", "purple", "orange", "brown", "pink", "gray", "cyan"];
+
+
+
 
 
 //#endregion
@@ -359,15 +352,14 @@ function setupMinimapClickHandler(originalSVG) {
 
 
 function adjustIndicator(scale, currentX, currentY, event) {
-    console.log(statechart);
+  
     var indicator = document.getElementById("indicator");
 
     // New positions for inicator calculation
     var newLeft = ((currentX / scale / scaleFactor)) * -1;
     var newTop = (currentY / scale / scaleFactor);
 
-    console.log(newTop)
-    console.log(minimapContainer.clientHeight - indicator.clientHeight)
+
 
     // To let the indicator stay in the boundaries of the minimap
     newLeft = Math.min(Math.max(newLeft, 0), minimapContainer.clientWidth - indicator.clientWidth);
@@ -545,29 +537,35 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
             });
 
             console.log(traceInteractionFrequency);
+            
         }
     } catch (error) {
         console.error("Error parsing JSON:", error);
     }
+    d3.selectAll(polygons).style("fill", "#7373733b")
 
-    for (let j = 0; j < interactionFrequency.length; j++) {
+    for (let i = 0; i < selectedTraces.length; i++) {
+        var color = colorArray[i];
+        console.log(interactionFrequency[i], selectedTraces.length);
 
-        var color = colorArray[j];
+        for (let eventName in interactionFrequency[i]) {
+           
+            polygons.each(function () {
+                var nodeText = d3.select(this.parentNode).select("text").text();
 
-        polygons.style("fill", function () {
-            var nodeText = d3.select(this.parentNode).select("text").text();
-            var interaction = interactionFrequency[j][nodeText] || 0;
-
-            // Color gray if there are no interactions
-            if (interaction === 0) {
-                return "#7373733b"; // or "grey"
-            }
-
-            // Use the current color from the array
-            return color;
-        });
-        console.log(color, j)
+                if (nodeText.trim() === eventName.trim()) {
+                    console.log(eventName, nodeText);
+                    if (d3.select(this).style("fill") === "#7373733b") {
+                        d3.select(this).style("fill", color);
+                    } else {
+                        d3.select(this).style("fill", "yellow");
+                    }
+                }
+            });
+        }
     }
+
+
 
 
     localStorage.removeItem("selectedTraces");
@@ -910,7 +908,7 @@ function isNameInUrl(jsonData, systemUrl) {
                     statechart
                     .selectAll("g")
                     .attr('transform', event.transform);
-                    console.log(event)
+                    
                     currentZoom = event.transform.k
                     adjustIndicator(event.transform.k, event.transform.x, event.transform.y, event)
                 });
