@@ -161,6 +161,7 @@ window.onload = function () {
   loadingIcon = document.getElementById("loadingIcon");
   table = document.getElementById("tasktable");
 
+  colorLegend();
   getUserTasks();
   //getUserTasksTime();
 };
@@ -242,5 +243,112 @@ function populateTable(data) {
     // Add the row to the table
     tableBody.appendChild(row);
     }
+  }
+}
+// Function to get color based on event name
+function getColor(eventName) {
+  switch (eventName) {
+    case "mouseover":
+      return "#1f77b4";
+    case "click":
+      return "#ff7f0e";
+    case "brush":
+      return "#ffbb78";
+    case "mousemove":
+      return "#2ca02c";
+    case "wheel":
+      return "#8c564b";
+    case "mouseout":
+      return "#ff9896";
+    case "mousedown":
+      return "#98df8a";
+    case "mouseup":
+      return "#9467bd";
+    case "dblclick":
+      return "#aec7e8";
+    case "Double Click":
+      return "#aec7e8";
+    case "facsimile back":
+      return "#c5b0d5";
+    // Add more cases as needed
+    default:
+      console.log(eventName);
+      return "red";
+  }
+}
+const eventTypesArray = [
+  "mouseover",
+  "click",
+  "brush",
+  "mousemove",
+  "mousedown",
+  "wheel",
+  "mouseout",
+  "mouseup",
+  "dblclick",
+  "facsimile_back",
+];
+function colorLegend() {
+  const colorLegend = document.getElementById("colorLegend");
+  const eventColumn = document.getElementById("eventColumn");
+  const violationsColumn = document.getElementById("violationsColumn");
+
+  eventTypesArray.forEach((element) => {
+    let colorElementDiv = document.createElement("div");
+    colorElementDiv.classList.add("legendElementDiv");
+
+    let colorElementImg = document.createElement("div");
+    colorElementImg.classList.add("colorDiv");
+    if (element == "facsimile_back")
+      colorElementImg.style.backgroundColor = getColor("facsimile back");
+    else colorElementImg.style.backgroundColor = getColor(element);
+
+    let colorElementText = document.createElement("p");
+    colorElementText.textContent = element;
+
+    colorElementDiv.appendChild(colorElementImg);
+    colorElementDiv.appendChild(colorElementText);
+
+    eventColumn.appendChild(colorElementDiv);
+  });
+
+  const violations = ["Low", "Medium", "High", "Critical"];
+  violations.forEach((element) => {
+    let colorElementDiv = document.createElement("div");
+    colorElementDiv.classList.add("legendElementDiv");
+
+    let colorElementImg = document.createElement("div");
+    colorElementImg.classList.add("colorDiv");
+    if (element.includes("Low"))
+      colorElementImg.style.backgroundColor = "#c7c7c7";
+    else if (element.includes("Medium"))
+      colorElementImg.style.backgroundColor = "#7f7f7f";
+    else if (element.includes("High"))
+      colorElementImg.style.backgroundColor = "#dbdb8d";
+    else if (element.includes("Critical"))
+      colorElementImg.style.backgroundColor = "#17becf";
+
+    let colorElementText = document.createElement("p");
+    colorElementText.textContent = element;
+
+    colorElementDiv.appendChild(colorElementImg);
+    colorElementDiv.appendChild(colorElementText);
+
+    violationsColumn.appendChild(colorElementDiv);
+  });
+}
+
+function toggleLegend() {
+  const colorLegend = document.getElementById("colorLegend");
+  const buttonImg = document.getElementById("colorLegendButton");
+ 
+  if (colorLegend.getAttribute("data-visible") == "false") {
+    colorLegend.setAttribute("data-visible", "true");
+    buttonImg.style.transform = "rotate(0deg)";
+    colorLegend.style.height = "310px";
+  } else {
+    colorLegend.setAttribute("data-visible", "false");
+    buttonImg.style.transform = "rotate(180deg)";
+    colorLegend.style.height = "31px";
   }
 }
