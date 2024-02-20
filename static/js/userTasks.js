@@ -188,55 +188,53 @@ function populateTable(data) {
     nameCell.textContent = key;
     row.appendChild(nameCell);
 
-    // Add Name column
-    const ideaCell = document.createElement("td");
-    if(key == 0){
-      ideaCell.textContent = "'Try to select a range of flights that is between the departure time of 8-12'";
-    }
-    else if (key == 1){
-      ideaCell.textContent = "'How many flights were longer than four and less than six hours (More than 240 minutes and less than 360 minutes)?'";
-    }
-    else if (key == 2) {
-      ideaCell.textContent = "'Which two-hour window (during time of day) contains more flights with longer arrival delays?'";
-    }
-    else if (key == 3) {
-      ideaCell.textContent = "'Which factors appear to have the greatest effect on the length of departure delays?'";
-    } 
+    // const ideaCell = document.createElement("td");
+    // if(key == 0){
+    //   ideaCell.textContent = "'Try to select a range of flights that is between the departure time of 8-12'";
+    // }
+    // else if (key == 1){
+    //   ideaCell.textContent = "'How many flights were longer than four and less than six hours (More than 240 minutes and less than 360 minutes)?'";
+    // }
+    // else if (key == 2) {
+    //   ideaCell.textContent = "'Which two-hour window (during time of day) contains more flights with longer arrival delays?'";
+    // }
+    // else if (key == 3) {
+    //   ideaCell.textContent = "'Which factors appear to have the greatest effect on the length of departure delays?'";
+    // } 
 
-    else if (key == 4) {
-      ideaCell.textContent = "'How do distance, departure delays, and both distance and departure delays together appear to affect arrival delays?'";
-    }
+    // else if (key == 4) {
+    //   ideaCell.textContent = "'How do distance, departure delays, and both distance and departure delays together appear to affect arrival delays?'";
+    // }
+    // row.appendChild(ideaCell);
+    // console.log(data, key)
     
-    row.appendChild(ideaCell);
-    console.log(data, key)
+    // const categoryCell = document.createElement("td");
+    // if(key == 0){
 
-    // Add Name column
-
+    //   categoryCell.textContent = "Tutorial";
+    // }
+    // else{
+    //   categoryCell.textContent = "Exploratory";
+    // }
+    // row.appendChild(categoryCell);
     
-    const categoryCell = document.createElement("td");
-    if(key == 0){
-
-      categoryCell.textContent = "Tutorial";
-    }
-    else{
-      categoryCell.textContent = "Exploratory";
-    }
-    
-    
-    row.appendChild(categoryCell);
-    
-    // Add Name column
     const tracesCell = document.createElement("td");
     tracesCell.textContent = data[key].count;
     row.appendChild(tracesCell);
 
-    // Add Name column
+    const varianceCell = document.createElement("td");
+    varianceCell.textContent = "-";
+    row.appendChild(varianceCell);
+
+    const correctnessCell = document.createElement("td");
+    correctnessCell.textContent = "-";
+    row.appendChild(correctnessCell);
+
     const timeCell = document.createElement("td");
     timeCell.textContent = data[key].count;
     row.appendChild(timeCell);
     timeCell.textContent = "-";
 
-    // Add Name column
     const idealTraceCell = document.createElement("td");
     idealTraceCell.textContent = "-";
     row.appendChild(idealTraceCell);

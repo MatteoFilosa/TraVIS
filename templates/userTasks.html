@@ -88,10 +88,10 @@
 
                 <div id="traceContainer">
                     <div id="tableDiv" style="display: block;
-                    width: 70%;
+                    width: 80%;
                     padding: 0.5%;transition: all 0.3s;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">
                         <div style="display: flex;justify-content: space-between;">
-                            <h1 id="tracesNum" style="margin-bottom: 5%;">Loading User Traces... </h1>
+                            <h1 id="tracesNum" style="margin-bottom: 2%;">Loading User Traces... </h1>
                             <button id="resetButton" onclick="resetFilters()">Clear Filters</button>
                         </div>
 
@@ -129,18 +129,22 @@
                                 <tr>
                                     <th scope="col" style="width: 0.5%;padding-left: 1%;"><input type="checkbox"
                                             id="selectAllCheckbox"></th>
-                                    <th scope="col" style="width: 2%;"><img src="images/task.png" width="25px"
+                                    <th scope="col" style="width: 1.5%;"><img src="images/task.png" width="25px"
                                             height="25px" />Task</th>
-                                    <th scope="col" style="width: 2%;"><img src="images/idea.png" width="25px"
+                                    <!-- <th scope="col" style="width: 2%;"><img src="images/idea.png" width="25px"
                                             height="25px" />Idea</th>
                                     <th scope="col" style="width: 2%;"><img src="images/category.png" width="25px"
-                                            height="25px" />Category</th>
+                                            height="25px" />Category</th> -->
                                     <th scope="col" style="width: 2%;"><img src="images/trace.png" width="25px"
                                             height="25px" />Interactions</th>
-                                    <th scope="col" style="width: 2%;"><img src="images/timeIcon.png" width="25px" 
-                                            height="25px" />Time</th>
+                                    <th scope="col" style="width: 1.5%;"><img src="images/variance.png" width="25px"
+                                            height="25px" />Variance</th>
                                     <th scope="col" style="width: 2%;"><img src="images/correct.png" width="25px"
-                                            height="25px" />Ideal Trace</th>
+                                            height="25px" />Degree of Correctness</th>
+                                    <th scope="col" style="width: 1%;"><img src="images/timeIcon.png" width="25px"
+                                            height="25px" />Time</th>
+                                    <th scope="col" style="width: 1.5%;"><img src="images/golden.png" width="25px"
+                                            height="25px" />Golden Trace</th>
                                     <!-- <th scope="col" style="width: 0.1%;"> </th> -->
 
                                 </tr>
@@ -166,7 +170,7 @@
                     <button class="selectTraceBtn" id="selectTraceBtn"></button>
                     <div class="extrainfoDiv" id="extrainfoDiv" data-visible="false">
                         <div style="display: flex;justify-content: space-between;">
-                            <h1 id="traceInfoTitle">Trace Information </h1>
+                            <h1 id="traceInfoTitle">Task Information </h1>
                             <a class="newPageBtn" href="#" target="_blank" id="previewTrace"><img
                                     src="images/newPage.png" /></a>
                         </div>

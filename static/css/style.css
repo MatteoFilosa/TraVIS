@@ -606,6 +606,9 @@ tr {
     height: 2rem;
 }
 
+#tasktable th{
+    font-size: 15px;
+}
 #tasktable tr{
     height: 6rem;
 }
