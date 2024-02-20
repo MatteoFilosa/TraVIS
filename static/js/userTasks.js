@@ -1,3 +1,5 @@
+var taskInfo={};
+
 function getUserTasks() {
   const url = "http://127.0.0.1:5000/get_user_tasks";
 
@@ -8,7 +10,7 @@ function getUserTasks() {
       //filtersContainer.style.display = "flex";
       table.style.display = "block";
 
-      const aggregatedInfo = {
+      taskInfo = {
         0: { count: 0, mostPerformedEvent: "", interactions: {} },
         1: { count: 0, mostPerformedEvent: "", interactions: {} },
         2: { count: 0, mostPerformedEvent: "", interactions: {} },
@@ -21,11 +23,11 @@ function getUserTasks() {
       // Iterate through each file
       json.forEach((task) => {
         // Iterate through each number in the file
-        Object.keys(aggregatedInfo).forEach((number) => {
+        Object.keys(taskInfo).forEach((number) => {
           // If the number exists in the task, update the aggregated info
           if (task[number]) {
             // Increment the count for the current number
-            aggregatedInfo[number].count += Array.isArray(task[number])
+            taskInfo[number].count += Array.isArray(task[number])
               ? task[number].length
               : 0;
 
@@ -38,44 +40,45 @@ function getUserTasks() {
 
             for (const event in eventCounts) {
               if (
-                !aggregatedInfo[number].mostPerformedEvent ||
+                !taskInfo[number].mostPerformedEvent ||
                 eventCounts[event] >
-                  eventCounts[aggregatedInfo[number].mostPerformedEvent]
+                  eventCounts[taskInfo[number].mostPerformedEvent]
               ) {
-                aggregatedInfo[number].mostPerformedEvent = event;
+                taskInfo[number].mostPerformedEvent = event;
               }
 
               // Collect all different interactions for the current number
-              if (!aggregatedInfo[number].interactions[event]) {
-                aggregatedInfo[number].interactions[event] = 0;
+              if (!taskInfo[number].interactions[event]) {
+                taskInfo[number].interactions[event] = 0;
               }
-              aggregatedInfo[number].interactions[event] += eventCounts[event];
+              taskInfo[number].interactions[event] += eventCounts[event];
             }
           }
         });
       });
 
       // Display aggregated info in the mainContainer
-      Object.keys(aggregatedInfo).forEach((number) => {
+      Object.keys(taskInfo).forEach((number) => {
         const infoDiv = document.createElement("div");
 
         // Sort interactions by the number of interactions
         const sortedInteractions = Object.entries(
-          aggregatedInfo[number].interactions
+          taskInfo[number].interactions
         )
           .sort((a, b) => b[1] - a[1])
           .map(([interaction, count]) => `${interaction}: ${count}`);
 
         infoDiv.textContent = `${number} : Most performed event: ${
-          aggregatedInfo[number].mostPerformedEvent
+          taskInfo[number].mostPerformedEvent
         } - Total interactions: ${
-          aggregatedInfo[number].count
+          taskInfo[number].count
         } - All Interactions: ${sortedInteractions.join(", ")}`;
         //mainContainer.appendChild(infoDiv);
       });
-      populateTable(aggregatedInfo);
-    }).then(()=>{
-        // Enable filtering for table
+      populateTable(taskInfo);
+    })
+    .then(() => {
+      // Enable filtering for table
       var table = new DataTable("#tasktable", {
         searching: false,
         columnDefs: [
@@ -166,82 +169,91 @@ window.onload = function () {
   //getUserTasksTime();
 };
 
-
 function populateTable(data) {
   const tableBody = document.getElementById("tracesTable");
   //console.log(data);
 
-  for(var key in data){
+  for (var key in data) {
     if (data.hasOwnProperty(key)) {
-        const row = document.createElement("tr");
+      const row = document.createElement("tr");
 
-    // Add checkbox column
-    const checkboxCell = document.createElement("td");
-    checkboxCell.style.paddingLeft = "1%";
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.id = key;
-    checkboxCell.appendChild(checkbox);
-    row.appendChild(checkboxCell);
+      // Add checkbox column
+      const checkboxCell = document.createElement("td");
+      checkboxCell.style.paddingLeft = "1%";
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.id = key;
+      checkboxCell.appendChild(checkbox);
+      row.appendChild(checkboxCell);
 
-    // Add Name column
-    const nameCell = document.createElement("td");
-    nameCell.textContent = key;
-    row.appendChild(nameCell);
+      // Add Name column
+      const nameCell = document.createElement("td");
+      nameCell.textContent = key;
+      row.appendChild(nameCell);
 
-    // const ideaCell = document.createElement("td");
-    // if(key == 0){
-    //   ideaCell.textContent = "'Try to select a range of flights that is between the departure time of 8-12'";
-    // }
-    // else if (key == 1){
-    //   ideaCell.textContent = "'How many flights were longer than four and less than six hours (More than 240 minutes and less than 360 minutes)?'";
-    // }
-    // else if (key == 2) {
-    //   ideaCell.textContent = "'Which two-hour window (during time of day) contains more flights with longer arrival delays?'";
-    // }
-    // else if (key == 3) {
-    //   ideaCell.textContent = "'Which factors appear to have the greatest effect on the length of departure delays?'";
-    // } 
+      // const ideaCell = document.createElement("td");
+      // if(key == 0){
+      //   ideaCell.textContent = "'Try to select a range of flights that is between the departure time of 8-12'";
+      // }
+      // else if (key == 1){
+      //   ideaCell.textContent = "'How many flights were longer than four and less than six hours (More than 240 minutes and less than 360 minutes)?'";
+      // }
+      // else if (key == 2) {
+      //   ideaCell.textContent = "'Which two-hour window (during time of day) contains more flights with longer arrival delays?'";
+      // }
+      // else if (key == 3) {
+      //   ideaCell.textContent = "'Which factors appear to have the greatest effect on the length of departure delays?'";
+      // }
 
-    // else if (key == 4) {
-    //   ideaCell.textContent = "'How do distance, departure delays, and both distance and departure delays together appear to affect arrival delays?'";
-    // }
-    // row.appendChild(ideaCell);
-    // console.log(data, key)
-    
-    // const categoryCell = document.createElement("td");
-    // if(key == 0){
+      // else if (key == 4) {
+      //   ideaCell.textContent = "'How do distance, departure delays, and both distance and departure delays together appear to affect arrival delays?'";
+      // }
+      // row.appendChild(ideaCell);
+      // console.log(data, key)
 
-    //   categoryCell.textContent = "Tutorial";
-    // }
-    // else{
-    //   categoryCell.textContent = "Exploratory";
-    // }
-    // row.appendChild(categoryCell);
-    
-    const tracesCell = document.createElement("td");
-    tracesCell.textContent = data[key].count;
-    row.appendChild(tracesCell);
+      // const categoryCell = document.createElement("td");
+      // if(key == 0){
 
-    const varianceCell = document.createElement("td");
-    varianceCell.textContent = "-";
-    row.appendChild(varianceCell);
+      //   categoryCell.textContent = "Tutorial";
+      // }
+      // else{
+      //   categoryCell.textContent = "Exploratory";
+      // }
+      // row.appendChild(categoryCell);
 
-    const correctnessCell = document.createElement("td");
-    correctnessCell.textContent = "-";
-    row.appendChild(correctnessCell);
+      const tracesCell = document.createElement("td");
+      tracesCell.textContent = data[key].count;
+      row.appendChild(tracesCell);
 
-    const timeCell = document.createElement("td");
-    timeCell.textContent = data[key].count;
-    row.appendChild(timeCell);
-    timeCell.textContent = "-";
+      const varianceCell = document.createElement("td");
+      varianceCell.textContent = "-";
+      row.appendChild(varianceCell);
 
-    const idealTraceCell = document.createElement("td");
-    idealTraceCell.textContent = "-";
-    row.appendChild(idealTraceCell);
+      const correctnessCell = document.createElement("td");
+      correctnessCell.textContent = "-";
+      row.appendChild(correctnessCell);
 
-    // Add the row to the table
-    tableBody.appendChild(row);
+      const timeCell = document.createElement("td");
+      timeCell.textContent = data[key].count;
+      row.appendChild(timeCell);
+      timeCell.textContent = "-";
+
+      const idealTraceCell = document.createElement("td");
+      idealTraceCell.textContent = "-";
+      row.appendChild(idealTraceCell);
+
+      // Add the row to the table
+      tableBody.appendChild(row);
+
+      checkbox.addEventListener("change", function () {
+        
+        if (checkbox.checked) {
+          
+          ExtraInfo(checkbox.id);
+        }else{
+          clearExtraInformation();
+        }
+      });
     }
   }
 }
@@ -341,7 +353,7 @@ function colorLegend() {
 function toggleLegend() {
   const colorLegend = document.getElementById("colorLegend");
   const buttonImg = document.getElementById("colorLegendButton");
- 
+
   if (colorLegend.getAttribute("data-visible") == "false") {
     colorLegend.setAttribute("data-visible", "true");
     buttonImg.style.transform = "rotate(0deg)";
@@ -351,4 +363,42 @@ function toggleLegend() {
     buttonImg.style.transform = "rotate(180deg)";
     colorLegend.style.height = "31px";
   }
+}
+
+function ExtraInfo(taskID) {
+  document.getElementById("selectTraceBtn").style.opacity = 1;
+  document.getElementById(
+    "selectTraceBtn"
+  ).innerHTML = `View task`;
+  document.getElementById("extrainfoContent").style.opacity = 1;
+  document.getElementById("placeholderText").style.display = "none";
+
+  document.getElementById(
+    "traceInfoTitle"
+  ).innerHTML = `Task Information: ${[taskID]}`;
+
+  for (var key in taskInfo) {
+    if (taskInfo.hasOwnProperty(key)) {
+      if(key == taskID){
+        const eventsList = document.getElementById("eventsList");
+      eventsList.innerHTML = "";
+      eventsList.innerHTML=`Most performed event: ${taskInfo[key].mostPerformedEvent}`;
+
+      const violationsList = document.getElementById("violationsList");
+      violationsList.innerHTML = "";
+      
+      for(var data in taskInfo[key].interactions){
+        violationsList.innerHTML+=`${data}: ${taskInfo[key].interactions[data]}`;
+      }
+      }
+    }
+  }
+}
+
+function clearExtraInformation(){
+  document.getElementById("selectTraceBtn").style.opacity = 0;
+  document.getElementById(`previewTrace`).style.display = "none";
+  document.getElementById("placeholderText").style.display = "block";
+  document.getElementById("extrainfoContent").style.opacity = 0;
+  document.getElementById("traceInfoTitle").innerHTML = "Task Information   ";
 }
