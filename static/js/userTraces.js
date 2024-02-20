@@ -750,12 +750,15 @@ function populateTable(data) {
         if (selectedTraces.size > 0) ExtraInfo();
         else clearExtraInformation();
       }
-      if (selectedTraces.size != 0) {
+      if (selectedTraces.size != 0 && selectedTraces.size <= 5) {
+
         document.getElementById("selectTraceBtn").style.display = "block";
-        if (selectedTraces.size > 1) {
+        
+
+        if (selectedTraces.size > 1 && selectedTraces.size <= 5) {
           document.getElementById("selectTraceBtn").innerHTML = `View ${selectedTraces.size} traces`;
 
-     
+          document.getElementById("selectTraceBtn").style.display = "block";
           document.getElementById("selectTraceBtn").onclick = function () {
          
             window.location.href = "home";
@@ -766,7 +769,12 @@ function populateTable(data) {
             localStorage.setItem("loadedTraces", JSON.stringify(loadedTraces));
             
           };
-        } else
+        }
+        else if (selectedTraces.size > 5) {
+          //document.getElementById("selectTraceBtn").style.display = "hidden";
+        }
+        
+        else
           document.getElementById(
             "selectTraceBtn"
           ).innerHTML = `Replay ${selectedTraces.size} trace`;

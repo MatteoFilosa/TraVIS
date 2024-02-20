@@ -486,19 +486,22 @@ function highlightStatechart(interaction_types) {
 }
 
 
-// Create a single color scale outside the loop
-//var colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-
 function highlightStatechartMultiple(loadedTraces, selectedTraces) {
     document.getElementById("colorLegend").style.display = 'none';
-
+    document.getElementById("changeLayoutButton").style.display = 'none';
     // Select nodes, polygons, and texts
     var nodes = d3.select("#originalSVG").selectAll(".node");
     var polygons = nodes.selectAll("polygon");
-    var texts = document.querySelectorAll("#originalSVG .node text");
+    var texts = nodes.selectAll("text");
 
-    // Create an array to store interaction frequency for each trace
-    var interactionFrequency = [];
+    // Array of predefined color scales
+    var colors = [
+        "#1F77B4FF",
+        "#2CA02CFF",
+        "#8C564BFF",
+        "#9467BDFF"
+        // Add more color scales as needed
+    ];
 
     try {
         for (let i = 0; i < selectedTraces.length; i++) {
@@ -529,49 +532,131 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
             });
 
             // Set interaction frequency for the current trace in the array
-            interactionFrequency.push(traceInteractionFrequency);
-
-            // Set text color to white
-            texts.forEach(function (text) {
-                text.style.fill = "white";
-            });
-
-            console.log(traceInteractionFrequency);
-            
+            updatePolygonsClassName(polygons, colors, traceInteractionFrequency, i, loadedTraces[i].name)
         }
     } catch (error) {
         console.error("Error parsing JSON:", error);
     }
-    d3.selectAll(polygons).style("fill", "#7373733b")
 
-    for (let i = 0; i < selectedTraces.length; i++) {
-        var color = colorArray[i];
-        console.log(interactionFrequency[i], selectedTraces.length);
-
-        for (let eventName in interactionFrequency[i]) {
-           
-            polygons.each(function () {
-                var nodeText = d3.select(this.parentNode).select("text").text();
-
-                if (nodeText.trim() === eventName.trim()) {
-                    console.log(eventName, nodeText);
-                    if (d3.select(this).style("fill") === "#7373733b") {
-                        d3.select(this).style("fill", color);
-                    } else {
-                        d3.select(this).style("fill", "yellow");
-                    }
-                }
-            });
-        }
-    }
+    texts.style("fill", "white"); // Set text color to white
 
 
 
+ 
+    updateColorsByClassName(polygons, colors, JSON.parse(localStorage.getItem("selectedTraces")))
 
+    
     localStorage.removeItem("selectedTraces");
     localStorage.removeItem("loadedTraces");
-    console.log(interactionFrequency);
+
+
 }
+
+function updatePolygonsClassName(polygons, colors, traceInteractionFrequency, index, traceName) {
+    console.log(index);
+    polygons.attr("id", "")
+    // Update polygon fill colors based on interaction frequency and trace index
+    polygons.each(function () {
+        var nodeText = d3.select(this.parentNode).select("text").text();
+        var interaction = traceInteractionFrequency[nodeText] || 0;
+
+        // Color gray if there are no interactions
+        if (interaction !== 0) {
+            d3.select(this).classed(colors[index], true);
+            d3.select(this).attr("id", function () {
+                var currentId = d3.select(this).attr("id");
+                return currentId + extractNumbersFromString(traceName);
+            });
+        }
+    });
+}
+
+
+function updateColorsByClassName(polygons, colors, tracesID) {
+
+    var traceString = "Traces:"
+
+    traceInfoDiv = document.createElement("div");
+    traceInfoDiv.id = "traceInfo";
+    traceInfoDiv.style.position = "absolute";
+    traceInfoDiv.style.top = "150px";
+    traceInfoDiv.style.right = "10px";
+    traceInfoDiv.style.background = "white";
+    traceInfoDiv.style.width = "180px";
+    traceInfoDiv.style.padding = "10px";
+    traceInfoDiv.style.display = "flex";
+    traceInfoDiv.style.flexDirection = "column";
+    traceInfoDiv.style.borderTop = "2px solid #554e8d";
+    traceInfoDiv.style.borderLeft = "2px solid #554e8d";
+    traceInfoDiv.style.borderRight = "2px solid #554e8d";
+    traceInfoDiv.style.borderBottom = "2px solid #554e8d";
+    
+    d3.selectAll(polygons).attr("fill", "#7373733b")
+    for (let i = 0; i < colors.length; i++) {
+        // Update polygon fill colors based on interaction frequency and trace index
+        polygons.each(function () {
+            var currentPolygon = d3.select(this);
+            var classAttribute = currentPolygon.attr("class");
+
+            if (classAttribute && classAttribute.includes(colors[i])) {
+
+                var classes = classAttribute.split(" ");
+                
+              
+                if (classes.length == 2) {
+                    
+                    
+                    // Class attribute includes more than one space
+                    currentPolygon.attr("fill", "#f7b267");
+                }
+                else if (classes.length == 3) {
+                    // Class attribute includes more than one space
+                    currentPolygon.attr("fill", "#f79d65");
+                }
+                else if (classes.length == 4) {
+                    // Class attribute includes more than one space
+                    currentPolygon.attr("fill", "#f4845f");
+                }
+                else if (classes.length == 5) {
+                    // Class attribute includes more than one space
+                    currentPolygon.attr("fill", "#f27059");
+                }
+  
+                else {
+                    currentPolygon.attr("fill", colors[i]);
+
+                }
+ 
+
+
+            }
+        });
+
+    }
+    
+
+    traceInfoDiv.innerHTML = traceString
+    // Append the traceInfo div to the statechartContainer
+    //document.getElementById("statechartContainer").appendChild(traceInfoDiv);
+
+}
+
+function extractNumbersFromString(inputString) {
+    // Use a regular expression to match all numeric characters
+    const numbersArray = inputString.match(/\d+/g);
+
+    // Check if any numbers were found
+    if (numbersArray) {
+        // Convert the array of strings to an array of numbers
+        const numbers = numbersArray.map(Number);
+        return numbers;
+    } else {
+        // No numbers found in the string
+        return [];
+    }
+}
+
+
 
 
 
