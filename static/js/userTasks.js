@@ -1,3 +1,5 @@
+
+
 var taskInfo={};
 
 function getUserTasks() {
@@ -107,57 +109,225 @@ function getUserTasksTime() {
       return response.json();
     })
     .then((json) => {
-      //console.log(json);
-      // const mainContainer = document.getElementById("mainContainerTime");
-      //mainContainer.innerHTML = "";
-
-      // Verifica se la proprietà 'groups' è presente nella risposta JSON
-      if (json && json.groups) {
+      if (
+        json &&
+        json.length > 0 &&
+        JSON.parse(json[0].user_trace).groups
+      ) {
         const groupSum = {};
         const groupCount = {};
+        const groupVariance = {};
 
-        // Itera attraverso ogni gruppo nel file
-        Object.keys(json.groups).forEach((group) => {
-          // Aggiorna la somma per il gruppo corrente
-          if (!groupSum[group]) {
-            groupSum[group] = 0;
-            groupCount[group] = 0;
+        json.forEach((item) => {
+          const groups = JSON.parse(item.user_trace).groups;
+
+          if (groups) {
+            Object.keys(groups).forEach((group) => {
+              if (!groupSum[group]) {
+                groupSum[group] = 0;
+                groupCount[group] = 0;
+                groupVariance[group] = [];
+              }
+
+              groupSum[group] += groups[group].total_time / 1000;
+              groupCount[group]++;
+              groupVariance[group].push(groups[group].total_time / 1000); // Store total_time for variance calculation
+            });
+          } else {
+            console.error(
+              "Error: 'groups' property is undefined or null in an item."
+            );
           }
-
-          groupSum[group] += json.groups[group].total_time;
-          groupCount[group]++;
         });
 
-        // Visualizza i risultati in mainContainerTime
         Object.keys(groupSum).forEach((group) => {
-          const averageTime = (
-            groupSum[group] /
-            (groupCount[group] * 1000)
-          ).toFixed(2); // Converti millisecondi in secondi
-          const infoDiv = document.createElement("div");
-          infoDiv.textContent = `${group} : Somma del Tempo Totale: ${
-            groupSum[group] / 1000
-          } secondi - Tempo Medio: ${averageTime} secondi`;
-          //mainContainer.appendChild(infoDiv);
+          const mean = groupSum[group] / groupCount[group];
+          const totalSquaredDifference = groupVariance[group].reduce(
+            (acc, time) => acc + Math.pow(time - mean, 2),
+            0
+          );
+
+          const variance = totalSquaredDifference / groupVariance[group].length;
+
+          console.log(`Task ${group} Variance: ${variance}`);
+          // Use d3 to create boxplot
+          createBoxPlot(group, groupVariance[group]);
+
+          // Append average information to the timeCell in the table
+          const timeCell = document.getElementById(`timeCell_${group}`);
+          if (timeCell) {
+            const averageTime = groupSum[group] / groupCount[group];
+            timeCell.textContent = `${averageTime.toFixed(2)}s`;
+          }
+
+          // Append variance information to the variance cell in the table
+          const varianceCell = document.getElementById(`varianceCell_${group}`);
+          if (varianceCell) {
+            varianceCell.textContent = `${variance.toFixed(2)}`;
+          }
         });
       } else {
         console.error(
-          "Errore: la proprietà 'groups' è indefinita o nulla nella risposta JSON."
+          "Error: 'groups' property is undefined or null in the JSON response or there are no items in the array."
         );
       }
     })
     .catch((error) => {
-      console.error("Errore durante il recupero dei dati:", error);
+      console.error("Error retrieving data:", error);
     });
 }
+
+
+function createBoxPlot(groupId, totalTimeArray) {
+  // Select the variance cell using the groupId
+  const boxPlotCell = d3.select(`#boxPlotCell_${groupId}`);
+  console.log(groupId, totalTimeArray);
+
+  // Set up the dimensions for the box plot
+  const width = 200;
+  const height = 150;
+  const margin = { top: 10, right: 30, bottom: 30, left: 40 };
+
+  // Create an SVG container for the box plot
+  const svg = boxPlotCell
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left},${margin.top})`);
+
+  // Compute summary statistics used for the box:
+  const dataSorted = totalTimeArray.sort(d3.ascending);
+  const q1 = d3.quantile(dataSorted, 0.25);
+  const median = d3.quantile(dataSorted, 0.5);
+  const q3 = d3.quantile(dataSorted, 0.75);
+  const interQuantileRange = q3 - q1;
+  const min = q1 - 1.5 * interQuantileRange;
+  const max = q1 + 1.5 * interQuantileRange;
+
+  // Show the Y scale
+  const y = d3.scaleLinear()
+    .domain([Math.min(...totalTimeArray), Math.max(...totalTimeArray)])
+    .range([height, 0]);
+  svg.call(d3.axisLeft(y));
+
+  // a few features for the box
+  const center = width / 2;
+  const boxWidth = 100;
+
+  // Show the main vertical line
+  svg
+    .append("line")
+    .attr("x1", center)
+    .attr("x2", center)
+    .attr("y1", y(min))
+    .attr("y2", y(max))
+    .attr("stroke", "black");
+
+  // Show the box
+  svg
+    .append("rect")
+    .attr("x", center - boxWidth / 2)
+    .attr("y", y(q3))
+    .attr("height", y(q1) - y(q3))
+    .attr("width", boxWidth)
+    .attr("stroke", "black")
+    .style("fill", "#69b3a2");
+
+  // Show median, min, and max horizontal lines
+  const horizontalLinesData = [min, median, max];
+
+  svg
+    .selectAll("line.toto")
+    .data(horizontalLinesData)
+    .enter()
+    .append("line")
+    .attr("x1", center - boxWidth / 2)
+    .attr("x2", center + boxWidth / 2)
+    .attr("y1", (d) => y(d))
+    .attr("y2", (d) => y(d))
+    .attr("stroke", "black");
+}
+
+
+
+
+
+
+
+
+
 
 function getUserTasksViolations() {
   const url = "http://127.0.0.1:5000/get_violations";
 
   fetch(url)
     .then((response) => response.json())
-    .then((json) => {});
+    .then((json) => {
+      const groupData = {};
+
+      // Iterate through each JSON file
+      json.forEach((jsonData, index) => {
+        const violationsData = JSON.parse(jsonData.user_trace);
+
+        // Iterate through each group in the current JSON file
+        for (const group in violationsData) {
+          if (violationsData.hasOwnProperty(group)) {
+            // Initialize group data if not exists
+            if (!groupData[group]) {
+              groupData[group] = {
+                levels: {},
+                totalViolations: 0,
+              };
+            }
+
+            // Calculate the sum of violations for the current group
+            violationsData[group].forEach((violation) => {
+              // Extract the violation level directly from the string
+              const levelMatch = violation.match(/violation of level (\d+)/);
+              const level = levelMatch ? parseInt(levelMatch[1]) : 0;
+
+              // Update the count for the specific level
+              if (!groupData[group].levels[level]) {
+                groupData[group].levels[level] = 0;
+              }
+              groupData[group].levels[level]++;
+
+              // Update the total violations for the current group
+              groupData[group].totalViolations++;
+            });
+          }
+        }
+      });
+
+      // Print the sum of violations for each group to the console
+      for (const group in groupData) {
+        if (groupData.hasOwnProperty(group)) {
+          // Log the total violations for each group
+          console.log(`Group ${group}: Total Violations - ${groupData[group].totalViolations}`);
+        }
+      }
+
+      // Now, update the corresponding violationCell in the table
+      for (const group in groupData) {
+        if (groupData.hasOwnProperty(group)) {
+          const violationCell = document.getElementById(`violationCell_${group}`);
+          if (violationCell) {
+            violationCell.textContent = groupData[group].totalViolations;
+          }
+        }
+      }
+    })
+    .catch((error) => {
+      console.error("Error retrieving violations data:", error);
+    });
 }
+
+
+
+
+
+
 
 window.onload = function () {
   filtersContainer = document.getElementById("filtersContainer");
@@ -166,7 +336,7 @@ window.onload = function () {
 
   colorLegend();
   getUserTasks();
-  //getUserTasksTime();
+  
 };
 
 function populateTable(data) {
@@ -225,18 +395,35 @@ function populateTable(data) {
       tracesCell.textContent = data[key].count;
       row.appendChild(tracesCell);
 
+      const timeCell = document.createElement("td");
+      timeCell.id = `timeCell_${key}`;
+      row.appendChild(timeCell);
+
+      const boxPlotCell = document.createElement("td");
+      boxPlotCell.id = `boxPlotCell_${key}`;
+      //boxPlotCell.textContent = "-";
+      //boxPlotCell.style.width = "150px"; // Set the width to your desired value
+      row.appendChild(boxPlotCell);
+
       const varianceCell = document.createElement("td");
-      varianceCell.textContent = "-";
+      varianceCell.id = `varianceCell_${key}`;
+      varianceCell.textContent = "-"
       row.appendChild(varianceCell);
+
+      const violationCell = document.createElement("td");
+      violationCell.id = `violationCell_${key}`;
+      violationCell.textContent = data[key].totalViolations;
+      console.log(data[key].totalViolations)
+      row.appendChild(violationCell);
 
       const correctnessCell = document.createElement("td");
       correctnessCell.textContent = "-";
       row.appendChild(correctnessCell);
 
-      const timeCell = document.createElement("td");
-      timeCell.textContent = data[key].count;
-      row.appendChild(timeCell);
-      timeCell.textContent = "-";
+      
+
+      
+      
 
       const idealTraceCell = document.createElement("td");
       idealTraceCell.textContent = "-";
@@ -256,6 +443,8 @@ function populateTable(data) {
       });
     }
   }
+  getUserTasksTime();
+  getUserTasksViolations();
 }
 // Function to get color based on event name
 function getColor(eventName) {
