@@ -1,6 +1,23 @@
+var taskInfo = {};
+var groupSum = {};
+var groupCount = {};
+var groupVariance = {};
+var violationsData;
+var groupData = {};
 
+window.onload = function () {
+  filtersContainer = document.getElementById("filtersContainer");
+  loadingIcon = document.getElementById("loadingIcon");
+  table = document.getElementById("tasktable");
 
-var taskInfo={};
+  colorLegend();
+  getUserTasksTime();
+  //This SUCKS, I know, but js synchronization sucks more
+  //When getUserTasksTime finishes: 
+  //  calls getUserTasksViolations
+  //    when getUserTasksViolations finishes:
+  //      calls getUserTasks
+};
 
 function getUserTasks() {
   const url = "http://127.0.0.1:5000/get_user_tasks";
@@ -64,9 +81,7 @@ function getUserTasks() {
         const infoDiv = document.createElement("div");
 
         // Sort interactions by the number of interactions
-        const sortedInteractions = Object.entries(
-          taskInfo[number].interactions
-        )
+        const sortedInteractions = Object.entries(taskInfo[number].interactions)
           .sort((a, b) => b[1] - a[1])
           .map(([interaction, count]) => `${interaction}: ${count}`);
 
@@ -109,15 +124,7 @@ function getUserTasksTime() {
       return response.json();
     })
     .then((json) => {
-      if (
-        json &&
-        json.length > 0 &&
-        JSON.parse(json[0].user_trace).groups
-      ) {
-        const groupSum = {};
-        const groupCount = {};
-        const groupVariance = {};
-
+      if (json && json.length > 0 && JSON.parse(json[0].user_trace).groups) {
         json.forEach((item) => {
           const groups = JSON.parse(item.user_trace).groups;
 
@@ -139,45 +146,114 @@ function getUserTasksTime() {
             );
           }
         });
-
-        Object.keys(groupSum).forEach((group) => {
-          const mean = groupSum[group] / groupCount[group];
-          const totalSquaredDifference = groupVariance[group].reduce(
-            (acc, time) => acc + Math.pow(time - mean, 2),
-            0
-          );
-
-          const variance = totalSquaredDifference / groupVariance[group].length;
-
-          console.log(`Task ${group} Variance: ${variance}`);
-          // Use d3 to create boxplot
-          createBoxPlot(group, groupVariance[group]);
-
-          // Append average information to the timeCell in the table
-          const timeCell = document.getElementById(`timeCell_${group}`);
-          if (timeCell) {
-            const averageTime = groupSum[group] / groupCount[group];
-            timeCell.textContent = `${averageTime.toFixed(2)}s`;
-          }
-
-          // Append variance information to the variance cell in the table
-          const varianceCell = document.getElementById(`varianceCell_${group}`);
-          if (varianceCell) {
-            varianceCell.textContent = `${variance.toFixed(2)}`;
-          }
-        });
       } else {
         console.error(
           "Error: 'groups' property is undefined or null in the JSON response or there are no items in the array."
         );
       }
     })
+    .then(() => {
+      getUserTasksViolations();
+    })
     .catch((error) => {
       console.error("Error retrieving data:", error);
     });
 }
+function getUserTasksViolations() {
+  const url = "http://127.0.0.1:5000/get_violations";
 
+  fetch(url)
+    .then((response) => response.json())
+    .then((json) => {
+      // Iterate through each JSON file
+      json.forEach((jsonData, index) => {
+        violationsData = JSON.parse(jsonData.user_trace);
 
+        // Iterate through each group in the current JSON file
+        for (const group in violationsData) {
+          if (violationsData.hasOwnProperty(group)) {
+            // Initialize group data if not exists
+            if (!groupData[group]) {
+              groupData[group] = {
+                levels: {},
+                totalViolations: 0,
+              };
+            }
+
+            // Calculate the sum of violations for the current group
+            violationsData[group].forEach((violation) => {
+              // Extract the violation level directly from the string
+              const levelMatch = violation.match(/violation of level (\d+)/);
+              const level = levelMatch ? parseInt(levelMatch[1]) : 0;
+
+              // Update the count for the specific level
+              if (!groupData[group].levels[level]) {
+                groupData[group].levels[level] = 0;
+              }
+              groupData[group].levels[level]++;
+
+              // Update the total violations for the current group
+              groupData[group].totalViolations++;
+            });
+          }
+        }
+      });
+
+      // Print the sum of violations for each group to the console
+      for (const group in groupData) {
+        if (groupData.hasOwnProperty(group)) {
+          // Log the total violations for each group
+          console.log(
+            `Group ${group}: Total Violations - ${groupData[group].totalViolations}`
+          );
+        }
+      }
+    })
+    .then(() => {
+      getUserTasks();
+    })
+    .catch((error) => {
+      console.error("Error retrieving violations data:", error);
+    });
+}
+async function getViolationsForGroup(groupID) {
+  var violations;
+  //Now, update the corresponding violationCell in the table
+  for (const group in groupData) {
+    if (groupData.hasOwnProperty(group)) {
+      if (group == groupID) {
+        console.log(groupData);
+        violations = groupData[group].totalViolations;
+      }
+    }
+  }
+  return violations;
+}
+async function getTimeForGroup(groupID) {
+  var returnObj = {
+    variance: 0,
+    averageTime: 0,
+  };
+  Object.keys(groupSum).forEach((group) => {
+    if (group == groupID) {
+      const mean = groupSum[group] / groupCount[group];
+      const totalSquaredDifference = groupVariance[group].reduce(
+        (acc, time) => acc + Math.pow(time - mean, 2),
+        0
+      );
+
+      returnObj.variance = totalSquaredDifference / groupVariance[group].length;
+      returnObj.variance = returnObj.variance.toFixed(2);
+      console.log(`Task ${group} Variance: ${returnObj.variance}`);
+      // Use d3 to create boxplot
+      createBoxPlot(group, groupVariance[group]);
+
+      returnObj.averageTime = groupSum[group] / groupCount[group];
+      returnObj.averageTime = returnObj.averageTime.toFixed(2);
+    }
+  });
+  return returnObj;
+}
 function createBoxPlot(groupId, totalTimeArray) {
   // Select the variance cell using the groupId
   const boxPlotCell = d3.select(`#boxPlotCell_${groupId}`);
@@ -206,7 +282,8 @@ function createBoxPlot(groupId, totalTimeArray) {
   const max = q1 + 1.5 * interQuantileRange;
 
   // Show the Y scale
-  const y = d3.scaleLinear()
+  const y = d3
+    .scaleLinear()
     .domain([Math.min(...totalTimeArray), Math.max(...totalTimeArray)])
     .range([height, 0]);
   svg.call(d3.axisLeft(y));
@@ -249,96 +326,6 @@ function createBoxPlot(groupId, totalTimeArray) {
     .attr("stroke", "black");
 }
 
-
-
-
-
-
-
-
-
-
-function getUserTasksViolations() {
-  const url = "http://127.0.0.1:5000/get_violations";
-
-  fetch(url)
-    .then((response) => response.json())
-    .then((json) => {
-      const groupData = {};
-
-      // Iterate through each JSON file
-      json.forEach((jsonData, index) => {
-        const violationsData = JSON.parse(jsonData.user_trace);
-
-        // Iterate through each group in the current JSON file
-        for (const group in violationsData) {
-          if (violationsData.hasOwnProperty(group)) {
-            // Initialize group data if not exists
-            if (!groupData[group]) {
-              groupData[group] = {
-                levels: {},
-                totalViolations: 0,
-              };
-            }
-
-            // Calculate the sum of violations for the current group
-            violationsData[group].forEach((violation) => {
-              // Extract the violation level directly from the string
-              const levelMatch = violation.match(/violation of level (\d+)/);
-              const level = levelMatch ? parseInt(levelMatch[1]) : 0;
-
-              // Update the count for the specific level
-              if (!groupData[group].levels[level]) {
-                groupData[group].levels[level] = 0;
-              }
-              groupData[group].levels[level]++;
-
-              // Update the total violations for the current group
-              groupData[group].totalViolations++;
-            });
-          }
-        }
-      });
-
-      // Print the sum of violations for each group to the console
-      for (const group in groupData) {
-        if (groupData.hasOwnProperty(group)) {
-          // Log the total violations for each group
-          console.log(`Group ${group}: Total Violations - ${groupData[group].totalViolations}`);
-        }
-      }
-
-      // Now, update the corresponding violationCell in the table
-      for (const group in groupData) {
-        if (groupData.hasOwnProperty(group)) {
-          const violationCell = document.getElementById(`violationCell_${group}`);
-          if (violationCell) {
-            violationCell.textContent = groupData[group].totalViolations;
-          }
-        }
-      }
-    })
-    .catch((error) => {
-      console.error("Error retrieving violations data:", error);
-    });
-}
-
-
-
-
-
-
-
-window.onload = function () {
-  filtersContainer = document.getElementById("filtersContainer");
-  loadingIcon = document.getElementById("loadingIcon");
-  table = document.getElementById("tasktable");
-
-  colorLegend();
-  getUserTasks();
-  
-};
-
 function populateTable(data) {
   const tableBody = document.getElementById("tracesTable");
   //console.log(data);
@@ -361,90 +348,62 @@ function populateTable(data) {
       nameCell.textContent = key;
       row.appendChild(nameCell);
 
-      // const ideaCell = document.createElement("td");
-      // if(key == 0){
-      //   ideaCell.textContent = "'Try to select a range of flights that is between the departure time of 8-12'";
-      // }
-      // else if (key == 1){
-      //   ideaCell.textContent = "'How many flights were longer than four and less than six hours (More than 240 minutes and less than 360 minutes)?'";
-      // }
-      // else if (key == 2) {
-      //   ideaCell.textContent = "'Which two-hour window (during time of day) contains more flights with longer arrival delays?'";
-      // }
-      // else if (key == 3) {
-      //   ideaCell.textContent = "'Which factors appear to have the greatest effect on the length of departure delays?'";
-      // }
-
-      // else if (key == 4) {
-      //   ideaCell.textContent = "'How do distance, departure delays, and both distance and departure delays together appear to affect arrival delays?'";
-      // }
-      // row.appendChild(ideaCell);
-      // console.log(data, key)
-
-      // const categoryCell = document.createElement("td");
-      // if(key == 0){
-
-      //   categoryCell.textContent = "Tutorial";
-      // }
-      // else{
-      //   categoryCell.textContent = "Exploratory";
-      // }
-      // row.appendChild(categoryCell);
-
       const tracesCell = document.createElement("td");
       tracesCell.textContent = data[key].count;
       row.appendChild(tracesCell);
 
-      const timeCell = document.createElement("td");
-      timeCell.id = `timeCell_${key}`;
-      row.appendChild(timeCell);
+      var variance, averageTime;
 
-      const boxPlotCell = document.createElement("td");
-      boxPlotCell.id = `boxPlotCell_${key}`;
-      //boxPlotCell.textContent = "-";
-      //boxPlotCell.style.width = "150px"; // Set the width to your desired value
-      row.appendChild(boxPlotCell);
+      getTimeForGroup(key).then(function (value) {
+        variance = value.variance;
+        averageTime = value.averageTime;
 
-      const varianceCell = document.createElement("td");
-      varianceCell.id = `varianceCell_${key}`;
-      varianceCell.textContent = "-"
-      row.appendChild(varianceCell);
+        const timeCell = document.createElement("td");
+        timeCell.id = `timeCell_${key}`;
+        timeCell.textContent = averageTime;
+        row.appendChild(timeCell);
 
-      const violationCell = document.createElement("td");
-      violationCell.id = `violationCell_${key}`;
-      violationCell.textContent = data[key].totalViolations;
-      console.log(data[key].totalViolations)
-      row.appendChild(violationCell);
+        const varianceCell = document.createElement("td");
+        varianceCell.id = `varianceCell_${key}`;
+        varianceCell.textContent = variance;
+        row.appendChild(varianceCell);
 
-      const correctnessCell = document.createElement("td");
-      correctnessCell.textContent = "-";
-      row.appendChild(correctnessCell);
-
-      
-
-      
-      
-
-      const idealTraceCell = document.createElement("td");
-      idealTraceCell.textContent = "-";
-      row.appendChild(idealTraceCell);
-
-      // Add the row to the table
-      tableBody.appendChild(row);
-
-      checkbox.addEventListener("change", function () {
         
+      });
+      getViolationsForGroup(key).then(function (value) {
+        const violationCell = document.createElement("td");
+        row.appendChild(violationCell);
+
+        const correctnessCell = document.createElement("td");
+        row.appendChild(correctnessCell);
+
+        const idealTraceCell = document.createElement("td");
+        row.appendChild(idealTraceCell);
+        
+
+        //console.log(value);
+        violationCell.id = `violationCell_${key}`;
+        violationCell.textContent = value;
+        //console.log(data[key].totalViolations);
+
+        correctnessCell.textContent = "-";
+
+        idealTraceCell.textContent = "-";
+
+        // Add the row to the table
+        tableBody.appendChild(row);
+      });
+      checkbox.addEventListener("change", function () {
         if (checkbox.checked) {
-          
           ExtraInfo(checkbox.id);
-        }else{
+        } else {
           clearExtraInformation();
         }
       });
     }
   }
-  getUserTasksTime();
-  getUserTasksViolations();
+  // getUserTasksTime();
+  //getUserTasksViolations();
 }
 // Function to get color based on event name
 function getColor(eventName) {
@@ -556,35 +515,33 @@ function toggleLegend() {
 
 function ExtraInfo(taskID) {
   document.getElementById("selectTraceBtn").style.opacity = 1;
-  document.getElementById(
-    "selectTraceBtn"
-  ).innerHTML = `View task`;
+  document.getElementById("selectTraceBtn").innerHTML = `View task`;
   document.getElementById("extrainfoContent").style.opacity = 1;
   document.getElementById("placeholderText").style.display = "none";
 
-  document.getElementById(
-    "traceInfoTitle"
-  ).innerHTML = `Task Information: ${[taskID]}`;
+  document.getElementById("traceInfoTitle").innerHTML = `Task Information: ${[
+    taskID,
+  ]}`;
 
   for (var key in taskInfo) {
     if (taskInfo.hasOwnProperty(key)) {
-      if(key == taskID){
+      if (key == taskID) {
         const eventsList = document.getElementById("eventsList");
-      eventsList.innerHTML = "";
-      eventsList.innerHTML=`Most performed event: ${taskInfo[key].mostPerformedEvent}`;
+        eventsList.innerHTML = "";
+        eventsList.innerHTML = `Most performed event: ${taskInfo[key].mostPerformedEvent}`;
 
-      const violationsList = document.getElementById("violationsList");
-      violationsList.innerHTML = "";
-      
-      for(var data in taskInfo[key].interactions){
-        violationsList.innerHTML+=`${data}: ${taskInfo[key].interactions[data]}`;
-      }
+        const violationsList = document.getElementById("violationsList");
+        violationsList.innerHTML = "";
+
+        for (var data in taskInfo[key].interactions) {
+          violationsList.innerHTML += `${data}: ${taskInfo[key].interactions[data]}`;
+        }
       }
     }
   }
 }
 
-function clearExtraInformation(){
+function clearExtraInformation() {
   document.getElementById("selectTraceBtn").style.opacity = 0;
   document.getElementById(`previewTrace`).style.display = "none";
   document.getElementById("placeholderText").style.display = "block";
