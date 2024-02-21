@@ -499,7 +499,8 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
         "#1F77B4FF",
         "#2CA02CFF",
         "#8C564BFF",
-        "#9467BDFF"
+        "#9467BDFF",
+        "#E377C2FF"
         // Add more color scales as needed
     ];
 
@@ -532,7 +533,7 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
             });
 
             // Set interaction frequency for the current trace in the array
-            updatePolygonsClassName(polygons, colors, traceInteractionFrequency, i, loadedTraces[i].name)
+            updatePolygonsClassName(polygons, colors, traceInteractionFrequency, i, selectedTraces[i])
         }
     } catch (error) {
         console.error("Error parsing JSON:", error);
@@ -562,11 +563,10 @@ function updatePolygonsClassName(polygons, colors, traceInteractionFrequency, in
 
         // Color gray if there are no interactions
         if (interaction !== 0) {
-            d3.select(this).classed(colors[index], true);
-            d3.select(this).attr("id", function () {
-                var currentId = d3.select(this).attr("id");
-                return currentId + extractNumbersFromString(traceName);
-            });
+            //console.log(extractNumberAfter7M(traceName), traceName)
+            //var traceID = extractNumberAfter7M(traceName)
+            d3.select(this).classed(colors[index] + "_" + traceName , true);
+            
         }
     });
 }
@@ -574,9 +574,14 @@ function updatePolygonsClassName(polygons, colors, traceInteractionFrequency, in
 
 function updateColorsByClassName(polygons, colors, tracesID) {
 
-    var traceString = "Traces:"
+    var case1 = []
+    var case2 = []
+    var case3 = []
+    var case4 = []
+    var case5 = []
+    
 
-    traceInfoDiv = document.createElement("div");
+    var traceInfoDiv = document.createElement("div");
     traceInfoDiv.id = "traceInfo";
     traceInfoDiv.style.position = "absolute";
     traceInfoDiv.style.top = "150px";
@@ -590,69 +595,93 @@ function updateColorsByClassName(polygons, colors, tracesID) {
     traceInfoDiv.style.borderLeft = "2px solid #554e8d";
     traceInfoDiv.style.borderRight = "2px solid #554e8d";
     traceInfoDiv.style.borderBottom = "2px solid #554e8d";
-    
-    d3.selectAll(polygons).attr("fill", "#7373733b")
+
+    d3.selectAll(polygons).attr("fill", "#7373733b");
+
     for (let i = 0; i < colors.length; i++) {
-        // Update polygon fill colors based on interaction frequency and trace index
         polygons.each(function () {
             var currentPolygon = d3.select(this);
             var classAttribute = currentPolygon.attr("class");
 
             if (classAttribute && classAttribute.includes(colors[i])) {
-
                 var classes = classAttribute.split(" ");
-                
-              
+
                 if (classes.length == 2) {
-                    
-                    
-                    // Class attribute includes more than one space
                     currentPolygon.attr("fill", "#f7b267");
-                }
-                else if (classes.length == 3) {
-                    // Class attribute includes more than one space
+
+                    if (case2.length < 1) {
+                        var IDs = classAttribute.match(/_(\d+)/g);
+                        case2 = IDs.map(match => parseInt(match.substring(1), 10));
+                    }
+                } else if (classes.length == 3) {
                     currentPolygon.attr("fill", "#f79d65");
-                }
-                else if (classes.length == 4) {
-                    // Class attribute includes more than one space
+
+                    if (case3.length < 1) {
+                        var IDs = classAttribute.match(/_(\d+)/g);
+                        case3 = IDs.map(match => parseInt(match.substring(1), 10));
+                    }
+                } else if (classes.length == 4) {
                     currentPolygon.attr("fill", "#f4845f");
-                }
-                else if (classes.length == 5) {
-                    // Class attribute includes more than one space
+
+                    if (case4.length < 1) {
+                        var IDs = classAttribute.match(/_(\d+)/g);
+                        case4 = IDs.map(match => parseInt(match.substring(1), 10));
+                    }
+                } else if (classes.length == 5) {
                     currentPolygon.attr("fill", "#f27059");
-                }
-  
-                else {
+
+                    if (case5.length < 1) {
+                        var IDs = classAttribute.match(/_(\d+)/g);
+                        case5 = IDs.map(match => parseInt(match.substring(1), 10));
+                    }
+                } else {
                     currentPolygon.attr("fill", colors[i]);
 
+                    if (case1.includes(colors[i]) == false) {
+                        var IDs = classAttribute.match(/_(\d+)/g);
+                        var tmp = IDs.map(match => parseInt(match.substring(1), 10));
+                        case1.push([tmp,colors[i]])
+                    }
                 }
- 
-
-
             }
         });
+    }
 
+    // Append the content of "case" arrays and the color boxes to traceInfoDiv
+    for(let z = 0; z < case1.length; z++){
+        if(traceInfoDiv.innerHTML.includes("Trace: " + case1[z][0]) == false) traceInfoDiv.innerHTML += "Trace: " + case1[z][0] + " - Color: <div style='width: 20px; height: 20px; background-color: " + case1[z][1] + "; display: inline-block;'></div><br>";
     }
     
+    if (case2.length > 1) traceInfoDiv.innerHTML += "Traces: " + case2 + " - Color: <div style='width: 20px; height: 20px; background-color: #f7b267; display: inline-block;'></div><br>";
+    if (case3.length > 1) traceInfoDiv.innerHTML += "Traces: " + case3 + " - Color: <div style='width: 20px; height: 20px; background-color: #f79d65; display: inline-block;'></div><br>";
+    if (case4.length > 1) traceInfoDiv.innerHTML += "Traces: " + case4 + " - Color: <div style='width: 20px; height: 20px; background-color: #f4845f; display: inline-block;'></div><br>";
+    if (case5.length > 1) traceInfoDiv.innerHTML += "Traces: " + case5 + " - Color: <div style='width: 20px; height: 20px; background-color: #f27059; display: inline-block;'></div><br>";
 
-    traceInfoDiv.innerHTML = traceString
     // Append the traceInfo div to the statechartContainer
-    //document.getElementById("statechartContainer").appendChild(traceInfoDiv);
-
+    document.getElementById("statechartContainer").appendChild(traceInfoDiv);
 }
 
-function extractNumbersFromString(inputString) {
-    // Use a regular expression to match all numeric characters
-    const numbersArray = inputString.match(/\d+/g);
 
-    // Check if any numbers were found
-    if (numbersArray) {
-        // Convert the array of strings to an array of numbers
-        const numbers = numbersArray.map(Number);
-        return numbers;
+
+function extractNumberAfter7M(inputString) {
+    // Use a regular expression to match the number after "7M"
+    const match = inputString.match(/7M_(\d{1,2})\.json/);
+
+    // Check if a match was found
+    if (match) {
+        // Extract the matched number
+        const number = parseInt(match[1], 10);
+
+        // Check if the extracted number is within the desired range (1 to 50)
+        if (number >= 1 && number <= 50) {
+            return number;
+        } else {
+            // Number is out of range
+            return null;
+        }
     } else {
-        // No numbers found in the string
-        return [];
+        // No match found
+        return null;
     }
 }
 
