@@ -13,7 +13,7 @@ window.onload = function () {
   colorLegend();
   getUserTasksTime();
   //This SUCKS, I know, but js synchronization sucks more
-  //When getUserTasksTime finishes: 
+  //When getUserTasksTime finishes:
   //  calls getUserTasksViolations
   //    when getUserTasksViolations finishes:
   //      calls getUserTasks
@@ -246,7 +246,7 @@ async function getTimeForGroup(groupID) {
       returnObj.variance = returnObj.variance.toFixed(2);
       console.log(`Task ${group} Variance: ${returnObj.variance}`);
       // Use d3 to create boxplot
-      createBoxPlot(group, groupVariance[group]);
+      //createBoxPlot(group, groupVariance[group]);
 
       returnObj.averageTime = groupSum[group] / groupCount[group];
       returnObj.averageTime = returnObj.averageTime.toFixed(2);
@@ -256,7 +256,9 @@ async function getTimeForGroup(groupID) {
 }
 function createBoxPlot(groupId, totalTimeArray) {
   // Select the variance cell using the groupId
-  const boxPlotCell = d3.select(`#boxPlotCell_${groupId}`);
+  //const boxPlotCell = d3.select(`#boxPlotCell_${groupId}`);
+  const boxPlotCell = d3.select(`#boxPlot`);
+  document.getElementById("boxPlot").innerHTML = "";
   console.log(groupId, totalTimeArray);
 
   // Set up the dimensions for the box plot
@@ -367,8 +369,6 @@ function populateTable(data) {
         varianceCell.id = `varianceCell_${key}`;
         varianceCell.textContent = variance;
         row.appendChild(varianceCell);
-
-        
       });
       getViolationsForGroup(key).then(function (value) {
         const violationCell = document.createElement("td");
@@ -379,7 +379,6 @@ function populateTable(data) {
 
         const idealTraceCell = document.createElement("td");
         row.appendChild(idealTraceCell);
-        
 
         //console.log(value);
         violationCell.id = `violationCell_${key}`;
@@ -526,16 +525,34 @@ function ExtraInfo(taskID) {
   for (var key in taskInfo) {
     if (taskInfo.hasOwnProperty(key)) {
       if (key == taskID) {
-        const eventsList = document.getElementById("eventsList");
-        eventsList.innerHTML = "";
-        eventsList.innerHTML = `Most performed event: ${taskInfo[key].mostPerformedEvent}`;
+        const mostPerformed = document.getElementById("mostPerformed");
+        mostPerformed.innerHTML = "";
+        mostPerformed.innerHTML = `Most performed event: ${taskInfo[key].mostPerformedEvent}`;
 
-        const violationsList = document.getElementById("violationsList");
-        violationsList.innerHTML = "";
+        const eventsList = document.getElementById("interactionsList");
+        eventsList.innerHTML = "";
 
         for (var data in taskInfo[key].interactions) {
-          violationsList.innerHTML += `${data}: ${taskInfo[key].interactions[data]}`;
+          var eventElement = document.createElement("li");
+          eventElement.textContent = `${data}: ${taskInfo[key].interactions[data]}`;
+          eventsList.appendChild(eventElement);
         }
+        createBoxPlot(taskID, groupVariance[taskID]);
+
+        document.getElementById(
+          "violationsTotal"
+        ).innerHTML = `Total Violations: ${groupData[taskID].totalViolations}`;
+
+        const mean = groupSum[taskID] / groupCount[taskID];
+        const totalSquaredDifference = groupVariance[taskID].reduce(
+          (acc, time) => acc + Math.pow(time - mean, 2),
+          0
+        );
+  
+        var variance = totalSquaredDifference / groupVariance[taskID].length;
+        variance = variance.toFixed(2);
+
+        document.getElementById("varianceInfo").textContent="Variance: "+variance;
       }
     }
   }

@@ -666,6 +666,7 @@ th img {
     height: fit-content;
     width: 30%;
     font-size: 1.1rem;
+    overflow-y: scroll;
 }
 .extrainfoDiv p {
     color:#000000 !important;
@@ -694,15 +695,15 @@ table.dataTable tbody td {
 }
 .selectTraceBtn{
     opacity: 0;
-    height: 79px;
-    width: 227px;
+    height: 38px;
+    width: 114px;
     position: absolute;
     right: 54px;
-    bottom: 37px;
+    top: 69px;
     border: none;
     border-radius: 6px;
     background-color: #52b0c3;
-    font-size: 22px;
+    font-size: 17px;
     font-weight: 500;
     color: white;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
@@ -771,6 +772,10 @@ table.dataTable tbody td {
 .newPageBtn img{
     width: 25px;
     height: 25px;
+}
+#interactionsList{
+    height: 200px;
+    overflow-y: scroll;
 }
 /* ---------------------------------------------------
     MEDIAQUERIES
