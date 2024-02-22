@@ -914,7 +914,7 @@ function populateTable(data) {
         else
           document.getElementById(
             "selectTraceBtn"
-          ).innerHTML = `Replay ${selectedTraces.size} trace`;
+          ).innerHTML = `View ${selectedTraces.size} trace`;
       } else {
         document.getElementById("selectTraceBtn").style.opacity = 0;
       }
