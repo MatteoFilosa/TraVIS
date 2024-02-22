@@ -198,7 +198,7 @@ function applyCheckboxFilter() {
 
   // Update innerHTML of "tracesNum" element
   document.getElementById("tracesNum").innerHTML =
-    "Loaded User Traces: " + visibleRowCount;
+    `Loaded User Traces: ${visibleRowCount} out of ${tracesNum}`;
 }
 
 // Function to check if an ID has at least one violation for each specified level
@@ -421,7 +421,7 @@ function applyTableFilter() {
 
   // Update innerHTML of "tracesNum" element
   document.getElementById("tracesNum").innerHTML =
-    "Loaded User Traces: " + visibleRowCount;
+  `Loaded User Traces: ${visibleRowCount} out of ${tracesNum}`;
 }
 
 function getInteractionCountInfo(rowID, interactionType) {
@@ -588,7 +588,7 @@ function applyDemographicFilter() {
 
   // "tracesNum"
   document.getElementById("tracesNum").innerHTML =
-    "Loaded User Traces: " + visibleRowCount;
+  `Loaded User Traces: ${visibleRowCount} out of ${tracesNum}`;
 }
 
 function resetFilters() {
