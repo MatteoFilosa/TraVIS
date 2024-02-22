@@ -10,6 +10,15 @@ var maxInteractionsValue, maxTotalTimeValue, maxViolationsValue;
 var globalViolationsData = [];
 var filtersContainer;
 var demographicData;
+var interactionCounts = {}
+var eventTypesFilter = [
+  "click",
+  "brush",
+  "mousemove",
+  "wheel",
+  "dblclick",
+  "mouseout"
+];
 //#endregion
 
 window.onload = function () {
@@ -22,6 +31,7 @@ window.onload = function () {
   getViolations();
   getTime();
   getUserTraces();
+  //getTaskDivision();
 
   document
     .getElementById("selectAllCheckbox")
@@ -58,7 +68,7 @@ window.onload = function () {
 
 function createCheckboxes() {
   for (let i = 1; i <= tracesNum; i++) {
-    console.log(typeof String(i));
+    
     findViolations(String(i)).then((violationsTmp) => {
       globalViolationsData.push({
         user: String(i),
@@ -67,7 +77,7 @@ function createCheckboxes() {
     });
   }
 
-  console.log(globalViolationsData);
+
 
   var violationFilterDiv = document.createElement("div");
   // // Creazione del label "Violation types"
@@ -227,15 +237,59 @@ function createSliders() {
     maxTotalTimeValue
   );
 
+  const eventTypesArray = [
+    "click",
+    "brush",
+    "mousemove",
+    "wheel",
+    "dblclick",
+    "mouseout"
+  ];
+
+  eventTypesArray.forEach((interactionType) => {
+    const maxInteractionValue = getMaxValueForInteractionType(interactionType);
+    const slider = createSlider(interactionType + "Slider", interactionType, maxInteractionValue);
+    console.log(interactionType + "Filter")
+    document.getElementById(interactionType + "Filter").appendChild(slider);
+  });
+
   // Add sliders
   document.getElementById("violationsFilter").appendChild(violationsSlider);
   document.getElementById("eventsFilter").appendChild(interactionsSlider);
   document.getElementById("totalTimeFilter").appendChild(totalTimeSlider);
+  
 
   // Add the other two checkboxes (violation types, task division), can be done later
 
   // We need to add a function for filtering the table
 }
+
+function getMaxValueForInteractionType(interactionType) {
+  let maxValue = 0;
+  console.log('Interaction Type:', interactionType);
+  // Check if interactionCounts is defined and has the specified interactionType
+  if (interactionCounts && interactionCounts[interactionType]) {
+    // Iterate over the interactionCounts array
+    for (let i = 0; i < interactionCounts[interactionType].length; i++) {
+      const countInfo = interactionCounts[interactionType][i];
+
+      // Parse the userTraceIndex into a number
+      const userTraceIndex = parseInt(countInfo.userTraceIndex, 10);
+      //console.log('Count Info:', countInfo);
+
+      // Check if the current interaction type exists in the counts and has a valid count
+      if (!isNaN(userTraceIndex) && countInfo.count) {
+        const count = parseInt(countInfo.count, 10);
+
+        // Update the maxValue if the current count is greater
+        maxValue = Math.max(maxValue, count);
+      }
+    }
+  }
+  console.log('Max Value:', maxValue);
+  return maxValue;
+}
+
 
 function createSlider(id, label, maxValue) {
   const sliderContainer = document.createElement("div");
@@ -278,12 +332,9 @@ function createSlider(id, label, maxValue) {
 
 function applyTableFilter() {
   // Get values from sliders
-  const violationsFilterValue =
-    document.getElementById("violationsSlider").value;
+  const violationsFilterValue = document.getElementById("violationsSlider").value;
   const eventsFilterValue = document.getElementById("interactionsSlider").value;
-  const totalTimeFilterValue = parseFloat(
-    document.getElementById("totalTimeSlider").value
-  );
+  const totalTimeFilterValue = parseFloat(document.getElementById("totalTimeSlider").value);
 
   // Get values selected from checkboxes
   const checkbox1Checked = document.getElementById("checkbox1").checked;
@@ -313,11 +364,9 @@ function applyTableFilter() {
     const row = tableRows[i];
 
     // Get values from children using specified ids
-    const violationsValue = parseFloat(
-      row.querySelector("#violationsCell").innerHTML
-    );
+    const violationsValue = parseFloat(row.querySelector("#violationsCell").innerHTML);
     const eventsValue = parseFloat(row.querySelector("#eventCell").innerHTML);
-    var totalTimeValue = parseFloat(row.querySelector("#timeCell").innerHTML);
+    const totalTimeValue = parseFloat(row.querySelector("#timeCell").innerHTML);
 
     // Get ID from the row
     const userIDElement = row.querySelector(".sorting_1");
@@ -336,7 +385,17 @@ function applyTableFilter() {
       (checkbox3Checked && hasViolationsLevel(rowID, ["level3"])) ||
       (checkbox4Checked && hasViolationsLevel(rowID, ["level4"]));
 
-    // Check if the ID has at least one violation for each selected level and satisfies slider filters
+    const interactionTypeFilterCondition = eventTypesFilter.every((interactionType) => {
+      const sliderValue = parseFloat(document.getElementById(interactionType + "Slider").value);
+      const interactionCountInfo = getInteractionCountInfo(rowID, interactionType);
+
+      // Check if the interaction value satisfies the filter
+      //console.log(interactionType, interactionCountInfo, sliderValue, interactionCountInfo && interactionCountInfo.count <= sliderValue);
+      return interactionCountInfo && interactionCountInfo.count <= sliderValue;
+    });
+
+
+    // Show/hide row based on the filter
     const showRow =
       !isNaN(violationsValue) &&
       !isNaN(eventsValue) &&
@@ -345,6 +404,7 @@ function applyTableFilter() {
       eventsValue <= eventsFilterValue &&
       totalTimeValue <= totalTimeFilterValue &&
       checkboxFilterCondition &&
+      interactionTypeFilterCondition &&
       (!selectedAge || userDemographicInfo.Age === selectedAge) &&
       (!selectedGender || userDemographicInfo.Gender === selectedGender) &&
       (!selectedStudyTitle ||
@@ -363,6 +423,17 @@ function applyTableFilter() {
   document.getElementById("tracesNum").innerHTML =
     "Loaded User Traces: " + visibleRowCount;
 }
+
+function getInteractionCountInfo(rowID, interactionType) {
+  //console.log(interactionCounts, interactionType, interactionCounts[interactionType])
+  const interactionCountInfo = interactionCounts[interactionType].find(
+    (countInfo) => countInfo.userTraceIndex === rowID
+    
+  );
+  //console.log(interactionCountInfo)
+  return interactionCountInfo;
+}
+
 
 function createDemographicFilter(data) {
   demographicData = data;
@@ -526,6 +597,20 @@ function resetFilters() {
   document.getElementById("interactionsSlider").value = maxInteractionsValue;
   document.getElementById("totalTimeSlider").value = maxTotalTimeValue;
 
+  eventTypesFilter.forEach((interactionType) => {
+    const sliderId = interactionType + "Slider";
+    const maxInteractionValue = getMaxValueForInteractionType(interactionType);
+
+    // Set the slider value
+    document.getElementById(sliderId).value = maxInteractionValue;
+
+    // Update the corresponding display element
+    const displayElement = document.getElementById(sliderId).nextSibling; // Assuming it's the next sibling element
+    if (displayElement) {
+      displayElement.textContent = maxInteractionValue;
+    }
+  });
+
   // Uncheck all checkboxes
   document.getElementById("checkbox1").checked = false;
   document.getElementById("checkbox2").checked = false;
@@ -540,6 +625,7 @@ function resetFilters() {
   // Apply the reset to update the table
   applyTableFilter();
 }
+
 
 
 function getUserTraces() {
@@ -599,6 +685,56 @@ function getTime() {
     });
 }
 
+/* function getTaskDivision() {
+  const url = "http://127.0.0.1:5000/get_user_tasks";
+  fetch(url)
+    .then((response) => response.json())
+    .then((json) => {
+      const eventTypesArray = [
+        "mouseover",
+        "click",
+        "brush",
+        "mousemove",
+        "wheel",
+        "dblclick",
+      ];
+
+      for (let i = 0; i < json.length; i++) {
+       
+        var objLength = Object.keys(json[i]).length - 1;
+
+        // Create an object to store interaction counts for the current JSON file
+        let currentInteractionCount = {};
+
+        for (let j = 0; j < objLength; j++) {
+          var events = json[i][j];
+
+          for (let z = 0; z < events.length; z++) {
+            var interactionType = events[z].split(" ")[0].toLowerCase();
+            
+
+            if (eventTypesArray.includes(interactionType)) {
+              // Update or initialize the count for the current interaction type
+              currentInteractionCount[interactionType] =
+                (currentInteractionCount[interactionType] || 0) + 1;
+            }
+          }
+        }
+
+        // Add the interaction counts for the current JSON file to the global variable
+        interactionCounts.push({
+          index: i,
+          counts: currentInteractionCount,
+        });
+      }
+
+      // Now, interactionCounts contains the counts for each interaction type for each JSON file
+      console.log(interactionCounts);
+    });
+} */
+
+
+
 //#region Update Table
 // Function to truncate a string and add ellipsis
 function truncateString(str, maxLength) {
@@ -639,7 +775,7 @@ function populateTable(data) {
     eventsCell.id = "eventCell";
 
     eventTypes(extractedNumber).then(function (value) {
-      eventsCell.appendChild(createEventsBar(value));
+      eventsCell.appendChild(createEventsBar(value, extractedNumber));
 
       const interactionsValue = Object.values(value).reduce(
         (acc, count) => acc + count,
@@ -652,6 +788,7 @@ function populateTable(data) {
       ) {
         maxInteractionsValue = interactionsValue;
       }
+      
     });
 
     //console.log("Il valore più grande di interactionsValue è:", maxInteractionsValue);
@@ -1375,41 +1512,42 @@ function createViolationsBar(violations) {
   violationsRectangle.appendChild(wrapperDiv);
   return violationsRectangle;
 }
-function createEventsBar(events) {
+function createEventsBar(events, userTraceIndex) {
   const eventRectangle = document.createElement("div");
   eventRectangle.id = "eventRectangle";
   eventRectangle.innerHTML = "";
 
   // Calculate the percentage of each event type
-  const totalEvents = Object.values(events).reduce(
-    (acc, count) => acc + count,
-    0
-  );
-  const percentages = {};
-  for (const [eventName, count] of Object.entries(events)) {
-    percentages[eventName] = (count / totalEvents) * 100;
-  }
-
-  const sortedPercentages = Object.entries(events)
-    .map(([eventName, count]) => ({
-      eventName,
-      percentage: (count / totalEvents) * 100,
-    }))
-    .sort((a, b) => a.percentage - b.percentage);
+  const totalEvents = Object.values(events).reduce((acc, count) => acc + count, 0);
 
   for (const [eventName, count] of Object.entries(events)) {
+    const percentage = (count / totalEvents) * 100;
+
+    // Check if the interaction type already exists in interactionsCount
+    if (!interactionCounts[eventName]) {
+      interactionCounts[eventName] = [];
+    }
+
+    // Add the interaction type, count, and user trace ID to the interactionsCount object
+    interactionCounts[eventName].push({
+      count,
+      userTraceIndex,
+    });
+
     const eventDiv = document.createElement("div");
     eventDiv.classList.add("eventColor");
     eventDiv.style.height = "20px";
-    eventDiv.style.width = `${
-      (count / Object.values(events).reduce((acc, count) => acc + count, 0)) *
-      100
-    }%`;
+    eventDiv.style.width = `${percentage}%`;
     eventDiv.style.backgroundColor = getColor(eventName);
     eventRectangle.appendChild(eventDiv);
   }
+
+
   return eventRectangle;
 }
+
+
+
 
 function generateViolationsHeatmap(violations) {
   const violationsRectangle = document.getElementById("violationsHeatmap");
