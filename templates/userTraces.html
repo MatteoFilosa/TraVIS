@@ -86,29 +86,6 @@
 
             <div class="mainContainer">
 
-                <!--maybe this can be that additional context menu for more filtering-->
-
-                <span id="mousemoveFilter" class="filterSpan">
-                    <label for="interactionsSlider">Mousemove:</label>
-                </span>
-                <span id="mouseoutFilter" class="filterSpan">
-                    <label for="mouseoutSlider">Mouseout:</label>
-                </span>
-                    <span id="clickFilter" class="filterSpan">
-                    <label for="violationsSlider">Click:</label>
-                </span>
-                <span id="dblclickFilter" class="filterSpan">
-                    <label for="totalTimeSlider">Double Click:</label>
-                </span>
-                <span id="brushFilter" class="filterSpan">
-                    <label for="interactionsSlider">Brush:</label>
-                </span>
-                <span id="wheelFilter" class="filterSpan">
-                    <label for="totalTimeSlider">Wheel:</label>
-                </span>
-                
-                
-
 
 
                 <div id="traceContainer">
@@ -117,7 +94,7 @@
                     padding: 0.5%;transition: all 0.3s;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">
                         <div style="display: flex;justify-content: space-between;">
                             <h1 id="tracesNum">Loading User Traces... </h1>
-                            <button id="resetButton" onclick="resetFilters()">Clear Filters</button>
+                            <button  class="btn btn-secondary" onclick="resetFilters()" style="margin-top: 10px;">Clear Filters</button>
                         </div>
 
                         <div class="spinner-border" id="loadingIcon" role="status" style="display: block;margin-left: 50%;
@@ -125,6 +102,7 @@
                             <span class="sr-only">Loading...</span>
                         </div>
                         <div id="filtersContainer">
+
                             <span id="eventsFilter" class="filterSpan">
                                 <label for="interactionsSlider">Events:</label>
                             </span>
@@ -146,7 +124,53 @@
 
 
                             </div>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn extraFiltersBtn" data-toggle="modal"
+                                data-target="#filtersModal">
+                                More filters
+                            </button>
 
+                            <!-- Modal -->
+                            <div class="modal fade" id="filtersModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <!--maybe this can be that additional context menu for more filtering-->
+
+                                            <span id="mousemoveFilter" class="filterSpan">
+                                                <label for="interactionsSlider">Mousemove:</label>
+                                            </span>
+                                            <span id="mouseoutFilter" class="filterSpan">
+                                                <label for="mouseoutSlider">Mouseout:</label>
+                                            </span>
+                                            <span id="clickFilter" class="filterSpan">
+                                                <label for="violationsSlider">Click:</label>
+                                            </span>
+                                            <span id="dblclickFilter" class="filterSpan">
+                                                <label for="totalTimeSlider">Double Click:</label>
+                                            </span>
+                                            <span id="brushFilter" class="filterSpan">
+                                                <label for="interactionsSlider">Brush:</label>
+                                            </span>
+                                            <span id="wheelFilter" class="filterSpan">
+                                                <label for="totalTimeSlider">Wheel:</label>
+                                            </span>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                            onclick="resetFilters()">Reset</button>
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color: #554e8d;">Save changes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <table class="table-responsive table-hover" id="table">

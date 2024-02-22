@@ -369,9 +369,12 @@ a.dropdown-item {
 
 }
 
-.dropdown button{
+.extraFiltersBtn{
     background-color: #554e8d;
     color: white;
+    height: 42px;
+    width: 144px;
+    padding: 0px;
 }
 
 #demographicFilter{
@@ -381,7 +384,7 @@ a.dropdown-item {
 #demographicFilter div{
     margin-right: 10px;
 }
-#demographicFilter div select{
+#demographicFilter div select,.dropdown button{
     background-color: white;
     color: black;
     border-radius: 5px;
