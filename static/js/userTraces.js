@@ -999,7 +999,7 @@ function ExtraInfo() {
       level1.style.display = "flex";
       let level1colorDiv = document.createElement("div");
       level1colorDiv.classList.add("violationsColorDiv");
-      level1colorDiv.style.backgroundColor = "#c7c7c7";
+      level1colorDiv.style.backgroundColor = "#F8D3D3";
       level1.append(level1colorDiv);
       level1.append("Low: " + value.level1);
 
@@ -1007,7 +1007,7 @@ function ExtraInfo() {
       level2.style.display = "flex";
       let level2colorDiv = document.createElement("div");
       level2colorDiv.classList.add("violationsColorDiv");
-      level2colorDiv.style.backgroundColor = "#7f7f7f";
+      level2colorDiv.style.backgroundColor = "#EA7B7B";
       level2.append(level2colorDiv);
       level2.append("Medium: " + value.level2);
 
@@ -1015,7 +1015,7 @@ function ExtraInfo() {
       level3.style.display = "flex";
       let level3colorDiv = document.createElement("div");
       level3colorDiv.classList.add("violationsColorDiv");
-      level3colorDiv.style.backgroundColor = "#dbdb8d";
+      level3colorDiv.style.backgroundColor = "#DC2323";
       level3.append(level3colorDiv);
       level3.append("High: " + value.level3);
 
@@ -1023,7 +1023,7 @@ function ExtraInfo() {
       level4.style.display = "flex";
       let level4colorDiv = document.createElement("div");
       level4colorDiv.classList.add("violationsColorDiv");
-      level4colorDiv.style.backgroundColor = "#17becf";
+      level4colorDiv.style.backgroundColor = "#580E0E";
       level4.append(level4colorDiv);
       level4.append("Critical: " + value.level4);
 
@@ -1160,7 +1160,7 @@ function showExtraInformation(userID) {
     level1.style.display = "flex";
     let level1colorDiv = document.createElement("div");
     level1colorDiv.classList.add("violationsColorDiv");
-    level1colorDiv.style.backgroundColor = "#c7c7c7";
+    level1colorDiv.style.backgroundColor = "#F8D3D3";
     level1.append(level1colorDiv);
     level1.append("Low: " + value.level1);
 
@@ -1168,7 +1168,7 @@ function showExtraInformation(userID) {
     level2.style.display = "flex";
     let level2colorDiv = document.createElement("div");
     level2colorDiv.classList.add("violationsColorDiv");
-    level2colorDiv.style.backgroundColor = "#7f7f7f";
+    level2colorDiv.style.backgroundColor = "#EA7B7B";
     level2.append(level2colorDiv);
     level2.append("Medium: " + value.level2);
 
@@ -1176,7 +1176,7 @@ function showExtraInformation(userID) {
     level3.style.display = "flex";
     let level3colorDiv = document.createElement("div");
     level3colorDiv.classList.add("violationsColorDiv");
-    level3colorDiv.style.backgroundColor = "#dbdb8d";
+    level3colorDiv.style.backgroundColor = "#DC2323";
     level3.append(level3colorDiv);
     level3.append("High: " + value.level3);
 
@@ -1184,7 +1184,7 @@ function showExtraInformation(userID) {
     level4.style.display = "flex";
     let level4colorDiv = document.createElement("div");
     level4colorDiv.classList.add("violationsColorDiv");
-    level4colorDiv.style.backgroundColor = "#17becf";
+    level4colorDiv.style.backgroundColor = "#580E0E";
     level4.append(level4colorDiv);
     level4.append("Critical: " + value.level4);
 
@@ -1276,7 +1276,7 @@ function sumViolations(objectContainer) {
   level1.style.display = "flex";
   let level1colorDiv = document.createElement("div");
   level1colorDiv.classList.add("violationsColorDiv");
-  level1colorDiv.style.backgroundColor = "#c7c7c7";
+  level1colorDiv.style.backgroundColor = "#F8D3D3";
   level1.append(level1colorDiv);
   level1.append("Low: " + summedObject.level1);
 
@@ -1284,7 +1284,7 @@ function sumViolations(objectContainer) {
   level2.style.display = "flex";
   let level2colorDiv = document.createElement("div");
   level2colorDiv.classList.add("violationsColorDiv");
-  level2colorDiv.style.backgroundColor = "#7f7f7f";
+  level2colorDiv.style.backgroundColor = "#EA7B7B";
   level2.append(level2colorDiv);
   level2.append("Medium: " + summedObject.level2);
 
@@ -1292,7 +1292,7 @@ function sumViolations(objectContainer) {
   level3.style.display = "flex";
   let level3colorDiv = document.createElement("div");
   level3colorDiv.classList.add("violationsColorDiv");
-  level3colorDiv.style.backgroundColor = "#dbdb8d";
+  level3colorDiv.style.backgroundColor = "#DC2323";
   level3.append(level3colorDiv);
   level3.append("High: " + summedObject.level3);
 
@@ -1300,7 +1300,7 @@ function sumViolations(objectContainer) {
   level4.style.display = "flex";
   let level4colorDiv = document.createElement("div");
   level4colorDiv.classList.add("violationsColorDiv");
-  level4colorDiv.style.backgroundColor = "#17becf";
+  level4colorDiv.style.backgroundColor = "#580E0E";
   level4.append(level4colorDiv);
   level4.append("Critical: " + summedObject.level4);
 
@@ -1497,13 +1497,13 @@ function createViolationsBar(violations) {
 
       // Set different background colors based on violation level
       if (violationName.includes("1"))
-        eventDiv.style.backgroundColor = "#c7c7c7";
+        eventDiv.style.backgroundColor = "#F8D3D3";
       else if (violationName.includes("2"))
-        eventDiv.style.backgroundColor = "#7f7f7f";
+        eventDiv.style.backgroundColor = "#EA7B7B";
       else if (violationName.includes("3"))
-        eventDiv.style.backgroundColor = "#dbdb8d";
+        eventDiv.style.backgroundColor = "#DC2323";
       else if (element.includes("4"))
-        colorElementImg.style.backgroundColor = "#17becf";
+        colorElementImg.style.backgroundColor = "#580E0E";
 
       wrapperDiv.appendChild(eventDiv);
     }
@@ -1744,13 +1744,13 @@ function colorLegend() {
     let colorElementImg = document.createElement("div");
     colorElementImg.classList.add("colorDiv");
     if (element.includes("Low"))
-      colorElementImg.style.backgroundColor = "#c7c7c7";
+      colorElementImg.style.backgroundColor = "#F8D3D3";
     else if (element.includes("Medium"))
-      colorElementImg.style.backgroundColor = "#7f7f7f";
+      colorElementImg.style.backgroundColor = "#EA7B7B";
     else if (element.includes("High"))
-      colorElementImg.style.backgroundColor = "#dbdb8d";
+      colorElementImg.style.backgroundColor = "#DC2323";
     else if (element.includes("Critical"))
-      colorElementImg.style.backgroundColor = "#17becf";
+      colorElementImg.style.backgroundColor = "#580E0E";
 
     let colorElementText = document.createElement("p");
     colorElementText.textContent = element;
