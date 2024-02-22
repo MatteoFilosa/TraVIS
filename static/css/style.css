@@ -777,6 +777,10 @@ table.dataTable tbody td {
     height: 200px;
     overflow-y: scroll;
 }
+#generalInfo p{
+    font-weight: 500 !important;
+    font-size: 14px !important;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */

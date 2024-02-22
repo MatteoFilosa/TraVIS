@@ -525,6 +525,36 @@ function ExtraInfo(taskID) {
   for (var key in taskInfo) {
     if (taskInfo.hasOwnProperty(key)) {
       if (key == taskID) {
+        var ideaCell = document.getElementById("idea");
+        if (key == 0) {
+          ideaCell.textContent =
+            "'Try to select a range of flights that is between the departure time of 8-12'";
+        } else if (key == 1) {
+          ideaCell.textContent =
+            "'How many flights were longer than four and less than six hours (More than 240 minutes and less than 360 minutes)?'";
+        } else if (key == 2) {
+          ideaCell.textContent =
+            "'Which two-hour window (during time of day) contains more flights with longer arrival delays?'";
+        } else if (key == 3) {
+          ideaCell.textContent =
+            "'Which factors appear to have the greatest effect on the length of departure delays?'";
+        } else if (key == 4) {
+          ideaCell.textContent =
+            "'How do distance, departure delays, and both distance and departure delays together appear to affect arrival delays?'";
+        }
+
+        var categoryCell = document.getElementById("category");
+        if (key == 0) {
+          categoryCell.textContent = "Tutorial";
+        } else {
+          categoryCell.textContent = "Exploratory";
+        }
+
+        var descriptionCell = document.getElementById("description");
+        descriptionCell="-"
+        var idealSequenceCell = document.getElementById("idealSequence");
+        idealSequenceCell="-";
+
         const mostPerformed = document.getElementById("mostPerformed");
         mostPerformed.innerHTML = "";
         mostPerformed.innerHTML = `Most performed event: ${taskInfo[key].mostPerformedEvent}`;
@@ -548,11 +578,12 @@ function ExtraInfo(taskID) {
           (acc, time) => acc + Math.pow(time - mean, 2),
           0
         );
-  
+
         var variance = totalSquaredDifference / groupVariance[taskID].length;
         variance = variance.toFixed(2);
 
-        document.getElementById("varianceInfo").textContent="Variance: "+variance;
+        document.getElementById("varianceInfo").textContent =
+          "Variance: " + variance;
       }
     }
   }
