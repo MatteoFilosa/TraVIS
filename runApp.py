@@ -9,7 +9,7 @@ def activate_environment(env_name):
         os.system(activate_command)
         print(f'Activated virtual environment: {env_name}')
 
-         # Change this to your preferred server file
+        # Change this to your preferred server file
         flask_app_name = "server_flask"
 
         os.environ['FLASK_APP'] = flask_app_name

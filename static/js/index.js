@@ -39,7 +39,7 @@ window.onload = function () {
         document.getElementById("sidebar").classList.toggle("active");
     });
     colorLegend();
-    graphviz();
+    //graphviz();
 
     // If the user wants to see the state chart highlighted from the user traces page
     if ((JSON.parse(localStorage.getItem("selectedTrace")) != null) || (JSON.parse(localStorage.getItem("loadedTraces")) != null)){
@@ -972,8 +972,9 @@ function toggleLegend(){
 function isNameInUrl(jsonData, systemUrl) {
     
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
+
     if (matchingElement) {
-       if(document.getElementById("notFoundText")){
+        if(document.getElementById("notFoundText")){
         document.getElementById("notFoundText").remove();
        }
         matchingName = matchingElement.name;
@@ -1079,25 +1080,59 @@ function isNameInUrl(jsonData, systemUrl) {
             }
 
 
-
-
+            localStorage.removeItem("selectedTrace")
             return true;
-        } else {
+        }
+        else {
             console.error("Invalid original SVG");
             return false;
         }
+    }
+    
+    else
+    {
+        // TODO MATTEO
 
-
-        
-
-
-    }else{
-        if(!document.getElementById("notFoundText")){
-            const notFoundtext = document.createElement("div");
+        // First we set up the 'notFoundText' div and its elements, so that something is displayed while the
+        // statechart files are being created and saved.
+        notFoundtext = document.getElementById("notFoundText");
+        if(!notFoundtext){
+            notFoundtext = document.createElement("div");
             notFoundtext.id="notFoundText";
-            notFoundtext.textContent = "No statechart found for inserted URL"
             document.getElementById("statechartContainer").appendChild(notFoundtext);
         }
+        notFoundtext.innerHTML = `
+            <div align="center">
+                <div>
+                    No statechart found for inserted URL. Please wait while it gets created.
+                    <br>
+                    This may take a while. A new browser page may also be opened in order to perform the creation process correctly; please do not interact with it, it will be automatically closed at the end.
+                    <br>
+                    The statechart will be automatically loaded when it is ready.
+                </div>
+                <br>
+                <div class="spinner-border" id="spinnerId" role="status" style="display: block;"></div>
+            </div>
+        `;
+
+        // We don't let the user interrupt the creation process.
+        loadButton.disabled = true;
+
+        // We use Python to call the backend functions needed for creating the statechart files
+        // and to save it in the db. Finally we try to load it.
+        url = 'http://127.0.0.1:5000/create_statechart_files';
+        fetch
+            (
+                url,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ newUrl: systemUrl })
+                }
+            )
+            .then(response => console.log(response))
+            .then(loadButton.disabled = false)
+            .then(setTimeout(CheckIfStatechartExists, 5000));
     }
     return false;
 }
@@ -1257,6 +1292,15 @@ function pinSidebar() {
 // Function to load the system
 function LoadSystem() {
     statechartSVG.innerHTML = "";
+
+    // TODO MATTEO
+    // We also swipe clean the 'notFoundText' div so that it won't overlap later on.
+    notFoundTextDiv = document.getElementById("notFoundText");
+    if(notFoundTextDiv)
+    {
+        notFoundTextDiv.innerHTML = "";
+    }
+
     var minimapContainer = document.createElement("div");
     minimapContainer.id = "minimapContainer";
     statechartSVG.appendChild(minimapContainer);
@@ -1272,6 +1316,8 @@ function LoadSystem() {
         systemURL = document.getElementById("insertedURL").value;
 
         
+    if(JSON.parse(localStorage.getItem("selectedTrace")) == null){
+        systemURL = document.getElementById("insertedURL").value;
     }
 
     websiteContainer.src = systemURL;

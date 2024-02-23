@@ -1,0 +1,127 @@
+[
+    [
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[1]",
+            "css": "#bottone1ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "mouseenter",
+            "info": null,
+            "leadsToState": 1
+        },
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[1]",
+            "css": "#bottone1ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "click",
+            "info": null,
+            "leadsToState": 2
+        },
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[1]",
+            "css": "#bottone1ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "click",
+            "info": null,
+            "leadsToState": 2
+        }
+    ],
+    [
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[1]",
+            "css": "#bottone1ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "mouseenter",
+            "info": null,
+            "leadsToState": 1
+        },
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[1]",
+            "css": "#bottone1ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "click",
+            "info": null,
+            "leadsToState": 2
+        },
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[1]",
+            "css": "#bottone1ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "mouseleave",
+            "info": null,
+            "leadsToState": 3
+        },
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[1]",
+            "css": "#bottone1ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "mouseenter",
+            "info": null,
+            "leadsToState": 2
+        }
+    ],
+    [
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[1]",
+            "css": "#bottone1ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "mouseenter",
+            "info": null,
+            "leadsToState": 1
+        },
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[1]",
+            "css": "#bottone1ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "click",
+            "info": null,
+            "leadsToState": 2
+        },
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[1]",
+            "css": "#bottone1ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "mouseleave",
+            "info": null,
+            "leadsToState": 3
+        },
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[2]",
+            "css": "#bottone2ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "click",
+            "info": null,
+            "leadsToState": 0
+        }
+    ],
+    [
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[1]",
+            "css": "#bottone1ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "mouseenter",
+            "info": null,
+            "leadsToState": 1
+        },
+        {
+            "xpath": "/html[1]/body[1]/div[1]/button[1]",
+            "css": "#bottone1ID",
+            "startingPath": -1,
+            "siblings": 0,
+            "event": "mouseleave",
+            "info": null,
+            "leadsToState": 0
+        }
+    ]
+]

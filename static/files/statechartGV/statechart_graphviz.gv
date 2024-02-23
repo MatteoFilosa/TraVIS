@@ -1,0 +1,34 @@
+digraph G {
+
+	rankdir="LR";
+	splines=ortho;
+
+	E0 [label="'mouseenter' on '#bottone1ID'\n(/html[1]/body[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E0 [arrowhead="box"];
+	E0 -> 1;
+
+	E1 [label="'click' on '#bottone1ID'\n(/html[1]/body[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	1 -> E1 [arrowhead="box"];
+	E1 -> 2;
+
+	E2 [label="'mouseleave' on '#bottone1ID'\n(/html[1]/body[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	1 -> E2 [arrowhead="box"];
+	E2 -> 0;
+
+	E3 [label="'click' on '#bottone1ID'\n(/html[1]/body[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	2 -> E3 [arrowhead="box"];
+	E3 -> 2;
+
+	E4 [label="'mouseleave' on '#bottone1ID'\n(/html[1]/body[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	2 -> E4 [arrowhead="box"];
+	E4 -> 3;
+
+	E5 [label="'mouseenter' on '#bottone1ID'\n(/html[1]/body[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	3 -> E5 [arrowhead="box"];
+	E5 -> 2;
+
+	E6 [label="'click' on '#bottone2ID'\n(/html[1]/body[1]/div[1]/button[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	3 -> E6 [arrowhead="box"];
+	E6 -> 0;
+
+}

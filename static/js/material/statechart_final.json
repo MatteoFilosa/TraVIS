@@ -1,0 +1,174 @@
+{
+    "0": {
+        "visited": null,
+        "transitions": [
+            {
+                "id": "#bottone1ID",
+                "tag": "button",
+                "event": "mouseenter",
+                "brushable": null,
+                "zoomable": null,
+                "leadsToState": 1,
+                "siblings": 0,
+                "visited": null,
+                "xpath": "/html[1]/body[1]/div[1]/button[1]",
+                "startingPath": -1,
+                "attributes": {
+                    "onclick": "bottone1onclick();",
+                    "onmouseenter": "bottone1onmouseenter();",
+                    "onmouseleave": "bottone1onmouseleave()"
+                },
+                "styles": {
+                    "height": 21,
+                    "width": 91
+                },
+                "data": null
+            }
+        ]
+    },
+    "1": {
+        "visited": null,
+        "transitions": [
+            {
+                "id": "#bottone1ID",
+                "tag": "button",
+                "event": "click",
+                "brushable": null,
+                "zoomable": null,
+                "leadsToState": 2,
+                "siblings": 0,
+                "visited": null,
+                "xpath": "/html[1]/body[1]/div[1]/button[1]",
+                "startingPath": -1,
+                "attributes": {
+                    "onclick": "bottone1onclick();",
+                    "onmouseenter": "bottone1onmouseenter();",
+                    "onmouseleave": "bottone1onmouseleave()"
+                },
+                "styles": {
+                    "height": 21,
+                    "width": 91
+                },
+                "data": null
+            },
+            {
+                "id": "#bottone1ID",
+                "tag": "button",
+                "event": "mouseleave",
+                "brushable": null,
+                "zoomable": null,
+                "leadsToState": 0,
+                "siblings": 0,
+                "visited": null,
+                "xpath": "/html[1]/body[1]/div[1]/button[1]",
+                "startingPath": -1,
+                "attributes": {
+                    "onclick": "bottone1onclick();",
+                    "onmouseenter": "bottone1onmouseenter();",
+                    "onmouseleave": "bottone1onmouseleave()"
+                },
+                "styles": {
+                    "height": 21,
+                    "width": 91
+                },
+                "data": null
+            }
+        ]
+    },
+    "2": {
+        "visited": null,
+        "transitions": [
+            {
+                "id": "#bottone1ID",
+                "tag": "button",
+                "event": "click",
+                "brushable": null,
+                "zoomable": null,
+                "leadsToState": 2,
+                "siblings": 0,
+                "visited": null,
+                "xpath": "/html[1]/body[1]/div[1]/button[1]",
+                "startingPath": -1,
+                "attributes": {
+                    "onclick": "bottone1onclick();",
+                    "onmouseenter": "bottone1onmouseenter();",
+                    "onmouseleave": "bottone1onmouseleave()"
+                },
+                "styles": {
+                    "height": 21,
+                    "width": 91
+                },
+                "data": null
+            },
+            {
+                "id": "#bottone1ID",
+                "tag": "button",
+                "event": "mouseleave",
+                "brushable": null,
+                "zoomable": null,
+                "leadsToState": 3,
+                "siblings": 0,
+                "visited": null,
+                "xpath": "/html[1]/body[1]/div[1]/button[1]",
+                "startingPath": -1,
+                "attributes": {
+                    "onclick": "bottone1onclick();",
+                    "onmouseenter": "bottone1onmouseenter();",
+                    "onmouseleave": "bottone1onmouseleave()"
+                },
+                "styles": {
+                    "height": 21,
+                    "width": 91
+                },
+                "data": null
+            }
+        ]
+    },
+    "3": {
+        "visited": null,
+        "transitions": [
+            {
+                "id": "#bottone1ID",
+                "tag": "button",
+                "event": "mouseenter",
+                "brushable": null,
+                "zoomable": null,
+                "leadsToState": 2,
+                "siblings": 0,
+                "visited": null,
+                "xpath": "/html[1]/body[1]/div[1]/button[1]",
+                "startingPath": -1,
+                "attributes": {
+                    "onclick": "bottone1onclick();",
+                    "onmouseenter": "bottone1onmouseenter();",
+                    "onmouseleave": "bottone1onmouseleave()"
+                },
+                "styles": {
+                    "height": 21,
+                    "width": 91
+                },
+                "data": null
+            },
+            {
+                "id": "#bottone2ID",
+                "tag": "button",
+                "event": "click",
+                "brushable": null,
+                "zoomable": null,
+                "leadsToState": 0,
+                "siblings": 0,
+                "visited": null,
+                "xpath": "/html[1]/body[1]/div[1]/button[2]",
+                "startingPath": -1,
+                "attributes": {
+                    "onclick": "bottone2onclick();"
+                },
+                "styles": {
+                    "height": 21,
+                    "width": 91
+                },
+                "data": null
+            }
+        ]
+    }
+}
