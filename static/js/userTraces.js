@@ -21,6 +21,10 @@ var eventTypesFilter = [
 ];
 //#endregion
 
+//Gloabl Variables - Francesco
+let selectedCheckboxTrace;
+//End Global Variables - Francesco
+
 window.onload = function () {
   filtersContainer = document.getElementById("filtersContainer");
   loadingIcon = document.getElementById("loadingIcon");
@@ -844,6 +848,10 @@ function populateTable(data) {
     });
 
     checkbox.addEventListener("change", function () {
+
+      //Save ID of the trace in a global variable - in order to use for replay later - Francesco
+      selectedCheckboxTrace = this.id;
+
       var numbersOnlyID = checkbox.id;
       if (checkbox.checked) {
         row.classList.add("table-selected");
@@ -897,8 +905,9 @@ function populateTable(data) {
 
           document.getElementById("selectTraceBtn").style.display = "block";
           document.getElementById("selectTraceBtn").onclick = function () {
-         
-            window.location.href = "home";
+            
+            console.log("home")
+            window.location.href = "home"; //!!!!!
             console.log(selectedTraces)
             localStorage.removeItem("selectedTrace")
             localStorage.removeItem("selectedTraceID")
@@ -927,6 +936,10 @@ function populateTable(data) {
 //#region Select Trace
 
 function ExtraInfo() {
+
+
+  
+
   document.getElementById("extrainfoContent").style.opacity = 1;
   document.getElementById("placeholderText").style.display = "none";
 
@@ -1096,6 +1109,38 @@ function ExtraInfo() {
       });
     });
   }
+
+  // Assuming you have an element with id "extraInfoContent"
+  let extraInfoContentElem = document.getElementById("extrainfoContent");
+
+  // Create the button element
+  let replayTraceBtnElem = document.createElement("button");
+
+  // Set button properties
+  replayTraceBtnElem.innerHTML = "Replay selected trace";
+  replayTraceBtnElem.style.opacity = 1;
+  replayTraceBtnElem.style.display = "block";
+  replayTraceBtnElem.id = "replayTraceBtn"
+  // Append the button to the "extraInfoContent" element
+  extraInfoContentElem.appendChild(replayTraceBtnElem);
+  
+  // Add click event listener to the button
+  replayTraceBtnElem.addEventListener("click", function () {
+    localStorage.removeItem("selectedTrace");
+    localStorage.removeItem("selectedTraceID");
+    localStorage.removeItem("loadedTraces");
+    localStorage.setItem("replayCheck", JSON.stringify(1))
+  
+    let url = 'http://127.0.0.1:5000/replay';
+    fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ current_trace: JSON.stringify(selectedTrace_RawValue), name: "falcon" })
+    })
+      .then(response => console.log(response));
+  });
+
+  
 }
 function showExtraInformation(userID) {
   //console.log(userID)
@@ -1112,10 +1157,13 @@ function showExtraInformation(userID) {
     }
   });
 
+
   document.getElementById("placeholderText").style.display = "none";
   document.getElementById("previewTrace").style.display = "block";
 
   var previewTraceElement = document.getElementById("previewTrace");
+
+  
 
 
   previewTraceElement.addEventListener("click", function () {
@@ -1123,7 +1171,7 @@ function showExtraInformation(userID) {
     localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue));
     localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
 
-
+    console.log("home")
     previewTraceElement.href = "home";
   });
 

@@ -709,6 +709,19 @@ table.dataTable tbody td {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease-in-out;
 }
+
+#replayTraceBtn{
+    border: none;
+    border-radius: 6px;
+    background-color: #52b0c3;
+    font-size: 17px;
+    font-weight: 500;
+    color: white;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+
 #placeholderText{
     color: #0000008e;
     height: 50px;

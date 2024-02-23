@@ -22,5 +22,14 @@ visualization system will be loaded on the left, the resulting state chart will 
 2) In the User Traces Tab you can see all user traces captured on the Falcon Visualization system and see other details.
 
 
+-----REPLAY FEATURE-----
+
+Install selenium 4.1.3 ----> pip install selenium==4.1.3
+
+Download and put in any folder you like an updated chromedriver https://googlechromelabs.github.io/chrome-for-testing/#stable (Find the list here and download the version relative to your OS)
+
+Add the chromedriver's path to PATH environmental variable
+
+
 
 

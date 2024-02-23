@@ -41,7 +41,7 @@ window.onload = function () {
     colorLegend();
     //graphviz();
 
-    // If the user wants to see the state chart highlighted from the user traces page
+    // If the user wants to see the state chart highlighted from the user traces page. Change here for conflicts with replay. And for the future...
     if ((JSON.parse(localStorage.getItem("selectedTrace")) != null) || (JSON.parse(localStorage.getItem("loadedTraces")) != null)){
         console.log("eh")
         systemURL = "https://vega.github.io/falcon/flights/"
@@ -573,7 +573,7 @@ function updatePolygonsClassName(polygons, colors, traceInteractionFrequency, in
 
 
 function updateColorsByClassName(polygons, colors, tracesID) {
-
+    console.log("y")
     var case1 = []
     var case2 = []
     var case3 = []
@@ -738,9 +738,10 @@ function graphLayout(svg) {
         //var xPath = "";
         //console.log(node)
 
-
+        let replayCheck = JSON.parse(localStorage.getItem("replayCheck"))
         // Hide Xpath
-        if (node.classList.contains("node")) {
+        console.log("ciao")
+        if ((toString(replayCheck) != "1") && (node.classList.contains("node"))) {
         /*
             if ((textElement.textContent.includes('[')) && (textElement.textContent.includes(']'))) {
                 xPath = textElement;
@@ -823,6 +824,7 @@ function graphLayout(svg) {
                 }
             }
         }
+        localStorage.removeItem("replayCheck")
     });
 
     //GRAPH INFO
@@ -1060,15 +1062,12 @@ function isNameInUrl(jsonData, systemUrl) {
             document.getElementById("statechartContainer").appendChild(changeLayoutButton);
 
 
+            let selectedTrace = JSON.parse(localStorage.getItem("selectedTrace"));
 
-
-            //To see if the user wants the state chart highlighted!
-            if (JSON.parse(localStorage.getItem("selectedTrace")) != null) {
-
-
-                console.log("selectedTrace != null")
-                highlightStatechart(JSON.parse(localStorage.getItem("selectedTrace")));
-
+            if (selectedTrace && Object.keys(selectedTrace).length > 0) {
+                console.log("selectedTrace is not empty");
+                console.log(selectedTrace);
+                highlightStatechart(selectedTrace);
             }
             
             if (JSON.parse(localStorage.getItem("loadedTraces")) != null) {
@@ -1158,11 +1157,11 @@ function changeLayout(layoutName) {
     var vis_name = ""
     var changeLayoutButton = document.getElementById("changeLayoutButton")
 
-    if (systemURL.includes("falcon")) vis_name = "falcon"
-    if (systemURL.includes("nemesis")) vis_name = "nemesis"
-    if (systemURL.includes("crumbs")) vis_name = "crumbs"
-    if (systemURL.includes("summit")) vis_name = "summit"
-    if (systemURL.includes("radviz")) vis_name = "radviz"
+    if (systemURL.includes("falcon"))  vis_name = "https://vega.github.io/falcon/flights/"
+    if (systemURL.includes("nemesis")) vis_name = "http://awareserver.dis.uniroma1.it/nemesis/"
+    if (systemURL.includes("crumbs"))  vis_name = "http://awareserver.dis.uniroma1.it:11768/crumbs-example/"
+    if (systemURL.includes("summit"))  vis_name = "https://fredhohman.com/summit/"
+    if (systemURL.includes("radviz"))  vis_name = "https://aware-diag-sapienza.github.io/d3-radviz/prototype/index.html"
 
     console.log(systemURL)
 
@@ -1292,15 +1291,6 @@ function pinSidebar() {
 // Function to load the system
 function LoadSystem() {
     statechartSVG.innerHTML = "";
-
-    // TODO MATTEO
-    // We also swipe clean the 'notFoundText' div so that it won't overlap later on.
-    notFoundTextDiv = document.getElementById("notFoundText");
-    if(notFoundTextDiv)
-    {
-        notFoundTextDiv.innerHTML = "";
-    }
-
     var minimapContainer = document.createElement("div");
     minimapContainer.id = "minimapContainer";
     statechartSVG.appendChild(minimapContainer);
@@ -1311,20 +1301,14 @@ function LoadSystem() {
     loadingIcon.style.display = "block";
     statechartSVG.style.display = "none";
 
-    if ((JSON.parse(localStorage.getItem("selectedTrace")) == null) && (JSON.parse(localStorage.getItem("loadedTraces")) == null)){
+    if ((JSON.parse(localStorage.getItem("selectedTrace")) == null) && (JSON.parse(localStorage.getItem("loadedTraces")) == null)) {
 
         systemURL = document.getElementById("insertedURL").value;
 
-        
-    if(JSON.parse(localStorage.getItem("selectedTrace")) == null){
-        systemURL = document.getElementById("insertedURL").value;
+
     }
 
     websiteContainer.src = systemURL;
 
     CheckIfStatechartExists();
 }
-
-//#endregion
-
-

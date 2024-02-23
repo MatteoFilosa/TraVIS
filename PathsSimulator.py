@@ -1039,13 +1039,88 @@ def EventHandle(eventName,state,driver,pathNumber,pathElement):
         actionSequence.append([eventName,latency])
 
 
+
 actionSequence = []
 finalSummary = {}
 problemsFound =  {}
 element = None
 pathElement = ""
+currentState = -1
+currentEdge = "E-1"
 
-if __name__ == "__main__":
+'''
+    Global variable indicating the replay state.
+    It can only have these values:
+    "stop"
+    "pause"
+    "play"
+    "step"
+'''
+replayState = "play"
+
+
+
+# Function that changes the color of the replay path.
+def changeStateChartColors(transition, replayJson, driver):
+    global currentState
+    global currentEdge
+
+    # We will add here the scripts to execute on the inputted driver.
+    totalScript = ""
+
+    # We are in the first ever transition. 'currentState' is 0 and we only need to find the 'currentEdge'.
+    if -1 == currentState and "E-1" == currentEdge:
+        print("ANCORA PRIMA: "  + currentEdge + ", " + str(currentState))
+        currentState = 0
+
+        for edge in replayJson:
+            if (
+                ( replayJson[edge]["from_node"] == currentState )        and 
+                ( replayJson[edge]["event"]     == transition["event"] ) and 
+                ( replayJson[edge]["xpath"]     == transition["xpath"] )
+            ):
+                currentEdge = edge
+                print("PRIMA: " + currentEdge + ", " + str(currentState))
+                break
+
+    # In any other transition we compute the new 'currentState' and 'currentEdge', after having filled the old
+    # ones in blue.
+    else:
+        totalScript += "document.querySelector('#originalSVG #svg_node_id_" + str(currentState) + "').style.fill = 'rgb(0, 0, 255)'; document.querySelector('#originalSVG #svg_edge_id_" + currentEdge + "').style.fill = 'rgb(0, 0, 255)'; "
+
+        for edge in replayJson:
+            if (
+                ( replayJson[edge]["from_node"] == currentState )        and 
+                ( replayJson[edge]["event"]     == transition["event"] ) and 
+                ( replayJson[edge]["xpath"]     == transition["xpath"] )
+            ):
+                currentState = replayJson[edge]["to_node"]
+                currentEdge = edge
+                break
+
+    print("SECONDA: " + currentEdge + ", " + str(currentState))
+
+    # The current transition is filled in red and the whole script is executed.
+    totalScript += "document.querySelector('#originalSVG #svg_node_id_" + str(currentState) + "').style.fill = 'rgb(255, 0, 0)'; document.querySelector('#originalSVG #svg_edge_id_" + currentEdge + "').style.fill = 'rgb(255, 0, 0)';"
+    driver.execute_script(totalScript)
+
+
+
+# The main container.
+def pathsSimulatorContainer(explorationSequence, replayJson):
+
+    global element
+    global actionSequence
+    global finalSummary
+    global problemsFound
+    global pathElement
+    global timeOut
+    global replayState
+    replayState = "play"
+    global currentState
+    currentState = -1
+    global currentEdge
+    currentEdge = "E-1"
 
     nameVis = "Falcon"
 
@@ -1054,30 +1129,35 @@ if __name__ == "__main__":
     finalSummary[pathNumber] = []
     problemsFound[pathNumber] = []
 
-    siblingPercentage = 10
-
     #open the statechart json file
-    explorationSequence = open('./static/js/material/exploration_user.json')
+    #explorationSequence = open('./static/js/material/exploration_user.json')
+    #explorationSequence = open('user_trace_flights.json')
 
     #returns the JSON object as a dictionary
-    explorationSequence = json.load(explorationSequence)
+    explorationSequence = json.loads(explorationSequence)
 
     #driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
     options = webdriver.ChromeOptions()
     options.add_argument('ignore-certificate-errors')
     options.add_argument('--ignore-ssl-errors')
-    #driver = webdriver.Chrome(executable_path='C:\Webdriver\chromedriver.exe')
-    driver = webdriver.Chrome(executable_path='/home/user/Scrivania/paper/Webdriver/chromedriver')
-    driver = webdriver.Chrome(chrome_options=options)
+    driver = webdriver.Chrome(executable_path='C:\webdrivers\chromedriver.exe', chrome_options=options) #VERY IMPORTANT TO MODIFY THIS LINE, DEPENDING ON WHERE YOUR CHROMEDRIVER IS!!!!
+    #driver = webdriver.Chrome(executable_path='/home/user/Scrivania/paper/Webdriver/chromedriver')
 
     try:
 
-        system_url_file = open("./static/js/material/system_url.txt", "r")
-        urlVis = system_url_file.read()
-        system_url_file.close()
+        #system_url_file = open("./static/js/material/system_url.txt", "r")
+        #urlVis = system_url_file.read()
+        #system_url_file.close()
 
-        driver.get(urlVis)
         driver.maximize_window()
+        driver.get("http://127.0.0.1:5000")
+
+        script = "localStorage.setItem('selectedTrace', '[]');"
+        driver.execute_script(script)
+        driver.refresh()
+
+        iframe = driver.find_element(By.ID, "website")
+        driver.switch_to.frame(iframe)
 
     except Exception as e:
 
@@ -1088,119 +1168,107 @@ if __name__ == "__main__":
 
     else:
 
-        pathNumber = 0
-        for path in explorationSequence:
+        originalWindow = driver.current_window_handle
+
+        time.sleep(10)
+
+        for transition in explorationSequence:
+            # TODO - COLORAZIONE SVG  
+            # Here we handle the changing colors of the replay SVG.
+            #if(len(driver.window_handles) != 1):
+            #    driver.switch_to.window(originalWindow) 
+            driver.switch_to.default_content()
+            changeStateChartColors(transition, replayJson, driver)
+            driver.switch_to.frame(iframe)
+
+            # Here we handle the replay state.
+            # We close and return in case of "stop", we wait in case of "pause", we continue in case of "play"
+            # and we move forward of one transition in case of "step".
+            print("Replay state: " + replayState)
+            while replayState == "pause": pass
+            if replayState == "stop":
+                driver.close()
+                return
+            elif replayState == "step":
+                replayState = "pause"
+
+            time.sleep(0.5)
+
+            mouseOutElement = driver.find_element(By.CSS_SELECTOR,"body")
+            actions = ActionChains(driver,duration = 0)
+
+            actions.move_to_element(mouseOutElement)
+
+            start = time.time()
+            actions.perform()
+            end = time.time()
+
+            timeOut = end-start
+
+
+            xpath = transition["xpath"]
+            event = transition["event"]
+
+            pathElement = xpath
 
             try:
 
-                driver.get(urlVis)
-                driver.maximize_window()
+                element = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH,pathElement)))
 
-            except:
+            except Exception as e:
 
-                print("URL NOT REACHABLE")
-                driver.close()
-                exit
+                    print(e)
+                    print("Element not found: " + pathElement)
 
             else:
 
-                originalWindow = driver.current_window_handle
+                #try:
 
-                print("PATH: " + str(pathNumber))
-                
-                finalSummary[pathNumber] = []
-                problemsFound[pathNumber] = []
+                if(element.rect["width"] == 0 and element.rect["height"] == 0):
 
-                if(path == None):
-                    print("None found")
+                    print("Element not interactable")
 
                 else:
 
-                    time.sleep(2)
+                    visible = driver.execute_script("var rect = arguments[0].getBoundingClientRect(); "+
+                        "return (rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && " +
+                        "rect.right <= (window.innerWidth || document.documentElement.clientWidth))",element)
 
-                    for transition in path:
+                    if not visible:
 
-                        if(len(driver.window_handles) != 1):
-                            driver.switch_to.window(originalWindow)
+                        driver.execute_script("arguments[0].scrollIntoView(true);", element)
 
-                        time.sleep(1)
+                    eventName = event
 
-                        mouseOutElement = driver.find_element(By.CSS_SELECTOR,"body")
-                        actions = ActionChains(driver,duration = 0)
+                    EventHandle(eventName,transition,driver,pathNumber,pathElement)
 
-                        actions.move_to_element(mouseOutElement)
-                        
-                        start = time.time()
-                        actions.perform()
-                        end = time.time()
+                #except Exception as e:
 
-                        timeOut = end-start
+                #    print("Exception Found: ",end="")
+                #    print(e)
+
+            print("-------------------------------------------------------")
 
 
-                        xpath = transition["xpath"]
-                        event = transition["event"]
-                        siblings = int((int(transition["siblings"])*siblingPercentage)/100)
-                        starting = transition["startingPath"]
-                    
-
-                        for i in range(siblings + 1):
-
-                            if(siblings != 0):
-
-                                pathElement = xpath + "[" + str(starting + i) + "]"
-                            
-                            else:
-
-                                pathElement = xpath
-
-                            try:
-
-                                element = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH,pathElement)))
-
-                            except Exception as e:
-
-                                    print(e)
-                                    print("Element not found: " + pathElement)
-
-                            else:
-
-                                try:
-
-                                    if(element.rect["width"] == 0 and element.rect["height"] == 0):
-
-                                        print("Element not interactable")
-
-                                    else:
-
-                                        visible = driver.execute_script("var rect = arguments[0].getBoundingClientRect(); "+
-                                            "return (rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && " +
-                                            "rect.right <= (window.innerWidth || document.documentElement.clientWidth))",element)
-
-                                        if not visible:
-                            
-                                            driver.execute_script("arguments[0].scrollIntoView(true);", element)
-
-                                        eventName = event
-
-                                        EventHandle(eventName,transition,driver,pathNumber,pathElement)
-
-                                except Exception as e:
-                                    
-                                    print("Exception Found: ",end="")
-                                    print(e)
-                                    
-                            print("-------------------------------------------------------")
-
-                pathNumber+=1
-            
         driver.close()
 
-        with open('./static/js/material/summary_sib' + str(siblingPercentage) + '.json', 'w') as fp:
+        with open('userTraceSummary_' + nameVis + '.json', 'w') as fp:
             json.dump(finalSummary, fp,  indent=4)
-        
+
         #print(actionSequence)
         print("Problems found :",end="")
         print(problemsFound)
 
-        with open('./static/js/material/summaryProblems_sib' + str(siblingPercentage) + '.json', 'w') as fp:
+        with open('userTraceSummaryProblems_' + nameVis + '.json', 'w') as fp:
             json.dump(problemsFound, fp,  indent=4)
+
+
+
+# Function to change the replayState value.
+def PathSimulator_changeReplayState(newState):
+    global replayState
+    if ((newState != "stop") and (newState != "pause") and (newState != "play") and (newState != "step")):
+        newState = "stop"
+        print("ERROR: INVALID 'changeReplayState' INPUT! STATE SET TO STOP!")
+    replayState = newState
+    print("Replay state changed: " + replayState)
