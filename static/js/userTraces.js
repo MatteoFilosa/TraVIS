@@ -10,14 +10,14 @@ var maxInteractionsValue, maxTotalTimeValue, maxViolationsValue;
 var globalViolationsData = [];
 var filtersContainer;
 var demographicData;
-var interactionCounts = {}
+var interactionCounts = {};
 var eventTypesFilter = [
   "click",
   "brush",
   "mousemove",
   "wheel",
   "dblclick",
-  "mouseout"
+  "mouseout",
 ];
 //#endregion
 
@@ -72,7 +72,6 @@ window.onload = function () {
 
 function createCheckboxes() {
   for (let i = 1; i <= tracesNum; i++) {
-    
     findViolations(String(i)).then((violationsTmp) => {
       globalViolationsData.push({
         user: String(i),
@@ -80,8 +79,6 @@ function createCheckboxes() {
       });
     });
   }
-
-
 
   var violationFilterDiv = document.createElement("div");
   // // Creazione del label "Violation types"
@@ -201,8 +198,9 @@ function applyCheckboxFilter() {
   }
 
   // Update innerHTML of "tracesNum" element
-  document.getElementById("tracesNum").innerHTML =
-    `Loaded User Traces: ${visibleRowCount} out of ${tracesNum}`;
+  document.getElementById(
+    "tracesNum"
+  ).innerHTML = `Loaded User Traces: ${visibleRowCount} out of ${tracesNum}`;
 }
 
 // Function to check if an ID has at least one violation for each specified level
@@ -247,13 +245,17 @@ function createSliders() {
     "mousemove",
     "wheel",
     "dblclick",
-    "mouseout"
+    "mouseout",
   ];
 
   eventTypesArray.forEach((interactionType) => {
     const maxInteractionValue = getMaxValueForInteractionType(interactionType);
-    const slider = createSlider(interactionType + "Slider", interactionType, maxInteractionValue);
-    console.log(interactionType + "Filter")
+    const slider = createSlider(
+      interactionType + "Slider",
+      interactionType,
+      maxInteractionValue
+    );
+    console.log(interactionType + "Filter");
     document.getElementById(interactionType + "Filter").appendChild(slider);
   });
 
@@ -261,7 +263,6 @@ function createSliders() {
   document.getElementById("violationsFilter").appendChild(violationsSlider);
   document.getElementById("eventsFilter").appendChild(interactionsSlider);
   document.getElementById("totalTimeFilter").appendChild(totalTimeSlider);
-  
 
   // Add the other two checkboxes (violation types, task division), can be done later
 
@@ -270,7 +271,7 @@ function createSliders() {
 
 function getMaxValueForInteractionType(interactionType) {
   let maxValue = 0;
-  console.log('Interaction Type:', interactionType);
+  console.log("Interaction Type:", interactionType);
   // Check if interactionCounts is defined and has the specified interactionType
   if (interactionCounts && interactionCounts[interactionType]) {
     // Iterate over the interactionCounts array
@@ -290,10 +291,9 @@ function getMaxValueForInteractionType(interactionType) {
       }
     }
   }
-  console.log('Max Value:', maxValue);
+  console.log("Max Value:", maxValue);
   return maxValue;
 }
-
 
 function createSlider(id, label, maxValue) {
   const sliderContainer = document.createElement("div");
@@ -315,15 +315,33 @@ function createSlider(id, label, maxValue) {
   slider.value = maxValue;
   slider.id = id;
 
-  // Create element to display current value
-  const valueDisplay = document.createElement("span");
-  valueDisplay.textContent = maxValue;
+  const valuesDiv = document.createElement("div");
+  valuesDiv.style.display = "flex";
+  valuesDiv.style.justifyContent = "space-between";
+
+  const minValueLabel = document.createElement("span");
+  minValueLabel.textContent = 0;
+  const maxValueLabel = document.createElement("span");
+  maxValueLabel.textContent = maxValue;
+
+  valuesDiv.appendChild(minValueLabel);
+  valuesDiv.appendChild(maxValueLabel);
 
   // Append slider and value display to the container
   sliderContainer.appendChild(slider);
-  sliderContainer.appendChild(valueDisplay);
+  sliderContainer.appendChild(valuesDiv);
 
   //sliderContainer.setAttribute("data-filter", dataFilter);
+
+  // Create element to display current value
+  const valueDisplay = document.createElement("span");
+  valueDisplay.textContent = maxValue;
+  valueDisplay.style.color = "#52b0c3";
+  valueDisplay.style.fontWeight = 700;
+
+  console.log(label);
+  const parent = document.getElementById(`${label}Header`);
+  parent.appendChild(valueDisplay);
 
   // Attach an event listener to update the displayed value when the slider changes
   slider.addEventListener("input", () => {
@@ -336,9 +354,12 @@ function createSlider(id, label, maxValue) {
 
 function applyTableFilter() {
   // Get values from sliders
-  const violationsFilterValue = document.getElementById("violationsSlider").value;
+  const violationsFilterValue =
+    document.getElementById("violationsSlider").value;
   const eventsFilterValue = document.getElementById("interactionsSlider").value;
-  const totalTimeFilterValue = parseFloat(document.getElementById("totalTimeSlider").value);
+  const totalTimeFilterValue = parseFloat(
+    document.getElementById("totalTimeSlider").value
+  );
 
   // Get values selected from checkboxes
   const checkbox1Checked = document.getElementById("checkbox1").checked;
@@ -368,7 +389,9 @@ function applyTableFilter() {
     const row = tableRows[i];
 
     // Get values from children using specified ids
-    const violationsValue = parseFloat(row.querySelector("#violationsCell").innerHTML);
+    const violationsValue = parseFloat(
+      row.querySelector("#violationsCell").innerHTML
+    );
     const eventsValue = parseFloat(row.querySelector("#eventCell").innerHTML);
     const totalTimeValue = parseFloat(row.querySelector("#timeCell").innerHTML);
 
@@ -389,15 +412,23 @@ function applyTableFilter() {
       (checkbox3Checked && hasViolationsLevel(rowID, ["level3"])) ||
       (checkbox4Checked && hasViolationsLevel(rowID, ["level4"]));
 
-    const interactionTypeFilterCondition = eventTypesFilter.every((interactionType) => {
-      const sliderValue = parseFloat(document.getElementById(interactionType + "Slider").value);
-      const interactionCountInfo = getInteractionCountInfo(rowID, interactionType);
+    const interactionTypeFilterCondition = eventTypesFilter.every(
+      (interactionType) => {
+        const sliderValue = parseFloat(
+          document.getElementById(interactionType + "Slider").value
+        );
+        const interactionCountInfo = getInteractionCountInfo(
+          rowID,
+          interactionType
+        );
 
-      // Check if the interaction value satisfies the filter
-      //console.log(interactionType, interactionCountInfo, sliderValue, interactionCountInfo && interactionCountInfo.count <= sliderValue);
-      return interactionCountInfo && interactionCountInfo.count <= sliderValue;
-    });
-
+        // Check if the interaction value satisfies the filter
+        //console.log(interactionType, interactionCountInfo, sliderValue, interactionCountInfo && interactionCountInfo.count <= sliderValue);
+        return (
+          interactionCountInfo && interactionCountInfo.count <= sliderValue
+        );
+      }
+    );
 
     // Show/hide row based on the filter
     const showRow =
@@ -424,20 +455,19 @@ function applyTableFilter() {
   }
 
   // Update innerHTML of "tracesNum" element
-  document.getElementById("tracesNum").innerHTML =
-  `Loaded User Traces: ${visibleRowCount} out of ${tracesNum}`;
+  document.getElementById(
+    "tracesNum"
+  ).innerHTML = `Loaded User Traces: ${visibleRowCount} out of ${tracesNum}`;
 }
 
 function getInteractionCountInfo(rowID, interactionType) {
   //console.log(interactionCounts, interactionType, interactionCounts[interactionType])
   const interactionCountInfo = interactionCounts[interactionType].find(
     (countInfo) => countInfo.userTraceIndex === rowID
-    
   );
   //console.log(interactionCountInfo)
   return interactionCountInfo;
 }
-
 
 function createDemographicFilter(data) {
   demographicData = data;
@@ -459,15 +489,30 @@ function createDemographicFilter(data) {
   ];
 
   // Create filter for age
-  const ageFilter = createSelectFilter("AgeFilter", "Age", uniqueAges, "Select Age");
+  const ageFilter = createSelectFilter(
+    "AgeFilter",
+    "Age",
+    uniqueAges,
+    "Select Age"
+  );
   document.getElementById("demographicFilter").appendChild(ageFilter);
 
   // Create filter for gender with placeholder "Select Gender"
-  const genderFilter = createSelectFilter("GenderFilter", "Gender", uniqueGenders, "Select Gender");
+  const genderFilter = createSelectFilter(
+    "GenderFilter",
+    "Gender",
+    uniqueGenders,
+    "Select Gender"
+  );
   document.getElementById("demographicFilter").appendChild(genderFilter);
 
   // Create filter for study title with placeholder "Select Study Title"
-  const studyTitleFilter = createSelectFilter("StudyTitleFilter", "Study Title", uniqueStudyTitles, "Select Study Title");
+  const studyTitleFilter = createSelectFilter(
+    "StudyTitleFilter",
+    "Study Title",
+    uniqueStudyTitles,
+    "Select Study Title"
+  );
   document.getElementById("demographicFilter").appendChild(studyTitleFilter);
 
   // Add listener to filter elements to apply the filter function
@@ -511,7 +556,6 @@ function createSelectFilter(id, label, options, placeholder = "Select") {
 
   return selectContainer;
 }
-
 
 function applyDemographicFilter() {
   const selectedAge = document.getElementById("AgeFilter").value;
@@ -591,8 +635,9 @@ function applyDemographicFilter() {
   }
 
   // "tracesNum"
-  document.getElementById("tracesNum").innerHTML =
-  `Loaded User Traces: ${visibleRowCount} out of ${tracesNum}`;
+  document.getElementById(
+    "tracesNum"
+  ).innerHTML = `Loaded User Traces: ${visibleRowCount} out of ${tracesNum}`;
 }
 
 function resetFilters() {
@@ -629,8 +674,6 @@ function resetFilters() {
   // Apply the reset to update the table
   applyTableFilter();
 }
-
-
 
 function getUserTraces() {
   const url = "http://127.0.0.1:5000/get_user_traces";
@@ -737,8 +780,6 @@ function getTime() {
     });
 } */
 
-
-
 //#region Update Table
 // Function to truncate a string and add ellipsis
 function truncateString(str, maxLength) {
@@ -792,7 +833,6 @@ function populateTable(data) {
       ) {
         maxInteractionsValue = interactionsValue;
       }
-      
     });
 
     //console.log("Il valore più grande di interactionsValue è:", maxInteractionsValue);
@@ -848,7 +888,6 @@ function populateTable(data) {
     });
 
     checkbox.addEventListener("change", function () {
-
       //Save ID of the trace in a global variable - in order to use for replay later - Francesco
       selectedCheckboxTrace = this.id;
 
@@ -896,31 +935,26 @@ function populateTable(data) {
         else clearExtraInformation();
       }
       if (selectedTraces.size != 0 && selectedTraces.size <= 5) {
-
         document.getElementById("selectTraceBtn").style.display = "block";
-        
 
         if (selectedTraces.size > 1 && selectedTraces.size <= 5) {
-          document.getElementById("selectTraceBtn").innerHTML = `View ${selectedTraces.size} traces`;
+          document.getElementById(
+            "selectTraceBtn"
+          ).innerHTML = `View ${selectedTraces.size} traces`;
 
           document.getElementById("selectTraceBtn").style.display = "block";
           document.getElementById("selectTraceBtn").onclick = function () {
-            
-            console.log("home")
+            console.log("home");
             window.location.href = "home"; //!!!!!
-            console.log(selectedTraces)
-            localStorage.removeItem("selectedTrace")
-            localStorage.removeItem("selectedTraceID")
-            
+            console.log(selectedTraces);
+            localStorage.removeItem("selectedTrace");
+            localStorage.removeItem("selectedTraceID");
+
             localStorage.setItem("loadedTraces", JSON.stringify(loadedTraces));
-            
           };
-        }
-        else if (selectedTraces.size > 5) {
+        } else if (selectedTraces.size > 5) {
           //document.getElementById("selectTraceBtn").style.display = "hidden";
-        }
-        
-        else
+        } else
           document.getElementById(
             "selectTraceBtn"
           ).innerHTML = `View ${selectedTraces.size} trace`;
@@ -968,8 +1002,8 @@ function ExtraInfo() {
     localStorage.setItem("selectedTraceID", JSON.stringify(userNum));
     document.getElementById("previewTrace").id += userNum;
 
-    document.getElementById("heatmap").style.display="block";
-    document.getElementById("combinedHeatmaps").style.display="none";
+    document.getElementById("heatmap").style.display = "block";
+    document.getElementById("combinedHeatmaps").style.display = "none";
     generateHeatmap(selectedTraceID);
 
     eventTypes(selectedTraceID).then(function (value) {
@@ -1054,10 +1088,10 @@ function ExtraInfo() {
       timeList.append(averageTime);
     });
   } else {
-    console.log(selectedTraces)
+    console.log(selectedTraces);
     let traces = Array.from(selectedTraces);
     traces = traces.sort();
-    console.log(traces)
+    console.log(traces);
     let selectedNums = traces.join(", ");
     document.getElementById(
       "traceInfoTitle"
@@ -1067,13 +1101,13 @@ function ExtraInfo() {
       document.getElementById(`previewTrace${selectedTraceID}`).id =
         "previewTrace";
     }
-    localStorage.removeItem("selectedTraces")
+    localStorage.removeItem("selectedTraces");
     localStorage.setItem("selectedTraces", JSON.stringify(traces));
 
     document.getElementById(`previewTrace`).style.display = "none";
-    document.getElementById("heatmap").style.display="none";
-    document.getElementById("combinedHeatmaps").innerHTML="";
-    document.getElementById("combinedHeatmaps").style.display="grid";
+    document.getElementById("heatmap").style.display = "none";
+    document.getElementById("combinedHeatmaps").innerHTML = "";
+    document.getElementById("combinedHeatmaps").style.display = "grid";
     let sumOfEventTypes = {};
     let sumOfViolations = {};
     let sumOfTimes = {};
@@ -1081,9 +1115,10 @@ function ExtraInfo() {
       j = 0,
       k = 0;
     traces.forEach((element) => {
-      
-      document.getElementById("combinedHeatmaps").appendChild(generateHeatmap(element));
-      
+      document
+        .getElementById("combinedHeatmaps")
+        .appendChild(generateHeatmap(element));
+
       eventTypes(element).then(function (value) {
         sumOfEventTypes[`trace${i}`] = value;
         //console.log(sumOfEventTypes);
@@ -1116,27 +1151,26 @@ function ExtraInfo() {
   replayTraceBtnElem.innerHTML = "Replay selected trace";
   replayTraceBtnElem.style.opacity = 1;
   replayTraceBtnElem.style.display = "block";
-  replayTraceBtnElem.id = "replayTraceBtn"
+  replayTraceBtnElem.id = "replayTraceBtn";
   // Append the button to the "extraInfoContent" element
   extraInfoContentElem.appendChild(replayTraceBtnElem);
-  
+
   // Add click event listener to the button
   replayTraceBtnElem.addEventListener("click", function () {
     localStorage.removeItem("selectedTrace");
     localStorage.removeItem("selectedTraceID");
     localStorage.removeItem("loadedTraces");
-    
-  
-    let url = 'http://127.0.0.1:5000/replay';
-    fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ current_trace: JSON.stringify(selectedTrace_RawValue), name: "falcon" })
-    })
-      .then(response => console.log(response));
-  });
 
-  
+    let url = "http://127.0.0.1:5000/replay";
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        current_trace: JSON.stringify(selectedTrace_RawValue),
+        name: "falcon",
+      }),
+    }).then((response) => console.log(response));
+  });
 }
 function showExtraInformation(userID) {
   //console.log(userID)
@@ -1153,21 +1187,19 @@ function showExtraInformation(userID) {
     }
   });
 
-
   document.getElementById("placeholderText").style.display = "none";
   document.getElementById("previewTrace").style.display = "block";
 
   var previewTraceElement = document.getElementById("previewTrace");
 
-  
-
-
   previewTraceElement.addEventListener("click", function () {
-
-    localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue));
+    localStorage.setItem(
+      "selectedTrace",
+      JSON.stringify(selectedTrace_RawValue)
+    );
     localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
 
-    console.log("home")
+    console.log("home");
     previewTraceElement.href = "home";
   });
 
@@ -1364,7 +1396,6 @@ function sumTimes(objectContainer) {
     objectCount++;
 
     for (const key in obj) {
-      
       if (key === "averageTime") {
         summedAvgTime += Number(obj[key]);
       } else {
@@ -1376,14 +1407,18 @@ function sumTimes(objectContainer) {
       }
     }
   }
-  summedObject["averageTime"]=(summedAvgTime/objectCount);
+  summedObject["averageTime"] = summedAvgTime / objectCount;
 
   const timeList = document.getElementById("timeList");
   timeList.innerHTML = "";
   var totalTime = document.createElement("li");
-  totalTime.textContent = `Total time: ${(summedObject.totalTime).toFixed(2)} seconds`;
+  totalTime.textContent = `Total time: ${summedObject.totalTime.toFixed(
+    2
+  )} seconds`;
   var averageTime = document.createElement("li");
-  averageTime.textContent = `Average time: ${(summedObject.averageTime).toFixed(2)} seconds`;
+  averageTime.textContent = `Average time: ${summedObject.averageTime.toFixed(
+    2
+  )} seconds`;
 
   timeList.append(totalTime);
   timeList.append(averageTime);
@@ -1562,7 +1597,10 @@ function createEventsBar(events, userTraceIndex) {
   eventRectangle.innerHTML = "";
 
   // Calculate the percentage of each event type
-  const totalEvents = Object.values(events).reduce((acc, count) => acc + count, 0);
+  const totalEvents = Object.values(events).reduce(
+    (acc, count) => acc + count,
+    0
+  );
 
   for (const [eventName, count] of Object.entries(events)) {
     const percentage = (count / totalEvents) * 100;
@@ -1586,12 +1624,8 @@ function createEventsBar(events, userTraceIndex) {
     eventRectangle.appendChild(eventDiv);
   }
 
-
   return eventRectangle;
 }
-
-
-
 
 function generateViolationsHeatmap(violations) {
   const violationsRectangle = document.getElementById("violationsHeatmap");
@@ -1636,12 +1670,12 @@ function generateViolationsHeatmap(violations) {
 
 function generateHeatmap(userID) {
   var mainDiv;
-  if(selectedTraces.size==1){
+  if (selectedTraces.size == 1) {
     mainDiv = document.getElementById("heatmap");
     mainDiv.innerHTML = "";
-  }else{
+  } else {
     mainDiv = document.createElement("div");
-    mainDiv.style.position="relative";
+    mainDiv.style.position = "relative";
   }
 
   loadedTraces.forEach((element, index) => {
@@ -1675,17 +1709,15 @@ function generateHeatmap(userID) {
         // var violationCircle = document.createElement("div");
         // violationCircle.className="event-Violation";
 
-          // Append the event div to the main div
-          mainDiv.appendChild(eventDiv);
-        
-        
+        // Append the event div to the main div
+        mainDiv.appendChild(eventDiv);
+
         cnt++;
       });
 
-        // Set the number of rows and columns as CSS variables for the main div
-        mainDiv.style.setProperty("--rows", rows);
-        mainDiv.style.setProperty("--columns", columns);
-      
+      // Set the number of rows and columns as CSS variables for the main div
+      mainDiv.style.setProperty("--rows", rows);
+      mainDiv.style.setProperty("--columns", columns);
     }
   });
   return mainDiv;
