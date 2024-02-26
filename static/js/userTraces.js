@@ -936,10 +936,6 @@ function populateTable(data) {
 //#region Select Trace
 
 function ExtraInfo() {
-
-
-  
-
   document.getElementById("extrainfoContent").style.opacity = 1;
   document.getElementById("placeholderText").style.display = "none";
 
@@ -1385,9 +1381,9 @@ function sumTimes(objectContainer) {
   const timeList = document.getElementById("timeList");
   timeList.innerHTML = "";
   var totalTime = document.createElement("li");
-  totalTime.textContent = `Total time: ${summedObject.totalTime} seconds`;
+  totalTime.textContent = `Total time: ${(summedObject.totalTime).toFixed(2)} seconds`;
   var averageTime = document.createElement("li");
-  averageTime.textContent = `Average time: ${summedObject.averageTime} seconds`;
+  averageTime.textContent = `Average time: ${(summedObject.averageTime).toFixed(2)} seconds`;
 
   timeList.append(totalTime);
   timeList.append(averageTime);
