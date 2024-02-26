@@ -1129,7 +1129,7 @@ function ExtraInfo() {
     localStorage.removeItem("selectedTrace");
     localStorage.removeItem("selectedTraceID");
     localStorage.removeItem("loadedTraces");
-    localStorage.setItem("replayCheck", JSON.stringify(1))
+    
   
     let url = 'http://127.0.0.1:5000/replay';
     fetch(url, {

@@ -12,6 +12,7 @@ window.onload = function () {
 
   colorLegend();
   getUserTasksTime();
+  getUserTraceConformity();
   //This SUCKS, I know, but js synchronization sucks more
   //When getUserTasksTime finishes:
   //  calls getUserTasksViolations
@@ -19,8 +20,33 @@ window.onload = function () {
   //      calls getUserTasks
 };
 
+function jaccardIndex(set1, set2) {
+  const intersection = new Set([...set1].filter(x => set2.has(x)));
+  const union = new Set([...set1, ...set2]);
+  return intersection.size / union.size;
+}
+
+// Funzione per valutare la conformità di una traccia rispetto alla golden trace
+function calculateConformity(trace, goldenTrace) {
+  const traceSet = new Set(trace);
+  const goldenTraceSet = new Set(goldenTrace);
+
+  // Calcola l'indice di Jaccard
+  const conformityScore = jaccardIndex(traceSet, goldenTraceSet);
+
+  // Mappa l'indice di Jaccard su una scala da 1 a 5 o in percentuale
+  const scaledScore = conformityScore * 5; // Scala da 0 a 1 a 0 a 5
+  const percentageScore = conformityScore * 100; // Scala da 0 a 1 a 0% a 100%
+
+  return {
+    scaledScore: scaledScore,
+    percentageScore: percentageScore
+  };
+}
+
 function getUserTasks() {
   const url = "http://127.0.0.1:5000/get_user_tasks";
+
 
   fetch(url)
     .then((response) => response.json())
@@ -49,6 +75,8 @@ function getUserTasks() {
             taskInfo[number].count += Array.isArray(task[number])
               ? task[number].length
               : 0;
+
+            
 
             // Update the most performed event for the current number
             const events = Array.isArray(task[number]) ? task[number] : [];
@@ -93,6 +121,7 @@ function getUserTasks() {
         //mainContainer.appendChild(infoDiv);
       });
       populateTable(taskInfo);
+      
     })
     .then(() => {
       // Enable filtering for table
@@ -112,6 +141,61 @@ function getUserTasks() {
       console.error("Error fetching data:", error);
     });
 }
+
+const traceConformityScores = [];
+
+
+function getUserTraceConformity() {
+  const url = "http://127.0.0.1:5000/get_user_tasks";
+
+  fetch(url)
+    .then((response) => response.json())
+    .then((json) => {
+      json.forEach((trace, index) => {
+        const traceInfo = {};
+        Object.keys(trace).forEach((number) => {
+          if (number != "_id" && number <= 4) {
+            if (trace[number]) {
+              const goldenTracePath = `/files/user_traces/golden_traces/task_${number}.json`;
+
+              // Fetch the golden trace
+              fetch(goldenTracePath)
+                .then((goldenResponse) => goldenResponse.json())
+                .then((goldenTrace) => {
+                  // Calculate the conformity scores
+                  const conformityResult = calculateConformity(trace[number], goldenTrace);
+
+                  // Store the conformity scores in the traceInfo object
+                  traceInfo[`Task${number}`] = {
+                    scaledScore: conformityResult.scaledScore,
+                    percentageScore: conformityResult.percentageScore,
+                  };
+
+                  // Log the conformity scores with loop index
+                  console.log(`Trace ${index+1}, Task ${number}: Conformity Score (Scaled): ${conformityResult.scaledScore}`);
+                  console.log(`Trace ${index+1}, Task ${number}: Conformity Score (Percentage): ${conformityResult.percentageScore}`);
+                })
+                .catch((goldenError) => {
+                  console.error(`Error fetching golden trace for Task ${number} in Trace ${index+1}:`, goldenError);
+                });
+            }
+          }
+        });
+
+        // Push the traceInfo object to the traceConformityScores array
+        traceConformityScores.push(traceInfo);
+      });
+
+      // Now traceConformityScores array contains conformity scores for each trace
+      console.log("Trace Conformity Scores:", traceConformityScores);
+    })
+    .catch((error) => {
+      console.error("Error fetching user tasks:", error);
+    });
+}
+
+
+
 
 function getUserTasksTime() {
   const url = "http://127.0.0.1:5000/get_userTraceTime";
@@ -254,7 +338,7 @@ async function getTimeForGroup(groupID) {
   });
   return returnObj;
 }
-function createBoxPlot(groupId, totalTimeArray) {
+/* function createBoxPlot(groupId, totalTimeArray) {
   // Select the variance cell using the groupId
   //const boxPlotCell = d3.select(`#boxPlotCell_${groupId}`);
   const boxPlotCell = d3.select(`#boxPlot`);
@@ -326,7 +410,7 @@ function createBoxPlot(groupId, totalTimeArray) {
     .attr("y1", (d) => y(d))
     .attr("y2", (d) => y(d))
     .attr("stroke", "black");
-}
+} */
 
 function populateTable(data) {
   const tableBody = document.getElementById("tracesTable");
@@ -513,8 +597,8 @@ function toggleLegend() {
 }
 
 function ExtraInfo(taskID) {
-  document.getElementById("selectTraceBtn").style.opacity = 1;
-  document.getElementById("selectTraceBtn").innerHTML = `View task`;
+  //document.getElementById("selectTraceBtn").style.opacity = 1;
+  //document.getElementById("selectTraceBtn").innerHTML = `View task`;
   document.getElementById("extrainfoContent").style.opacity = 1;
   document.getElementById("placeholderText").style.display = "none";
 
@@ -567,7 +651,7 @@ function ExtraInfo(taskID) {
           eventElement.textContent = `${data}: ${taskInfo[key].interactions[data]}`;
           eventsList.appendChild(eventElement);
         }
-        createBoxPlot(taskID, groupVariance[taskID]);
+        //createBoxPlot(taskID, groupVariance[taskID]);
 
         document.getElementById(
           "violationsTotal"

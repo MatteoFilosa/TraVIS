@@ -391,11 +391,15 @@ function adjustIndicator(scale, currentX, currentY, event) {
 function highlightStatechart(interaction_types) {
     
     document.getElementById("colorLegend").style.display = 'none';
+    document.getElementById("changeLayoutButton").style.display = "none";
+    document.getElementById("minimapContainer").style.display = "none";
 
     // Select nodes, polygons, and texts
     var nodes = d3.select("#originalSVG").selectAll(".node");
     var polygons = nodes.selectAll("polygon");
     var texts = nodes.selectAll("text");
+    var mostPerformedEvent = ""
+    var maxFrequency = 0
 
     var interactionFrequency = {}; // Object to store interaction frequency
 
@@ -419,11 +423,23 @@ function highlightStatechart(interaction_types) {
         } else {
             interactionFrequency[interaction] = (interactionFrequency[interaction] || 0) + 1; // Frequency 
         }
+
+        if (interactionFrequency[interaction] > maxFrequency) {
+            maxFrequency = interactionFrequency[interaction];
+            mostPerformedEvent = interaction_types[i].event + " on " + css;
+
+            // Remove "#" symbols
+            mostPerformedEvent = mostPerformedEvent.replace(/#/g, "");
+
+            // Remove "canvas.marks" substring
+            mostPerformedEvent = mostPerformedEvent.replace("canvas.marks", "");
+        }
     }
 
-    // Viridis frequency scale
-    var maxFrequency = d3.max(Object.values(interactionFrequency));
-    var colorScale = d3.scaleSequential(d3.interpolateViridis).domain([0, maxFrequency]);
+    
+
+    var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, maxFrequency]);
+
 
     // Update polygon fill colors based on interaction frequency
     polygons.style("fill", function () {
@@ -450,7 +466,7 @@ function highlightStatechart(interaction_types) {
         traceInfoDiv.style.top = "150px";
         traceInfoDiv.style.right = "10px";
         traceInfoDiv.style.background = "white";
-        traceInfoDiv.style.width = "180px";
+        traceInfoDiv.style.width = "290px";
         traceInfoDiv.style.padding = "10px";
         traceInfoDiv.style.display = "flex";
         traceInfoDiv.style.flexDirection = "column";
@@ -461,16 +477,17 @@ function highlightStatechart(interaction_types) {
 
         // Add an image to the traceInfo div
         var img = document.createElement("img");
-        img.src = "images/viridis.png";
-        img.alt = "Viridis Image";
+        img.src = "images/blues.png";
+        img.alt = "Blues Image";
+        img.style.height= "30px"
         img.style.maxWidth = "100%";
-        traceInfoDiv.appendChild(img);
+        traceInfoDiv.appendChild(img); 
 
         // Add a small number representing the maximum number of interactions
         var interactionCount = document.createElement("div");
         interactionCount.className = "interaction-count";
         interactionCount.style.color = "black";
-        interactionCount.textContent = "Max Interactions: " + maxFrequency;
+        interactionCount.textContent = "Most performed interaction: " + mostPerformedEvent + ", " + maxFrequency + " times";
         traceInfoDiv.appendChild(interactionCount);
 
         // Append the traceInfo div to the statechartContainer
@@ -489,6 +506,7 @@ function highlightStatechart(interaction_types) {
 function highlightStatechartMultiple(loadedTraces, selectedTraces) {
     document.getElementById("colorLegend").style.display = 'none';
     document.getElementById("changeLayoutButton").style.display = 'none';
+    document.getElementById("minimapContainer").style.display = 'none';
     // Select nodes, polygons, and texts
     var nodes = d3.select("#originalSVG").selectAll(".node");
     var polygons = nodes.selectAll("polygon");
@@ -573,7 +591,7 @@ function updatePolygonsClassName(polygons, colors, traceInteractionFrequency, in
 
 
 function updateColorsByClassName(polygons, colors, tracesID) {
-    console.log("y")
+  
     var case1 = []
     var case2 = []
     var case3 = []
@@ -646,6 +664,7 @@ function updateColorsByClassName(polygons, colors, tracesID) {
             }
         });
     }
+    console.log(case1)
 
     // Append the content of "case" arrays and the color boxes to traceInfoDiv
     for(let z = 0; z < case1.length; z++){
@@ -731,17 +750,18 @@ function graphLayout(svg) {
         tooltip.style.left = x + 'px';
         tooltip.style.top = y + 'px';
     }
- */
+    
+ */ if((window.location.href.includes("replay") === false)){
+
+ 
     textElements.forEach(function (textElement) {
         
         var node = textElement.parentElement;
         //var xPath = "";
         //console.log(node)
 
-        let replayCheck = JSON.parse(localStorage.getItem("replayCheck"))
-        // Hide Xpath
-        console.log("ciao")
-        if ((toString(replayCheck) != "1") && (node.classList.contains("node"))) {
+        
+        if (node.classList.contains("node")) {
         /*
             if ((textElement.textContent.includes('[')) && (textElement.textContent.includes(']'))) {
                 xPath = textElement;
@@ -824,8 +844,10 @@ function graphLayout(svg) {
                 }
             }
         }
-        localStorage.removeItem("replayCheck")
+        
     });
+    }
+    
 
     //GRAPH INFO
 
@@ -974,7 +996,7 @@ function toggleLegend(){
 function isNameInUrl(jsonData, systemUrl) {
     
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
-
+    
     if (matchingElement) {
         if(document.getElementById("notFoundText")){
         document.getElementById("notFoundText").remove();
@@ -1061,7 +1083,7 @@ function isNameInUrl(jsonData, systemUrl) {
 
             document.getElementById("statechartContainer").appendChild(changeLayoutButton);
 
-
+            if(window.location.href.includes("replay")) document.getElementById("changeLayoutButton").style.display = "none";
             let selectedTrace = JSON.parse(localStorage.getItem("selectedTrace"));
 
             if (selectedTrace && Object.keys(selectedTrace).length > 0) {

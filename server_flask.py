@@ -6,6 +6,8 @@ from configparser import ConfigParser
 import os, re
 import subprocess
 import json
+import dns.resolver
+
 
 from PathsGenerator import *
 from PathsSimulator import *

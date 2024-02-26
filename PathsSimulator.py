@@ -1150,7 +1150,13 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
         #system_url_file.close()
 
         driver.maximize_window()
-        driver.get("http://127.0.0.1:5000")
+
+        # Add a parameter to the URL
+        base_url = "http://127.0.0.1:5000/home"
+        flag_parameter = "replay=true"
+        url_with_flag = f"{base_url}?{flag_parameter}"
+
+        driver.get(url_with_flag)
 
         script = "localStorage.setItem('selectedTrace', '[]');"
         driver.execute_script(script)
