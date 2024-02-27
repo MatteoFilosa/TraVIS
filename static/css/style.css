@@ -780,6 +780,7 @@ table.dataTable tbody td {
     width: 35px;
     background: transparent;
     padding: 2px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 .newPageBtn img{
     width: 25px;

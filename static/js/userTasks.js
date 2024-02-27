@@ -445,12 +445,12 @@ function populateTable(data) {
         averageTime = value.averageTime;
 
         const timeCell = document.createElement("td");
-        timeCell.id = `timeCell_${key}`;
+        timeCell.id = `timeCell_${checkbox.id}`;
         timeCell.textContent = averageTime;
         row.appendChild(timeCell);
 
         const varianceCell = document.createElement("td");
-        varianceCell.id = `varianceCell_${key}`;
+        varianceCell.id = `varianceCell_${checkbox.id}`;
         varianceCell.textContent = variance;
         row.appendChild(varianceCell);
       });
@@ -462,16 +462,26 @@ function populateTable(data) {
         row.appendChild(correctnessCell);
 
         const idealTraceCell = document.createElement("td");
+        var goldenTraceBtn = document.createElement("button");
+        var btnImg = document.createElement("img");
+        btnImg.src = "images/newPage.png";
+        btnImg.width = "20px";
+        btnImg.height = "20px";
+        goldenTraceBtn.appendChild(btnImg);
+        goldenTraceBtn.classList.add("newPageBtn");
+        goldenTraceBtn.style.display="block";
+        goldenTraceBtn.id=`goldenTraceFor${checkbox.id}`;
+        
+        idealTraceCell.appendChild(goldenTraceBtn);
         row.appendChild(idealTraceCell);
 
         //console.log(value);
-        violationCell.id = `violationCell_${key}`;
+        violationCell.id = `violationCell_${checkbox.id}`;
         violationCell.textContent = value;
         //console.log(data[key].totalViolations);
 
         correctnessCell.textContent = "-";
-
-        idealTraceCell.textContent = "-";
+        
 
         // Add the row to the table
         tableBody.appendChild(row);
