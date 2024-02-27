@@ -485,6 +485,9 @@ function populateTable(data) {
           if(document.getElementById(`newrow${checkbox.id}`)==undefined){
             newRow = document.createElement("tr");
             newRow.classList.add("extraRow");
+            var rowWidth = row.offsetWidth;
+            console.log(rowWidth);
+            newRow.style.width = rowWidth+"px";
             newRow.id=`newrow${checkbox.id}`;
             row.appendChild(newRow);
             addTraceInfo(checkbox.id);

@@ -796,14 +796,15 @@ table.dataTable tbody td {
 
 .extraRow{
     padding: 2%;
+    width: 100%;
     position: absolute;
-    width: 98%;
-    margin-top: 96px;
+    margin-top: 111px;
     left: 0;
-    height: 384px !important;
+    height: 371px !important;
+    background-color: #d5d4e35c !important;
 }
 .extraRow:hover {
-    background-color: white !important;
+    background-color: #d5d4e35c !important;
 }
 .extraRow p{
     color:#554e8d;
