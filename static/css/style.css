@@ -612,7 +612,7 @@ tr {
     font-size: 15px;
 }
 #tasktable tr{
-    height: 6rem;
+    height: 7rem;
 }
 tbody tr:hover {
     background-color: #d5d4e5 !important;
@@ -792,6 +792,21 @@ table.dataTable tbody td {
 #generalInfo p{
     font-weight: 500 !important;
     font-size: 14px !important;
+}
+
+.extraRow{
+    padding: 2%;
+    position: absolute;
+    width: 98%;
+    margin-top: 96px;
+    left: 0;
+    height: 384px !important;
+}
+.extraRow:hover {
+    background-color: white !important;
+}
+.extraRow p{
+    color:#554e8d;
 }
 /* ---------------------------------------------------
     MEDIAQUERIES

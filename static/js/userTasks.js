@@ -419,7 +419,7 @@ function populateTable(data) {
   for (var key in data) {
     if (data.hasOwnProperty(key)) {
       const row = document.createElement("tr");
-
+      row.id="row"+key;
       // Add checkbox column
       const checkboxCell = document.createElement("td");
       checkboxCell.style.paddingLeft = "1%";
@@ -476,12 +476,33 @@ function populateTable(data) {
         // Add the row to the table
         tableBody.appendChild(row);
       });
+      var newRow;
       checkbox.addEventListener("change", function () {
         if (checkbox.checked) {
           row.classList.add("table-selected");
           ExtraInfo(checkbox.id);
+
+          if(document.getElementById(`newrow${checkbox.id}`)==undefined){
+            newRow = document.createElement("tr");
+            newRow.classList.add("extraRow");
+            newRow.id=`newrow${checkbox.id}`;
+            row.appendChild(newRow);
+            addTraceInfo(checkbox.id);
+          }else{
+            document.getElementById(`newrow${checkbox.id}`).style.display="table-row";
+          }
+          
+
+          for (var i = 0; i <= 4; i++) {
+            if(i!=checkbox.id)
+              document.getElementById(`row${i}`).style.display="none";
+          }
         } else {
           row.classList.remove("table-selected");
+          document.getElementById(`newrow${checkbox.id}`).style.display="none";
+          for (var i = 0; i <= 4; i++) {
+            document.getElementById(`row${i}`).style.display="table-row";
+          }
           clearExtraInformation();
         }
       });
@@ -489,6 +510,17 @@ function populateTable(data) {
   }
   // getUserTasksTime();
   //getUserTasksViolations();
+}
+
+function addTraceInfo(taskID){
+  var div = document.getElementById(`newrow${taskID}`);
+  var title = document.createElement("p");
+  title.textContent = `Traces of Task ${taskID}`;
+  div.appendChild(title);
+  var table = document.createElement("table");
+  var row = document.createElement("tr");
+  table.appendChild(row);
+  div.appendChild(table);
 }
 // Function to get color based on event name
 function getColor(eventName) {
