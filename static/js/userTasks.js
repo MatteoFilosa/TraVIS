@@ -478,8 +478,10 @@ function populateTable(data) {
       });
       checkbox.addEventListener("change", function () {
         if (checkbox.checked) {
+          row.classList.add("table-selected");
           ExtraInfo(checkbox.id);
         } else {
+          row.classList.remove("table-selected");
           clearExtraInformation();
         }
       });
