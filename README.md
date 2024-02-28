@@ -32,12 +32,12 @@ Download and put in any folder you like an updated chromedriver https://googlech
 Add the chromedriver's path to PATH environmental variable
 
 2)
-Install node modules:
 
-npm install selenium
-npm install is-same-origin
-npm install fs
-npm install puppeteer
+In order to build and run it in your machine, you must have already installed and configured:
+- NodeJS v12.20.2
+- Puppeteer node module v13.7.0 (npm install puppeteer@13.7.0)
+- fs node module v1.0.0 (npm install fs)
+- is-same-origin node module v0.0.7 (npm install is-same-origin)
 
 
 
