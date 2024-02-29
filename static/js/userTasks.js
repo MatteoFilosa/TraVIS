@@ -338,84 +338,10 @@ async function getTimeForGroup(groupID) {
   });
   return returnObj;
 }
-/* function createBoxPlot(groupId, totalTimeArray) {
-  // Select the variance cell using the groupId
-  //const boxPlotCell = d3.select(`#boxPlotCell_${groupId}`);
-  const boxPlotCell = d3.select(`#boxPlot`);
-  document.getElementById("boxPlot").innerHTML = "";
-  console.log(groupId, totalTimeArray);
-
-  // Set up the dimensions for the box plot
-  const width = 200;
-  const height = 150;
-  const margin = { top: 10, right: 30, bottom: 30, left: 40 };
-
-  // Create an SVG container for the box plot
-  const svg = boxPlotCell
-    .append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", `translate(${margin.left},${margin.top})`);
-
-  // Compute summary statistics used for the box:
-  const dataSorted = totalTimeArray.sort(d3.ascending);
-  const q1 = d3.quantile(dataSorted, 0.25);
-  const median = d3.quantile(dataSorted, 0.5);
-  const q3 = d3.quantile(dataSorted, 0.75);
-  const interQuantileRange = q3 - q1;
-  const min = q1 - 1.5 * interQuantileRange;
-  const max = q1 + 1.5 * interQuantileRange;
-
-  // Show the Y scale
-  const y = d3
-    .scaleLinear()
-    .domain([Math.min(...totalTimeArray), Math.max(...totalTimeArray)])
-    .range([height, 0]);
-  svg.call(d3.axisLeft(y));
-
-  // a few features for the box
-  const center = width / 2;
-  const boxWidth = 100;
-
-  // Show the main vertical line
-  svg
-    .append("line")
-    .attr("x1", center)
-    .attr("x2", center)
-    .attr("y1", y(min))
-    .attr("y2", y(max))
-    .attr("stroke", "black");
-
-  // Show the box
-  svg
-    .append("rect")
-    .attr("x", center - boxWidth / 2)
-    .attr("y", y(q3))
-    .attr("height", y(q1) - y(q3))
-    .attr("width", boxWidth)
-    .attr("stroke", "black")
-    .style("fill", "#69b3a2");
-
-  // Show median, min, and max horizontal lines
-  const horizontalLinesData = [min, median, max];
-
-  svg
-    .selectAll("line.toto")
-    .data(horizontalLinesData)
-    .enter()
-    .append("line")
-    .attr("x1", center - boxWidth / 2)
-    .attr("x2", center + boxWidth / 2)
-    .attr("y1", (d) => y(d))
-    .attr("y2", (d) => y(d))
-    .attr("stroke", "black");
-} */
 
 function populateTable(data) {
   const tableBody = document.getElementById("tracesTable");
-  //console.log(data);
-
+  
   for (var key in data) {
     if (data.hasOwnProperty(key)) {
       const row = document.createElement("tr");
@@ -481,24 +407,41 @@ function populateTable(data) {
         //console.log(data[key].totalViolations);
 
         correctnessCell.textContent = "-";
+
+        const buttonCell = document.createElement("td");
+        var btn = document.createElement("button");
+        btn.id=`expand${checkbox.id}`;
+        btn.classList.add("expandButton");
+        var img = document.createElement("img");
+        img.src="images/downArrow.png";
+        img.width="20px";
+        img.height="20px";
+        img.id=`expandImg${checkbox.id}`;
+        btn.appendChild(img);
         
+        buttonCell.appendChild(btn);
+        row.appendChild(buttonCell);
 
         // Add the row to the table
         tableBody.appendChild(row);
+        btn.addEventListener("click",function(){
+          expandTableOnClick(checkbox.id,row);
+        });
       });
       var newRow;
       checkbox.addEventListener("change", function () {
         if (checkbox.checked) {
           row.classList.add("table-selected");
           ExtraInfo(checkbox.id);
-
+          
           if(document.getElementById(`newrow${checkbox.id}`)==undefined){
             newRow = document.createElement("tr");
             newRow.classList.add("extraRow");
             var rowWidth = row.offsetWidth;
-            console.log(rowWidth);
+            
             newRow.style.width = rowWidth+"px";
             newRow.id=`newrow${checkbox.id}`;
+            
             row.appendChild(newRow);
             addTraceInfo(checkbox.id);
           }else{
@@ -524,16 +467,56 @@ function populateTable(data) {
   // getUserTasksTime();
   //getUserTasksViolations();
 }
-
+var rowExpanded = false;
+function expandTableOnClick(id,row){
+  if(!rowExpanded){
+    if(document.getElementById(`newrow${id}`)==undefined){
+      newRow = document.createElement("tr");
+      newRow.classList.add("extraRow");
+      var rowWidth = row.offsetWidth;
+      
+      newRow.style.width = rowWidth+"px";
+      newRow.id=`newrow${id}`;
+      
+      row.appendChild(newRow);
+      addTraceInfo(id);
+    }else{
+      document.getElementById(`newrow${id}`).style.display="table-row";
+    }
+    
+    for (var i = 0; i <= 4; i++) {
+      if(i!=id)
+        document.getElementById(`row${i}`).style.display="none";
+    }
+    document.getElementById(`expandImg${id}`).style.transform = 'rotate(' + 180 + 'deg)';
+    rowExpanded = true;
+  }else{
+    document.getElementById(`newrow${id}`).style.display="none";
+    for (var i = 0; i <= 4; i++) {
+      document.getElementById(`row${i}`).style.display="table-row";
+    }
+    document.getElementById(`expandImg${id}`).style.transform = 'rotate(' + 0 + 'deg)';
+    rowExpanded = false;
+  }
+  
+}
 function addTraceInfo(taskID){
   var div = document.getElementById(`newrow${taskID}`);
   var title = document.createElement("p");
   title.textContent = `Traces of Task ${taskID}`;
   div.appendChild(title);
+  var tableDiv = document.createElement("div");
+  tableDiv.classList.add("innerTableDiv");
+  
   var table = document.createElement("table");
-  var row = document.createElement("tr");
-  table.appendChild(row);
-  div.appendChild(table);
+  table.innerHTML = localStorage.getItem("tracesTable");
+  // var thead = document.createElement("thead"); 
+  // table.appendChild(thead);
+  // var tbody = document.createElement("tbody");
+  // tbody.innerHTML =  localStorage.getItem("tracesTable");
+  // table.appendChild(tbody);
+  tableDiv.appendChild(table);
+  div.appendChild(tableDiv);
 }
 // Function to get color based on event name
 function getColor(eventName) {
@@ -610,13 +593,13 @@ function colorLegend() {
     let colorElementImg = document.createElement("div");
     colorElementImg.classList.add("colorDiv");
     if (element.includes("Low"))
-      colorElementImg.style.backgroundColor = "#c7c7c7";
+      colorElementImg.style.backgroundColor = "#F8D3D3";
     else if (element.includes("Medium"))
-      colorElementImg.style.backgroundColor = "#7f7f7f";
+      colorElementImg.style.backgroundColor = "#EA7B7B";
     else if (element.includes("High"))
-      colorElementImg.style.backgroundColor = "#dbdb8d";
+      colorElementImg.style.backgroundColor = "#DC2323";
     else if (element.includes("Critical"))
-      colorElementImg.style.backgroundColor = "#17becf";
+      colorElementImg.style.backgroundColor = "#580E0E";
 
     let colorElementText = document.createElement("p");
     colorElementText.textContent = element;
@@ -726,4 +709,8 @@ function clearExtraInformation() {
   document.getElementById("placeholderText").style.display = "block";
   document.getElementById("extrainfoContent").style.opacity = 0;
   document.getElementById("traceInfoTitle").innerHTML = "Task Information   ";
+}
+
+function showTracesForTask(taskID){
+
 }

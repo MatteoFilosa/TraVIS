@@ -630,8 +630,7 @@ tbody tr:hover {
     width: 42px;
     height: 31px;
     background-color: transparent;
-    border: 1px solid black;
-    border-radius: 6px;
+    border: none;
     transition: all 0.2s ease-in-out;
 }
 .expandButtonPressed{
@@ -641,6 +640,7 @@ tbody tr:hover {
 .expandButton img {
     width: 25px;
     height: 25px;
+    transition: all 0.2s ease-in-out;
 }
 
 .extrainfoRow {
@@ -803,12 +803,17 @@ table.dataTable tbody td {
     left: 0;
     height: 371px !important;
     background-color: #d5d4e35c !important;
+    overflow-y: scroll;
 }
 .extraRow:hover {
     background-color: #d5d4e35c !important;
 }
 .extraRow p{
     color:#554e8d;
+}
+.innerTableDiv{
+    width: 100%;
+    overflow-y: scroll;
 }
 /* ---------------------------------------------------
     MEDIAQUERIES

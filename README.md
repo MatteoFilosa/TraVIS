@@ -30,6 +30,7 @@ Install selenium 4.1.3 ----> pip install selenium==4.1.3
 Download and put in any folder you like an updated chromedriver https://googlechromelabs.github.io/chrome-for-testing/#stable (Find the list here and download the version relative to your OS)
 
 Add the chromedriver's path to PATH environmental variable
+and change line 1147 in PathSimulator.py to your path to chromedriver (...). Use double '\' for the path if you get syntax error
 
 2)
 

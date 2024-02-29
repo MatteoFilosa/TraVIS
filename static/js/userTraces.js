@@ -885,6 +885,7 @@ function populateTable(data) {
       console.log("maxInteractionsValue è:", maxInteractionsValue);
       console.log("maxViolationsValue è:", maxViolationsValue);
       console.log("maxTotalTime è:", maxTotalTimeValue);
+      localStorage.setItem("tracesTable",document.getElementById("table").innerHTML);
     });
 
     checkbox.addEventListener("change", function () {
@@ -963,6 +964,7 @@ function populateTable(data) {
       }
     });
   });
+  
 }
 
 //#endregion
