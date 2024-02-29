@@ -401,6 +401,15 @@ function populateTable(data) {
         idealTraceCell.appendChild(goldenTraceBtn);
         row.appendChild(idealTraceCell);
 
+        const deltaInteractionCell = document.createElement("td");
+        deltaInteractionCell.textContent = "-";
+        row.appendChild(deltaInteractionCell);
+        const deltaTimeCell = document.createElement("td");
+        deltaTimeCell.textContent = "-";
+        row.appendChild(deltaTimeCell);
+        const deltaViolationsCell = document.createElement("td");
+        deltaViolationsCell.textContent = "-";
+        row.appendChild(deltaViolationsCell);
         //console.log(value);
         violationCell.id = `violationCell_${checkbox.id}`;
         violationCell.textContent = value;
