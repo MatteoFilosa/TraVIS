@@ -898,7 +898,7 @@ function populateTable(data) {
         selectedTraces.add(checkbox.id);
         console.log(selectedTraces);
 
-        document.getElementById("selectTraceBtn").style.opacity = 1;
+        // document.getElementById("selectTraceBtn").style.opacity = 1;
         ExtraInfo();
 
         // if (document.getElementById(`extrainfoDiv`).getAttribute("data-visible") === "false") {

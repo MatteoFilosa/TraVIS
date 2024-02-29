@@ -815,6 +815,11 @@ table.dataTable tbody td {
     width: 100%;
     overflow-y: scroll;
 }
+.filtersModalLabels{
+    font-weight: 700;
+    color: #000000;
+    font-size: 15px;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
