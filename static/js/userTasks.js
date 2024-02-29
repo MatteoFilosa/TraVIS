@@ -442,32 +442,8 @@ function populateTable(data) {
         if (checkbox.checked) {
           row.classList.add("table-selected");
           ExtraInfo(checkbox.id);
-          
-          if(document.getElementById(`newrow${checkbox.id}`)==undefined){
-            newRow = document.createElement("tr");
-            newRow.classList.add("extraRow");
-            var rowWidth = row.offsetWidth;
-            
-            newRow.style.width = rowWidth+"px";
-            newRow.id=`newrow${checkbox.id}`;
-            
-            row.appendChild(newRow);
-            addTraceInfo(checkbox.id);
-          }else{
-            document.getElementById(`newrow${checkbox.id}`).style.display="table-row";
-          }
-          
-
-          for (var i = 0; i <= 4; i++) {
-            if(i!=checkbox.id)
-              document.getElementById(`row${i}`).style.display="none";
-          }
         } else {
           row.classList.remove("table-selected");
-          document.getElementById(`newrow${checkbox.id}`).style.display="none";
-          for (var i = 0; i <= 4; i++) {
-            document.getElementById(`row${i}`).style.display="table-row";
-          }
           clearExtraInformation();
         }
       });
