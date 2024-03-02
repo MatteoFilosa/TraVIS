@@ -3,10 +3,14 @@ from flask_cors import CORS
 from flask_pymongo import PyMongo
 from flask_caching import Cache
 from configparser import ConfigParser
+""" from pm4py.algo.filtering.log.variants import variants_filter
+from pm4py.algo.evaluation.replay_fitness import replay_fitness
+from pm4py.objects.log.importer.xes import factory as xes_importer """
 import os, re
 import subprocess
 import json
 import dns.resolver
+
 
 
 from PathsGenerator import *
@@ -230,6 +234,50 @@ def get_user_tasks():
 
 
 
+""" @app.route("/get_user_trace_conformity")
+def get_user_trace_conformity():
+    # Database configuration
+    database_name = "visualizations"
+    mongo_uri = config['DATABASES'][database_name]
+    app.config["MONGO_URI"] = mongo_uri
+    mongo = PyMongo(app)
+
+    # Collection name
+    collection_name = "task_division"
+
+    # Retrieve user traces data from the MongoDB collection
+    user_traces_cursor = mongo.db[collection_name].find()
+    
+    # Convert user traces ObjectId to string and cursor to a list of dictionaries
+    user_traces_list = [{**trace, '_id': str(trace['_id'])} for trace in user_traces_cursor]
+
+    # Load golden traces from a local file
+    with open("static/files/user_traces/golden_traces.txt", "r") as file:
+        golden_traces_list = [line.strip() for line in file]
+
+    # Create logs for user and golden traces
+    user_log = xes_importer.apply(user_traces_list)
+    golden_log = xes_importer.apply(golden_traces_list)
+
+    # Filter variants to get a common set for replay fitness
+    user_variants = variants_filter.get_variants(user_log)
+    golden_variants = variants_filter.get_variants(golden_log)
+    common_variants = set(user_variants).intersection(golden_variants)
+
+    # Calculate replay fitness for each variant
+    fitness_results = replay_fitness(user_log, golden_log, parameters={replay_fitness.VariantsFilter.WHOLE: common_variants})
+
+    # Extract conformity information or perform further actions as needed
+    conformity_info = fitness_results
+
+    # Convert data to JSON
+    response_data = jsonify({"conformity_info": conformity_info})
+
+    # Set Cache-Control header to enable browser caching for 1 hour (3600 seconds)
+    response = make_response(response_data)
+    response.headers["Cache-Control"] = "max-age=3600"
+
+    return response """
 
 
 

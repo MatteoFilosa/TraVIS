@@ -27,7 +27,7 @@ visualization system will be loaded on the left, the resulting state chart will 
 1) 
 Install selenium 4.1.3 ----> pip install selenium==4.1.3
 
-Download and put in any folder you like an updated chromedriver https://googlechromelabs.github.io/chrome-for-testing/#stable (Find the list here and download the version relative to your OS)
+Download and put in any folder you like an updated chromedriver https://googlechromelabs.github.io/chrome-for-testing/#stable (Find the list here and download the version relative to your OS). Don't forget to update Chrome.
 
 Add the chromedriver's path to PATH environmental variable
 and change line 1147 in PathSimulator.py to your path to chromedriver (...). Use double '\' for the path if you get syntax error
@@ -35,7 +35,7 @@ and change line 1147 in PathSimulator.py to your path to chromedriver (...). Use
 2)
 
 In order to build and run it in your machine, you must have already installed and configured:
-- NodeJS v12.20.2
+- NodeJS (from v12.20.2)
 - Puppeteer node module v13.7.0 (npm install puppeteer@13.7.0)
 - fs node module v1.0.0 (npm install fs)
 - is-same-origin node module v0.0.7 (npm install is-same-origin)

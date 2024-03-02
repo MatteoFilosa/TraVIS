@@ -43,10 +43,19 @@ window.onload = function () {
 
     // If the user wants to see the state chart highlighted from the user traces page. Change here for conflicts with replay. And for the future...
     if ((JSON.parse(localStorage.getItem("selectedTrace")) != null) || (JSON.parse(localStorage.getItem("loadedTraces")) != null)){
-        console.log("eh")
+        console.log("Forced Falcon Visualization System. SelectedTrace is not null (or loadedtraces).")
         systemURL = "https://vega.github.io/falcon/flights/"
         LoadSystem();
         
+    }
+
+    //If the user wants to see the state chart highlighted given the task from the tasks page
+    else if (JSON.parse(localStorage.getItem("taskID")) != null){
+
+        console.log("Forced Falcon Visualization System. TaskID is not null.")
+        systemURL = "https://vega.github.io/falcon/flights/"
+        LoadSystem();
+
     }
     
 };
@@ -444,6 +453,7 @@ function highlightStatechart(interaction_types) {
     // Update polygon fill colors based on interaction frequency
     polygons.style("fill", function () {
         var nodeText = d3.select(this.parentNode).select("text").text();
+        d3.select(this.parentNode).select("text").style("fill", "white"); 
         var interaction = interactionFrequency[nodeText] || 0;
 
         // Color gray if there are no interactions
@@ -451,11 +461,11 @@ function highlightStatechart(interaction_types) {
             return "#7373733b"; // or "grey"
         }
 
-        // Use the Viridis color scale
+        console.log(interaction)
         return colorScale(interaction);
     });
 
-    texts.style("fill", "white"); // Set text color to white
+    //texts.style("fill", "white"); // Set text color to white
 
     // Create and update traceInfo div using plain HTML
     var traceInfoDiv = document.getElementById("traceInfo");
@@ -568,6 +578,146 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
     localStorage.removeItem("selectedTraces");
     localStorage.removeItem("loadedTraces");
 
+
+}
+
+function highlightTask(taskInfo, taskID){
+
+    var nodes = d3.select("#originalSVG").selectAll(".node");
+    var polygons = nodes.selectAll("polygon");
+    var texts = nodes.selectAll("text");
+
+    document.getElementById("colorLegend").style.display = 'none';
+    document.getElementById("changeLayoutButton").style.display = "none";
+    document.getElementById("minimapContainer").style.display = "none";
+
+    console.log(taskInfo, taskID)
+
+     // Select nodes, polygons, and texts
+    var nodes = d3.select("#originalSVG").selectAll(".node");
+    var polygons = nodes.selectAll("polygon");
+    var texts = nodes.selectAll("text");
+    var mostPerformedEvent = ""
+    var maxFrequency = 0
+
+    var interactionFrequency = {}; // Object to store interaction frequency
+
+    // Check if the taskID exists in taskInfo
+    if (taskInfo.hasOwnProperty(taskID)) {
+        var currentTask = taskInfo[taskID];
+        var maxFrequency = 0;
+        var mostPerformedEvent = "";
+
+        // Iterate through the interactions of the current task
+        for (const interaction in currentTask.interactions) {
+
+            var components = interaction.split(' ');
+
+            // Formatta i primi e terzi componenti
+            var formattedString = `'${components[0]}' on '#${components[2]} canvas.marks'`;
+
+            // Ora puoi utilizzare la variabile formattedString come necessario
+            console.log(formattedString);
+        
+
+            if(components[0]==("brush")){
+
+                interactionFrequency[formattedString] = currentTask.interactions[interaction];
+
+                mousedownString = `'mousedown' on '#${components[2]} canvas.marks'`;
+                interactionFrequency[mousedownString] = currentTask.interactions[interaction];
+
+                mousemoveString = `'mousemove' on '#${components[2]} canvas.marks'`;
+                interactionFrequency[mousemoveString] = currentTask.interactions[interaction];
+
+                mouseupString = `'mouseup' on '#${components[2]} canvas.marks'`;
+                interactionFrequency[mouseupString] = currentTask.interactions[interaction];
+
+                mouseoutString = `'mouseout' on '#${components[2]} canvas.marks'`;
+                interactionFrequency[mouseoutString] = currentTask.interactions[interaction];
+
+            } 
+            
+            else{
+
+                interactionFrequency[formattedString] = currentTask.interactions[interaction];
+            } 
+
+            // Update maxFrequency and mostPerformedEvent
+            if (currentTask.interactions[interaction] > maxFrequency) {
+                maxFrequency = currentTask.interactions[interaction];
+                mostPerformedEvent = interaction;
+            }
+        }
+
+        var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, maxFrequency]);
+
+        
+        polygons.style("fill", function (d) {
+            console.log("polygons")
+            var nodeText = d3.select(this.parentNode).select("text").text();
+            d3.select(this.parentNode).select("text").style("fill", "white"); 
+            var interaction = interactionFrequency[nodeText] || 0;
+            console.log(interaction)
+            console.log(interactionFrequency[nodeText])
+            console.log(interactionFrequency) 
+            console.log(nodeText) 
+            
+            // Color gray if there are no interactions
+            if (interaction === 0) {
+                return "#7373733b"; // or "grey"
+            }
+
+            
+
+            return colorScale(interaction);
+        });
+    }
+
+    //texts.style("fill", "white"); // Set text color to white
+
+    // Create and update traceInfo div using plain HTML
+    var traceInfoDiv = document.getElementById("traceInfo");
+    if (!traceInfoDiv) {
+        traceInfoDiv = document.createElement("div");
+        traceInfoDiv.id = "traceInfo";
+        traceInfoDiv.style.position = "absolute";
+        traceInfoDiv.style.top = "150px";
+        traceInfoDiv.style.right = "10px";
+        traceInfoDiv.style.background = "white";
+        traceInfoDiv.style.width = "290px";
+        traceInfoDiv.style.padding = "10px";
+        traceInfoDiv.style.display = "flex";
+        traceInfoDiv.style.flexDirection = "column";
+        traceInfoDiv.style.borderTop = "2px solid #554e8d";
+        traceInfoDiv.style.borderLeft = "2px solid #554e8d";
+        traceInfoDiv.style.borderRight = "2px solid #554e8d";
+        traceInfoDiv.style.borderBottom = "2px solid #554e8d";
+
+        // Add an image to the traceInfo div
+        var img = document.createElement("img");
+        img.src = "images/blues.png";
+        img.alt = "Blues Image";
+        img.style.height = "30px"
+        img.style.maxWidth = "100%";
+        traceInfoDiv.appendChild(img);
+
+        // Add a small number representing the maximum number of interactions
+        var interactionCount = document.createElement("div");
+        interactionCount.className = "interaction-count";
+        interactionCount.style.color = "black";
+        interactionCount.textContent = "Most performed interaction: " + mostPerformedEvent + ", " + maxFrequency + " times";
+        traceInfoDiv.appendChild(interactionCount);
+
+        // Append the traceInfo div to the statechartContainer
+        document.getElementById("statechartContainer").appendChild(traceInfoDiv);
+    }
+
+    // Add content to the traceInfo div
+    traceInfoDiv.innerHTML += "Task selected: " + JSON.parse(localStorage.getItem("taskID")); 
+
+    localStorage.removeItem("taskInfo");
+    localStorage.removeItem("taskID");
 
 }
 
@@ -994,8 +1144,9 @@ function toggleLegend(){
     }
 }
 function isNameInUrl(jsonData, systemUrl) {
-    
+    console.log("isNameInUrl")
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
+    console.log(systemURL, matchingElement, jsonData)
     
     if (matchingElement) {
         if(document.getElementById("notFoundText")){
@@ -1083,23 +1234,34 @@ function isNameInUrl(jsonData, systemUrl) {
 
             document.getElementById("statechartContainer").appendChild(changeLayoutButton);
 
+            //Different functionalities part
+
             if(window.location.href.includes("replay")) document.getElementById("changeLayoutButton").style.display = "none";
             let selectedTrace = JSON.parse(localStorage.getItem("selectedTrace"));
+
+            //State chart highlighting for interaction frequency
 
             if (selectedTrace && Object.keys(selectedTrace).length > 0) {
                 console.log("selectedTrace is not empty");
                 console.log(selectedTrace);
                 highlightStatechart(selectedTrace);
             }
+
+            //State chart highlighting for interaction frequency (multiple traces selected)
             
             if (JSON.parse(localStorage.getItem("loadedTraces")) != null) {
-
 
                 console.log("loadedTraces != null")
                 highlightStatechartMultiple(JSON.parse(localStorage.getItem("loadedTraces")), JSON.parse(localStorage.getItem("selectedTraces")));
 
             }
 
+            //State chart highlighting for task and interaction frequency (multiple traces selected)
+
+            if (JSON.parse(localStorage.getItem("taskInfo")) != null){
+                console.log("Highlight Task")
+                highlightTask(JSON.parse(localStorage.getItem("taskInfo")), JSON.parse(localStorage.getItem("taskID")))
+            }
 
             localStorage.removeItem("selectedTrace")
             return true;
@@ -1323,7 +1485,7 @@ function LoadSystem() {
     loadingIcon.style.display = "block";
     statechartSVG.style.display = "none";
 
-    if ((JSON.parse(localStorage.getItem("selectedTrace")) == null) && (JSON.parse(localStorage.getItem("loadedTraces")) == null)) {
+    if ((JSON.parse(localStorage.getItem("selectedTrace")) == null) && (JSON.parse(localStorage.getItem("loadedTraces")) == null) && (JSON.parse(localStorage.getItem("taskID")) == null)) {
 
         systemURL = document.getElementById("insertedURL").value;
 

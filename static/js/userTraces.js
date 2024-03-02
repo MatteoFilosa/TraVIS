@@ -945,9 +945,7 @@ function populateTable(data) {
 
           document.getElementById("selectTraceBtn").style.display = "block";
           document.getElementById("selectTraceBtn").onclick = function () {
-            console.log("home");
             window.location.href = "home"; //!!!!!
-            console.log(selectedTraces);
             localStorage.removeItem("selectedTrace");
             localStorage.removeItem("selectedTraceID");
 

@@ -1,7 +1,7 @@
 var taskInfo = {};
 var groupSum = {};
 var groupCount = {};
-var groupVariance = {};
+var groupstd = {};
 var violationsData;
 var groupData = {};
 
@@ -12,7 +12,7 @@ window.onload = function () {
 
   colorLegend();
   getUserTasksTime();
-  getUserTraceConformity();
+  //getUserTraceConformity();
   //This SUCKS, I know, but js synchronization sucks more
   //When getUserTasksTime finishes:
   //  calls getUserTasksViolations
@@ -85,14 +85,14 @@ function getUserTasks() {
               return acc;
             }, {});
 
-            for (const event in eventCounts) {
+            for (const event of Object.keys(eventCounts)) {
               if (
                 !taskInfo[number].mostPerformedEvent ||
-                eventCounts[event] >
-                  eventCounts[taskInfo[number].mostPerformedEvent]
+                eventCounts[event] > taskInfo[number].interactions[taskInfo[number].mostPerformedEvent]
               ) {
                 taskInfo[number].mostPerformedEvent = event;
               }
+
 
               // Collect all different interactions for the current number
               if (!taskInfo[number].interactions[event]) {
@@ -146,55 +146,28 @@ const traceConformityScores = [];
 
 
 function getUserTraceConformity() {
-  const url = "http://127.0.0.1:5000/get_user_tasks";
+  const url = "http://127.0.0.1:5000/get_user_trace_conformity";
 
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
       json.forEach((trace, index) => {
-        const traceInfo = {};
-        Object.keys(trace).forEach((number) => {
-          if (number != "_id" && number <= 4) {
-            if (trace[number]) {
-              const goldenTracePath = `/files/user_traces/golden_traces/task_${number}.json`;
-
-              // Fetch the golden trace
-              fetch(goldenTracePath)
-                .then((goldenResponse) => goldenResponse.json())
-                .then((goldenTrace) => {
-                  // Calculate the conformity scores
-                  const conformityResult = calculateConformity(trace[number], goldenTrace);
-
-                  // Store the conformity scores in the traceInfo object
-                  traceInfo[`Task${number}`] = {
-                    scaledScore: conformityResult.scaledScore,
-                    percentageScore: conformityResult.percentageScore,
-                  };
-
-                  // Log the conformity scores with loop index
-                  console.log(`Trace ${index+1}, Task ${number}: Conformity Score (Scaled): ${conformityResult.scaledScore}`);
-                  console.log(`Trace ${index+1}, Task ${number}: Conformity Score (Percentage): ${conformityResult.percentageScore}`);
-                })
-                .catch((goldenError) => {
-                  console.error(`Error fetching golden trace for Task ${number} in Trace ${index+1}:`, goldenError);
-                });
-            }
-          }
-        });
-
-        // Push the traceInfo object to the traceConformityScores array
-        traceConformityScores.push(traceInfo);
+        
       });
 
       // Now traceConformityScores array contains conformity scores for each trace
-      console.log("Trace Conformity Scores:", traceConformityScores);
+      console.log("Trace Conformity Scores: ");
     })
     .catch((error) => {
       console.error("Error fetching user tasks:", error);
     });
 }
 
+function getGoldenTraceAlignment(){
 
+  const url = "http://127.0.0.1:5000/get_traceAlignment";
+
+}
 
 
 function getUserTasksTime() {
@@ -217,12 +190,12 @@ function getUserTasksTime() {
               if (!groupSum[group]) {
                 groupSum[group] = 0;
                 groupCount[group] = 0;
-                groupVariance[group] = [];
+                groupstd[group] = [];
               }
 
               groupSum[group] += groups[group].total_time / 1000;
               groupCount[group]++;
-              groupVariance[group].push(groups[group].total_time / 1000); // Store total_time for variance calculation
+              groupstd[group].push(groups[group].total_time / 1000); // Store total_time for std calculation
             });
           } else {
             console.error(
@@ -315,22 +288,22 @@ async function getViolationsForGroup(groupID) {
 }
 async function getTimeForGroup(groupID) {
   var returnObj = {
-    variance: 0,
+    std: 0,
     averageTime: 0,
   };
   Object.keys(groupSum).forEach((group) => {
     if (group == groupID) {
       const mean = groupSum[group] / groupCount[group];
-      const totalSquaredDifference = groupVariance[group].reduce(
+      const totalSquaredDifference = groupstd[group].reduce(
         (acc, time) => acc + Math.pow(time - mean, 2),
         0
       );
 
-      returnObj.variance = totalSquaredDifference / groupVariance[group].length;
-      returnObj.variance = returnObj.variance.toFixed(2);
-      console.log(`Task ${group} Variance: ${returnObj.variance}`);
+      returnObj.std = totalSquaredDifference / groupstd[group].length;
+      returnObj.std = returnObj.std.toFixed(2);
+      console.log(`Task ${group} std: ${returnObj.std}`);
       // Use d3 to create boxplot
-      //createBoxPlot(group, groupVariance[group]);
+      //createBoxPlot(group, groupstd[group]);
 
       returnObj.averageTime = groupSum[group] / groupCount[group];
       returnObj.averageTime = returnObj.averageTime.toFixed(2);
@@ -364,10 +337,10 @@ function populateTable(data) {
       tracesCell.textContent = data[key].count;
       row.appendChild(tracesCell);
 
-      var variance, averageTime;
+      var std, averageTime;
 
       getTimeForGroup(key).then(function (value) {
-        variance = value.variance;
+        std = value.std;
         averageTime = value.averageTime;
 
         const timeCell = document.createElement("td");
@@ -375,10 +348,10 @@ function populateTable(data) {
         timeCell.textContent = averageTime;
         row.appendChild(timeCell);
 
-        const varianceCell = document.createElement("td");
-        varianceCell.id = `varianceCell_${checkbox.id}`;
-        varianceCell.textContent = variance;
-        row.appendChild(varianceCell);
+        const stdCell = document.createElement("td");
+        stdCell.id = `stdCell_${checkbox.id}`;
+        stdCell.textContent = Math.sqrt(std).toFixed(2);
+        row.appendChild(stdCell);
       });
       getViolationsForGroup(key).then(function (value) {
         const violationCell = document.createElement("td");
@@ -612,8 +585,17 @@ function toggleLegend() {
 }
 
 function ExtraInfo(taskID) {
-  //document.getElementById("selectTraceBtn").style.opacity = 1;
-  //document.getElementById("selectTraceBtn").innerHTML = `View task`;
+  document.getElementById("selectTraceBtn").style.opacity = 1;
+  document.getElementById("selectTraceBtn").innerHTML = `View task`;
+
+  document.getElementById("selectTraceBtn").onclick = function () {
+
+    window.location.href = "home"; //!!!!!
+
+    localStorage.setItem("taskInfo", JSON.stringify(taskInfo));
+    localStorage.setItem("taskID", JSON.stringify(taskID));
+  };
+
   document.getElementById("extrainfoContent").style.opacity = 1;
   document.getElementById("placeholderText").style.display = "none";
 
@@ -666,23 +648,23 @@ function ExtraInfo(taskID) {
           eventElement.textContent = `${data}: ${taskInfo[key].interactions[data]}`;
           eventsList.appendChild(eventElement);
         }
-        //createBoxPlot(taskID, groupVariance[taskID]);
+        //createBoxPlot(taskID, groupstd[taskID]);
 
         document.getElementById(
           "violationsTotal"
         ).innerHTML = `Total Violations: ${groupData[taskID].totalViolations}`;
 
         const mean = groupSum[taskID] / groupCount[taskID];
-        const totalSquaredDifference = groupVariance[taskID].reduce(
+        const totalSquaredDifference = groupstd[taskID].reduce(
           (acc, time) => acc + Math.pow(time - mean, 2),
           0
         );
 
-        var variance = totalSquaredDifference / groupVariance[taskID].length;
-        variance = variance.toFixed(2);
+        var std = Math.sqrt(totalSquaredDifference / groupstd[taskID].length);
+        std = std.toFixed(2);
 
-        document.getElementById("varianceInfo").textContent =
-          "Variance: " + variance;
+        document.getElementById("stdInfo").textContent =
+          "Standard deviation: " + std;
       }
     }
   }
