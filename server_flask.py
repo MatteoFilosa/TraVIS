@@ -3,9 +3,8 @@ from flask_cors import CORS
 from flask_pymongo import PyMongo
 from flask_caching import Cache
 from configparser import ConfigParser
-""" from pm4py.algo.filtering.log.variants import variants_filter
-from pm4py.algo.evaluation.replay_fitness import replay_fitness
-from pm4py.objects.log.importer.xes import factory as xes_importer """
+import pm4py
+
 import os, re
 import subprocess
 import json
@@ -234,7 +233,7 @@ def get_user_tasks():
 
 
 
-""" @app.route("/get_user_trace_conformity")
+@app.route("/get_user_trace_conformity")
 def get_user_trace_conformity():
     # Database configuration
     database_name = "visualizations"
@@ -255,29 +254,27 @@ def get_user_trace_conformity():
     with open("static/files/user_traces/golden_traces.txt", "r") as file:
         golden_traces_list = [line.strip() for line in file]
 
-    # Create logs for user and golden traces
-    user_log = xes_importer.apply(user_traces_list)
-    golden_log = xes_importer.apply(golden_traces_list)
-
-    # Filter variants to get a common set for replay fitness
-    user_variants = variants_filter.get_variants(user_log)
-    golden_variants = variants_filter.get_variants(golden_log)
-    common_variants = set(user_variants).intersection(golden_variants)
-
-    # Calculate replay fitness for each variant
-    fitness_results = replay_fitness(user_log, golden_log, parameters={replay_fitness.VariantsFilter.WHOLE: common_variants})
+    
 
     # Extract conformity information or perform further actions as needed
-    conformity_info = fitness_results
+    #conformity_info = fitness_results
 
     # Convert data to JSON
-    response_data = jsonify({"conformity_info": conformity_info})
+    #response_data = jsonify({"conformity_info": conformity_info})
+        
+    log = pm4py.read_xes(os.path.join("tests", "input_data", "running-example.xes"))
+    log = pm4py.convert_to_event_log(log)
+
+    net, initial_marking, final_marking = pm4py.discover_petri_net_inductive(log)
+
+    import pm4py
+    aligned_traces = pm4py.conformance_diagnostics_alignments(log, net, initial_marking, final_marking)
 
     # Set Cache-Control header to enable browser caching for 1 hour (3600 seconds)
-    response = make_response(response_data)
-    response.headers["Cache-Control"] = "max-age=3600"
+    #response = make_response(response_data)
+    #response.headers["Cache-Control"] = "max-age=3600"
 
-    return response """
+    #return response 
 
 
 
