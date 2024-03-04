@@ -1,0 +1,2254 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<extension name="Concept" prefix="concept" uri="http://www.xes-standard.org/concept.xesext" />
+	<extension name="Time" prefix="time" uri="http://www.xes-standard.org/time.xesext" />
+	<string key="origin" value="csv" />
+	<trace>
+		<string key="concept:name" value="0" />
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="0" />
+			<date key="formatted_timestamp" value="2022-12-07T16:00:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:00:00+00:00" />
+			<int key="@@index" value="0" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="1" />
+			<date key="formatted_timestamp" value="2022-12-07T16:00:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:00:00+00:00" />
+			<int key="@@index" value="1" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="2" />
+			<date key="formatted_timestamp" value="2022-12-07T16:00:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:00:00+00:00" />
+			<int key="@@index" value="2" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="3" />
+			<date key="formatted_timestamp" value="2022-12-07T16:00:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:00:00+00:00" />
+			<int key="@@index" value="3" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="4" />
+			<date key="formatted_timestamp" value="2022-12-07T16:00:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:00:00+00:00" />
+			<int key="@@index" value="4" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="5" />
+			<date key="formatted_timestamp" value="2022-12-07T16:00:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:00:00+00:00" />
+			<int key="@@index" value="5" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="click on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="6" />
+			<date key="formatted_timestamp" value="2022-12-07T16:00:00+00:00" />
+			<string key="concept:name" value="click on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:00:00+00:00" />
+			<int key="@@index" value="6" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="7" />
+			<date key="formatted_timestamp" value="2022-12-07T16:00:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:00:00+00:00" />
+			<int key="@@index" value="7" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="8" />
+			<date key="formatted_timestamp" value="2022-12-07T16:00:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:00:00+00:00" />
+			<int key="@@index" value="8" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="9" />
+			<date key="formatted_timestamp" value="2022-12-07T16:00:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:00:00+00:00" />
+			<int key="@@index" value="9" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="10" />
+			<date key="formatted_timestamp" value="2022-12-07T16:00:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:00:00+00:00" />
+			<int key="@@index" value="10" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="11" />
+			<date key="formatted_timestamp" value="2022-12-07T16:01:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:01:00+00:00" />
+			<int key="@@index" value="11" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="12" />
+			<date key="formatted_timestamp" value="2022-12-07T16:01:00+00:00" />
+			<string key="concept:name" value="mousemove on distance" />
+			<date key="time:timestamp" value="2022-12-07T16:01:00+00:00" />
+			<int key="@@index" value="12" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="13" />
+			<date key="formatted_timestamp" value="2022-12-07T16:01:00+00:00" />
+			<string key="concept:name" value="mousemove on departure" />
+			<date key="time:timestamp" value="2022-12-07T16:01:00+00:00" />
+			<int key="@@index" value="13" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="brush on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="14" />
+			<date key="formatted_timestamp" value="2022-12-07T16:01:00+00:00" />
+			<string key="concept:name" value="brush on distance" />
+			<date key="time:timestamp" value="2022-12-07T16:01:00+00:00" />
+			<int key="@@index" value="14" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="brush on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="15" />
+			<date key="formatted_timestamp" value="2022-12-07T16:02:00+00:00" />
+			<string key="concept:name" value="brush on distance" />
+			<date key="time:timestamp" value="2022-12-07T16:02:00+00:00" />
+			<int key="@@index" value="15" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="16" />
+			<date key="formatted_timestamp" value="2022-12-07T16:02:00+00:00" />
+			<string key="concept:name" value="mousemove on distance" />
+			<date key="time:timestamp" value="2022-12-07T16:02:00+00:00" />
+			<int key="@@index" value="16" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="brush on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="17" />
+			<date key="formatted_timestamp" value="2022-12-07T16:02:00+00:00" />
+			<string key="concept:name" value="brush on distance" />
+			<date key="time:timestamp" value="2022-12-07T16:02:00+00:00" />
+			<int key="@@index" value="17" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="click on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="18" />
+			<date key="formatted_timestamp" value="2022-12-07T16:02:00+00:00" />
+			<string key="concept:name" value="click on distance" />
+			<date key="time:timestamp" value="2022-12-07T16:02:00+00:00" />
+			<int key="@@index" value="18" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="19" />
+			<date key="formatted_timestamp" value="2022-12-07T16:03:00+00:00" />
+			<string key="concept:name" value="mousemove on distance" />
+			<date key="time:timestamp" value="2022-12-07T16:03:00+00:00" />
+			<int key="@@index" value="19" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="brush on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="20" />
+			<date key="formatted_timestamp" value="2022-12-07T16:03:00+00:00" />
+			<string key="concept:name" value="brush on distance" />
+			<date key="time:timestamp" value="2022-12-07T16:03:00+00:00" />
+			<int key="@@index" value="20" />
+			<int key="@@case_index" value="0" />
+		</event>
+		<event>
+			<string key="event" value="brush on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="21" />
+			<date key="formatted_timestamp" value="2022-12-07T16:03:00+00:00" />
+			<string key="concept:name" value="brush on distance" />
+			<date key="time:timestamp" value="2022-12-07T16:03:00+00:00" />
+			<int key="@@index" value="21" />
+			<int key="@@case_index" value="0" />
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="1" />
+		<event>
+			<string key="event" value="brush on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="22" />
+			<date key="formatted_timestamp" value="2022-12-07T16:04:00+00:00" />
+			<string key="concept:name" value="brush on distance" />
+			<date key="time:timestamp" value="2022-12-07T16:04:00+00:00" />
+			<int key="@@index" value="22" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="23" />
+			<date key="formatted_timestamp" value="2022-12-07T16:04:00+00:00" />
+			<string key="concept:name" value="brush on distance" />
+			<date key="time:timestamp" value="2022-12-07T16:04:00+00:00" />
+			<int key="@@index" value="23" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="24" />
+			<date key="formatted_timestamp" value="2022-12-07T16:05:00+00:00" />
+			<string key="concept:name" value="brush on departure" />
+			<date key="time:timestamp" value="2022-12-07T16:05:00+00:00" />
+			<int key="@@index" value="24" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="25" />
+			<date key="formatted_timestamp" value="2022-12-07T16:05:00+00:00" />
+			<string key="concept:name" value="brush on departure" />
+			<date key="time:timestamp" value="2022-12-07T16:05:00+00:00" />
+			<int key="@@index" value="25" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="26" />
+			<date key="formatted_timestamp" value="2022-12-07T16:05:00+00:00" />
+			<string key="concept:name" value="brush on departure" />
+			<date key="time:timestamp" value="2022-12-07T16:05:00+00:00" />
+			<int key="@@index" value="26" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="27" />
+			<date key="formatted_timestamp" value="2022-12-07T16:06:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:06:00+00:00" />
+			<int key="@@index" value="27" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="28" />
+			<date key="formatted_timestamp" value="2022-12-07T16:06:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:06:00+00:00" />
+			<int key="@@index" value="28" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="29" />
+			<date key="formatted_timestamp" value="2022-12-07T16:07:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:07:00+00:00" />
+			<int key="@@index" value="29" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="30" />
+			<date key="formatted_timestamp" value="2022-12-07T16:07:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:07:00+00:00" />
+			<int key="@@index" value="30" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="31" />
+			<date key="formatted_timestamp" value="2022-12-07T16:08:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:08:00+00:00" />
+			<int key="@@index" value="31" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="32" />
+			<date key="formatted_timestamp" value="2022-12-07T16:08:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:08:00+00:00" />
+			<int key="@@index" value="32" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="33" />
+			<date key="formatted_timestamp" value="2022-12-07T16:09:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:09:00+00:00" />
+			<int key="@@index" value="33" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="34" />
+			<date key="formatted_timestamp" value="2022-12-07T16:09:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:09:00+00:00" />
+			<int key="@@index" value="34" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="35" />
+			<date key="formatted_timestamp" value="2022-12-07T16:10:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:10:00+00:00" />
+			<int key="@@index" value="35" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="36" />
+			<date key="formatted_timestamp" value="2022-12-07T16:11:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:11:00+00:00" />
+			<int key="@@index" value="36" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="37" />
+			<date key="formatted_timestamp" value="2022-12-07T16:11:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:11:00+00:00" />
+			<int key="@@index" value="37" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="38" />
+			<date key="formatted_timestamp" value="2022-12-07T16:12:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:12:00+00:00" />
+			<int key="@@index" value="38" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="39" />
+			<date key="formatted_timestamp" value="2022-12-07T16:13:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:13:00+00:00" />
+			<int key="@@index" value="39" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="40" />
+			<date key="formatted_timestamp" value="2022-12-07T16:13:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:13:00+00:00" />
+			<int key="@@index" value="40" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="41" />
+			<date key="formatted_timestamp" value="2022-12-07T16:14:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:14:00+00:00" />
+			<int key="@@index" value="41" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="42" />
+			<date key="formatted_timestamp" value="2022-12-07T16:15:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:15:00+00:00" />
+			<int key="@@index" value="42" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="43" />
+			<date key="formatted_timestamp" value="2022-12-07T16:15:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:15:00+00:00" />
+			<int key="@@index" value="43" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="44" />
+			<date key="formatted_timestamp" value="2022-12-07T16:16:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:16:00+00:00" />
+			<int key="@@index" value="44" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="45" />
+			<date key="formatted_timestamp" value="2022-12-07T16:17:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:17:00+00:00" />
+			<int key="@@index" value="45" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="46" />
+			<date key="formatted_timestamp" value="2022-12-07T16:18:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:18:00+00:00" />
+			<int key="@@index" value="46" />
+			<int key="@@case_index" value="1" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="1" />
+			<int key="timestamp" value="47" />
+			<date key="formatted_timestamp" value="2022-12-07T16:18:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:18:00+00:00" />
+			<int key="@@index" value="47" />
+			<int key="@@case_index" value="1" />
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="2" />
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="2" />
+			<int key="timestamp" value="48" />
+			<date key="formatted_timestamp" value="2022-12-07T16:19:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:19:00+00:00" />
+			<int key="@@index" value="48" />
+			<int key="@@case_index" value="2" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="2" />
+			<int key="timestamp" value="49" />
+			<date key="formatted_timestamp" value="2022-12-07T16:20:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:20:00+00:00" />
+			<int key="@@index" value="49" />
+			<int key="@@case_index" value="2" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="2" />
+			<int key="timestamp" value="50" />
+			<date key="formatted_timestamp" value="2022-12-07T16:21:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:21:00+00:00" />
+			<int key="@@index" value="50" />
+			<int key="@@case_index" value="2" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="2" />
+			<int key="timestamp" value="51" />
+			<date key="formatted_timestamp" value="2022-12-07T16:22:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:22:00+00:00" />
+			<int key="@@index" value="51" />
+			<int key="@@case_index" value="2" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="2" />
+			<int key="timestamp" value="52" />
+			<date key="formatted_timestamp" value="2022-12-07T16:22:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:22:00+00:00" />
+			<int key="@@index" value="52" />
+			<int key="@@case_index" value="2" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="2" />
+			<int key="timestamp" value="53" />
+			<date key="formatted_timestamp" value="2022-12-07T16:23:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:23:00+00:00" />
+			<int key="@@index" value="53" />
+			<int key="@@case_index" value="2" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="2" />
+			<int key="timestamp" value="54" />
+			<date key="formatted_timestamp" value="2022-12-07T16:24:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:24:00+00:00" />
+			<int key="@@index" value="54" />
+			<int key="@@case_index" value="2" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="2" />
+			<int key="timestamp" value="55" />
+			<date key="formatted_timestamp" value="2022-12-07T16:25:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:25:00+00:00" />
+			<int key="@@index" value="55" />
+			<int key="@@case_index" value="2" />
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="3" />
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="3" />
+			<int key="timestamp" value="56" />
+			<date key="formatted_timestamp" value="2022-12-07T16:26:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:26:00+00:00" />
+			<int key="@@index" value="56" />
+			<int key="@@case_index" value="3" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="3" />
+			<int key="timestamp" value="57" />
+			<date key="formatted_timestamp" value="2022-12-07T16:27:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:27:00+00:00" />
+			<int key="@@index" value="57" />
+			<int key="@@case_index" value="3" />
+		</event>
+		<event>
+			<string key="event" value="click on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="3" />
+			<int key="timestamp" value="58" />
+			<date key="formatted_timestamp" value="2022-12-07T16:28:00+00:00" />
+			<string key="concept:name" value="click on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:28:00+00:00" />
+			<int key="@@index" value="58" />
+			<int key="@@case_index" value="3" />
+		</event>
+	</trace>
+	<trace>
+		<string key="concept:name" value="4" />
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="59" />
+			<date key="formatted_timestamp" value="2022-12-07T16:29:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:29:00+00:00" />
+			<int key="@@index" value="59" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="60" />
+			<date key="formatted_timestamp" value="2022-12-07T16:30:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:30:00+00:00" />
+			<int key="@@index" value="60" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="61" />
+			<date key="formatted_timestamp" value="2022-12-07T16:31:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:31:00+00:00" />
+			<int key="@@index" value="61" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="62" />
+			<date key="formatted_timestamp" value="2022-12-07T16:32:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:32:00+00:00" />
+			<int key="@@index" value="62" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="63" />
+			<date key="formatted_timestamp" value="2022-12-07T16:33:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:33:00+00:00" />
+			<int key="@@index" value="63" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="64" />
+			<date key="formatted_timestamp" value="2022-12-07T16:34:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:34:00+00:00" />
+			<int key="@@index" value="64" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="65" />
+			<date key="formatted_timestamp" value="2022-12-07T16:35:00+00:00" />
+			<string key="concept:name" value="dblclick on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:35:00+00:00" />
+			<int key="@@index" value="65" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="66" />
+			<date key="formatted_timestamp" value="2022-12-07T16:36:00+00:00" />
+			<string key="concept:name" value="dblclick on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:36:00+00:00" />
+			<int key="@@index" value="66" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="67" />
+			<date key="formatted_timestamp" value="2022-12-07T16:37:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:37:00+00:00" />
+			<int key="@@index" value="67" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="68" />
+			<date key="formatted_timestamp" value="2022-12-07T16:39:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:39:00+00:00" />
+			<int key="@@index" value="68" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="69" />
+			<date key="formatted_timestamp" value="2022-12-07T16:40:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:40:00+00:00" />
+			<int key="@@index" value="69" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="70" />
+			<date key="formatted_timestamp" value="2022-12-07T16:41:00+00:00" />
+			<string key="concept:name" value="dblclick on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:41:00+00:00" />
+			<int key="@@index" value="70" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="71" />
+			<date key="formatted_timestamp" value="2022-12-07T16:42:00+00:00" />
+			<string key="concept:name" value="dblclick on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:42:00+00:00" />
+			<int key="@@index" value="71" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="72" />
+			<date key="formatted_timestamp" value="2022-12-07T16:43:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T16:43:00+00:00" />
+			<int key="@@index" value="72" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="73" />
+			<date key="formatted_timestamp" value="2022-12-07T16:45:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:45:00+00:00" />
+			<int key="@@index" value="73" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="74" />
+			<date key="formatted_timestamp" value="2022-12-07T16:46:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:46:00+00:00" />
+			<int key="@@index" value="74" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="75" />
+			<date key="formatted_timestamp" value="2022-12-07T16:47:00+00:00" />
+			<string key="concept:name" value="click on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:47:00+00:00" />
+			<int key="@@index" value="75" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="76" />
+			<date key="formatted_timestamp" value="2022-12-07T16:48:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:48:00+00:00" />
+			<int key="@@index" value="76" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="77" />
+			<date key="formatted_timestamp" value="2022-12-07T16:50:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:50:00+00:00" />
+			<int key="@@index" value="77" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="78" />
+			<date key="formatted_timestamp" value="2022-12-07T16:51:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:51:00+00:00" />
+			<int key="@@index" value="78" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="79" />
+			<date key="formatted_timestamp" value="2022-12-07T16:52:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:52:00+00:00" />
+			<int key="@@index" value="79" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="80" />
+			<date key="formatted_timestamp" value="2022-12-07T16:54:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:54:00+00:00" />
+			<int key="@@index" value="80" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="81" />
+			<date key="formatted_timestamp" value="2022-12-07T16:55:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:55:00+00:00" />
+			<int key="@@index" value="81" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="82" />
+			<date key="formatted_timestamp" value="2022-12-07T16:56:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:56:00+00:00" />
+			<int key="@@index" value="82" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="83" />
+			<date key="formatted_timestamp" value="2022-12-07T16:58:00+00:00" />
+			<string key="concept:name" value="click on arrival" />
+			<date key="time:timestamp" value="2022-12-07T16:58:00+00:00" />
+			<int key="@@index" value="83" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="84" />
+			<date key="formatted_timestamp" value="2022-12-07T16:59:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T16:59:00+00:00" />
+			<int key="@@index" value="84" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="85" />
+			<date key="formatted_timestamp" value="2022-12-07T17:00:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:00:00+00:00" />
+			<int key="@@index" value="85" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="86" />
+			<date key="formatted_timestamp" value="2022-12-07T17:02:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:02:00+00:00" />
+			<int key="@@index" value="86" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="87" />
+			<date key="formatted_timestamp" value="2022-12-07T17:03:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:03:00+00:00" />
+			<int key="@@index" value="87" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="88" />
+			<date key="formatted_timestamp" value="2022-12-07T17:05:00+00:00" />
+			<string key="concept:name" value="brush on distance" />
+			<date key="time:timestamp" value="2022-12-07T17:05:00+00:00" />
+			<int key="@@index" value="88" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="89" />
+			<date key="formatted_timestamp" value="2022-12-07T17:06:00+00:00" />
+			<string key="concept:name" value="mousemove on distance" />
+			<date key="time:timestamp" value="2022-12-07T17:06:00+00:00" />
+			<int key="@@index" value="89" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="90" />
+			<date key="formatted_timestamp" value="2022-12-07T17:08:00+00:00" />
+			<string key="concept:name" value="mousemove on departure" />
+			<date key="time:timestamp" value="2022-12-07T17:08:00+00:00" />
+			<int key="@@index" value="90" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="91" />
+			<date key="formatted_timestamp" value="2022-12-07T17:09:00+00:00" />
+			<string key="concept:name" value="brush on departure" />
+			<date key="time:timestamp" value="2022-12-07T17:09:00+00:00" />
+			<int key="@@index" value="91" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="92" />
+			<date key="formatted_timestamp" value="2022-12-07T17:11:00+00:00" />
+			<string key="concept:name" value="brush on departure" />
+			<date key="time:timestamp" value="2022-12-07T17:11:00+00:00" />
+			<int key="@@index" value="92" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="93" />
+			<date key="formatted_timestamp" value="2022-12-07T17:12:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:12:00+00:00" />
+			<int key="@@index" value="93" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="94" />
+			<date key="formatted_timestamp" value="2022-12-07T17:14:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:14:00+00:00" />
+			<int key="@@index" value="94" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="95" />
+			<date key="formatted_timestamp" value="2022-12-07T17:16:00+00:00" />
+			<string key="concept:name" value="brush on departure" />
+			<date key="time:timestamp" value="2022-12-07T17:16:00+00:00" />
+			<int key="@@index" value="95" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="96" />
+			<date key="formatted_timestamp" value="2022-12-07T17:17:00+00:00" />
+			<string key="concept:name" value="brush on distance" />
+			<date key="time:timestamp" value="2022-12-07T17:17:00+00:00" />
+			<int key="@@index" value="96" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="97" />
+			<date key="formatted_timestamp" value="2022-12-07T17:19:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:19:00+00:00" />
+			<int key="@@index" value="97" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="98" />
+			<date key="formatted_timestamp" value="2022-12-07T17:20:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T17:20:00+00:00" />
+			<int key="@@index" value="98" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="99" />
+			<date key="formatted_timestamp" value="2022-12-07T17:22:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:22:00+00:00" />
+			<int key="@@index" value="99" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="100" />
+			<date key="formatted_timestamp" value="2022-12-07T17:24:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:24:00+00:00" />
+			<int key="@@index" value="100" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="101" />
+			<date key="formatted_timestamp" value="2022-12-07T17:25:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:25:00+00:00" />
+			<int key="@@index" value="101" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="102" />
+			<date key="formatted_timestamp" value="2022-12-07T17:27:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:27:00+00:00" />
+			<int key="@@index" value="102" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="103" />
+			<date key="formatted_timestamp" value="2022-12-07T17:29:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:29:00+00:00" />
+			<int key="@@index" value="103" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="104" />
+			<date key="formatted_timestamp" value="2022-12-07T17:31:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:31:00+00:00" />
+			<int key="@@index" value="104" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="105" />
+			<date key="formatted_timestamp" value="2022-12-07T17:32:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:32:00+00:00" />
+			<int key="@@index" value="105" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="106" />
+			<date key="formatted_timestamp" value="2022-12-07T17:34:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:34:00+00:00" />
+			<int key="@@index" value="106" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="107" />
+			<date key="formatted_timestamp" value="2022-12-07T17:36:00+00:00" />
+			<string key="concept:name" value="dblclick on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:36:00+00:00" />
+			<int key="@@index" value="107" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="108" />
+			<date key="formatted_timestamp" value="2022-12-07T17:38:00+00:00" />
+			<string key="concept:name" value="dblclick on airtime" />
+			<date key="time:timestamp" value="2022-12-07T17:38:00+00:00" />
+			<int key="@@index" value="108" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="109" />
+			<date key="formatted_timestamp" value="2022-12-07T17:39:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T17:39:00+00:00" />
+			<int key="@@index" value="109" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="110" />
+			<date key="formatted_timestamp" value="2022-12-07T17:41:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T17:41:00+00:00" />
+			<int key="@@index" value="110" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="111" />
+			<date key="formatted_timestamp" value="2022-12-07T17:43:00+00:00" />
+			<string key="concept:name" value="click on arrival" />
+			<date key="time:timestamp" value="2022-12-07T17:43:00+00:00" />
+			<int key="@@index" value="111" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="112" />
+			<date key="formatted_timestamp" value="2022-12-07T17:45:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T17:45:00+00:00" />
+			<int key="@@index" value="112" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="113" />
+			<date key="formatted_timestamp" value="2022-12-07T17:47:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T17:47:00+00:00" />
+			<int key="@@index" value="113" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="114" />
+			<date key="formatted_timestamp" value="2022-12-07T17:49:00+00:00" />
+			<string key="concept:name" value="click on arrival" />
+			<date key="time:timestamp" value="2022-12-07T17:49:00+00:00" />
+			<int key="@@index" value="114" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="115" />
+			<date key="formatted_timestamp" value="2022-12-07T17:51:00+00:00" />
+			<string key="concept:name" value="dblclick on arrival" />
+			<date key="time:timestamp" value="2022-12-07T17:51:00+00:00" />
+			<int key="@@index" value="115" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="116" />
+			<date key="formatted_timestamp" value="2022-12-07T17:53:00+00:00" />
+			<string key="concept:name" value="dblclick on arrival" />
+			<date key="time:timestamp" value="2022-12-07T17:53:00+00:00" />
+			<int key="@@index" value="116" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="117" />
+			<date key="formatted_timestamp" value="2022-12-07T17:55:00+00:00" />
+			<string key="concept:name" value="mousemove on departure" />
+			<date key="time:timestamp" value="2022-12-07T17:55:00+00:00" />
+			<int key="@@index" value="117" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="118" />
+			<date key="formatted_timestamp" value="2022-12-07T17:57:00+00:00" />
+			<string key="concept:name" value="brush on departure" />
+			<date key="time:timestamp" value="2022-12-07T17:57:00+00:00" />
+			<int key="@@index" value="118" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="119" />
+			<date key="formatted_timestamp" value="2022-12-07T17:59:00+00:00" />
+			<string key="concept:name" value="click on departure" />
+			<date key="time:timestamp" value="2022-12-07T17:59:00+00:00" />
+			<int key="@@index" value="119" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="120" />
+			<date key="formatted_timestamp" value="2022-12-07T18:01:00+00:00" />
+			<string key="concept:name" value="mousemove on departure" />
+			<date key="time:timestamp" value="2022-12-07T18:01:00+00:00" />
+			<int key="@@index" value="120" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="121" />
+			<date key="formatted_timestamp" value="2022-12-07T18:03:00+00:00" />
+			<string key="concept:name" value="brush on departure" />
+			<date key="time:timestamp" value="2022-12-07T18:03:00+00:00" />
+			<int key="@@index" value="121" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="122" />
+			<date key="formatted_timestamp" value="2022-12-07T18:05:00+00:00" />
+			<string key="concept:name" value="click on departure" />
+			<date key="time:timestamp" value="2022-12-07T18:05:00+00:00" />
+			<int key="@@index" value="122" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="123" />
+			<date key="formatted_timestamp" value="2022-12-07T18:07:00+00:00" />
+			<string key="concept:name" value="dblclick on departure" />
+			<date key="time:timestamp" value="2022-12-07T18:07:00+00:00" />
+			<int key="@@index" value="123" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="124" />
+			<date key="formatted_timestamp" value="2022-12-07T18:09:00+00:00" />
+			<string key="concept:name" value="dblclick on departure" />
+			<date key="time:timestamp" value="2022-12-07T18:09:00+00:00" />
+			<int key="@@index" value="124" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="125" />
+			<date key="formatted_timestamp" value="2022-12-07T18:11:00+00:00" />
+			<string key="concept:name" value="mousemove on distance" />
+			<date key="time:timestamp" value="2022-12-07T18:11:00+00:00" />
+			<int key="@@index" value="125" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="126" />
+			<date key="formatted_timestamp" value="2022-12-07T18:13:00+00:00" />
+			<string key="concept:name" value="brush on distance" />
+			<date key="time:timestamp" value="2022-12-07T18:13:00+00:00" />
+			<int key="@@index" value="126" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="127" />
+			<date key="formatted_timestamp" value="2022-12-07T18:15:00+00:00" />
+			<string key="concept:name" value="click on distance" />
+			<date key="time:timestamp" value="2022-12-07T18:15:00+00:00" />
+			<int key="@@index" value="127" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="128" />
+			<date key="formatted_timestamp" value="2022-12-07T18:17:00+00:00" />
+			<string key="concept:name" value="mousemove on distance" />
+			<date key="time:timestamp" value="2022-12-07T18:17:00+00:00" />
+			<int key="@@index" value="128" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="129" />
+			<date key="formatted_timestamp" value="2022-12-07T18:19:00+00:00" />
+			<string key="concept:name" value="brush on distance" />
+			<date key="time:timestamp" value="2022-12-07T18:19:00+00:00" />
+			<int key="@@index" value="129" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="130" />
+			<date key="formatted_timestamp" value="2022-12-07T18:21:00+00:00" />
+			<string key="concept:name" value="click on distance" />
+			<date key="time:timestamp" value="2022-12-07T18:21:00+00:00" />
+			<int key="@@index" value="130" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="131" />
+			<date key="formatted_timestamp" value="2022-12-07T18:24:00+00:00" />
+			<string key="concept:name" value="dblclick on distance" />
+			<date key="time:timestamp" value="2022-12-07T18:24:00+00:00" />
+			<int key="@@index" value="131" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on distance" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="132" />
+			<date key="formatted_timestamp" value="2022-12-07T18:26:00+00:00" />
+			<string key="concept:name" value="dblclick on distance" />
+			<date key="time:timestamp" value="2022-12-07T18:26:00+00:00" />
+			<int key="@@index" value="132" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="133" />
+			<date key="formatted_timestamp" value="2022-12-07T18:28:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T18:28:00+00:00" />
+			<int key="@@index" value="133" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="134" />
+			<date key="formatted_timestamp" value="2022-12-07T18:30:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T18:30:00+00:00" />
+			<int key="@@index" value="134" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="135" />
+			<date key="formatted_timestamp" value="2022-12-07T18:33:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T18:33:00+00:00" />
+			<int key="@@index" value="135" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="136" />
+			<date key="formatted_timestamp" value="2022-12-07T18:35:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T18:35:00+00:00" />
+			<int key="@@index" value="136" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="137" />
+			<date key="formatted_timestamp" value="2022-12-07T18:37:00+00:00" />
+			<string key="concept:name" value="dblclick on delay" />
+			<date key="time:timestamp" value="2022-12-07T18:37:00+00:00" />
+			<int key="@@index" value="137" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="138" />
+			<date key="formatted_timestamp" value="2022-12-07T18:39:00+00:00" />
+			<string key="concept:name" value="dblclick on delay" />
+			<date key="time:timestamp" value="2022-12-07T18:39:00+00:00" />
+			<int key="@@index" value="138" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="139" />
+			<date key="formatted_timestamp" value="2022-12-07T18:42:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T18:42:00+00:00" />
+			<int key="@@index" value="139" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="140" />
+			<date key="formatted_timestamp" value="2022-12-07T18:44:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T18:44:00+00:00" />
+			<int key="@@index" value="140" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="141" />
+			<date key="formatted_timestamp" value="2022-12-07T18:46:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T18:46:00+00:00" />
+			<int key="@@index" value="141" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="142" />
+			<date key="formatted_timestamp" value="2022-12-07T18:49:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T18:49:00+00:00" />
+			<int key="@@index" value="142" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="143" />
+			<date key="formatted_timestamp" value="2022-12-07T18:51:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T18:51:00+00:00" />
+			<int key="@@index" value="143" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="144" />
+			<date key="formatted_timestamp" value="2022-12-07T18:54:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T18:54:00+00:00" />
+			<int key="@@index" value="144" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="145" />
+			<date key="formatted_timestamp" value="2022-12-07T18:56:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T18:56:00+00:00" />
+			<int key="@@index" value="145" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="146" />
+			<date key="formatted_timestamp" value="2022-12-07T18:58:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T18:58:00+00:00" />
+			<int key="@@index" value="146" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="147" />
+			<date key="formatted_timestamp" value="2022-12-07T19:01:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T19:01:00+00:00" />
+			<int key="@@index" value="147" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="148" />
+			<date key="formatted_timestamp" value="2022-12-07T19:03:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T19:03:00+00:00" />
+			<int key="@@index" value="148" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="149" />
+			<date key="formatted_timestamp" value="2022-12-07T19:06:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T19:06:00+00:00" />
+			<int key="@@index" value="149" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="150" />
+			<date key="formatted_timestamp" value="2022-12-07T19:08:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T19:08:00+00:00" />
+			<int key="@@index" value="150" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="151" />
+			<date key="formatted_timestamp" value="2022-12-07T19:11:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T19:11:00+00:00" />
+			<int key="@@index" value="151" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="152" />
+			<date key="formatted_timestamp" value="2022-12-07T19:13:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T19:13:00+00:00" />
+			<int key="@@index" value="152" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="153" />
+			<date key="formatted_timestamp" value="2022-12-07T19:16:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T19:16:00+00:00" />
+			<int key="@@index" value="153" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="154" />
+			<date key="formatted_timestamp" value="2022-12-07T19:18:00+00:00" />
+			<string key="concept:name" value="mousemove on airtime" />
+			<date key="time:timestamp" value="2022-12-07T19:18:00+00:00" />
+			<int key="@@index" value="154" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="155" />
+			<date key="formatted_timestamp" value="2022-12-07T19:21:00+00:00" />
+			<string key="concept:name" value="brush on airtime" />
+			<date key="time:timestamp" value="2022-12-07T19:21:00+00:00" />
+			<int key="@@index" value="155" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on airtime" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="156" />
+			<date key="formatted_timestamp" value="2022-12-07T19:24:00+00:00" />
+			<string key="concept:name" value="click on airtime" />
+			<date key="time:timestamp" value="2022-12-07T19:24:00+00:00" />
+			<int key="@@index" value="156" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="157" />
+			<date key="formatted_timestamp" value="2022-12-07T19:26:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:26:00+00:00" />
+			<int key="@@index" value="157" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="158" />
+			<date key="formatted_timestamp" value="2022-12-07T19:29:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:29:00+00:00" />
+			<int key="@@index" value="158" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="159" />
+			<date key="formatted_timestamp" value="2022-12-07T19:32:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:32:00+00:00" />
+			<int key="@@index" value="159" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="160" />
+			<date key="formatted_timestamp" value="2022-12-07T19:34:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:34:00+00:00" />
+			<int key="@@index" value="160" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="161" />
+			<date key="formatted_timestamp" value="2022-12-07T19:37:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:37:00+00:00" />
+			<int key="@@index" value="161" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="162" />
+			<date key="formatted_timestamp" value="2022-12-07T19:40:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:40:00+00:00" />
+			<int key="@@index" value="162" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="163" />
+			<date key="formatted_timestamp" value="2022-12-07T19:42:00+00:00" />
+			<string key="concept:name" value="dblclick on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:42:00+00:00" />
+			<int key="@@index" value="163" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="164" />
+			<date key="formatted_timestamp" value="2022-12-07T19:45:00+00:00" />
+			<string key="concept:name" value="dblclick on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:45:00+00:00" />
+			<int key="@@index" value="164" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="165" />
+			<date key="formatted_timestamp" value="2022-12-07T19:48:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:48:00+00:00" />
+			<int key="@@index" value="165" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="166" />
+			<date key="formatted_timestamp" value="2022-12-07T19:51:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:51:00+00:00" />
+			<int key="@@index" value="166" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="167" />
+			<date key="formatted_timestamp" value="2022-12-07T19:53:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:53:00+00:00" />
+			<int key="@@index" value="167" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="168" />
+			<date key="formatted_timestamp" value="2022-12-07T19:56:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:56:00+00:00" />
+			<int key="@@index" value="168" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="169" />
+			<date key="formatted_timestamp" value="2022-12-07T19:59:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T19:59:00+00:00" />
+			<int key="@@index" value="169" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="170" />
+			<date key="formatted_timestamp" value="2022-12-07T20:02:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T20:02:00+00:00" />
+			<int key="@@index" value="170" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="171" />
+			<date key="formatted_timestamp" value="2022-12-07T20:05:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T20:05:00+00:00" />
+			<int key="@@index" value="171" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="172" />
+			<date key="formatted_timestamp" value="2022-12-07T20:07:00+00:00" />
+			<string key="concept:name" value="dblclick on delay" />
+			<date key="time:timestamp" value="2022-12-07T20:07:00+00:00" />
+			<int key="@@index" value="172" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="173" />
+			<date key="formatted_timestamp" value="2022-12-07T20:10:00+00:00" />
+			<string key="concept:name" value="dblclick on delay" />
+			<date key="time:timestamp" value="2022-12-07T20:10:00+00:00" />
+			<int key="@@index" value="173" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="174" />
+			<date key="formatted_timestamp" value="2022-12-07T20:13:00+00:00" />
+			<string key="concept:name" value="mousemove on delay" />
+			<date key="time:timestamp" value="2022-12-07T20:13:00+00:00" />
+			<int key="@@index" value="174" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on delay" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="175" />
+			<date key="formatted_timestamp" value="2022-12-07T20:16:00+00:00" />
+			<string key="concept:name" value="brush on delay" />
+			<date key="time:timestamp" value="2022-12-07T20:16:00+00:00" />
+			<int key="@@index" value="175" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="176" />
+			<date key="formatted_timestamp" value="2022-12-07T20:19:00+00:00" />
+			<string key="concept:name" value="mousemove on departure" />
+			<date key="time:timestamp" value="2022-12-07T20:19:00+00:00" />
+			<int key="@@index" value="176" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on departure" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="177" />
+			<date key="formatted_timestamp" value="2022-12-07T20:22:00+00:00" />
+			<string key="concept:name" value="brush on departure" />
+			<date key="time:timestamp" value="2022-12-07T20:22:00+00:00" />
+			<int key="@@index" value="177" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="178" />
+			<date key="formatted_timestamp" value="2022-12-07T20:25:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T20:25:00+00:00" />
+			<int key="@@index" value="178" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="179" />
+			<date key="formatted_timestamp" value="2022-12-07T20:28:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T20:28:00+00:00" />
+			<int key="@@index" value="179" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="180" />
+			<date key="formatted_timestamp" value="2022-12-07T20:31:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T20:31:00+00:00" />
+			<int key="@@index" value="180" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="181" />
+			<date key="formatted_timestamp" value="2022-12-07T20:34:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T20:34:00+00:00" />
+			<int key="@@index" value="181" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="182" />
+			<date key="formatted_timestamp" value="2022-12-07T20:37:00+00:00" />
+			<string key="concept:name" value="dblclick on arrival" />
+			<date key="time:timestamp" value="2022-12-07T20:37:00+00:00" />
+			<int key="@@index" value="182" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="183" />
+			<date key="formatted_timestamp" value="2022-12-07T20:40:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T20:40:00+00:00" />
+			<int key="@@index" value="183" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="184" />
+			<date key="formatted_timestamp" value="2022-12-07T20:43:00+00:00" />
+			<string key="concept:name" value="click on arrival" />
+			<date key="time:timestamp" value="2022-12-07T20:43:00+00:00" />
+			<int key="@@index" value="184" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="185" />
+			<date key="formatted_timestamp" value="2022-12-07T20:46:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T20:46:00+00:00" />
+			<int key="@@index" value="185" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="186" />
+			<date key="formatted_timestamp" value="2022-12-07T20:49:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T20:49:00+00:00" />
+			<int key="@@index" value="186" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="187" />
+			<date key="formatted_timestamp" value="2022-12-07T20:52:00+00:00" />
+			<string key="concept:name" value="click on arrival" />
+			<date key="time:timestamp" value="2022-12-07T20:52:00+00:00" />
+			<int key="@@index" value="187" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="188" />
+			<date key="formatted_timestamp" value="2022-12-07T20:56:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T20:56:00+00:00" />
+			<int key="@@index" value="188" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="189" />
+			<date key="formatted_timestamp" value="2022-12-07T20:59:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T20:59:00+00:00" />
+			<int key="@@index" value="189" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="190" />
+			<date key="formatted_timestamp" value="2022-12-07T21:02:00+00:00" />
+			<string key="concept:name" value="click on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:02:00+00:00" />
+			<int key="@@index" value="190" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="191" />
+			<date key="formatted_timestamp" value="2022-12-07T21:05:00+00:00" />
+			<string key="concept:name" value="dblclick on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:05:00+00:00" />
+			<int key="@@index" value="191" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="dblclick on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="192" />
+			<date key="formatted_timestamp" value="2022-12-07T21:08:00+00:00" />
+			<string key="concept:name" value="dblclick on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:08:00+00:00" />
+			<int key="@@index" value="192" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="193" />
+			<date key="formatted_timestamp" value="2022-12-07T21:12:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:12:00+00:00" />
+			<int key="@@index" value="193" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="194" />
+			<date key="formatted_timestamp" value="2022-12-07T21:15:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:15:00+00:00" />
+			<int key="@@index" value="194" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="195" />
+			<date key="formatted_timestamp" value="2022-12-07T21:18:00+00:00" />
+			<string key="concept:name" value="click on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:18:00+00:00" />
+			<int key="@@index" value="195" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="196" />
+			<date key="formatted_timestamp" value="2022-12-07T21:21:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:21:00+00:00" />
+			<int key="@@index" value="196" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="197" />
+			<date key="formatted_timestamp" value="2022-12-07T21:25:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:25:00+00:00" />
+			<int key="@@index" value="197" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="198" />
+			<date key="formatted_timestamp" value="2022-12-07T21:28:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:28:00+00:00" />
+			<int key="@@index" value="198" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="199" />
+			<date key="formatted_timestamp" value="2022-12-07T21:31:00+00:00" />
+			<string key="concept:name" value="click on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:31:00+00:00" />
+			<int key="@@index" value="199" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="mousemove on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="200" />
+			<date key="formatted_timestamp" value="2022-12-07T21:35:00+00:00" />
+			<string key="concept:name" value="mousemove on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:35:00+00:00" />
+			<int key="@@index" value="200" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="brush on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="201" />
+			<date key="formatted_timestamp" value="2022-12-07T21:38:00+00:00" />
+			<string key="concept:name" value="brush on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:38:00+00:00" />
+			<int key="@@index" value="201" />
+			<int key="@@case_index" value="4" />
+		</event>
+		<event>
+			<string key="event" value="click on arrival" />
+			<int key="traceID" value="15" />
+			<int key="taskID" value="4" />
+			<int key="timestamp" value="202" />
+			<date key="formatted_timestamp" value="2022-12-07T21:41:00+00:00" />
+			<string key="concept:name" value="click on arrival" />
+			<date key="time:timestamp" value="2022-12-07T21:41:00+00:00" />
+			<int key="@@index" value="202" />
+			<int key="@@case_index" value="4" />
+		</event>
+	</trace>
+</log>

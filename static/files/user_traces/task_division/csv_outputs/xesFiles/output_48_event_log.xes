@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<log xes.version="1849-2016" xes.features="nested-attributes" xmlns="http://www.xes-standard.org/">
+	<extension name="Concept" prefix="concept" uri="http://www.xes-standard.org/concept.xesext" />
+	<extension name="Time" prefix="time" uri="http://www.xes-standard.org/time.xesext" />
+	<string key="origin" value="csv" />
+	<trace>
+		<string key="concept:name" value="0" />
+		<event>
+			<string key="event" value="brush on departure" />
+			<int key="traceID" value="48" />
+			<int key="taskID" value="0" />
+			<int key="timestamp" value="0" />
+			<date key="formatted_timestamp" value="2022-12-07T16:00:00+00:00" />
+			<string key="concept:name" value="brush on departure" />
+			<date key="time:timestamp" value="2022-12-07T16:00:00+00:00" />
+			<int key="@@index" value="0" />
+			<int key="@@case_index" value="0" />
+		</event>
+	</trace>
+</log>

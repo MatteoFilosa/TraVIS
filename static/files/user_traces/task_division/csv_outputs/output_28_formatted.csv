@@ -1,0 +1,8 @@
+event,traceID,taskID,timestamp,formatted_timestamp
+mousemove on airtime,28,0,0,20221207T1600
+mousemove on delay,28,0,1,20221207T1600
+mousemove on distance,28,0,2,20221207T1600
+mousemove on arrival,28,0,3,20221207T1600
+mousemove on arrival,28,0,4,20221207T1600
+brush on arrival,28,0,5,20221207T1600
+mousemove on departure,28,4,6,20221207T1600

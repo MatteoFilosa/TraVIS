@@ -1,0 +1,3 @@
+event,traceID,taskID,timestamp
+mousemove on distance,35,0,0
+mousemove on airtime,35,2,1

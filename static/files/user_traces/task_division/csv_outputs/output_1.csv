@@ -1,0 +1,15 @@
+event,traceID,taskID,timestamp
+mousemove on delay,1,1,0
+mousemove on distance,1,1,1
+mousemove on airtime,1,1,2
+mousemove on departure,1,1,3
+brush on departure,1,1,4
+brush on airtime,1,2,5
+brush on arrival,1,3,6
+brush on delay,1,4,7
+brush on delay,1,4,8
+brush on delay,1,4,9
+brush on delay,1,4,10
+brush on delay,1,4,11
+brush on delay,1,4,12
+brush on delay,1,4,13

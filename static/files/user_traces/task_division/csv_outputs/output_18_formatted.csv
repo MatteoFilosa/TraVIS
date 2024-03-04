@@ -1,0 +1,23 @@
+event,traceID,taskID,timestamp,formatted_timestamp
+mousemove on distance,18,0,0,20221207T1600
+mousemove on departure,18,0,1,20221207T1600
+mousemove on departure,18,0,2,20221207T1600
+brush on departure,18,0,3,20221207T1600
+mousemove on airtime,18,0,4,20221207T1600
+brush on airtime,18,1,5,20221207T1600
+brush on airtime,18,1,6,20221207T1600
+wheel on airtime,18,1,7,20221207T1600
+wheel on airtime,18,1,8,20221207T1600
+wheel on airtime,18,1,9,20221207T1600
+wheel on airtime,18,1,10,20221207T1600
+mousemove on arrival,18,2,11,20221207T1601
+mousemove on delay,18,2,12,20221207T1601
+wheel on airtime,18,4,13,20221207T1601
+wheel on airtime,18,4,14,20221207T1601
+wheel on airtime,18,4,15,20221207T1602
+wheel on airtime,18,4,16,20221207T1602
+wheel on airtime,18,4,17,20221207T1602
+wheel on airtime,18,4,18,20221207T1602
+wheel on airtime,18,4,19,20221207T1603
+wheel on airtime,18,4,20,20221207T1603
+wheel on airtime,18,4,21,20221207T1603
