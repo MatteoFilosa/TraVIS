@@ -4,6 +4,8 @@ var groupCount = {};
 var groupstd = {};
 var violationsData;
 var groupData = {};
+var globalAlignmentData = {};
+var globalAlignmentDataPercent = {}
 
 window.onload = function () {
   filtersContainer = document.getElementById("filtersContainer");
@@ -12,6 +14,7 @@ window.onload = function () {
 
   colorLegend();
   getUserTasksTime();
+  getRealConformity();
   //getUserTraceConformity();
   //This SUCKS, I know, but js synchronization sucks more
   //When getUserTasksTime finishes:
@@ -19,6 +22,53 @@ window.onload = function () {
   //    when getUserTasksViolations finishes:
   //      calls getUserTasks
 };
+
+function getRealConformity() {
+
+  fetch('/get_trace_alignment')
+    .then(response => response.json())
+    .then(data => {
+    
+      globalAlignmentData = data;
+
+  
+      console.log('Alignment Data:', globalAlignmentData);
+
+      // COnvert in percent
+      globalAlignmentDataPercent = convertToPercentage(globalAlignmentData);
+
+     
+      console.log('Alignment Data in Percent:', globalAlignmentDataPercent);
+
+    })
+    .catch(error => {
+      console.error('Error fetching alignment data:', error);
+    });
+}
+
+// Funzione per convertire alignments in percent
+function convertToPercentage(originalData) {
+  let newData = {};
+
+
+  for (let key in originalData) {
+    if (originalData.hasOwnProperty(key)) {
+     
+      newData[key] = {};
+
+  
+      for (let subKey in originalData[key]) {
+        if (originalData[key].hasOwnProperty(subKey)) {
+         
+          newData[key][subKey] = originalData[key][subKey] * 100;
+        }
+      }
+    }
+  }
+
+  return newData;
+}
+
 
 function jaccardIndex(set1, set2) {
   const intersection = new Set([...set1].filter(x => set2.has(x)));

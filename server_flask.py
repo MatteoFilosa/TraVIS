@@ -4,6 +4,7 @@ from flask_pymongo import PyMongo
 from flask_caching import Cache
 from configparser import ConfigParser
 import pm4py
+from pm4py.algo.conformance.alignments.edit_distance import algorithm as logs_alignments
 
 import os, re
 import subprocess
@@ -232,7 +233,7 @@ def get_user_tasks():
     return response
 
 
-
+""" # Nuova funzione per ottenere la conformità delle tracce utente rispetto alle tracce d'oro
 @app.route("/get_user_trace_conformity")
 def get_user_trace_conformity():
     # Database configuration
@@ -244,38 +245,123 @@ def get_user_trace_conformity():
     # Collection name
     collection_name = "task_division"
 
+    # Load golden traces from local files
+    golden_traces_dir = "static/files/user_traces/golden_traces"
+    golden_traces = {}
+    for i in range(5):
+        file_path = os.path.join(golden_traces_dir, f"task_{i}.json")
+        with open(file_path, "r") as golden_file:
+            golden_traces[f"{i}"] = json.load(golden_file)
+
     # Retrieve user traces data from the MongoDB collection
     user_traces_cursor = mongo.db[collection_name].find()
-    
+
     # Convert user traces ObjectId to string and cursor to a list of dictionaries
     user_traces_list = [{**trace, '_id': str(trace['_id'])} for trace in user_traces_cursor]
 
-    # Load golden traces from a local file
-    with open("static/files/user_traces/golden_traces.txt", "r") as file:
-        golden_traces_list = [line.strip() for line in file]
-
-    
-
-    # Extract conformity information or perform further actions as needed
-    #conformity_info = fitness_results
-
     # Convert data to JSON
-    #response_data = jsonify({"conformity_info": conformity_info})
-        
-    log = pm4py.read_xes(os.path.join("tests", "input_data", "running-example.xes"))
-    log = pm4py.convert_to_event_log(log)
+    response_data = {}
 
-    net, initial_marking, final_marking = pm4py.discover_petri_net_inductive(log)
+    for user_trace in user_traces_list:
+        user_trace_id = user_trace['_id']
 
-    import pm4py
-    aligned_traces = pm4py.conformance_diagnostics_alignments(log, net, initial_marking, final_marking)
+        # Assuming the array structure directly represents user trace parts
+        user_trace_parts = user_trace
 
-    # Set Cache-Control header to enable browser caching for 1 hour (3600 seconds)
-    #response = make_response(response_data)
-    #response.headers["Cache-Control"] = "max-age=3600"
+        # Calculate conformance for each golden trace
+        conformity_info = {}
+        for golden_trace_id, golden_trace_data in golden_traces.items():
+            # Consider only the part of the user trace corresponding to the current golden trace
+            user_trace_part = user_trace_parts.get(golden_trace_id, [])  # Use an empty list if key not present
 
-    #return response 
+            # Create XES log for user trace part
+            user_xes_log = pm4py.new_log()
+            user_trace_event = pm4py.new_trace()
+            for event_name in user_trace_part:
+                user_trace_event.append(pm4py.new_event(attributes={"concept:name": event_name}))
+            user_xes_log.append(user_trace_event)
 
+            # Create XES log for golden trace
+            golden_xes_log = pm4py.new_log()
+            golden_trace_event = pm4py.new_trace()
+            for event_name in golden_trace_data:
+                golden_trace_event.append(pm4py.new_event(attributes={"concept:name": event_name}))
+            golden_xes_log.append(golden_trace_event)
+
+            # Discover Petri net for the golden trace
+            golden_net, golden_initial_marking, golden_final_marking = pm4py.discover_petri_net_inductive(golden_xes_log)
+
+            # Align user trace with the golden trace Petri net
+            aligned_traces = pm4py.conformance_diagnostics_alignments(user_xes_log, golden_net, golden_initial_marking, golden_final_marking)
+
+            # Calculate conformance information (you may adjust this based on your needs)
+            conformity_info[golden_trace_id] = {
+                "alignment_info": aligned_traces
+                # Add more information as needed
+            }
+
+        response_data[user_trace_id] = {"conformity_info": conformity_info}
+
+    # Return the response
+    return jsonify(response_data) """
+
+
+@app.route("/perform_trace_alignment")
+def perform_trace_alignment():
+    log_folder = "static/files/user_traces/task_division/csv_outputs/xesFiles/"
+    output_folder = "static/files/user_traces/trace_alignment"
+
+    # Create the output folder if it doesn't exist
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+    for i in range(1, 51):
+        log_filename = "golden_trace_formatted_event_log.xes"
+        simulated_log_filename = f"output_{i}_event_log.xes"
+
+        log_path = os.path.join(log_folder, log_filename)
+        simulated_log_path = os.path.join(log_folder, simulated_log_filename)
+
+        log = pm4py.read_xes(log_path)
+        simulated_log = pm4py.read_xes(simulated_log_path)
+        alignments = logs_alignments.apply(log, simulated_log)
+        net, im, fm = pm4py.discover_petri_net_inductive(log)
+
+        # Convert alignments to a Python data structure
+        alignments_data = [
+            {"alignment": [(str(key), str(value)) for key, value in alignment.items()],
+             "cost": alignment["cost"],
+             "fitness": alignment["fitness"],
+             "bwc": alignment["bwc"]} for alignment in alignments]
+
+        # Save alignments in JSON format
+        alignment_result_path = os.path.join(output_folder, f"alignment_result_{i}.json")
+        with open(alignment_result_path, "w") as file:
+            json.dump(alignments_data, file, indent=2)
+
+        # Print to console
+        print(f"Alignment result for output_{i}: {alignments_data}")
+
+    return jsonify(message="Alignment process completed for all files.")
+
+
+@app.route("/get_trace_alignment")
+def get_trace_alignment():
+    input_folder = "static/files/user_traces/trace_alignment"
+    fitness_values = {}
+
+    for file_number in range(1, 51):
+        file_name = f"alignment_result_{file_number}.json"
+        file_path = os.path.join(input_folder, file_name)
+
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+
+            # ABS (change if needed.)
+            fitness_values[file_name] = [abs(entry['fitness']) for entry in data[:5]]  
+
+    # Restituisci la risposta JSON
+    return json.dumps(fitness_values)
 
 
 

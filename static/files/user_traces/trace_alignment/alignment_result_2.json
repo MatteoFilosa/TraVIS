@@ -1,0 +1,117 @@
+[
+  {
+    "alignment": [
+      [
+        "alignment",
+        "[('mousemove on arrival', 'mousemove on arrival'), ('mousemove on airtime', '>>'), ('mousemove on distance', '>>'), ('>>', 'mousemove on arrival'), ('>>', 'brush on arrival'), ('>>', 'click on arrival'), ('mousemove on departure', 'mousemove on departure'), ('>>', 'dblclick on departure'), ('mousemove on departure', 'mousemove on departure'), ('brush on departure', 'brush on departure'), ('brush on departure', 'brush on departure'), ('>>', 'brush on departure')]"
+      ],
+      [
+        "cost",
+        "70000"
+      ],
+      [
+        "fitness",
+        "0.36363636363636365"
+      ],
+      [
+        "bwc",
+        "110000"
+      ]
+    ],
+    "cost": 70000,
+    "fitness": 0.36363636363636365,
+    "bwc": 110000
+  },
+  {
+    "alignment": [
+      [
+        "alignment",
+        "[('mousemove on delay', '>>'), ('brush on airtime', '>>'), ('>>', 'mousemove on airtime'), ('brush on airtime', 'brush on airtime'), ('mousemove on airtime', 'mousemove on airtime'), ('brush on airtime', 'brush on airtime'), ('click on airtime', '>>'), ('mousemove on airtime', '>>'), ('brush on airtime', '>>'), ('brush on airtime', '>>'), ('brush on airtime', '>>'), ('brush on airtime', '>>'), ('click on airtime', '>>'), ('mousemove on airtime', '>>'), ('brush on airtime', '>>'), ('click on airtime', '>>')]"
+      ],
+      [
+        "cost",
+        "130000"
+      ],
+      [
+        "fitness",
+        "0.3157894736842105"
+      ],
+      [
+        "bwc",
+        "190000"
+      ]
+    ],
+    "cost": 130000,
+    "fitness": 0.3157894736842105,
+    "bwc": 190000
+  },
+  {
+    "alignment": [
+      [
+        "alignment",
+        "[('>>', 'mousemove on arrival'), ('>>', 'mousemove on arrival'), ('>>', 'brush on arrival'), ('>>', 'click on arrival'), ('>>', 'mousemove on departure'), ('>>', 'dblclick on departure'), ('mousemove on departure', 'mousemove on departure'), ('brush on departure', 'brush on departure'), ('brush on departure', 'brush on departure'), ('brush on departure', 'brush on departure'), ('click on departure', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('click on departure', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('click on departure', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('click on departure', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('click on departure', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('click on departure', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('click on departure', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('click on departure', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('click on departure', '>>')]"
+      ],
+      [
+        "cost",
+        "390000"
+      ],
+      [
+        "fitness",
+        "0.04878048780487809"
+      ],
+      [
+        "bwc",
+        "410000"
+      ]
+    ],
+    "cost": 390000,
+    "fitness": 0.04878048780487809,
+    "bwc": 410000
+  },
+  {
+    "alignment": [
+      [
+        "alignment",
+        "[('>>', 'mousemove on arrival'), ('>>', 'mousemove on arrival'), ('>>', 'brush on arrival'), ('>>', 'click on arrival'), ('>>', 'mousemove on departure'), ('>>', 'dblclick on departure'), ('mousemove on departure', 'mousemove on departure'), ('brush on departure', 'brush on departure'), ('brush on departure', 'brush on departure'), ('brush on departure', 'brush on departure'), ('click on departure', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('click on departure', '>>'), ('mousemove on arrival', '>>'), ('brush on arrival', '>>'), ('brush on arrival', '>>'), ('brush on arrival', '>>'), ('click on arrival', '>>'), ('mousemove on arrival', '>>'), ('brush on arrival', '>>'), ('brush on arrival', '>>'), ('click on arrival', '>>'), ('mousemove on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('click on distance', '>>'), ('mousemove on airtime', '>>'), ('brush on airtime', '>>'), ('brush on airtime', '>>'), ('brush on airtime', '>>'), ('click on airtime', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('click on departure', '>>')]"
+      ],
+      [
+        "cost",
+        "340000"
+      ],
+      [
+        "fitness",
+        "0.05555555555555558"
+      ],
+      [
+        "bwc",
+        "360000"
+      ]
+    ],
+    "cost": 340000,
+    "fitness": 0.05555555555555558,
+    "bwc": 360000
+  },
+  {
+    "alignment": [
+      [
+        "alignment",
+        "[('mousemove on distance', '>>'), ('>>', 'brush on departure'), ('brush on distance', 'brush on distance'), ('brush on distance', 'brush on distance'), ('brush on distance', '>>'), ('click on distance', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('click on departure', '>>'), ('>>', 'brush on airtime'), ('>>', 'brush on arrival'), ('>>', 'click on delay'), ('>>', 'mousemove on delay'), ('mousemove on delay', 'mousemove on delay'), ('brush on delay', 'brush on delay'), ('mousemove on delay', '>>'), ('brush on delay', '>>'), ('brush on delay', '>>'), ('mousemove on delay', '>>'), ('brush on delay', '>>'), ('brush on delay', '>>')]"
+      ],
+      [
+        "cost",
+        "190000"
+      ],
+      [
+        "fitness",
+        "0.13636363636363635"
+      ],
+      [
+        "bwc",
+        "220000"
+      ]
+    ],
+    "cost": 190000,
+    "fitness": 0.13636363636363635,
+    "bwc": 220000
+  }
+]
