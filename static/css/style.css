@@ -376,7 +376,9 @@ a.dropdown-item {
     width: 144px;
     padding: 0px;
 }
-
+.extraFiltersBtn:hover{
+    border: 2px solid #554e8d;
+}
 #demographicFilter{
     display: flex;
     margin-bottom: 28px;
