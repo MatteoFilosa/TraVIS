@@ -6,6 +6,7 @@ var violationsData;
 var groupData = {};
 var globalAlignmentData = {};
 var globalAlignmentDataPercent = {}
+var averageConformity = {}
 
 window.onload = function () {
   filtersContainer = document.getElementById("filtersContainer");
@@ -15,6 +16,7 @@ window.onload = function () {
   colorLegend();
   getUserTasksTime();
   getRealConformity();
+  
   //getUserTraceConformity();
   //This SUCKS, I know, but js synchronization sucks more
   //When getUserTasksTime finishes:
@@ -39,6 +41,9 @@ function getRealConformity() {
 
      
       console.log('Alignment Data in Percent:', globalAlignmentDataPercent);
+
+      averageConformity = calculateAverage(globalAlignmentData);
+      console.log('Average Conformity:', averageConformity);
 
     })
     .catch(error => {
@@ -67,6 +72,34 @@ function convertToPercentage(originalData) {
   }
 
   return newData;
+}
+
+function calculateAverage(data) {
+  // Initialize an object to store the sum and count for each group
+  const groupSumCount = {};
+
+  // Iterate through each file
+  Object.values(data).forEach(fileData => {
+    // Iterate through each group in the file
+    Object.entries(fileData).forEach(([group, value]) => {
+      // Initialize the sum and count for the group if not present
+      if (!groupSumCount[group]) {
+        groupSumCount[group] = { sum: 0, count: 0 };
+      }
+
+      // Add the value to the sum and increment the count
+      groupSumCount[group].sum += value;
+      groupSumCount[group].count++;
+    });
+  });
+
+  // Calculate the average for each group
+  const groupAverages = {};
+  Object.entries(groupSumCount).forEach(([group, { sum, count }]) => {
+    groupAverages[group] = sum / count;
+  });
+
+  return groupAverages;
 }
 
 
@@ -410,6 +443,8 @@ function populateTable(data) {
         const correctnessCell = document.createElement("td");
         row.appendChild(correctnessCell);
 
+        //Start Golden Trace Button
+
         const idealTraceCell = document.createElement("td");
         var goldenTraceBtn = document.createElement("button");
         var btnImg = document.createElement("img");
@@ -417,13 +452,98 @@ function populateTable(data) {
         btnImg.width = "20px";
         btnImg.height = "20px";
         goldenTraceBtn.appendChild(btnImg);
-        goldenTraceBtn.classList.add("newPageBtn");
-        goldenTraceBtn.style.display="block";
-        goldenTraceBtn.id=`goldenTraceFor${checkbox.id}`;
-        
+        goldenTraceBtn.classList.add("btn", "extraFiltersBtn"); // Add Bootstrap button classes
+        goldenTraceBtn.textContent = "Show";
+        goldenTraceBtn.setAttribute("data-toggle", "modal");
+        goldenTraceBtn.setAttribute("data-target", "#filtersModal");
+
+        goldenTraceBtn.addEventListener("click", function () {
+          // Get the checkbox ID
+          const checkboxId = checkbox.id;
+
+          // Retrieve the information from the super_golden_trace.json file
+          fetch("/files/user_traces/trace_alignment/super_golden_trace.json")
+            .then(response => response.json())
+            .then(data => {
+              // Get or create the modal element
+              let modal = document.getElementById("filtersModal");
+              if (!modal) {
+                modal = document.createElement("div");
+                modal.id = "filtersModal";
+                modal.classList.add("modal", "fade");
+                modal.innerHTML = `
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalTitle">Golden Trace for Task</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body"></div>
+                        </div>
+                    </div>`;
+                document.body.appendChild(modal);
+              }
+
+              // Get the modal body element
+              const modalBody = modal.querySelector(".modal-body");
+
+              if (!modalBody) {
+                console.error("Modal body element not found");
+                return;
+              }
+
+              // Clear existing modal content
+              modalBody.innerHTML = "";
+
+              // Populate the modal with the information
+              data[checkboxId].forEach(item => {
+                const p = document.createElement("p");
+                p.style.color = "#000";
+                p.textContent = item;
+                modalBody.appendChild(p);
+              });
+
+              const separator = document.createElement("hr");
+              modalBody.appendChild(separator);
+
+              const alignmentHeader = '<h5 class="modal-title" id="modalTitle">Alignment results for Task ' + checkboxId + '</h5><br>';
+              modalBody.innerHTML += alignmentHeader;
+
+
+              let traceNumber = 1; // Initialize the trace number counter
+
+
+              Object.entries(globalAlignmentDataPercent).forEach(([fileName, data]) => {
+                const p = document.createElement("p");
+                p.style.color = "#000";
+
+                // Use traceNumber instead of fileName
+                p.textContent = `Alignment percentage for trace ${traceNumber}: ${(data[checkboxId] || 0).toFixed(2)}%`;
+
+                modalBody.appendChild(p);
+
+                // Increment the trace number counter
+                traceNumber++;
+              });
+
+              // Show the modal
+              $(modal).modal('show');
+
+              // Set the text color to black
+              modal.querySelector("#modalTitle").textContent = `Golden Trace for Task ${checkboxId}`;
+              modal.style.color = "#000";
+            })
+            .catch(error => console.error("Error fetching data:", error));
+        });
+
+        // Append the button to the idealTraceCell
         idealTraceCell.appendChild(goldenTraceBtn);
+
         row.appendChild(idealTraceCell);
 
+        //End golden trace cell
         const deltaInteractionCell = document.createElement("td");
         deltaInteractionCell.textContent = "-";
         row.appendChild(deltaInteractionCell);
@@ -438,7 +558,7 @@ function populateTable(data) {
         violationCell.textContent = value;
         //console.log(data[key].totalViolations);
 
-        correctnessCell.textContent = "-";
+        correctnessCell.textContent = (averageConformity[checkbox.id]*100).toFixed(2);
 
         const buttonCell = document.createElement("td");
         var btn = document.createElement("button");
@@ -518,6 +638,7 @@ function addTraceInfo(taskID){
   
   var table = document.createElement("table");
   table.innerHTML = localStorage.getItem("tracesTable");
+  
   // var thead = document.createElement("thead"); 
   // table.appendChild(thead);
   // var tbody = document.createElement("tbody");
