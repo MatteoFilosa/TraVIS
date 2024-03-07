@@ -664,7 +664,7 @@ th img {
 
 .extrainfoDiv {
     padding: 1%;
-    height: fit-content;
+    height: 92vh;
     width: 30%;
     font-size: 1.1rem;
     overflow-y: scroll;
@@ -698,9 +698,9 @@ table.dataTable tbody td {
     opacity: 0;
     height: 38px;
     width: 114px;
-    position: absolute;
+    /* position: absolute;
     right: 54px;
-    top: 69px;
+    top: 69px; */
     border: none;
     border-radius: 6px;
     background-color: #52b0c3;
@@ -792,11 +792,15 @@ table.dataTable tbody td {
     height: 200px;
     overflow-y: scroll;
 }
-#generalInfo p{
+.generalInfoHeader{
     font-weight: 500 !important;
-    font-size: 14px !important;
+    margin-right: 10px;
 }
-
+.generalInfoContent{
+    font-weight: 400 !important;
+    width: 100%;
+    background-color: aliceblue;
+}
 .extraRow{
     padding: 2%;
     width: 100%;
@@ -821,6 +825,12 @@ table.dataTable tbody td {
     font-weight: 700;
     color: #000000;
     font-size: 15px;
+}
+.taskInfoContent{
+    opacity: 0;
+    transition: all 0.3s;
+    font-size: 1em;
+    padding-top: 4%;
 }
 /* ---------------------------------------------------
     MEDIAQUERIES

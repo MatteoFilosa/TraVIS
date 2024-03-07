@@ -503,6 +503,7 @@ function populateTable(data) {
                 p.style.color = "#000";
                 p.textContent = item;
                 modalBody.appendChild(p);
+
               });
 
               const separator = document.createElement("hr");
@@ -818,12 +819,26 @@ function ExtraInfo(taskID) {
 
         var descriptionCell = document.getElementById("description");
         descriptionCell="-"
-        var idealSequenceCell = document.getElementById("idealSequence");
-        idealSequenceCell="-";
+        
+        // Retrieve the information from the super_golden_trace.json file
+        fetch("/files/user_traces/trace_alignment/super_golden_trace.json")
+        .then(response => response.json())
+        .then(data => {
+          var idealSequenceCell = document.getElementById("idealSequence");
+          data[taskID].forEach(item => {
+            const p = document.createElement("p");
+            p.style.color = "#000";
+            p.style.fontWeight = "400";
+            p.textContent = item;
+            idealSequenceCell.appendChild(p);
 
+          });
+        });
         const mostPerformed = document.getElementById("mostPerformed");
         mostPerformed.innerHTML = "";
-        mostPerformed.innerHTML = `Most performed event: ${taskInfo[key].mostPerformedEvent}`;
+        document.getElementById(
+          "mostPerformed"
+        ).innerHTML = `${taskInfo[key].mostPerformedEvent}`;
 
         const eventsList = document.getElementById("interactionsList");
         eventsList.innerHTML = "";
@@ -837,7 +852,7 @@ function ExtraInfo(taskID) {
 
         document.getElementById(
           "violationsTotal"
-        ).innerHTML = `Total Violations: ${groupData[taskID].totalViolations}`;
+        ).innerHTML = `${groupData[taskID].totalViolations}`;
 
         const mean = groupSum[taskID] / groupCount[taskID];
         const totalSquaredDifference = groupstd[taskID].reduce(
@@ -849,7 +864,7 @@ function ExtraInfo(taskID) {
         std = std.toFixed(2);
 
         document.getElementById("stdInfo").textContent =
-          "Standard deviation: " + std;
+          std;
       }
     }
   }

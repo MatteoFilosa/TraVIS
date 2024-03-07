@@ -45,7 +45,7 @@
     <div class="wrapper">
 
         <!-- Page Content  -->
-        <div id="content" style="overflow-y: scroll;">
+        <div id="content">
             <!-- Main Nav Bar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 3.2em">
 
@@ -150,39 +150,41 @@
 
                         </div>
                     </div>
-                    <button class="selectTraceBtn" id="selectTraceBtn"></button>
+                    
                     <div class="extrainfoDiv" id="extrainfoDiv" data-visible="false">
                         <div style="display: flex;justify-content: space-between;">
                             <h1 id="traceInfoTitle">Task Information </h1>
-                            <a class="newPageBtn" href="#" target="_blank" id="previewTrace"><img
-                                    src="images/newPage.png" /></a>
+                            <button class="selectTraceBtn" id="selectTraceBtn"></button>
                         </div>
 
                         <div id="placeholderText">Select a task to view more information</div>
-                        <div id="extrainfoContent" style="opacity: 0;transition: all 0.3s;font-size: 14px;">
+                        <div id="extrainfoContent" class="taskInfoContent">
                             <div id="generalInfo">
-                                <div style="display: flex;">
-                                    <p>Idea: </p>
-                                    <p id="idea" style="color: rgb(54, 54, 54);"></p>
+                                <div>
+                                    <p class="generalInfoHeader">Idea </p>
+                                    <p id="idea" class="generalInfoContent"></p>
                                 </div>
-                                <div style="display: flex;">
-                                    <p>Category: </p>
-                                    <p id="category" style="color: rgb(54, 54, 54);"></p>
+                                <div>
+                                    <p class="generalInfoHeader">Category </p>
+                                    <p id="category" class="generalInfoContent"></p>
                                 </div>
-                                <div style="display: flex;">
-                                    <p>Description: </p>
-                                    <p id="description" style="color: rgb(54, 54, 54);"></p>
+                                <div>
+                                    <p class="generalInfoHeader">Description </p>
+                                    <p id="description" class="generalInfoContent">-</p>
                                 </div>
-                                <div style="display: flex;">
-                                    <p>Ideal sequence: </p>
-                                    <p id="idealSequence" style="color: rgb(54, 54, 54);"></p>
+                                <div>
+                                    <p class="generalInfoHeader" id="idealSequenceHeader">Ideal sequence </p>
+                                    <div id="idealSequence" class="generalInfoContent"></div>
+                                </div>
+                                <div>
+                                    <p class="generalInfoHeader">Most performed event </p>
+                                    <p id="mostPerformed" class="generalInfoContent">-</p>
                                 </div>
                             </div>
-                            <div style="display: flex;justify-content: space-between;margin-bottom: 44px;">
+                            <div style="display: flex;justify-content: space-between;margin-bottom: 30px;">
                                 <div class="eventsDiv">
-                                    <p id="mostPerformed"></p>
-                                    <p>Task Interactions:</p>
-                                    <ul id="interactionsList">
+                                    <p class="generalInfoHeader">Task Interactions</p>
+                                    <ul id="interactionsList" class="generalInfoContent" style="width: 133%;">
                                         <li>item 1</li>
                                         <li>item 2</li>
                                         <li>item 3</li>
@@ -191,15 +193,17 @@
                                 <!-- <div id="heatmap"></div> -->
                                 <!-- <div id="combinedHeatmaps"></div> -->
                             </div>
-                            <div id="boxPlot"></div>
+                            <!-- <div id="boxPlot"></div> -->
                             <div>
-                                <p id="violationsTotal"></p>
-                                <div id="violationsList">
-
-                                </div>
+                                <p class="generalInfoHeader">Total Violations</p>
+                                <p id="violationsTotal"  class="generalInfoContent"></p>
+                               
                             </div>
-                            <p id="stdInfo"></p>
-                            <!-- <div id="violationsHeatmap"></div> -->
+                            <div>
+                                <p class="generalInfoHeader">Standard Deviation</p>
+                                <p id="stdInfo"  class="generalInfoContent"></p>
+                               
+                            </div>
 
                         </div>
 
