@@ -630,12 +630,34 @@ function addTraceInfo(taskID){
   
   var table = document.createElement("table");
   table.innerHTML = localStorage.getItem("tracesTable");
-  
-  // var thead = document.createElement("thead"); 
-  // table.appendChild(thead);
-  // var tbody = document.createElement("tbody");
-  // tbody.innerHTML =  localStorage.getItem("tracesTable");
-  // table.appendChild(tbody);
+  for (let row of table.rows) {
+    const newCell = row.insertCell(-1);
+    newCell.scope="col";
+    newCell.style.width="2.5%";
+    // Determine whether to create a <th> or <td> based on the parent
+    const elementType = row.parentNode.tagName === 'THEAD' ? 'th' : 'td';
+    const newElement = document.createElement(elementType);
+    newElement.style.borderBottom="none";
+    newCell.appendChild(newElement);
+    if(elementType == 'th'){
+      newElement.textContent = "Correctness %";
+    }else{
+      
+      Object.entries(globalAlignmentDataPercent).forEach(([fileName, data]) => {
+        const regex = /alignment_result_(\d+)\.json/;
+        const match = fileName.match(regex);
+        const cellContent = parseInt(row.cells[1].textContent, 10);
+        if(parseInt(match[1], 10) == cellContent){
+          console.log(parseInt(match[1], 10),cellContent);
+          newElement.textContent = `${(data[taskID] || 0).toFixed(2)}%`;
+        }
+        
+      
+      });
+    }
+    
+}
+
   tableDiv.appendChild(table);
   div.appendChild(tableDiv);
 }
