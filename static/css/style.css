@@ -832,6 +832,33 @@ table.dataTable tbody td {
     font-size: 1em;
     padding-top: 4%;
 }
+.idealPathBtn{
+    background-color: #52b0c3;
+    color: white;
+    height: 42px;
+    width: 160px;
+    padding: 0px;
+    margin-top: 10px;
+}
+.idealPathBtn:hover{
+    border: 2px solid #52b0c3;
+}
+.pathChoiceDiv{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.pathChoiceDiv p{
+    color: black;
+}
+.pathDiv h5{
+    color: #554e8d;
+}
+.pathDiv{
+    padding: 1%;
+    height: 100px;
+    background-color: #aeaccb2e;
+}
 /* ---------------------------------------------------
     MEDIAQUERIES
 ----------------------------------------------------- */
