@@ -450,20 +450,70 @@ function highlightStatechart(interaction_types) {
     var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, maxFrequency]);
 
 
-    // Update polygon fill colors based on interaction frequency
     polygons.style("fill", function () {
         var nodeText = d3.select(this.parentNode).select("text").text();
-        d3.select(this.parentNode).select("text").style("fill", "white"); 
+        
+
+        d3.select(this.parentNode).select("text").style("fill", "white");
         var interaction = interactionFrequency[nodeText] || 0;
 
-        // Color gray if there are no interactions
+        // Color grey if there are no interactions for the polygon
         if (interaction === 0) {
-            return "#7373733b"; // or "grey"
+            var greyColor = "#404040";
+            d3.select(this).style("fill", greyColor);
+            
+           
+           
+            return greyColor;
         }
 
-        console.log(interaction)
-        return colorScale(interaction);
+        var nodeId = this.id; // Assuming this.id is a string like "svg_edge_id_E54"
+        var parts = nodeId.split("_");
+        var realId = parts[3];
+
+        // Perform edge operations only when interactions are > 0
+        if (interaction > 0) {
+            // Check if the color is below a certain threshold
+            var threshold = maxFrequency / 3; // Adjust this threshold as needed
+
+            if (interaction <= threshold) { //The blue results too whiteish
+
+                console.log("BLACK: " + interaction, threshold, nodeText)
+                d3.select(this.parentNode).selectAll("text").style("fill", "black");
+
+
+            } else {
+                // Set the text color to black
+                console.log("WHITE: " + interaction, threshold, nodeText)
+                d3.select(this.parentNode).selectAll("text").style("fill", "white");
+            }
+
+            // Color the polygon using the color scale
+            var color = colorScale(interaction);
+            d3.select(this).style("fill", color);
+
+            var edges = d3.selectAll(".edge");
+
+            edges.each(function () {
+                var edge = d3.select(this);
+                var titleContent = edge.select("title").text();
+
+                // Check if the edge has interactions on the polygons
+                var regex = new RegExp("\\b" + realId + "\\b");
+                if (titleContent.match(regex)) {
+                    // Set the edge colors
+                    console.log(nodeId, titleContent);
+                    edge.select("polygon").style("fill", color);
+                    edge.select("polyline").style("fill", color);
+                    edge.select("path").style("stroke", color);
+                }
+            });
+            return color;
+        }
     });
+
+
+
 
     //texts.style("fill", "white"); // Set text color to white
 
@@ -514,6 +564,7 @@ function highlightStatechart(interaction_types) {
 
 
 function highlightStatechartMultiple(loadedTraces, selectedTraces) {
+
     document.getElementById("colorLegend").style.display = 'none';
     document.getElementById("changeLayoutButton").style.display = 'none';
     document.getElementById("minimapContainer").style.display = 'none';
@@ -581,8 +632,7 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
 
 }
 
-function highlightTask(taskInfo, taskID){
-
+function highlightTask(taskInfo, taskID) {
     var nodes = d3.select("#originalSVG").selectAll(".node");
     var polygons = nodes.selectAll("polygon");
     var texts = nodes.selectAll("text");
@@ -591,57 +641,43 @@ function highlightTask(taskInfo, taskID){
     document.getElementById("changeLayoutButton").style.display = "none";
     document.getElementById("minimapContainer").style.display = "none";
 
-    console.log(taskInfo, taskID)
-
-     // Select nodes, polygons, and texts
+    // Select nodes, polygons, and texts
     var nodes = d3.select("#originalSVG").selectAll(".node");
     var polygons = nodes.selectAll("polygon");
     var texts = nodes.selectAll("text");
-    var mostPerformedEvent = ""
-    var maxFrequency = 0
+    var mostPerformedEvent = "";
+    var maxFrequency = 0;
 
     var interactionFrequency = {}; // Object to store interaction frequency
 
     // Check if the taskID exists in taskInfo
     if (taskInfo.hasOwnProperty(taskID)) {
         var currentTask = taskInfo[taskID];
-        var maxFrequency = 0;
-        var mostPerformedEvent = "";
 
         // Iterate through the interactions of the current task
         for (const interaction in currentTask.interactions) {
-
             var components = interaction.split(' ');
 
-            // Formatta i primi e terzi componenti
+            // Format the first and third components
             var formattedString = `'${components[0]}' on '#${components[2]} canvas.marks'`;
 
-            // Ora puoi utilizzare la variabile formattedString come necessario
-            console.log(formattedString);
-        
-
-            if(components[0]==("brush")){
-
+            if (components[0] === "brush") {
                 interactionFrequency[formattedString] = currentTask.interactions[interaction];
 
-                mousedownString = `'mousedown' on '#${components[2]} canvas.marks'`;
+                var mousedownString = `'mousedown' on '#${components[2]} canvas.marks'`;
                 interactionFrequency[mousedownString] = currentTask.interactions[interaction];
 
-                mousemoveString = `'mousemove' on '#${components[2]} canvas.marks'`;
+                var mousemoveString = `'mousemove' on '#${components[2]} canvas.marks'`;
                 interactionFrequency[mousemoveString] = currentTask.interactions[interaction];
 
-                mouseupString = `'mouseup' on '#${components[2]} canvas.marks'`;
+                var mouseupString = `'mouseup' on '#${components[2]} canvas.marks'`;
                 interactionFrequency[mouseupString] = currentTask.interactions[interaction];
 
-                mouseoutString = `'mouseout' on '#${components[2]} canvas.marks'`;
+                var mouseoutString = `'mouseout' on '#${components[2]} canvas.marks'`;
                 interactionFrequency[mouseoutString] = currentTask.interactions[interaction];
-
-            } 
-            
-            else{
-
+            } else {
                 interactionFrequency[formattedString] = currentTask.interactions[interaction];
-            } 
+            }
 
             // Update maxFrequency and mostPerformedEvent
             if (currentTask.interactions[interaction] > maxFrequency) {
@@ -652,27 +688,64 @@ function highlightTask(taskInfo, taskID){
 
         var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, maxFrequency]);
 
-        
+        // Polygons styling
         polygons.style("fill", function (d) {
-            console.log("polygons")
             var nodeText = d3.select(this.parentNode).select("text").text();
-            d3.select(this.parentNode).select("text").style("fill", "white"); 
+            //d3.select(this.parentNode).select("text").style("fill", "white");
             var interaction = interactionFrequency[nodeText] || 0;
-            console.log(interaction)
-            console.log(interactionFrequency[nodeText])
-            console.log(interactionFrequency) 
-            console.log(nodeText) 
-            
+
             // Color gray if there are no interactions
             if (interaction === 0) {
-                return "#7373733b"; // or "grey"
+                return "#404040"; // or "grey"
             }
 
-            
+            // Color the polygon using the color scale
+            var color = colorScale(interaction);
+            d3.select(this).style("fill", color);
 
-            return colorScale(interaction);
+            var nodeId = this.id;
+            var parts = nodeId.split("_");
+            var realId = parts[3];
+
+            // Perform edge operations only when interactions are > 0
+            if (interaction > 0) {
+                // Check if the color is below a certain threshold
+                var threshold = maxFrequency/3; // Adjust this threshold as needed
+                
+                if (interaction <= threshold) { //The blue results too whiteish
+
+                    console.log("BLACK: " + interaction, threshold, nodeText)
+                    d3.select(this.parentNode).selectAll("text").style("fill", "black");
+                    
+                    
+                } else {
+                    // Set the text color to black
+                    console.log("WHITE: " + interaction, threshold, nodeText)
+                    d3.select(this.parentNode).selectAll("text").style("fill", "white");
+                }
+
+                // Color the edges using the color scale
+                var edges = d3.selectAll(".edge");
+
+                edges.each(function () {
+                    var edge = d3.select(this);
+                    var titleContent = edge.select("title").text();
+
+                    // Check if the edge has interactions on the polygons
+                    var regex = new RegExp("\\b" + realId + "\\b");
+                    if (titleContent.match(regex)) {
+                        // Set the edge colors
+                        edge.select("polygon").style("fill", color);
+                        edge.select("polyline").style("fill", color);
+                        edge.select("path").style("stroke", color);
+                    }
+                });
+
+                return color;
+            }
         });
     }
+    
 
     //texts.style("fill", "white"); // Set text color to white
 
@@ -766,68 +839,11 @@ function updateColorsByClassName(polygons, colors, tracesID) {
 
     d3.selectAll(polygons).attr("fill", "#7373733b");
 
-    for (let i = 0; i < colors.length; i++) {
-        polygons.each(function () {
-            var currentPolygon = d3.select(this);
-            var classAttribute = currentPolygon.attr("class");
-
-            if (classAttribute && classAttribute.includes(colors[i])) {
-                var classes = classAttribute.split(" ");
-
-                if (classes.length == 2) {
-                    currentPolygon.attr("fill", "#f7b267");
-
-                    if (case2.length < 1) {
-                        var IDs = classAttribute.match(/_(\d+)/g);
-                        case2 = IDs.map(match => parseInt(match.substring(1), 10));
-                    }
-                } else if (classes.length == 3) {
-                    currentPolygon.attr("fill", "#f79d65");
-
-                    if (case3.length < 1) {
-                        var IDs = classAttribute.match(/_(\d+)/g);
-                        case3 = IDs.map(match => parseInt(match.substring(1), 10));
-                    }
-                } else if (classes.length == 4) {
-                    currentPolygon.attr("fill", "#f4845f");
-
-                    if (case4.length < 1) {
-                        var IDs = classAttribute.match(/_(\d+)/g);
-                        case4 = IDs.map(match => parseInt(match.substring(1), 10));
-                    }
-                } else if (classes.length == 5) {
-                    currentPolygon.attr("fill", "#f27059");
-
-                    if (case5.length < 1) {
-                        var IDs = classAttribute.match(/_(\d+)/g);
-                        case5 = IDs.map(match => parseInt(match.substring(1), 10));
-                    }
-                } else {
-                    currentPolygon.attr("fill", colors[i]);
-
-                    if (case1.includes(colors[i]) == false) {
-                        var IDs = classAttribute.match(/_(\d+)/g);
-                        var tmp = IDs.map(match => parseInt(match.substring(1), 10));
-                        case1.push([tmp,colors[i]])
-                    }
-                }
-            }
-        });
-    }
-    console.log(case1)
-
-    // Append the content of "case" arrays and the color boxes to traceInfoDiv
-    for(let z = 0; z < case1.length; z++){
-        if(traceInfoDiv.innerHTML.includes("Trace: " + case1[z][0]) == false) traceInfoDiv.innerHTML += "Trace: " + case1[z][0] + " - Color: <div style='width: 20px; height: 20px; background-color: " + case1[z][1] + "; display: inline-block;'></div><br>";
-    }
     
-    if (case2.length > 1) traceInfoDiv.innerHTML += "Traces: " + case2 + " - Color: <div style='width: 20px; height: 20px; background-color: #f7b267; display: inline-block;'></div><br>";
-    if (case3.length > 1) traceInfoDiv.innerHTML += "Traces: " + case3 + " - Color: <div style='width: 20px; height: 20px; background-color: #f79d65; display: inline-block;'></div><br>";
-    if (case4.length > 1) traceInfoDiv.innerHTML += "Traces: " + case4 + " - Color: <div style='width: 20px; height: 20px; background-color: #f4845f; display: inline-block;'></div><br>";
-    if (case5.length > 1) traceInfoDiv.innerHTML += "Traces: " + case5 + " - Color: <div style='width: 20px; height: 20px; background-color: #f27059; display: inline-block;'></div><br>";
-
-    // Append the traceInfo div to the statechartContainer
-    document.getElementById("statechartContainer").appendChild(traceInfoDiv);
+    polygons.each(function () {
+        
+    })
+            
 }
 
 
