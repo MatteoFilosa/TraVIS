@@ -65,7 +65,7 @@ window.onload = function () {
           "selectTraceBtn"
         ).innerHTML = `View ${selectedTraces.size} traces`;
       } else {
-        document.getElementById("selectTraceBtn").style.display = "none";
+        //document.getElementById("selectTraceBtn").style.display = "none";
       }
     });
 };
@@ -255,7 +255,7 @@ function createSliders() {
       interactionType,
       maxInteractionValue
     );
-    console.log(interactionType + "Filter");
+    //console.log(interactionType + "Filter");
     document.getElementById(interactionType + "Filter").appendChild(slider);
   });
 
@@ -845,7 +845,7 @@ function populateTable(data) {
       const violationsCell = document.createElement("td");
       //violationsCell.id = "violationsCell";
 
-      console.log(value);
+      //console.log(value);
 
       const violationsValue = Object.values(value).reduce(
         (acc, count) => acc + count,
@@ -872,7 +872,7 @@ function populateTable(data) {
       timeCell.id = "timeCell";
       timeCell.textContent = value.totalTime;
       row.appendChild(timeCell);
-      console.log(value.totalTime);
+      //console.log(value.totalTime);
       if (
         parseFloat(value.totalTime) > maxTotalTimeValue ||
         maxTotalTimeValue === undefined
@@ -882,9 +882,9 @@ function populateTable(data) {
       // Add the row to the table
       tableBody.appendChild(row);
 
-      console.log("maxInteractionsValue è:", maxInteractionsValue);
-      console.log("maxViolationsValue è:", maxViolationsValue);
-      console.log("maxTotalTime è:", maxTotalTimeValue);
+      //console.log("maxInteractionsValue è:", maxInteractionsValue);
+      //console.log("maxViolationsValue è:", maxViolationsValue);
+      //console.log("maxTotalTime è:", maxTotalTimeValue);
       localStorage.setItem("tracesTable",document.getElementById("table").innerHTML);
     });
 
@@ -958,7 +958,7 @@ function populateTable(data) {
             "selectTraceBtn"
           ).innerHTML = `View ${selectedTraces.size} trace`;
       } else {
-        document.getElementById("selectTraceBtn").style.opacity = 0;
+        //document.getElementById("selectTraceBtn").style.opacity = 0;
       }
     });
   });
@@ -1731,7 +1731,7 @@ function checkIfThereisViolation(userID, xpath) {
     //console.log(extractedNumber,number);
     if (extractedNumber === userID) {
       const userTrace = JSON.parse(element.user_trace);
-      console.log(userTrace);
+      //console.log(userTrace);
       for (var key in userTrace) {
         if (userTrace.hasOwnProperty(key) && Array.isArray(userTrace[key])) {
           // Check if the buttonName is present in the array
@@ -1772,7 +1772,7 @@ function getColor(eventName) {
       return "#c5b0d5";
     // Add more cases as needed
     default:
-      console.log(eventName);
+      //console.log(eventName);
       return "red";
   }
 }
@@ -1841,7 +1841,7 @@ function colorLegend() {
 function toggleLegend() {
   const colorLegend = document.getElementById("colorLegend");
   const buttonImg = document.getElementById("colorLegendButton");
-  console.log(colorLegend.getAttribute("data-visible"));
+  //console.log(colorLegend.getAttribute("data-visible"));
   if (colorLegend.getAttribute("data-visible") == "false") {
     colorLegend.setAttribute("data-visible", "true");
     buttonImg.style.transform = "rotate(0deg)";

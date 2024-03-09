@@ -454,7 +454,7 @@ function highlightStatechart(interaction_types) {
         var nodeText = d3.select(this.parentNode).select("text").text();
         
 
-        d3.select(this.parentNode).select("text").style("fill", "white");
+        
         var interaction = interactionFrequency[nodeText] || 0;
 
         // Color grey if there are no interactions for the polygon
@@ -564,7 +564,6 @@ function highlightStatechart(interaction_types) {
 
 
 function highlightStatechartMultiple(loadedTraces, selectedTraces) {
-
     document.getElementById("colorLegend").style.display = 'none';
     document.getElementById("changeLayoutButton").style.display = 'none';
     document.getElementById("minimapContainer").style.display = 'none';
@@ -579,8 +578,12 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
         "#2CA02CFF",
         "#8C564BFF",
         "#9467BDFF",
-        "#E377C2FF"
-        // Add more color scales as needed
+        "#E377C2FF",
+        "#BCBD22FF",
+        "#FF7F0EFF",
+        "#17BECFFF",
+        "#D62728FF",
+        "#7F7F7FFF"
     ];
 
     try {
@@ -622,10 +625,10 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
 
 
 
- 
+
     updateColorsByClassName(polygons, colors, JSON.parse(localStorage.getItem("selectedTraces")))
 
-    
+
     localStorage.removeItem("selectedTraces");
     localStorage.removeItem("loadedTraces");
 
@@ -690,6 +693,7 @@ function highlightTask(taskInfo, taskID) {
 
         // Polygons styling
         polygons.style("fill", function (d) {
+
             var nodeText = d3.select(this.parentNode).select("text").text();
             //d3.select(this.parentNode).select("text").style("fill", "white");
             var interaction = interactionFrequency[nodeText] || 0;
@@ -796,7 +800,7 @@ function highlightTask(taskInfo, taskID) {
 
 function updatePolygonsClassName(polygons, colors, traceInteractionFrequency, index, traceName) {
     console.log(index);
-    polygons.attr("id", "")
+    //polygons.attr("id", "")
     // Update polygon fill colors based on interaction frequency and trace index
     polygons.each(function () {
         var nodeText = d3.select(this.parentNode).select("text").text();
@@ -806,21 +810,17 @@ function updatePolygonsClassName(polygons, colors, traceInteractionFrequency, in
         if (interaction !== 0) {
             //console.log(extractNumberAfter7M(traceName), traceName)
             //var traceID = extractNumberAfter7M(traceName)
-            d3.select(this).classed(colors[index] + "_" + traceName , true);
-            
+            d3.select(this).classed(colors[index] + "_" + traceName, true);
+
         }
     });
 }
 
 
+
 function updateColorsByClassName(polygons, colors, tracesID) {
-  
-    var case1 = []
-    var case2 = []
-    var case3 = []
-    var case4 = []
-    var case5 = []
-    
+
+    console.log(colors, tracesID)
 
     var traceInfoDiv = document.createElement("div");
     traceInfoDiv.id = "traceInfo";
@@ -837,15 +837,77 @@ function updateColorsByClassName(polygons, colors, tracesID) {
     traceInfoDiv.style.borderRight = "2px solid #554e8d";
     traceInfoDiv.style.borderBottom = "2px solid #554e8d";
 
-    d3.selectAll(polygons).attr("fill", "#7373733b");
+    d3.selectAll(polygons).attr("fill", "#404040");
 
-    
+    // Create an array to store unique pairs of elements
+    var uniquePairs = [];
+
     polygons.each(function () {
-        
-    })
-            
+        var currentPolygon = d3.select(this);
+        var classAttribute = currentPolygon.attr("class");
+
+        var parentNode = this.parentNode;
+        var nodeText = d3.select(parentNode).select("text");
+        var coord_x = nodeText.attr("x");
+        var coord_y = nodeText.attr("y");
+
+
+        if (classAttribute) {
+            var classes = classAttribute.split(" ");
+            var colorsToApply = classes.map(extractColorAndNumber);
+
+            for (let i = 0; i < colorsToApply.length; i++) {
+                // Insert vertical lines before existing "text" elements
+                d3.select(parentNode).insert("line", "text")
+                    .attr("x1", parseInt(coord_x) - 60 + (i * 40))
+                    .attr("y1", parseInt(coord_y) - 17)
+                    .attr("x2", parseInt(coord_x) - 60 + (i * 40))  // Vertical line, same x-coordinate
+                    .attr("y2", parseInt(coord_y) + 25)
+                    .attr("stroke", colorsToApply[i].color)
+                    .attr("stroke-width", 50);
+
+                // Populate the array with unique pairs
+                uniquePairs.push([colorsToApply[i].color, colorsToApply[i].number]);
+            }
+        }
+    });
+
+    // Remove duplicates from the array
+    uniquePairs = uniquePairs.filter(function (value, index, self) {
+        return self.findIndex(pair => pair[0] === value[0]) === index;
+    });
+
+
+
+    // Log the array with unique pairs
+    console.log(uniquePairs);
+
+    for (let j = 0; j < uniquePairs.length; j++) {
+        // Create a colored rectangle using inline SVG
+        let coloredRect = '<svg height="20" width="20"><rect width="20" height="20" style="fill:' + uniquePairs[j][0] + '; display: "></rect></svg>';
+
+        // Add the rectangle and text to the traceInfoDiv on a single line
+        traceInfoDiv.innerHTML += "Trace " + uniquePairs[j][1] + ": " + coloredRect;
+    }
+    document.getElementById("statechartContainer").appendChild(traceInfoDiv);
 }
 
+function extractColorAndNumber(inputString) {
+    var colorAndNumber = inputString.split("_");
+    return {
+        color: colorAndNumber[0],
+        number: colorAndNumber[1]
+    };
+}
+
+
+
+// Example usage:
+// updateColorsByClassName(d3.selectAll(".your-polygon-class"), ["#1F77B4FF", "#2CA02CFF", "#8C564BFF"], ["Trace A", "Trace B", "Trace C"]);
+
+
+// Example usage:
+// updateColorsByClassName(d3.selectAll(".your-polygon-class"), ["#1F77B4FF", "#2CA02CFF", "#8C564BFF"], ["Trace A", "Trace B", "Trace C"]);
 
 
 function extractNumberAfter7M(inputString) {
