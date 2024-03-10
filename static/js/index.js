@@ -57,6 +57,13 @@ window.onload = function () {
         LoadSystem();
 
     }
+
+    // TODO MATTEO
+    // If we are replaying the user traces (domain url "/home"), we must show the replay icons.
+    clientUrl = window.location.href;
+    if (clientUrl.includes("replay")) {
+        document.getElementById("replayIconsID").style.display = "block";
+    }
     
 };
 
@@ -1235,7 +1242,7 @@ function toggleLegend(){
 function isNameInUrl(jsonData, systemUrl) {
     console.log("isNameInUrl")
     const matchingElement = jsonData.find(element => systemUrl.includes(element.name));
-    console.log(systemURL, matchingElement, jsonData)
+    console.log(systemUrl, matchingElement, jsonData)
     
     if (matchingElement) {
         if(document.getElementById("notFoundText")){
@@ -1403,8 +1410,8 @@ function isNameInUrl(jsonData, systemUrl) {
                 }
             )
             .then(response => console.log(response))
-            .then(loadButton.disabled = false)
-            .then(setTimeout(CheckIfStatechartExists, 5000));
+            .then(() => { loadButton.disabled = false; })
+            .then(() => { setTimeout(CheckIfStatechartExists, 5000); });
     }
     return false;
 }
@@ -1584,4 +1591,41 @@ function LoadSystem() {
     websiteContainer.src = systemURL;
 
     CheckIfStatechartExists();
+}
+
+// TODO MATTEO
+// Function to change the replay state.
+function changeReplayState(newState) {
+    if
+        (
+        (newState.localeCompare("stop") != 0) &&
+        (newState.localeCompare("pause") != 0) &&
+        (newState.localeCompare("play") != 0) &&
+        (newState.localeCompare("step") != 0)
+    ) {
+        newState = "stop";
+        console.log("ERROR: INVALID 'changeReplayState' INPUT! STATE SET TO STOP!");
+    }
+
+    replayButtons = document.getElementsByClassName("replayButtonClass");
+    for (let i = 0; i < replayButtons.length; i++) {
+        replayButtons[i].style.color = "rgb(255, 255, 255)";
+    }
+    document.getElementById("replayID_" + newState).style.color = "rgb(0, 255, 0)";
+
+
+    url = `http://127.0.0.1:5000/change_replay_state`;
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ new_state: newState }),
+    })
+        .then(response => {
+            if (newState.localeCompare("step") == 0) {
+                document.getElementById("replayID_step").style.color = "rgb(255, 255, 255)";
+                document.getElementById("replayID_pause").style.color = "rgb(0, 255, 0)";
+            }
+        });
 }
