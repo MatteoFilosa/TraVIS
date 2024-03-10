@@ -520,20 +520,20 @@ function highlightStatechart(interaction_types) {
     // Create and update traceInfo div using plain HTML
     var traceInfoDiv = document.getElementById("traceInfo");
     if (!traceInfoDiv) {
-        traceInfoDiv = document.createElement("div");
+        var traceInfoDiv = document.createElement("div");
         traceInfoDiv.id = "traceInfo";
         traceInfoDiv.style.position = "absolute";
         traceInfoDiv.style.top = "150px";
         traceInfoDiv.style.right = "10px";
-        traceInfoDiv.style.background = "white";
-        traceInfoDiv.style.width = "290px";
-        traceInfoDiv.style.padding = "10px";
+        traceInfoDiv.style.background = "#f9f9f9";
+        traceInfoDiv.style.width = "200px";
+        traceInfoDiv.style.padding = "15px";
+        traceInfoDiv.style.border = "2px solid #554e8d";
+        traceInfoDiv.style.borderRadius = "8px";
+        traceInfoDiv.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
         traceInfoDiv.style.display = "flex";
         traceInfoDiv.style.flexDirection = "column";
-        traceInfoDiv.style.borderTop = "2px solid #554e8d";
-        traceInfoDiv.style.borderLeft = "2px solid #554e8d";
-        traceInfoDiv.style.borderRight = "2px solid #554e8d";
-        traceInfoDiv.style.borderBottom = "2px solid #554e8d";
+        traceInfoDiv.style.display = "inline"
 
         // Add an image to the traceInfo div
         var img = document.createElement("img");
@@ -620,8 +620,6 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
     } catch (error) {
         console.error("Error parsing JSON:", error);
     }
-
-    texts.style("fill", "white"); // Set text color to white
 
 
 
@@ -756,20 +754,20 @@ function highlightTask(taskInfo, taskID) {
     // Create and update traceInfo div using plain HTML
     var traceInfoDiv = document.getElementById("traceInfo");
     if (!traceInfoDiv) {
-        traceInfoDiv = document.createElement("div");
+        var traceInfoDiv = document.createElement("div");
         traceInfoDiv.id = "traceInfo";
         traceInfoDiv.style.position = "absolute";
         traceInfoDiv.style.top = "150px";
         traceInfoDiv.style.right = "10px";
-        traceInfoDiv.style.background = "white";
-        traceInfoDiv.style.width = "290px";
-        traceInfoDiv.style.padding = "10px";
+        traceInfoDiv.style.background = "#f9f9f9";
+        traceInfoDiv.style.width = "200px";
+        traceInfoDiv.style.padding = "15px";
+        traceInfoDiv.style.border = "2px solid #554e8d";
+        traceInfoDiv.style.borderRadius = "8px";
+        traceInfoDiv.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
         traceInfoDiv.style.display = "flex";
         traceInfoDiv.style.flexDirection = "column";
-        traceInfoDiv.style.borderTop = "2px solid #554e8d";
-        traceInfoDiv.style.borderLeft = "2px solid #554e8d";
-        traceInfoDiv.style.borderRight = "2px solid #554e8d";
-        traceInfoDiv.style.borderBottom = "2px solid #554e8d";
+        traceInfoDiv.style.display = "inline"
 
         // Add an image to the traceInfo div
         var img = document.createElement("img");
@@ -820,22 +818,22 @@ function updatePolygonsClassName(polygons, colors, traceInteractionFrequency, in
 
 function updateColorsByClassName(polygons, colors, tracesID) {
 
-    console.log(colors, tracesID)
+
 
     var traceInfoDiv = document.createElement("div");
     traceInfoDiv.id = "traceInfo";
     traceInfoDiv.style.position = "absolute";
     traceInfoDiv.style.top = "150px";
     traceInfoDiv.style.right = "10px";
-    traceInfoDiv.style.background = "white";
-    traceInfoDiv.style.width = "180px";
-    traceInfoDiv.style.padding = "10px";
+    traceInfoDiv.style.background = "#f9f9f9";
+    traceInfoDiv.style.width = "200px";
+    traceInfoDiv.style.padding = "15px";
+    traceInfoDiv.style.border = "2px solid #554e8d";
+    traceInfoDiv.style.borderRadius = "8px";
+    traceInfoDiv.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
     traceInfoDiv.style.display = "flex";
     traceInfoDiv.style.flexDirection = "column";
-    traceInfoDiv.style.borderTop = "2px solid #554e8d";
-    traceInfoDiv.style.borderLeft = "2px solid #554e8d";
-    traceInfoDiv.style.borderRight = "2px solid #554e8d";
-    traceInfoDiv.style.borderBottom = "2px solid #554e8d";
+    traceInfoDiv.style.display = "inline"
 
     d3.selectAll(polygons).attr("fill", "#404040");
 
@@ -843,6 +841,7 @@ function updateColorsByClassName(polygons, colors, tracesID) {
     var uniquePairs = [];
 
     polygons.each(function () {
+        d3.select(this.parentNode).selectAll("text").style("fill", "white");
         var currentPolygon = d3.select(this);
         var classAttribute = currentPolygon.attr("class");
 
@@ -872,9 +871,18 @@ function updateColorsByClassName(polygons, colors, tracesID) {
         }
     });
 
-    // Remove duplicates from the array
+
     uniquePairs = uniquePairs.filter(function (value, index, self) {
         return self.findIndex(pair => pair[0] === value[0]) === index;
+    });
+
+
+    uniquePairs.sort(function (a, b) {
+   
+        var traceNumberA = parseInt(a[1]);
+        var traceNumberB = parseInt(b[1]);
+
+        return traceNumberA - traceNumberB;
     });
 
 
@@ -882,12 +890,15 @@ function updateColorsByClassName(polygons, colors, tracesID) {
     // Log the array with unique pairs
     console.log(uniquePairs);
 
+    traceInfoDiv.innerHTML += "No Interactions: <svg height='20' width='20'><rect width='20' height='20' style='fill:#404040;'></rect></svg><br>";
+
+
     for (let j = 0; j < uniquePairs.length; j++) {
         // Create a colored rectangle using inline SVG
         let coloredRect = '<svg height="20" width="20"><rect width="20" height="20" style="fill:' + uniquePairs[j][0] + '; display: "></rect></svg>';
 
         // Add the rectangle and text to the traceInfoDiv on a single line
-        traceInfoDiv.innerHTML += "Trace " + uniquePairs[j][1] + ": " + coloredRect;
+        traceInfoDiv.innerHTML += "Trace " + uniquePairs[j][1] + ": " + coloredRect + "<br>";
     }
     document.getElementById("statechartContainer").appendChild(traceInfoDiv);
 }
