@@ -5,8 +5,8 @@ var groupstd = {};
 var violationsData;
 var groupData = {};
 var globalAlignmentData = {};
-var globalAlignmentDataPercent = {}
-var averageConformity = {}
+var globalAlignmentDataPercent = {};
+var averageConformity = {};
 
 window.onload = function () {
   filtersContainer = document.getElementById("filtersContainer");
@@ -16,7 +16,7 @@ window.onload = function () {
   colorLegend();
   getUserTasksTime();
   getRealConformity();
-  
+
   //getUserTraceConformity();
   //This SUCKS, I know, but js synchronization sucks more
   //When getUserTasksTime finishes:
@@ -26,28 +26,23 @@ window.onload = function () {
 };
 
 function getRealConformity() {
-
-  fetch('/get_trace_alignment')
-    .then(response => response.json())
-    .then(data => {
-    
+  fetch("/get_trace_alignment")
+    .then((response) => response.json())
+    .then((data) => {
       globalAlignmentData = data;
 
-  
-      console.log('Alignment Data:', globalAlignmentData);
+      console.log("Alignment Data:", globalAlignmentData);
 
       // COnvert in percent
       globalAlignmentDataPercent = convertToPercentage(globalAlignmentData);
 
-     
-      console.log('Alignment Data in Percent:', globalAlignmentDataPercent);
+      console.log("Alignment Data in Percent:", globalAlignmentDataPercent);
 
       averageConformity = calculateAverage(globalAlignmentData);
-      console.log('Average Conformity:', averageConformity);
-
+      console.log("Average Conformity:", averageConformity);
     })
-    .catch(error => {
-      console.error('Error fetching alignment data:', error);
+    .catch((error) => {
+      console.error("Error fetching alignment data:", error);
     });
 }
 
@@ -55,16 +50,12 @@ function getRealConformity() {
 function convertToPercentage(originalData) {
   let newData = {};
 
-
   for (let key in originalData) {
     if (originalData.hasOwnProperty(key)) {
-     
       newData[key] = {};
 
-  
       for (let subKey in originalData[key]) {
         if (originalData[key].hasOwnProperty(subKey)) {
-         
           newData[key][subKey] = originalData[key][subKey] * 100;
         }
       }
@@ -79,7 +70,7 @@ function calculateAverage(data) {
   const groupSumCount = {};
 
   // Iterate through each file
-  Object.values(data).forEach(fileData => {
+  Object.values(data).forEach((fileData) => {
     // Iterate through each group in the file
     Object.entries(fileData).forEach(([group, value]) => {
       // Initialize the sum and count for the group if not present
@@ -102,9 +93,8 @@ function calculateAverage(data) {
   return groupAverages;
 }
 
-
 function jaccardIndex(set1, set2) {
-  const intersection = new Set([...set1].filter(x => set2.has(x)));
+  const intersection = new Set([...set1].filter((x) => set2.has(x)));
   const union = new Set([...set1, ...set2]);
   return intersection.size / union.size;
 }
@@ -123,13 +113,12 @@ function calculateConformity(trace, goldenTrace) {
 
   return {
     scaledScore: scaledScore,
-    percentageScore: percentageScore
+    percentageScore: percentageScore,
   };
 }
 
 function getUserTasks() {
   const url = "http://127.0.0.1:5000/get_user_tasks";
-
 
   fetch(url)
     .then((response) => response.json())
@@ -159,8 +148,6 @@ function getUserTasks() {
               ? task[number].length
               : 0;
 
-            
-
             // Update the most performed event for the current number
             const events = Array.isArray(task[number]) ? task[number] : [];
             const eventCounts = events.reduce((acc, event) => {
@@ -171,11 +158,13 @@ function getUserTasks() {
             for (const event of Object.keys(eventCounts)) {
               if (
                 !taskInfo[number].mostPerformedEvent ||
-                eventCounts[event] > taskInfo[number].interactions[taskInfo[number].mostPerformedEvent]
+                eventCounts[event] >
+                  taskInfo[number].interactions[
+                    taskInfo[number].mostPerformedEvent
+                  ]
               ) {
                 taskInfo[number].mostPerformedEvent = event;
               }
-
 
               // Collect all different interactions for the current number
               if (!taskInfo[number].interactions[event]) {
@@ -204,7 +193,6 @@ function getUserTasks() {
         //mainContainer.appendChild(infoDiv);
       });
       populateTable(taskInfo);
-      
     })
     .then(() => {
       // Enable filtering for table
@@ -227,16 +215,13 @@ function getUserTasks() {
 
 const traceConformityScores = [];
 
-
 function getUserTraceConformity() {
   const url = "http://127.0.0.1:5000/get_user_trace_conformity";
 
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
-      json.forEach((trace, index) => {
-        
-      });
+      json.forEach((trace, index) => {});
 
       // Now traceConformityScores array contains conformity scores for each trace
       console.log("Trace Conformity Scores: ");
@@ -246,12 +231,9 @@ function getUserTraceConformity() {
     });
 }
 
-function getGoldenTraceAlignment(){
-
+function getGoldenTraceAlignment() {
   const url = "http://127.0.0.1:5000/get_traceAlignment";
-
 }
-
 
 function getUserTasksTime() {
   const url = "http://127.0.0.1:5000/get_userTraceTime";
@@ -397,11 +379,11 @@ async function getTimeForGroup(groupID) {
 
 function populateTable(data) {
   const tableBody = document.getElementById("tracesTable");
-  
+
   for (var key in data) {
     if (data.hasOwnProperty(key)) {
       const row = document.createElement("tr");
-      row.id="row"+key;
+      row.id = "row" + key;
       // Add checkbox column
       const checkboxCell = document.createElement("td");
       checkboxCell.style.paddingLeft = "1%";
@@ -463,8 +445,8 @@ function populateTable(data) {
 
           // Retrieve the information from the super_golden_trace.json file
           fetch("/files/user_traces/trace_alignment/super_golden_trace.json")
-            .then(response => response.json())
-            .then(data => {
+            .then((response) => response.json())
+            .then((data) => {
               // Get or create the modal element
               let modal = document.getElementById("filtersModal");
               if (!modal) {
@@ -498,45 +480,51 @@ function populateTable(data) {
               modalBody.innerHTML = "";
 
               // Populate the modal with the information
-              data[checkboxId].forEach(item => {
+              data[checkboxId].forEach((item) => {
                 const p = document.createElement("p");
                 p.style.color = "#000";
                 p.textContent = item;
                 modalBody.appendChild(p);
-
               });
 
               const separator = document.createElement("hr");
               modalBody.appendChild(separator);
 
-              const alignmentHeader = '<h5 class="modal-title" id="modalTitle">Alignment results for Task ' + checkboxId + '</h5><br>';
+              const alignmentHeader =
+                '<h5 class="modal-title" id="modalTitle">Alignment results for Task ' +
+                checkboxId +
+                "</h5><br>";
               modalBody.innerHTML += alignmentHeader;
-
 
               let traceNumber = 1; // Initialize the trace number counter
 
+              Object.entries(globalAlignmentDataPercent).forEach(
+                ([fileName, data]) => {
+                  const p = document.createElement("p");
+                  p.style.color = "#000";
 
-              Object.entries(globalAlignmentDataPercent).forEach(([fileName, data]) => {
-                const p = document.createElement("p");
-                p.style.color = "#000";
+                  // Use traceNumber instead of fileName
+                  p.textContent = `Alignment percentage for trace ${traceNumber}: ${(
+                    data[checkboxId] || 0
+                  ).toFixed(2)}%`;
 
-                // Use traceNumber instead of fileName
-                p.textContent = `Alignment percentage for trace ${traceNumber}: ${(data[checkboxId] || 0).toFixed(2)}%`;
+                  modalBody.appendChild(p);
 
-                modalBody.appendChild(p);
-
-                // Increment the trace number counter
-                traceNumber++;
-              });
+                  // Increment the trace number counter
+                  traceNumber++;
+                }
+              );
 
               // Show the modal
-              $(modal).modal('show');
+              $(modal).modal("show");
 
               // Set the text color to black
-              modal.querySelector("#modalTitle").textContent = `Golden Trace for Task ${checkboxId}`;
+              modal.querySelector(
+                "#modalTitle"
+              ).textContent = `Golden Trace for Task ${checkboxId}`;
               modal.style.color = "#000";
             })
-            .catch(error => console.error("Error fetching data:", error));
+            .catch((error) => console.error("Error fetching data:", error));
         });
 
         // Append the button to the idealTraceCell
@@ -545,32 +533,34 @@ function populateTable(data) {
         row.appendChild(idealTraceCell);
 
         //End golden trace cell
-        
+
         //console.log(value);
         violationCell.id = `violationCell_${checkbox.id}`;
         violationCell.textContent = value;
         //console.log(data[key].totalViolations);
 
-        correctnessCell.textContent = (averageConformity[checkbox.id]*100).toFixed(2);
+        correctnessCell.textContent = (
+          averageConformity[checkbox.id] * 100
+        ).toFixed(2);
 
         const buttonCell = document.createElement("td");
         var btn = document.createElement("button");
-        btn.id=`expand${checkbox.id}`;
+        btn.id = `expand${checkbox.id}`;
         btn.classList.add("expandButton");
         var img = document.createElement("img");
-        img.src="images/downArrow.png";
-        img.width="20px";
-        img.height="20px";
-        img.id=`expandImg${checkbox.id}`;
+        img.src = "images/downArrow.png";
+        img.width = "20px";
+        img.height = "20px";
+        img.id = `expandImg${checkbox.id}`;
         btn.appendChild(img);
-        
+
         buttonCell.appendChild(btn);
         row.appendChild(buttonCell);
 
         // Add the row to the table
         tableBody.appendChild(row);
-        btn.addEventListener("click",function(){
-          expandTableOnClick(checkbox.id,row);
+        btn.addEventListener("click", function () {
+          expandTableOnClick(checkbox.id, row);
         });
       });
       var newRow;
@@ -589,75 +579,86 @@ function populateTable(data) {
   //getUserTasksViolations();
 }
 var rowExpanded = false;
-function expandTableOnClick(id,row){
-  if(!rowExpanded){
-    if(document.getElementById(`newrow${id}`)==undefined){
+function expandTableOnClick(id, row) {
+  if (!rowExpanded) {
+    if (document.getElementById(`newrow${id}`) == undefined) {
       newRow = document.createElement("tr");
       newRow.classList.add("extraRow");
       var rowWidth = row.offsetWidth;
-      
-      newRow.style.width = rowWidth+"px";
-      newRow.id=`newrow${id}`;
-      
+
+      newRow.style.width = rowWidth + "px";
+      newRow.id = `newrow${id}`;
+
       row.appendChild(newRow);
-      addTraceInfo(id);
-    }else{
-      document.getElementById(`newrow${id}`).style.display="table-row";
+      addTraceInfo(id).then(() => {
+        // Enable sorting for table
+        var table = new DataTable("#innerTable", {
+          searching: false,
+          columnDefs: [
+            // exclude first and last row from filtering and sorting
+            { orderable: false, targets: [0] },
+          ],
+          paging: false,
+          order: [[1, "asc"]],
+          orderCellsTop: true,
+          fixedHeader: true,
+        });
+      });
+    } else {
+      document.getElementById(`newrow${id}`).style.display = "table-row";
     }
-    
+
     for (var i = 0; i <= 4; i++) {
-      if(i!=id)
-        document.getElementById(`row${i}`).style.display="none";
+      if (i != id) document.getElementById(`row${i}`).style.display = "none";
     }
-    document.getElementById(`expandImg${id}`).style.transform = 'rotate(' + 180 + 'deg)';
+    document.getElementById(`expandImg${id}`).style.transform =
+      "rotate(" + 180 + "deg)";
     rowExpanded = true;
-  }else{
-    document.getElementById(`newrow${id}`).style.display="none";
+  } else {
+    document.getElementById(`newrow${id}`).style.display = "none";
     for (var i = 0; i <= 4; i++) {
-      document.getElementById(`row${i}`).style.display="table-row";
+      document.getElementById(`row${i}`).style.display = "table-row";
     }
-    document.getElementById(`expandImg${id}`).style.transform = 'rotate(' + 0 + 'deg)';
+    document.getElementById(`expandImg${id}`).style.transform =
+      "rotate(" + 0 + "deg)";
     rowExpanded = false;
   }
-  
 }
-function addTraceInfo(taskID){
+async function addTraceInfo(taskID) {
   var div = document.getElementById(`newrow${taskID}`);
   var title = document.createElement("p");
   title.textContent = `Traces of Task ${taskID}`;
   div.appendChild(title);
   var tableDiv = document.createElement("div");
   tableDiv.classList.add("innerTableDiv");
-  
+
   var table = document.createElement("table");
+  table.id = "innerTable";
+
   table.innerHTML = localStorage.getItem("tracesTable");
   for (let row of table.rows) {
     const newCell = row.insertCell(-1);
-    newCell.scope="col";
-    newCell.style.width="2.5%";
+    newCell.scope = "col";
+    newCell.style.width = "2.5%";
     // Determine whether to create a <th> or <td> based on the parent
-    const elementType = row.parentNode.tagName === 'THEAD' ? 'th' : 'td';
+    const elementType = row.parentNode.tagName === "THEAD" ? "th" : "td";
     const newElement = document.createElement(elementType);
-    newElement.style.borderBottom="none";
+    newElement.style.borderBottom = "none";
     newCell.appendChild(newElement);
-    if(elementType == 'th'){
+    if (elementType == "th") {
       newElement.textContent = "Correctness %";
-    }else{
-      
+    } else {
       Object.entries(globalAlignmentDataPercent).forEach(([fileName, data]) => {
         const regex = /alignment_result_(\d+)\.json/;
         const match = fileName.match(regex);
         const cellContent = parseInt(row.cells[1].textContent, 10);
-        if(parseInt(match[1], 10) == cellContent){
-          console.log(parseInt(match[1], 10),cellContent);
+        if (parseInt(match[1], 10) == cellContent) {
+          console.log(parseInt(match[1], 10), cellContent);
           newElement.textContent = `${(data[taskID] || 0).toFixed(2)}%`;
         }
-        
-      
       });
     }
-    
-}
+  }
 
   tableDiv.appendChild(table);
   div.appendChild(tableDiv);
@@ -775,7 +776,6 @@ function ExtraInfo(taskID) {
   document.getElementById("selectTraceBtn").innerHTML = `View task`;
 
   document.getElementById("selectTraceBtn").onclick = function () {
-
     window.location.href = "home"; //!!!!!
 
     localStorage.setItem("taskInfo", JSON.stringify(taskInfo));
@@ -818,22 +818,21 @@ function ExtraInfo(taskID) {
         }
 
         var descriptionCell = document.getElementById("description");
-        descriptionCell="-"
-        
+        descriptionCell = "-";
+
         // Retrieve the information from the super_golden_trace.json file
         fetch("/files/user_traces/trace_alignment/super_golden_trace.json")
-        .then(response => response.json())
-        .then(data => {
-          var idealSequenceCell = document.getElementById("idealSequence");
-          data[taskID].forEach(item => {
-            const p = document.createElement("p");
-            p.style.color = "#000";
-            p.style.fontWeight = "400";
-            p.textContent = item;
-            idealSequenceCell.appendChild(p);
-
+          .then((response) => response.json())
+          .then((data) => {
+            var idealSequenceCell = document.getElementById("idealSequence");
+            data[taskID].forEach((item) => {
+              const p = document.createElement("p");
+              p.style.color = "#000";
+              p.style.fontWeight = "400";
+              p.textContent = item;
+              idealSequenceCell.appendChild(p);
+            });
           });
-        });
         const mostPerformed = document.getElementById("mostPerformed");
         mostPerformed.innerHTML = "";
         document.getElementById(
@@ -863,8 +862,7 @@ function ExtraInfo(taskID) {
         var std = Math.sqrt(totalSquaredDifference / groupstd[taskID].length);
         std = std.toFixed(2);
 
-        document.getElementById("stdInfo").textContent =
-          std;
+        document.getElementById("stdInfo").textContent = std;
       }
     }
   }
@@ -878,6 +876,4 @@ function clearExtraInformation() {
   document.getElementById("traceInfoTitle").innerHTML = "Task Information   ";
 }
 
-function showTracesForTask(taskID){
-
-}
+function showTracesForTask(taskID) {}
