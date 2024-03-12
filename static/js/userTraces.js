@@ -843,10 +843,7 @@ function populateTable(data) {
     findViolations(extractedNumber).then(function (value) {
       // Add violations column
       const violationsCell = document.createElement("td");
-      //violationsCell.id = "violationsCell";
-
-      //console.log(value);
-
+      violationsCell.id = "violationBarCell";
       const violationsValue = Object.values(value).reduce(
         (acc, count) => acc + count,
         0

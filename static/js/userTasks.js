@@ -636,6 +636,7 @@ async function addTraceInfo(taskID) {
   table.id = "innerTable";
 
   table.innerHTML = localStorage.getItem("tracesTable");
+  
   for (let row of table.rows) {
     const newCell = row.insertCell(-1);
     newCell.scope = "col";
@@ -662,6 +663,15 @@ async function addTraceInfo(taskID) {
 
   tableDiv.appendChild(table);
   div.appendChild(tableDiv);
+  const EventElements = document.querySelectorAll("[id^='eventCell']");
+  EventElements.forEach(element => {
+      element.style.marginTop = '10%';
+  });
+
+  const ViolationElements = document.querySelectorAll("[id^='violationBarCell']");
+  ViolationElements.forEach(element => {
+      element.style.marginTop = '10%';
+  });
 }
 // Function to get color based on event name
 function getColor(eventName) {
