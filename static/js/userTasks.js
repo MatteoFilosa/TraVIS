@@ -880,7 +880,6 @@ function ExtraInfo(taskID) {
 
 function clearExtraInformation() {
   document.getElementById("selectTraceBtn").style.opacity = 0;
-  document.getElementById(`previewTrace`).style.display = "none";
   document.getElementById("placeholderText").style.display = "block";
   document.getElementById("extrainfoContent").style.opacity = 0;
   document.getElementById("traceInfoTitle").innerHTML = "Task Information   ";
