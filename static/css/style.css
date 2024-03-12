@@ -379,6 +379,14 @@ a.dropdown-item {
 .extraFiltersBtn:hover{
     border: 2px solid #554e8d;
 }
+.goldenTraceBtnClicked{
+    background-color: white;
+    color: #554e8d;
+    border: 2px solid #554e8d;
+    height: 42px;
+    width: 144px;
+    padding: 0px;
+}
 #demographicFilter{
     display: flex;
     margin-bottom: 28px;

@@ -436,95 +436,82 @@ function populateTable(data) {
         goldenTraceBtn.appendChild(btnImg);
         goldenTraceBtn.classList.add("btn", "extraFiltersBtn"); // Add Bootstrap button classes
         goldenTraceBtn.textContent = "Show";
+        goldenTraceBtn.setAttribute("showedGoldenTrace", "false");
         goldenTraceBtn.setAttribute("data-toggle", "modal");
         goldenTraceBtn.setAttribute("data-target", "#filtersModal");
 
         goldenTraceBtn.addEventListener("click", function () {
+          clearExtraInformation();
+          goldenTraceBtn.classList.toggle("goldenTraceBtnClicked");
           // Get the checkbox ID
           const checkboxId = checkbox.id;
+          if (checkbox.checked) checkbox.checked = false;
 
-          // Retrieve the information from the super_golden_trace.json file
-          fetch("/files/user_traces/trace_alignment/super_golden_trace.json")
-            .then((response) => response.json())
-            .then((data) => {
-              // Get or create the modal element
-              let modal = document.getElementById("filtersModal");
-              if (!modal) {
-                modal = document.createElement("div");
-                modal.id = "filtersModal";
-                modal.classList.add("modal", "fade");
-                modal.innerHTML = `
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="modalTitle">Golden Trace for Task</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body"></div>
-                        </div>
-                    </div>`;
-                document.body.appendChild(modal);
-              }
+          if (goldenTraceBtn.getAttribute("showedGoldenTrace") == "false") {
+            const pressedBtns = document.querySelectorAll(
+              '[showedGoldenTrace="true"]'
+            );
+            pressedBtns.forEach((element) => {
+              element.setAttribute("showedGoldenTrace", "false");
+              element.classList.toggle("goldenTraceBtnClicked");
+              document.getElementById("goldenTraceEvents").innerHTML = "";
+            });
 
-              // Get the modal body element
-              const modalBody = modal.querySelector(".modal-body");
+            goldenTraceBtn.setAttribute("showedGoldenTrace", "true");
 
-              if (!modalBody) {
-                console.error("Modal body element not found");
-                return;
-              }
+            // Retrieve the information from the super_golden_trace.json file
+            fetch("/files/user_traces/trace_alignment/super_golden_trace.json")
+              .then((response) => response.json())
+              .then((data) => {
+                document.getElementById(
+                  "traceInfoTitle"
+                ).innerHTML = `Golden Trace for Task ${checkboxId}`;
+                document.getElementById("goldenTraceContent").style.opacity = 1;
+                document.getElementById("extrainfoContent").style.display =
+                  "none";
+                document.getElementById("placeholderText").style.display =
+                  "none";
+                generateHeatmap(data, checkbox.id);
+                // Populate the modal with the information
+                data[checkboxId].forEach((item) => {
+                  const li = document.createElement("li");
+                  li.style.color = "#000";
+                  li.textContent = item;
+                  document.getElementById("goldenTraceEvents").appendChild(li);
+                });
+                var replayTraceBtnElem =
+                  document.getElementById("replayTraceBtn");
+                replayTraceBtnElem.style.opacity = 1;
+                document.getElementById("selectTraceBtn").style.display="none";
+                replayTraceBtnElem.addEventListener("click", function () {
+                  localStorage.removeItem("selectedTrace");
+                  localStorage.removeItem("selectedTraceID");
+                  localStorage.removeItem("loadedTraces");
 
-              // Clear existing modal content
-              modalBody.innerHTML = "";
-
-              // Populate the modal with the information
-              data[checkboxId].forEach((item) => {
-                const p = document.createElement("p");
-                p.style.color = "#000";
-                p.textContent = item;
-                modalBody.appendChild(p);
+                  /// TODO: find id of golden trace and get raw value so we can replay it
+                  let url = "http://127.0.0.1:5000/replay";
+                  fetch(url, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      current_trace: JSON.stringify(selectedTrace_RawValue),
+                      name: "falcon",
+                    }),
+                  }).then((response) => console.log(response));
+                });
               });
-
-              const separator = document.createElement("hr");
-              modalBody.appendChild(separator);
-
-              const alignmentHeader =
-                '<h5 class="modal-title" id="modalTitle">Alignment results for Task ' +
-                checkboxId +
-                "</h5><br>";
-              modalBody.innerHTML += alignmentHeader;
-
-              let traceNumber = 1; // Initialize the trace number counter
-
-              Object.entries(globalAlignmentDataPercent).forEach(
-                ([fileName, data]) => {
-                  const p = document.createElement("p");
-                  p.style.color = "#000";
-
-                  // Use traceNumber instead of fileName
-                  p.textContent = `Alignment percentage for trace ${traceNumber}: ${(
-                    data[checkboxId] || 0
-                  ).toFixed(2)}%`;
-
-                  modalBody.appendChild(p);
-
-                  // Increment the trace number counter
-                  traceNumber++;
-                }
-              );
-
-              // Show the modal
-              $(modal).modal("show");
-
-              // Set the text color to black
-              modal.querySelector(
-                "#modalTitle"
-              ).textContent = `Golden Trace for Task ${checkboxId}`;
-              modal.style.color = "#000";
-            })
-            .catch((error) => console.error("Error fetching data:", error));
+          } else {
+            document.getElementById(
+              "traceInfoTitle"
+            ).innerHTML = `Task Information `;
+            clearExtraInformation();
+            goldenTraceBtn.setAttribute("showedGoldenTrace", "false");
+            document.getElementById("goldenTraceContent").style.opacity = 0;
+            document.getElementById("extrainfoContent").style.display = "block";
+            document.getElementById("placeholderText").style.display = "block";
+            document.getElementById("replayTraceBtn").style.opacity = 0;
+            document.getElementById("selectTraceBtn").style.display="block";
+          }
         });
 
         // Append the button to the idealTraceCell
@@ -577,6 +564,37 @@ function populateTable(data) {
   }
   // getUserTasksTime();
   //getUserTasksViolations();
+}
+
+function generateHeatmap(data, id) {
+  var mainDiv;
+  mainDiv = document.getElementById("heatmap");
+  mainDiv.innerHTML = "";
+
+  var rows = Math.ceil(Math.sqrt(data[id].length));
+  var columns = Math.ceil(data[id].length / rows);
+
+  //console.log(data[id]);
+  data[id].forEach((item, i) => {
+    var match = item.match(/^[^\s]+/)[0];
+    //Create a div for each event
+    var eventDiv = document.createElement("div");
+    eventDiv.className = "event-rectangle";
+    eventDiv.style.width = 100 / columns + "%";
+    eventDiv.style.height = 100 / rows + "%";
+    eventDiv.style.backgroundColor = getColor(match);
+    eventDiv.style.position = "absolute";
+    eventDiv.style.left = (i % columns) * (100 / columns) + "%";
+    eventDiv.style.top = Math.floor(i / columns) * (100 / rows) + "%";
+
+    // Append the event div to the main div
+    mainDiv.appendChild(eventDiv);
+
+    // Set the number of rows and columns as CSS variables for the main div
+    mainDiv.style.setProperty("--rows", rows);
+    mainDiv.style.setProperty("--columns", columns);
+  });
+  return mainDiv;
 }
 var rowExpanded = false;
 function expandTableOnClick(id, row) {
@@ -636,7 +654,7 @@ async function addTraceInfo(taskID) {
   table.id = "innerTable";
 
   table.innerHTML = localStorage.getItem("tracesTable");
-  
+
   for (let row of table.rows) {
     const newCell = row.insertCell(-1);
     newCell.scope = "col";
@@ -664,13 +682,15 @@ async function addTraceInfo(taskID) {
   tableDiv.appendChild(table);
   div.appendChild(tableDiv);
   const EventElements = document.querySelectorAll("[id^='eventCell']");
-  EventElements.forEach(element => {
-      element.style.marginTop = '10%';
+  EventElements.forEach((element) => {
+    element.style.marginTop = "10%";
   });
 
-  const ViolationElements = document.querySelectorAll("[id^='violationBarCell']");
-  ViolationElements.forEach(element => {
-      element.style.marginTop = '10%';
+  const ViolationElements = document.querySelectorAll(
+    "[id^='violationBarCell']"
+  );
+  ViolationElements.forEach((element) => {
+    element.style.marginTop = "10%";
   });
 }
 // Function to get color based on event name

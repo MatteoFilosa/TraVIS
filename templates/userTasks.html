@@ -195,6 +195,7 @@
                     <div class="extrainfoDiv" id="extrainfoDiv" data-visible="false">
                         <div style="display: flex;justify-content: space-between;">
                             <h1 id="traceInfoTitle">Task Information </h1>
+                            <button id="replayTraceBtn" style="opacity: 0;">Replay selected trace</button>
                             <button class="selectTraceBtn" id="selectTraceBtn"></button>
                         </div>
 
@@ -215,7 +216,8 @@
                                 </div>
                                 <div>
                                     <p class="generalInfoHeader" id="idealSequenceHeader">Ideal sequence </p>
-                                    <div id="idealSequence" class="generalInfoContent"></div>
+                                    <div id="idealSequence" class="generalInfoContent" style="overflow: scroll;
+                                    height: 265px;"></div>
                                 </div>
                                 <div>
                                     <p class="generalInfoHeader">Most performed event </p>
@@ -247,7 +249,16 @@
                             </div>
 
                         </div>
+                        <div id="goldenTraceContent" class="taskInfoContent" style="opacity: 0;">
+                            
+                            <div id="heatmap"></div>
+                            <div style="padding: 2%;">
+                                <p class="generalInfoHeader">Events: </p>
+                                <ol id="goldenTraceEvents">
 
+                                </ol>
+                            </div>
+                        </div>
                     </div>
 
 
