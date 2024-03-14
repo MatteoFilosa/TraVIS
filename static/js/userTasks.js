@@ -210,7 +210,6 @@ function getUserTasks() {
         orderCellsTop: true,
         fixedHeader: true,
       });
-      showTracesForTask(1);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -620,7 +619,7 @@ function expandTableOnClick(id, row) {
         var table = new DataTable(`#innerTable${id}`, {
           searching: false,
           paging: false,
-          order: [[1, "asc"]],
+          order: [[0, "asc"]],
           orderCellsTop: true,
           fixedHeader: true,
         });
@@ -697,9 +696,11 @@ async function addTraceInfo(taskID) {
   tbody.classList.id = "tracesTable";
   userTasks.forEach((element) => {
     let totalElements = 0;
+    let events = {};
     for (let key in userTasks[traceCnt]) {
       if (key == taskID) {
         totalElements += userTasks[traceCnt][key].length;
+        events = userTasks[traceCnt][key];
       }
     }
     if (totalElements != 0) {
@@ -712,6 +713,11 @@ async function addTraceInfo(taskID) {
       var interactionsCell = document.createElement("td");
 
       interactionsCell.textContent = totalElements;
+      eventTypes(events).then(function (value) {
+        interactionsCell.appendChild(createEventsBar(value));
+        interactionsCell.style.display = "flex";
+        interactionsCell.style.marginTop = "12%";
+      });
       tr.appendChild(interactionsCell);
 
       var violationsCell = document.createElement("td");
@@ -767,6 +773,7 @@ async function addTraceInfo(taskID) {
 
       tbody.appendChild(tr);
       table.appendChild(tbody);
+      
     }
     traceCnt++;
   });
@@ -996,7 +1003,58 @@ function clearExtraInformation() {
   document.getElementById("extrainfoContent").style.opacity = 0;
   document.getElementById("traceInfoTitle").innerHTML = "Task Information   ";
 }
+async function eventTypes(events) {
+  var searchWords = [
+    "mousemove",
+    "click",
+    "dblclick",
+    "brush",
+    "wheel",
+    "mouseout",
+    "mouseover",
+    "mousedown",
+    "mouseup",
+    "Double Click",
+    "facsimile back",
+  ];
+  var wordCount = {};
 
-function showTracesForTask(userID) {
-  //console.log(userTasks[userID-1]);
+  // Initialize counts for all search words to zero
+  searchWords.forEach(function (searchWord) {
+    wordCount[searchWord] = 0;
+  });
+
+  events.forEach((element, index) => {
+    searchWords.forEach(function (searchWord) {
+      if (String(element).includes(searchWord)) {
+        wordCount[searchWord]++;
+      }
+    });
+  });
+
+  return wordCount;
+}
+function createEventsBar(events) {
+  const eventRectangle = document.createElement("div");
+  eventRectangle.id = "eventRectangle";
+  eventRectangle.innerHTML = "";
+
+  // Calculate the percentage of each event type
+  const totalEvents = Object.values(events).reduce(
+    (acc, count) => acc + count,
+    0
+  );
+
+  for (const [eventName, count] of Object.entries(events)) {
+    const percentage = (count / totalEvents) * 100;
+
+    const eventDiv = document.createElement("div");
+    eventDiv.classList.add("eventColor");
+    eventDiv.style.height = "20px";
+    eventDiv.style.width = `${percentage}%`;
+    eventDiv.style.backgroundColor = getColor(eventName);
+    eventRectangle.appendChild(eventDiv);
+  }
+
+  return eventRectangle;
 }
