@@ -721,6 +721,7 @@ async function addTraceInfo(taskID) {
       tr.appendChild(interactionsCell);
 
       var violationsCell = document.createElement("td");
+      let violations = {};
       allViolations.forEach((jsonData, index) => {
         let match = jsonData.name.match(/_(\d+)\.[a-zA-Z]+$/);
         let extractedNumber = match ? match[1] : null;
@@ -731,7 +732,11 @@ async function addTraceInfo(taskID) {
           for (let key in userTrace) {
             if (key == taskID) {
               totalViolations += userTrace[key].length;
-              violationsCell.textContent = totalViolations;
+              violations = userTrace[key];
+              //violationsCell.textContent = totalViolations;
+              findViolations(violations).then(function (value) {
+                violationsCell.appendChild(createViolationsBar(value));
+              });
               tr.appendChild(violationsCell);
             }
           }
@@ -773,7 +778,6 @@ async function addTraceInfo(taskID) {
 
       tbody.appendChild(tr);
       table.appendChild(tbody);
-      
     }
     traceCnt++;
   });
@@ -1057,4 +1061,100 @@ function createEventsBar(events) {
   }
 
   return eventRectangle;
+}
+
+async function findViolations(violations) {
+  const levelCount = {
+    level1: 0,
+    level2: 0,
+    level3: 0,
+    level4: 0,
+  };
+  if (Array.isArray(violations)) {
+    violations.forEach(function (element) {
+      const match = element.match(/violation of level (\d+)/);
+      if (match) {
+        const level = `level${match[1]}`;
+        levelCount[level]++;
+      }
+    });
+  }
+
+  return levelCount;
+}
+//#endregion
+
+function createViolationsBar(violations) {
+  const violationsRectangle = document.createElement("div");
+  violationsRectangle.style.display = "flex";
+  violationsRectangle.style.width = "100%";
+  violationsRectangle.style.marginTop = "10%";
+  violationsRectangle.style.justifyContent = "space-between";
+  violationsRectangle.id = "violationsRectangle";
+  violationsRectangle.innerHTML = "";
+
+  // Calculate the percentage of each event type
+  const totalViolations = Object.values(violations).reduce(
+    (acc, count) => acc + count,
+    0
+  );
+
+  var totalNum = document.createElement("p");
+  totalNum.textContent = totalViolations;
+  totalNum.style.marginRight = "8px";
+  totalNum.style.color = "black";
+  totalNum.id = "violationsCell";
+  violationsRectangle.appendChild(totalNum);
+
+  const percentages = {};
+  for (const [violationName, count] of Object.entries(violations)) {
+    percentages[violationName] = (count / totalViolations) * 100;
+  }
+
+  const sortedPercentages = Object.entries(violations)
+    .map(([violationName, count]) => ({
+      violationName,
+      percentage: (count / totalViolations) * 100,
+    }))
+    .sort((a, b) => a.percentage - b.percentage);
+
+  // Set a minimum width for the bar
+  const minWidth = 10;
+
+  // Create and append bars based on violation types
+  let wrapperDiv = document.createElement("div");
+  wrapperDiv.style.width = "80%";
+  wrapperDiv.style.display = "flex";
+  wrapperDiv.style.marginTop = "5px";
+
+  for (const { violationName, percentage } of sortedPercentages) {
+    // Check if the violation count is greater than 0
+    if (violations[violationName] > 0) {
+      const eventDiv = document.createElement("div");
+      eventDiv.classList.add("eventColor");
+      eventDiv.style.height = "20px";
+
+      // Calculate the width of the bar based on percentage
+      const barWidth = Math.max(
+        minWidth,
+        (percentage / 100) * (totalViolations / 10)
+      );
+      eventDiv.style.width = `${barWidth}%`;
+
+      // Set different background colors based on violation level
+      if (violationName.includes("1"))
+        eventDiv.style.backgroundColor = "#F8D3D3";
+      else if (violationName.includes("2"))
+        eventDiv.style.backgroundColor = "#EA7B7B";
+      else if (violationName.includes("3"))
+        eventDiv.style.backgroundColor = "#DC2323";
+      else if (element.includes("4"))
+        colorElementImg.style.backgroundColor = "#580E0E";
+
+      wrapperDiv.appendChild(eventDiv);
+    }
+  }
+
+  violationsRectangle.appendChild(wrapperDiv);
+  return violationsRectangle;
 }
