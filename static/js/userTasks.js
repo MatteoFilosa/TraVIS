@@ -7,7 +7,9 @@ var groupData = {};
 var globalAlignmentData = {};
 var globalAlignmentDataPercent = {};
 var averageConformity = {};
-
+var userTasks = {};
+var allViolations = {};
+var allTaskTime = {};
 window.onload = function () {
   filtersContainer = document.getElementById("filtersContainer");
   loadingIcon = document.getElementById("loadingIcon");
@@ -123,6 +125,7 @@ function getUserTasks() {
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
+      userTasks = json;
       loadingIcon.style.display = "none";
       //filtersContainer.style.display = "flex";
       table.style.display = "block";
@@ -207,6 +210,7 @@ function getUserTasks() {
         orderCellsTop: true,
         fixedHeader: true,
       });
+      showTracesForTask(1);
     })
     .catch((error) => {
       console.error("Error fetching data:", error);
@@ -247,6 +251,7 @@ function getUserTasksTime() {
     })
     .then((json) => {
       if (json && json.length > 0 && JSON.parse(json[0].user_trace).groups) {
+        allTaskTime = json;
         json.forEach((item) => {
           const groups = JSON.parse(item.user_trace).groups;
 
@@ -287,6 +292,7 @@ function getUserTasksViolations() {
   fetch(url)
     .then((response) => response.json())
     .then((json) => {
+      allViolations = json;
       // Iterate through each JSON file
       json.forEach((jsonData, index) => {
         violationsData = JSON.parse(jsonData.user_trace);
@@ -482,7 +488,8 @@ function populateTable(data) {
                 var replayTraceBtnElem =
                   document.getElementById("replayTraceBtn");
                 replayTraceBtnElem.style.opacity = 1;
-                document.getElementById("selectTraceBtn").style.display="none";
+                document.getElementById("selectTraceBtn").style.display =
+                  "none";
                 replayTraceBtnElem.addEventListener("click", function () {
                   localStorage.removeItem("selectedTrace");
                   localStorage.removeItem("selectedTraceID");
@@ -510,7 +517,7 @@ function populateTable(data) {
             document.getElementById("extrainfoContent").style.display = "block";
             document.getElementById("placeholderText").style.display = "block";
             document.getElementById("replayTraceBtn").style.opacity = 0;
-            document.getElementById("selectTraceBtn").style.display="block";
+            document.getElementById("selectTraceBtn").style.display = "block";
           }
         });
 
@@ -610,12 +617,8 @@ function expandTableOnClick(id, row) {
       row.appendChild(newRow);
       addTraceInfo(id).then(() => {
         // Enable sorting for table
-        var table = new DataTable("#innerTable", {
+        var table = new DataTable(`#innerTable${id}`, {
           searching: false,
-          columnDefs: [
-            // exclude first and last row from filtering and sorting
-            { orderable: false, targets: [0] },
-          ],
           paging: false,
           order: [[1, "asc"]],
           orderCellsTop: true,
@@ -651,33 +654,122 @@ async function addTraceInfo(taskID) {
   tableDiv.classList.add("innerTableDiv");
 
   var table = document.createElement("table");
-  table.id = "innerTable";
+  table.classList.add("table-responsive");
+  table.classList.add("table-hover");
+  table.id = `innerTable${taskID}`;
+  // Create table header
+  var thead = document.createElement("thead");
+  var tr = document.createElement("tr");
+  var columns = [
+    "User ID",
+    "Interactions",
+    "Violations",
+    "Execution Time",
+    "Correctness %",
+  ];
+  columns.forEach(function (columnName, index) {
+    var th = document.createElement("th");
+    th.scope = "col";
+    th.style.width = "2.5%";
 
-  table.innerHTML = localStorage.getItem("tracesTable");
+    var divContent = document.createElement("div");
+    divContent.style.display = "flex";
+    var iconImg = document.createElement("img");
+    if (index == 0) iconImg.src = "images/userIcon.png";
+    else if (index == 1) iconImg.src = "images/interactorIcon.png";
+    else if (index == 2) iconImg.src = "images/errorIcon.png";
+    else if (index == 3) iconImg.src = "images/timeIcon.png";
+    iconImg.width = "20";
+    iconImg.height = "20";
+    if (index != 4) divContent.appendChild(iconImg);
 
-  for (let row of table.rows) {
-    const newCell = row.insertCell(-1);
-    newCell.scope = "col";
-    newCell.style.width = "2.5%";
-    // Determine whether to create a <th> or <td> based on the parent
-    const elementType = row.parentNode.tagName === "THEAD" ? "th" : "td";
-    const newElement = document.createElement(elementType);
-    newElement.style.borderBottom = "none";
-    newCell.appendChild(newElement);
-    if (elementType == "th") {
-      newElement.textContent = "Correctness %";
-    } else {
+    var text = document.createElement("h6");
+    text.textContent = columnName;
+    divContent.appendChild(text);
+    th.appendChild(divContent);
+    tr.appendChild(th);
+  });
+  thead.appendChild(tr);
+  table.appendChild(thead);
+
+  var traceCnt = 0;
+  var tbody = document.createElement("tbody");
+  tbody.classList.id = "tracesTable";
+  userTasks.forEach((element) => {
+    let totalElements = 0;
+    for (let key in userTasks[traceCnt]) {
+      if (key == taskID) {
+        totalElements += userTasks[traceCnt][key].length;
+      }
+    }
+    if (totalElements != 0) {
+      var tr = document.createElement("tr");
+
+      var userIDCell = document.createElement("td");
+      userIDCell.textContent = traceCnt + 1;
+      tr.appendChild(userIDCell);
+
+      var interactionsCell = document.createElement("td");
+
+      interactionsCell.textContent = totalElements;
+      tr.appendChild(interactionsCell);
+
+      var violationsCell = document.createElement("td");
+      allViolations.forEach((jsonData, index) => {
+        let match = jsonData.name.match(/_(\d+)\.[a-zA-Z]+$/);
+        let extractedNumber = match ? match[1] : null;
+
+        if (extractedNumber === (traceCnt + 1).toString()) {
+          const userTrace = JSON.parse(jsonData.user_trace);
+          let totalViolations = 0;
+          for (let key in userTrace) {
+            if (key == taskID) {
+              totalViolations += userTrace[key].length;
+              violationsCell.textContent = totalViolations;
+              tr.appendChild(violationsCell);
+            }
+          }
+        }
+      });
+
+      var timeCell = document.createElement("td");
+      const timeInfo = { totalTime: 0, averageTime: 0 };
+      allTaskTime.forEach((element, index) => {
+        let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
+        // Extract the captured number from the file name
+        let extractedNumber = match ? match[1] : null;
+
+        if (extractedNumber === (traceCnt + 1).toString()) {
+          const userTrace = JSON.parse(element.user_trace);
+          for (let key in userTrace.groups) {
+            if (key == taskID) {
+              var totalTimeInSeconds = (
+                userTrace.groups[key].total_time / 1000
+              ).toFixed(2); // Convert milliseconds to seconds
+              timeInfo.totalTime = totalTimeInSeconds;
+              timeCell.textContent = totalTimeInSeconds;
+              tr.appendChild(timeCell);
+            }
+          }
+        }
+      });
+
+      var correctnessCell = document.createElement("td");
       Object.entries(globalAlignmentDataPercent).forEach(([fileName, data]) => {
         const regex = /alignment_result_(\d+)\.json/;
         const match = fileName.match(regex);
-        const cellContent = parseInt(row.cells[1].textContent, 10);
-        if (parseInt(match[1], 10) == cellContent) {
-          console.log(parseInt(match[1], 10), cellContent);
-          newElement.textContent = `${(data[taskID] || 0).toFixed(2)}%`;
+        if (parseInt(match[1], 10) == traceCnt + 1) {
+          //console.log(parseInt(match[1], 10), cellContent);
+          correctnessCell.textContent = `${(data[taskID] || 0).toFixed(2)}%`;
+          tr.appendChild(correctnessCell);
         }
       });
+
+      tbody.appendChild(tr);
+      table.appendChild(tbody);
     }
-  }
+    traceCnt++;
+  });
 
   tableDiv.appendChild(table);
   div.appendChild(tableDiv);
@@ -905,4 +997,6 @@ function clearExtraInformation() {
   document.getElementById("traceInfoTitle").innerHTML = "Task Information   ";
 }
 
-function showTracesForTask(taskID) {}
+function showTracesForTask(userID) {
+  //console.log(userTasks[userID-1]);
+}
