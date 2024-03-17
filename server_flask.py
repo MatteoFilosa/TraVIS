@@ -424,6 +424,77 @@ def upload_statechart():
     return "Statecharts correctly uploaded!"
 
 
+
+
+@app.route("/upload_statechart_comparison")
+def upload_statechart_comparison():
+    
+    database_name = "visualizations"  # You can change db name here
+    mongo_uri = config['DATABASES'][database_name]
+    app.config["MONGO_URI"] = mongo_uri
+    mongo = PyMongo(app)
+
+    svg_folder = "static/files/statechart_comparison"
+    collection_name = "state_chart_comparison" 
+
+    try:
+        # Iterate over files in the folder
+        for filename in os.listdir(svg_folder):
+            if filename.endswith(".svg"):  # Ensure it's an SVG file
+                print("wewwe")
+
+                svg_path = os.path.join(svg_folder, f"{filename}")
+                with open(svg_path, "r") as file:
+                    svg_data = file.read()
+
+                # Inserisci il documento nella collezione
+                documento = {"name": filename, "svg": svg_data}
+                mongo.db[collection_name].insert_one(documento)
+                print(f"{filename} inserted into the database.")
+
+        print("Process complete!")
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return f"Error occurred: {e}"
+
+    return "Statecharts correctly uploaded!"
+
+
+@app.route("/get_statechart_comparison")
+def get_statechart_comparison():
+    
+    database_name = "visualizations"  # You can change db name here
+    mongo_uri = config['DATABASES'][database_name]
+    app.config["MONGO_URI"] = mongo_uri
+    mongo = PyMongo(app)
+
+    collection_name = "state_chart_comparison" 
+
+    try:
+        # Query all documents from the collection
+        documents = mongo.db[collection_name].find()
+
+        # Prepare a list to store file data
+        files_data = []
+
+        # Iterate over the documents
+        for document in documents:
+            filename = document["name"]
+            svg_data = document["svg"]
+            
+            # Append file data to the list
+            files_data.append({"filename": filename, "svg": svg_data})
+
+        print("Process complete!")
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": f"Error occurred: {e}"}), 500
+
+    return jsonify({"files": files_data})
+
+
 #Function to upload the user traces we already had from Falcon Crossfilter
 @app.route("/upload_user_traces")
 def upload_user_traces():
