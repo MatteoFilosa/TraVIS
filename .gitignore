@@ -7,3 +7,4 @@ userTraceSummaryProblems_Falcon.json
 package.json
 package-lock.json
 /node_modules
+static/files/user_traces/current_trace.json

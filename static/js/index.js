@@ -410,6 +410,14 @@ function highlightStatechart(interaction_types) {
     document.getElementById("changeLayoutButton").style.display = "none";
     document.getElementById("minimapContainer").style.display = "none";
 
+    //Making all the edges barely visible
+
+    var edges = d3.selectAll(".edge");
+    edges.select("polygon").style("opacity", 0.15);
+    edges.select("polyline").style("opacity", 0.15);
+    edges.select("path").style("opacity", 0.15);
+
+
     // Select nodes, polygons, and texts
     var nodes = d3.select("#originalSVG").selectAll(".node");
     var polygons = nodes.selectAll("polygon");
@@ -466,7 +474,7 @@ function highlightStatechart(interaction_types) {
 
         // Color grey if there are no interactions for the polygon
         if (interaction === 0) {
-            var greyColor = "#404040";
+            var greyColor = "#a3a3a3" //"#404040";
             d3.select(this).style("fill", greyColor);
             
            
@@ -474,7 +482,7 @@ function highlightStatechart(interaction_types) {
             return greyColor;
         }
 
-        var nodeId = this.id; // Assuming this.id is a string like "svg_edge_id_E54"
+        var nodeId = this.id; // this.id is a string like "svg_edge_id_E54"
         var parts = nodeId.split("_");
         var realId = parts[3];
 
@@ -499,20 +507,23 @@ function highlightStatechart(interaction_types) {
             var color = colorScale(interaction);
             d3.select(this).style("fill", color);
 
-            var edges = d3.selectAll(".edge");
-
+            
             edges.each(function () {
                 var edge = d3.select(this);
                 var titleContent = edge.select("title").text();
-
+                
                 // Check if the edge has interactions on the polygons
                 var regex = new RegExp("\\b" + realId + "\\b");
                 if (titleContent.match(regex)) {
                     // Set the edge colors
+                    // Increasing edges' opacity if we're interested in them
                     console.log(nodeId, titleContent);
                     edge.select("polygon").style("fill", color);
                     edge.select("polyline").style("fill", color);
                     edge.select("path").style("stroke", color);
+                    edge.select("polygon").style("opacity", 1);
+                    edge.select("polyline").style("opacity", 1);
+                    edge.select("path").style("opacity", 1);
                 }
             });
             return color;
@@ -541,6 +552,8 @@ function highlightStatechart(interaction_types) {
         traceInfoDiv.style.display = "flex";
         traceInfoDiv.style.flexDirection = "column";
         traceInfoDiv.style.display = "inline"
+
+        traceInfoDiv.innerHTML += "No Interactions: <svg height='20' width='20'><rect width='20' height='20' style='fill:#a3a3a3;'></rect></svg><br><br>";
 
         // Add an image to the traceInfo div
         var img = document.createElement("img");
@@ -649,6 +662,11 @@ function highlightTask(taskInfo, taskID) {
     document.getElementById("changeLayoutButton").style.display = "none";
     document.getElementById("minimapContainer").style.display = "none";
 
+    var edges = d3.selectAll(".edge");
+    edges.select("polygon").style("opacity", 0.15);
+    edges.select("polyline").style("opacity", 0.15);
+    edges.select("path").style("opacity", 0.15);
+
     // Select nodes, polygons, and texts
     var nodes = d3.select("#originalSVG").selectAll(".node");
     var polygons = nodes.selectAll("polygon");
@@ -703,9 +721,9 @@ function highlightTask(taskInfo, taskID) {
             //d3.select(this.parentNode).select("text").style("fill", "white");
             var interaction = interactionFrequency[nodeText] || 0;
 
-            // Color gray if there are no interactions
+            // Color grey if there are no interactions
             if (interaction === 0) {
-                return "#404040"; // or "grey"
+                return "#a3a3a3" //"#404040"; or "grey"
             }
 
             // Color the polygon using the color scale
@@ -747,6 +765,9 @@ function highlightTask(taskInfo, taskID) {
                         edge.select("polygon").style("fill", color);
                         edge.select("polyline").style("fill", color);
                         edge.select("path").style("stroke", color);
+                        edge.select("polygon").style("opacity", 1);
+                        edge.select("polyline").style("opacity", 1);
+                        edge.select("path").style("opacity", 1);
                     }
                 });
 
@@ -775,6 +796,8 @@ function highlightTask(taskInfo, taskID) {
         traceInfoDiv.style.display = "flex";
         traceInfoDiv.style.flexDirection = "column";
         traceInfoDiv.style.display = "inline"
+
+        traceInfoDiv.innerHTML += "No Interactions: <svg height='20' width='20'><rect width='20' height='20' style='fill:#a3a3a3;'></rect></svg><br><br>";
 
         // Add an image to the traceInfo div
         var img = document.createElement("img");
@@ -897,7 +920,7 @@ function updateColorsByClassName(polygons, colors, tracesID) {
     // Log the array with unique pairs
     console.log(uniquePairs);
 
-    traceInfoDiv.innerHTML += "No Interactions: <svg height='20' width='20'><rect width='20' height='20' style='fill:#404040;'></rect></svg><br>";
+    traceInfoDiv.innerHTML += "No Interactions: <svg height='20' width='20'><rect width='20' height='20' style='fill:#a3a3a3;'></rect></svg><br>";
 
 
     for (let j = 0; j < uniquePairs.length; j++) {
