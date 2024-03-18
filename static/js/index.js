@@ -973,31 +973,6 @@ function extractNumberAfter7M(inputString) {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function graphLayout(svg) {
     //labelsCount = 0;
     var textElements = svg.querySelectorAll("g.node text");

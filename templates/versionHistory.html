@@ -27,7 +27,8 @@
         integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY"
         crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js//versionHistory.js"></script>
+    
 </head>
 
 <body>
@@ -140,7 +141,7 @@
                     <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
                         <ul class="nav navbar-nav">
 
-                            <li class="nav-item active dropdown">
+                            <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">System Overview</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -154,48 +155,16 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/userTasks">User Tasks</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/versionHistory">Version History</a>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Version History</a>
                             </li>
                         </ul>
                     </div>
-
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" id="insertedURL" type="search" placeholder="Load System"
-                            aria-label="System URL">
-                        <button class="btn btn-outline-success" id="loadSystem" onclick="LoadSystem()">Load</button>
-                    </form>
-
-
                 </div>
             </nav>
 
             <!-- Tabs-->
             <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <p>Number of States</p>
-                    <p id = "states"> - </p>
-                    <div style="border-left: 1px solid #ffffffd9;
-                    height: 27px;"></div>
-                </li>
-                <li class="nav-item" >
-                    <p>Number of Edges</p>
-                    <p id = "edges"> - </p>
-                    <div style="border-left: 1px solid #ffffffd9;
-                    height: 27px;"></div>
-                </li>
-                <li class="nav-item" >
-                    <p>Max node degree</p>
-                    <p id = "maxDeg"> - </p>
-                    <div style="border-left: 1px solid #ffffffd9;
-                    height: 27px;"></div>
-                </li>
-                <li class="nav-item" >
-                    <p>Average node degree</p>
-                    <p id = "avgDeg"> - </p>
-                    <div style="border-left: 1px solid #ffffffd9;
-                    height: 27px;"></div>
-                </li>
 
                 <div class="layoutButtons">
                     <!-- TODO MATTEO -->
@@ -218,9 +187,6 @@
                             <div style="border-left: 1px solid #ffffffd9; height: 27px;"></div>
                         </li>
                     </ul>
-                    <button onclick="resizeContainers('statechart')"><img src="images/statechartLayout.png" /></button>
-                    <button onclick="resizeContainers()"><img src="images/defaultLayout.png" /></button>
-                    <button onclick="resizeContainers('website')"><img src="images/websiteLayout.png" /></button>
                 </div>
 
             </ul>
@@ -231,21 +197,31 @@
                     <img src="images/downArrow.png" id="colorLegendButton" width="20px" height="20px" style="transform: rotate(180deg);"/>
                     </button>
                 </div>
-                <div class="website" id="websiteContainer">
-                    <iframe id="website" src="" title="D3-radviz" frameBorder="0"></iframe>
-                </div>
-                <!-- <div class="dragLine" id="dragLine"></div> -->
                 <div class="statechart" id="statechartContainer">
                     <div id="tooltip" style="display: none"></div>
                     <div class="spinner-border" id="loadingIcon" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>
                     
-                    <div id="statechartSVG" style="display: none;" class="statechartSVG">
-
+                    <div id="leftContainer" style="display: none;" class="statechartSVG">
+<!-- 
                         <div id="minimapContainer">
 
-                        </div>
+                        </div> -->
+                    </div>
+
+                </div>
+                <div class="statechart" id="statechartContainer2">
+                    <div id="tooltip" style="display: none"></div>
+                    <div class="spinner-border" id="loadingIcon" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    
+                    <div id="rightContainer" style="display: none;" class="statechartSVG">
+<!-- 
+                        <div id="minimapContainer2">
+
+                        </div> -->
                     </div>
 
                 </div>
