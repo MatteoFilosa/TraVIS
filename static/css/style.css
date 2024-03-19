@@ -505,6 +505,13 @@ span {
 
 }
 
+#statechartContainer2 {
+
+    overflow-x: scroll;
+    overflow-y: scroll;
+
+}
+
 #statechartContainer::-webkit-scrollbar {
     width: 0px;
 }
