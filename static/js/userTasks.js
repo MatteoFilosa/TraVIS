@@ -10,6 +10,8 @@ var averageConformity = {};
 var userTasks = {};
 var allViolations = {};
 var allTaskTime = {};
+var interactionCounts = {};
+
 window.onload = function () {
   filtersContainer = document.getElementById("filtersContainer");
   loadingIcon = document.getElementById("loadingIcon");
@@ -714,7 +716,7 @@ async function addTraceInfo(taskID) {
 
       interactionsCell.textContent = totalElements;
       eventTypes(events).then(function (value) {
-        interactionsCell.appendChild(createEventsBar(value));
+        interactionsCell.appendChild(createEventsBar(value,(traceCnt + 1)));
         interactionsCell.style.display = "flex";
         interactionsCell.style.marginTop = "12%";
       });
@@ -1038,7 +1040,7 @@ async function eventTypes(events) {
 
   return wordCount;
 }
-function createEventsBar(events) {
+function createEventsBar(events,userTraceIndex) {
   const eventRectangle = document.createElement("div");
   eventRectangle.id = "eventRectangle";
   eventRectangle.innerHTML = "";
@@ -1048,18 +1050,35 @@ function createEventsBar(events) {
     (acc, count) => acc + count,
     0
   );
-
+  // Set a minimum width for the bar
+  const minWidth = 10;
   for (const [eventName, count] of Object.entries(events)) {
-    const percentage = (count / totalEvents) * 100;
+    if (count > 0) {
+      const percentage = (count / totalEvents) * 100;
 
-    const eventDiv = document.createElement("div");
-    eventDiv.classList.add("eventColor");
-    eventDiv.style.height = "20px";
-    eventDiv.style.width = `${percentage}%`;
-    eventDiv.style.backgroundColor = getColor(eventName);
-    eventRectangle.appendChild(eventDiv);
+      // Check if the interaction type already exists in interactionsCount
+      if (!interactionCounts[eventName]) {
+        interactionCounts[eventName] = [];
+      }
+
+      // Add the interaction type, count, and user trace ID to the interactionsCount object
+      interactionCounts[eventName].push({
+        count,
+        userTraceIndex,
+      });
+      // Calculate the width of the bar based on percentage
+      const barWidth = Math.max(
+        minWidth,
+        (percentage / 100) * (totalEvents / 10)
+      );
+      const eventDiv = document.createElement("div");
+      eventDiv.classList.add("eventColor");
+      eventDiv.style.height = "20px";
+      eventDiv.style.width = `${barWidth}%`;
+      eventDiv.style.backgroundColor = getColor(eventName);
+      eventRectangle.appendChild(eventDiv);
+    }
   }
-
   return eventRectangle;
 }
 
