@@ -1040,37 +1040,30 @@ async function eventTypes(events) {
 
   return wordCount;
 }
-function createEventsBar(events,userTraceIndex) {
+function createEventsBar(events, userTraceIndex) {
   const eventRectangle = document.createElement("div");
   eventRectangle.id = "eventRectangle";
   eventRectangle.innerHTML = "";
 
-  // Calculate the percentage of each event type
-  const totalEvents = Object.values(events).reduce(
-    (acc, count) => acc + count,
-    0
-  );
+  // Calculate the total number of events
+  const totalEvents = Object.values(events).reduce((acc, count) => acc + count, 0);
+
   // Set a minimum width for the bar
-  const minWidth = 10;
+  const minWidthPercent = 5; // Adjust as needed
+
+  // Calculate the maximum width of a single event type bar
+  const maxBarWidthPercent = 80; // Adjust as needed
+
+  // Calculate the width of the bar based on total events
+  const totalBarWidthPercent = Math.min(maxBarWidthPercent, totalEvents);
+
+  // Calculate the width of each event bar
   for (const [eventName, count] of Object.entries(events)) {
     if (count > 0) {
-      const percentage = (count / totalEvents) * 100;
+      const percentage = (count / totalEvents) * totalBarWidthPercent;
 
-      // Check if the interaction type already exists in interactionsCount
-      if (!interactionCounts[eventName]) {
-        interactionCounts[eventName] = [];
-      }
+      const barWidth = Math.max(minWidthPercent, percentage);
 
-      // Add the interaction type, count, and user trace ID to the interactionsCount object
-      interactionCounts[eventName].push({
-        count,
-        userTraceIndex,
-      });
-      // Calculate the width of the bar based on percentage
-      const barWidth = Math.max(
-        minWidth,
-        (percentage / 100) * (totalEvents / 10)
-      );
       const eventDiv = document.createElement("div");
       eventDiv.classList.add("eventColor");
       eventDiv.style.height = "20px";
@@ -1079,8 +1072,10 @@ function createEventsBar(events,userTraceIndex) {
       eventRectangle.appendChild(eventDiv);
     }
   }
+
   return eventRectangle;
 }
+
 
 async function findViolations(violations) {
   const levelCount = {
