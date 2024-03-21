@@ -1142,17 +1142,18 @@ function ExtraInfo() {
 
   // Assuming you have an element with id "extraInfoContent"
   let extraInfoContentElem = document.getElementById("extrainfoContent");
-
+  var replayTraceBtnElem;
   // Create the button element
-  let replayTraceBtnElem = document.createElement("button");
-
-  // Set button properties
-  replayTraceBtnElem.innerHTML = "Replay selected trace";
-  replayTraceBtnElem.style.opacity = 1;
-  replayTraceBtnElem.style.display = "block";
-  replayTraceBtnElem.id = "replayTraceBtn";
-  // Append the button to the "extraInfoContent" element
-  extraInfoContentElem.appendChild(replayTraceBtnElem);
+  if (document.getElementById("replayTraceBtn") == undefined) {
+    replayTraceBtnElem = document.createElement("button");
+    // Set button properties
+    replayTraceBtnElem.innerHTML = "Replay selected trace";
+    replayTraceBtnElem.style.opacity = 1;
+    replayTraceBtnElem.style.display = "block";
+    replayTraceBtnElem.id = "replayTraceBtn";
+    // Append the button to the "extraInfoContent" element
+    extraInfoContentElem.appendChild(replayTraceBtnElem);
+  }
 
   // Add click event listener to the button
   replayTraceBtnElem.addEventListener("click", function () {
