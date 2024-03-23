@@ -872,9 +872,9 @@ def userTraces():
 def userTasks():
     return render_template('userTasks.html')
     
-@app.route("/versionHistory")
+""" @app.route("/versionHistory")
 def versionHistory():
-    return render_template('versionHistory.html')
+    return render_template('versionHistory.html') """
 
 
 
