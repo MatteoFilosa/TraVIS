@@ -1,3 +1,9 @@
+https://vega.github.io/falcon/flights/ Falcon, 1M version (the 7M doesn't work).
+
+https://aware-diag-sapienza.github.io/filtering-overview/prototype/index.html
+
+----THE TEN "CLASSIC" VISUALIZATIONS---
+
 https://aware-diag-sapienza.github.io/d3-radviz/prototype/index.html
 
 http://awareserver.dis.uniroma1.it/nemesis/
@@ -6,13 +12,17 @@ http://awareserver.dis.uniroma1.it:11768/crumbs-example/
 
 https://fredhohman.com/summit/
 
-https://vega.github.io/falcon/flights/  Falcon, 1M version (the 7M doesn't work).
-
------------These URLs below have CORS/security issue and/or don't load a statechart in the system-------------
-
-https://aware-diag-sapienza.github.io/filtering-overview/prototype/index.html
+https://visdunneright.github.io/IDMVis/public/
 
 http://awareserver.dis.uniroma1.it:11768/claire/
 
 https://aware-diag-sapienza.github.io/W4SP/prototype/
+
+http://awareserver.dis.uniroma1.it:8080/IVAN/
+
+----THESE TWO OTHER CLASSIC VIS DON'T WORK VERY WELL---
+
+https://influencemap.cmlab.dev/submit/?id=AAAAAAEsOJZp~QWxhbiBKIFBlcmxpcw
+
+http://cloud-vis.com/qhd/icicle.html
 
