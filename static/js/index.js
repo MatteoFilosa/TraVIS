@@ -1302,7 +1302,7 @@ function isNameInUrl(jsonData, systemUrl) {
 
             //Append change layout button
 
-            const changeLayoutButton = document.createElement("button");
+            /* const changeLayoutButton = document.createElement("button");
             changeLayoutButton.innerHTML = "Change Layout";
             changeLayoutButton.className = "btn btn-info";
             changeLayoutButton.style.position = "absolute";
@@ -1324,7 +1324,9 @@ function isNameInUrl(jsonData, systemUrl) {
                         changeLayoutButton.innerHTML = "Change Layout";
                     }, 500);
                 }
-            };
+            }; */
+
+            
 
             document.getElementById("statechartContainer").appendChild(changeLayoutButton);
 

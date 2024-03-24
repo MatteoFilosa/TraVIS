@@ -26,3 +26,14 @@ https://influencemap.cmlab.dev/submit/?id=AAAAAAEsOJZp~QWxhbiBKIFBlcmxpcw
 
 http://cloud-vis.com/qhd/icicle.html
 
+
+------INTIVISOR'S 4 VISUALIZATIONS----
+
+https://ocular.cc.gatech.edu/visList
+
+https://ocular.cc.gatech.edu/listView //???
+
+https://sites.cc.gatech.edu/gvu/ii/citevis/citevis-d3/index.htm
+
+https://www.microsoft.com/en-us/research/project/microsoft-research-data-visualization-apps-for-office/ //TOO GENERIC
+
