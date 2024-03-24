@@ -1302,11 +1302,12 @@ function isNameInUrl(jsonData, systemUrl) {
 
             //Append change layout button
 
-            /* const changeLayoutButton = document.createElement("button");
+            const changeLayoutButton = document.createElement("button");
             changeLayoutButton.innerHTML = "Change Layout";
             changeLayoutButton.className = "btn btn-info";
             changeLayoutButton.style.position = "absolute";
             changeLayoutButton.style.top = "12%"
+            changeLayoutButton.style.display = "none";    
             changeLayoutButton.id = "changeLayoutButton"
             changeLayoutButton.onclick = function () {
                 // Check if the button's innerHTML includes the string "Change"
@@ -1324,7 +1325,9 @@ function isNameInUrl(jsonData, systemUrl) {
                         changeLayoutButton.innerHTML = "Change Layout";
                     }, 500);
                 }
-            }; */
+            }; 
+
+            
 
             
 
