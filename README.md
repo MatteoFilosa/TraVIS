@@ -12,7 +12,7 @@ Steps to run the server for the first time:
 
 TraVIS: installation of the dependencies for the traces replay and state chart generation features
 
-1) Install selenium 4.1.3 ----> pip install selenium==4.1.3
+1) Install selenium 4.1.3 ----> pip install selenium==4.1.3 (it should be already installed from step 1)
 
 2) Download and put in any folder you like an updated chromedriver https://googlechromelabs.github.io/chrome-for-testing/#stable (Find the list here and download the version relative to your OS). Don't forget to update Chrome.
 
