@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, make_response, request,send_file
+from flask import Flask, render_template, jsonify, make_response, request, send_file
 from flask_cors import CORS
 from flask_pymongo import PyMongo
 from flask_caching import Cache
@@ -9,7 +9,6 @@ from pm4py.algo.conformance.alignments.edit_distance import algorithm as logs_al
 import os, re
 import subprocess
 import json
-import dns.resolver
 
 
 
