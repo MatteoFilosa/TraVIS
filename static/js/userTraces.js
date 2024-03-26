@@ -1142,18 +1142,17 @@ function ExtraInfo() {
 
   // Assuming you have an element with id "extraInfoContent"
   let extraInfoContentElem = document.getElementById("extrainfoContent");
-  var replayTraceBtnElem;
+
   // Create the button element
-  if (document.getElementById("replayTraceBtn") == undefined) {
-    replayTraceBtnElem = document.createElement("button");
-    // Set button properties
-    replayTraceBtnElem.innerHTML = "Replay selected trace";
-    replayTraceBtnElem.style.opacity = 1;
-    replayTraceBtnElem.style.display = "block";
-    replayTraceBtnElem.id = "replayTraceBtn";
-    // Append the button to the "extraInfoContent" element
-    extraInfoContentElem.appendChild(replayTraceBtnElem);
-  }
+  let replayTraceBtnElem = document.createElement("button");
+
+  // Set button properties
+  replayTraceBtnElem.innerHTML = "Replay selected trace";
+  replayTraceBtnElem.style.opacity = 1;
+  replayTraceBtnElem.style.display = "block";
+  replayTraceBtnElem.id = "replayTraceBtn";
+  // Append the button to the "extraInfoContent" element
+  extraInfoContentElem.appendChild(replayTraceBtnElem);
 
   // Add click event listener to the button
   replayTraceBtnElem.addEventListener("click", function () {
@@ -1604,19 +1603,23 @@ function createEventsBar(events, userTraceIndex) {
   // Set a minimum width for the bar
   const minWidth = 10;
   for (const [eventName, count] of Object.entries(events)) {
+
+    // Check if the interaction type already exists in interactionsCount
+    if (!interactionCounts[eventName]) {
+      interactionCounts[eventName] = [];
+    }
+
+    // Add the interaction type, count, and user trace ID to the interactionsCount object
+    interactionCounts[eventName].push({
+      count,
+      userTraceIndex,
+    });
+
+
     if (count > 0) {
       const percentage = (count / totalEvents) * 100;
 
-      // Check if the interaction type already exists in interactionsCount
-      if (!interactionCounts[eventName]) {
-        interactionCounts[eventName] = [];
-      }
-
-      // Add the interaction type, count, and user trace ID to the interactionsCount object
-      interactionCounts[eventName].push({
-        count,
-        userTraceIndex,
-      });
+      
       // Calculate the width of the bar based on percentage
       const barWidth = Math.max(
         minWidth,
@@ -1630,6 +1633,10 @@ function createEventsBar(events, userTraceIndex) {
       eventRectangle.appendChild(eventDiv);
     }
   }
+
+
+
+
   return eventRectangle;
 }
 
@@ -1661,11 +1668,10 @@ function generateViolationsHeatmap(violations) {
     const eventDiv = document.createElement("div");
     eventDiv.classList.add("eventColor");
     eventDiv.style.height = "70px";
-    eventDiv.style.width = `${
-      (count /
+    eventDiv.style.width = `${(count /
         Object.values(violations).reduce((acc, count) => acc + count, 0)) *
       100
-    }%`;
+      }%`;
     if (violationName.includes("1")) eventDiv.style.backgroundColor = "#f1a171";
     if (violationName.includes("2")) eventDiv.style.backgroundColor = "#feb24c";
     if (violationName.includes("3")) eventDiv.style.backgroundColor = "#f03b20";
@@ -1859,4 +1865,4 @@ function toggleLegend() {
   }
 }
 
-function previewTrace() {}
+function previewTrace() { }
