@@ -23,6 +23,7 @@ from selenium.webdriver.common.keys import Keys
 latencyLimits = {"click":0, "change":0, "contextmenu":0,"mousedown":0, "mouseup":1, "mouseover":0, "mouseenter":0, "mousemove":0 , "mouseleave":1 , "mouseout":1, "wheel":1, "dbclick":1}
 Levels = [(0,200.0),(200.0,2000.0),(2000.0,5000.0),(5000.0,15000.0),15000.0]
 
+
 def checkLevel(event,value):
 
     if(value < 0):
@@ -1062,6 +1063,7 @@ replayState = "play"
 
 # Function that changes the color of the replay path.
 def changeStateChartColors(transition, replayJson, driver):
+    
     global currentState
     global currentEdge
 
@@ -1178,13 +1180,21 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
 
         time.sleep(10)
 
+        calledFirstTime = 0 #tochange!
+
         for transition in explorationSequence:
             # TODO - COLORAZIONE SVG  
             # Here we handle the changing colors of the replay SVG.
             #if(len(driver.window_handles) != 1):
             #    driver.switch_to.window(originalWindow) 
             driver.switch_to.default_content()
+            if calledFirstTime == 0: #tochange!
+                time.sleep(20)       #tochange!
+            print(calledFirstTime)
             changeStateChartColors(transition, replayJson, driver)
+            calledFirstTime = 1
+
+            
             driver.switch_to.frame(iframe)
 
             # Here we handle the replay state.

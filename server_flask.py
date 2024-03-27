@@ -811,6 +811,8 @@ def create_statechart_files():
 
 
 
+import time
+
 # The route to start the replay.
 @app.route("/replay", methods=['POST'])
 def replay_user_trace():
@@ -819,6 +821,9 @@ def replay_user_trace():
     current_name = request_data.get('name')
 
     try:
+        # Add a sleep of 10 seconds
+        
+
         current_trace_file = open("./static/files/user_traces/current_trace.json", "w")
         current_trace_file.write(current_trace)
         current_trace_file.close()
@@ -836,10 +841,11 @@ def replay_user_trace():
         pathsSimulatorContainer(current_trace, replayJsonified)
         output = "Simulation finished"
     except subprocess.CalledProcessError as e:
-        # Gestisci eventuali errori durante l'esecuzione
-        output = f'Errore durante l\'esecuzione del programma esterno: {e.stderr}'
+        # Handle any errors during execution
+        output = f'Error during the execution of the external program: {e.stderr}'
     
     return output
+
 
 
 
