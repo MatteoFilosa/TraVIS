@@ -34,10 +34,10 @@ window.onload = function () {
     loadButton = document.getElementById("loadSystem");
     statechartSVG = document.getElementById("statechartSVG");
 
-    sideBarCollapse.addEventListener("click", function () {
-        sideBarCollapse.classList.toggle("active");
-        document.getElementById("sidebar").classList.toggle("active");
-    });
+    // sideBarCollapse.addEventListener("click", function () {
+    //     sideBarCollapse.classList.toggle("active");
+    //     document.getElementById("sidebar").classList.toggle("active");
+    // });
     colorLegend();
     //graphviz();
 

@@ -74,9 +74,6 @@
                             <li class="nav-item active">
                                 <a class="nav-link" href="/userTasks">User Tasks</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/versionHistory">Version History</a>
-                            </li>
                         </ul>
                     </div>
 
@@ -93,8 +90,6 @@
                     padding: 0.5%;transition: all 0.3s;box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);">
                         <div style="display: flex;justify-content: space-between;">
                             <h1 id="tracesNum" style="margin-bottom: 2%;">Loading User Tasks... </h1>
-                            <button class="btn idealPathBtn" onclick="idealPath()" data-toggle="modal"
-                            data-target="#ideaPathModal">Define an Ideal Path</button>
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="ideaPathModal" tabindex="-1" role="dialog"
@@ -167,7 +162,7 @@
                                             height="20px" />Correctness percentage</th>
 
                                     <th scope="col" style="width: 1.5%;"><img src="images/golden.png" width="20px"
-                                            height="20px" />Golden Trace</th>
+                                            height="20px" />Ideal Trace</th>
                                     <th scope="col" style="width: 0.1%;"></th>
 
                                 </tr>
@@ -195,7 +190,7 @@
                     <div class="extrainfoDiv" id="extrainfoDiv" data-visible="false">
                         <div style="display: flex;justify-content: space-between;">
                             <h1 id="traceInfoTitle">Task Information </h1>
-                            <button id="replayTraceBtn" style="opacity: 0;">Replay selected trace</button>
+                            <!-- <button id="replayTraceBtn" style="opacity: 0;">Replay selected trace</button> -->
                             <button class="selectTraceBtn" id="selectTraceBtn"></button>
                         </div>
 
@@ -203,16 +198,12 @@
                         <div id="extrainfoContent" class="taskInfoContent">
                             <div id="generalInfo">
                                 <div>
-                                    <p class="generalInfoHeader">Idea </p>
+                                    <p class="generalInfoHeader">Description </p>
                                     <p id="idea" class="generalInfoContent"></p>
                                 </div>
                                 <div>
                                     <p class="generalInfoHeader">Category </p>
                                     <p id="category" class="generalInfoContent"></p>
-                                </div>
-                                <div>
-                                    <p class="generalInfoHeader">Description </p>
-                                    <p id="description" class="generalInfoContent">-</p>
                                 </div>
                                 <div>
                                     <p class="generalInfoHeader" id="idealSequenceHeader">Ideal sequence </p>
