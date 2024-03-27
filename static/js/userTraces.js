@@ -1138,6 +1138,11 @@ function ExtraInfo() {
         }
       });
     });
+    
+    var replayElements = document.getElementsByClassName("replayClass");
+    while (replayElements.length > 0) {
+      replayElements[0].parentNode.removeChild(replayElements[0]);
+    }
     document.getElementById("previewTrace").style.display = 'block';
     document.getElementById("previewTrace").href = "home"; 
     localStorage.removeItem("selectedTrace");
@@ -1159,6 +1164,7 @@ function ExtraInfo() {
   replayTraceBtnElem.innerHTML = "Replay selected trace";
   replayTraceBtnElem.style.opacity = 1;
   replayTraceBtnElem.style.display = "block";
+  replayTraceBtnElem.className = "replayClass";
   replayTraceBtnElem.id = "replayTraceBtn";
   // Append the button to the "extraInfoContent" element
   extraInfoContentElem.appendChild(replayTraceBtnElem);
