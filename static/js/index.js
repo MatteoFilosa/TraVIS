@@ -1350,7 +1350,7 @@ function isNameInUrl(jsonData, systemUrl) {
 
             }
 
-            //State chart highlighting for task and interaction frequency (multiple traces selected)
+            //State chart highlighting for task interaction frequency
 
             if (JSON.parse(localStorage.getItem("taskInfo")) != null){
                 console.log("Highlight Task")

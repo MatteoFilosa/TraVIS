@@ -927,7 +927,7 @@ function populateTable(data) {
           document.getElementById(`previewTrace${selectedTraceID}`).id =
             "previewTrace";
         }
-        document.getElementById(`previewTrace`).style.display = "none";
+        //document.getElementById(`previewTrace`).style.display = "none";
 
         // document.getElementById(`button${numbersOnlyID}`).classList.remove("expandButtonPressed");
         // document.getElementById(`extrainfoDiv`).setAttribute("data-visible", "false");
@@ -1103,7 +1103,7 @@ function ExtraInfo() {
     localStorage.removeItem("selectedTraces");
     localStorage.setItem("selectedTraces", JSON.stringify(traces));
 
-    document.getElementById(`previewTrace`).style.display = "none";
+    //document.getElementById(`previewTrace`).style.display = "none";
     document.getElementById("heatmap").style.display = "none";
     document.getElementById("combinedHeatmaps").innerHTML = "";
     document.getElementById("combinedHeatmaps").style.display = "grid";
@@ -1138,6 +1138,15 @@ function ExtraInfo() {
         }
       });
     });
+    document.getElementById("previewTrace").style.display = 'block';
+    document.getElementById("previewTrace").href = "home"; 
+    localStorage.removeItem("selectedTrace");
+    localStorage.removeItem("selectedTraceID");
+
+    localStorage.setItem("loadedTraces", JSON.stringify(loadedTraces));
+
+    if (selectedTraces.size > 5) document.getElementById("previewTrace").style.display = 'none'; 
+    
   }
 
   // Assuming you have an element with id "extraInfoContent"
