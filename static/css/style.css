@@ -712,7 +712,7 @@ table.dataTable tbody td {
 .selectTraceBtn{
     opacity: 0;
     height: 38px;
-    width: 114px;
+    width: 0px;
     /* position: absolute;
     right: 54px;
     top: 69px; */
