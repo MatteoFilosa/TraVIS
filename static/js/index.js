@@ -1306,7 +1306,8 @@ function isNameInUrl(jsonData, systemUrl) {
             changeLayoutButton.innerHTML = "Change Layout";
             changeLayoutButton.className = "btn btn-info";
             changeLayoutButton.style.position = "absolute";
-            changeLayoutButton.style.top = "12%"
+            changeLayoutButton.style.top = "12%";
+            changeLayoutButton.style.display = "none";
             changeLayoutButton.id = "changeLayoutButton"
             changeLayoutButton.onclick = function () {
                 // Check if the button's innerHTML includes the string "Change"
