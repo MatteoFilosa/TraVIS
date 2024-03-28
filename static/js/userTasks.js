@@ -383,7 +383,7 @@ async function getTimeForGroup(groupID) {
   });
   return returnObj;
 }
-
+var checkboxChecked = false;
 function populateTable(data) {
   const tableBody = document.getElementById("tracesTable");
 
@@ -442,6 +442,7 @@ function populateTable(data) {
         btnImg.height = "20px";
         goldenTraceBtn.appendChild(btnImg);
         goldenTraceBtn.classList.add("btn", "extraFiltersBtn"); // Add Bootstrap button classes
+        goldenTraceBtn.style.width = "100px";
         goldenTraceBtn.textContent = "Show";
         goldenTraceBtn.setAttribute("showedGoldenTrace", "false");
         goldenTraceBtn.setAttribute("data-toggle", "modal");
@@ -560,10 +561,27 @@ function populateTable(data) {
       });
       var newRow;
       checkbox.addEventListener("change", function () {
+        if (checkboxChecked) {
+          const checkboxes = document.querySelectorAll('input[checked="true"]');
+          checkboxes.forEach((checkbox) => {
+            if (checkbox.checked) {
+              const row = checkbox.closest("tr");
+      row.classList.remove("table-selected");
+              checkbox.setAttribute("checked", "false");
+              row.classList.remove("table-selected");
+              checkbox.checked = false;
+              clearExtraInformation();
+            }
+          });
+        }
         if (checkbox.checked) {
+          checkboxChecked = true;
+          checkbox.setAttribute("checked", "true");
           row.classList.add("table-selected");
           ExtraInfo(checkbox.id);
         } else {
+          checkboxChecked = false;
+          checkbox.setAttribute("checked", "false");
           row.classList.remove("table-selected");
           clearExtraInformation();
         }
@@ -716,7 +734,7 @@ async function addTraceInfo(taskID) {
 
       interactionsCell.textContent = totalElements;
       eventTypes(events).then(function (value) {
-        interactionsCell.appendChild(createEventsBar(value,(traceCnt + 1)));
+        interactionsCell.appendChild(createEventsBar(value, traceCnt + 1));
         interactionsCell.style.display = "flex";
         interactionsCell.style.marginTop = "12%";
       });
@@ -911,10 +929,11 @@ function ExtraInfo(taskID) {
   document.getElementById("selectTraceBtn").innerHTML = `View task`;
 
   document.getElementById("selectTraceBtn").onclick = function () {
-    window.location.href = "home"; //!!!!!
+    //window.location.href = "home"; //!!!!!
 
     localStorage.setItem("taskInfo", JSON.stringify(taskInfo));
     localStorage.setItem("taskID", JSON.stringify(taskID));
+    window.open("home", "_blank");
   };
 
   document.getElementById("extrainfoContent").style.opacity = 1;
@@ -1046,7 +1065,10 @@ function createEventsBar(events, userTraceIndex) {
   eventRectangle.innerHTML = "";
 
   // Calculate the total number of events
-  const totalEvents = Object.values(events).reduce((acc, count) => acc + count, 0);
+  const totalEvents = Object.values(events).reduce(
+    (acc, count) => acc + count,
+    0
+  );
 
   // Set a minimum width for the bar
   const minWidthPercent = 5; // Adjust as needed
@@ -1075,7 +1097,6 @@ function createEventsBar(events, userTraceIndex) {
 
   return eventRectangle;
 }
-
 
 async function findViolations(violations) {
   const levelCount = {
