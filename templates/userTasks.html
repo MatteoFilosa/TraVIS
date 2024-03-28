@@ -142,28 +142,28 @@
                                 <tr>
                                     <th scope="col" style="width: 0.5%;padding-left: 1%;"><input type="checkbox"
                                             id="selectAllCheckbox"></th>
-                                    <th scope="col" style="width: 1.5%;"><img src="images/task.png" width="20px"
+                                    <th scope="col" style="width: 2%;padding: 5px 5px;"><img src="images/task.png" width="20px"
                                             height="20px" />Task</th>
                                     <!-- <th scope="col" style="width: 2%;"><img src="images/idea.png" width="20px"
                                             height="20px" />Idea</th>
                                     <th scope="col" style="width: 2%;"><img src="images/category.png" width="20px"
                                             height="20px" />Category</th> -->
-                                    <th scope="col" style="width: 2%;"><img src="images/interactorIcon.png" width="20px"
+                                    <th scope="col" style="width: 1.5%;padding: 5px 5px;"><img src="images/interactorIcon.png" width="20px"
                                             height="20px" />Interactions</th>
-                                    <th scope="col" style="width: 1%;"><img src="images/timeIcon.png" width="20px"
+                                    <th scope="col" style="width: 5%;padding: 5px 5px;"><img src="images/timeIcon.png" width="20px"
                                             height="20px" />Average Ex. Time</th>
                                     <!-- <th scope="col" style="width: 4%;"><img src="images/boxPlot.png" width="20px"
                                             height="20px" />Total Time Distribution</th> -->
-                                    <th scope="col" style="width: 4%;"><img src="images/variance.png" width="20px"
+                                    <th scope="col" style="width: 8%;padding: 5px 5px;"><img src="images/variance.png" width="20px"
                                             height="20px" />Standard deviation in Ex. Time</th>
-                                    <th scope="col" style="width: 2.5%;"><img src="images/errorIcon.png" width="20px"
+                                    <th scope="col" style="width: 2%;padding: 5px 5px;"><img src="images/errorIcon.png" width="20px"
                                             height="20px" />Violations</th>
-                                    <th scope="col" style="width: 2%;"><img src="images/correct.png" width="20px"
-                                            height="20px" />Correctness percentage</th>
+                                    <th scope="col" style="width: 3%;padding: 5px 5px;"><img src="images/correct.png" width="20px"
+                                            height="20px" />Correctness %</th>
 
-                                    <th scope="col" style="width: 1.5%;"><img src="images/golden.png" width="20px"
+                                    <th scope="col" style="width: 0.05%;padding: 5px 5px;"><img src="images/golden.png" width="20px"
                                             height="20px" />Ideal Trace</th>
-                                    <th scope="col" style="width: 0.1%;"></th>
+                                    <th scope="col" style="width: 0.02%;padding: 0px;"></th>
 
                                 </tr>
                             </thead>
@@ -191,7 +191,7 @@
                         <div style="display: flex;justify-content: space-between;">
                             <h1 id="traceInfoTitle">Task Information </h1>
                             <!-- <button id="replayTraceBtn" style="opacity: 0;">Replay selected trace</button> -->
-                            <button class="selectTraceBtn" id="selectTraceBtn"></button>
+                            <button class="selectTraceBtn" id="selectTraceBtn" style="height: 33px;width: 151px;"></button>
                         </div>
 
                         <div id="placeholderText">Select a task to view more information</div>
@@ -215,10 +215,10 @@
                                     <p id="mostPerformed" class="generalInfoContent">-</p>
                                 </div>
                             </div>
-                            <div style="display: flex;justify-content: space-between;margin-bottom: 30px;">
+                            <div>
                                 <div class="eventsDiv">
                                     <p class="generalInfoHeader">Task Interactions</p>
-                                    <ul id="interactionsList" class="generalInfoContent" style="width: 133%;">
+                                    <ul id="interactionsList" class="generalInfoContent">
                                         <li>item 1</li>
                                         <li>item 2</li>
                                         <li>item 3</li>
