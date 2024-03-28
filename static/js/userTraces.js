@@ -673,6 +673,19 @@ function resetFilters() {
 
   // Apply the reset to update the table
   applyTableFilter();
+
+  const checkboxes = document.querySelectorAll(
+    "#tracesTable input[type='checkbox']"
+  );
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+    const row = checkbox.closest("tr");
+      row.classList.remove("table-selected");
+      selectedTraces.delete(checkbox.id);
+    
+  });
+  console.log(selectedTraces);
+  clearExtraInformation();
 }
 
 function getUserTraces() {
@@ -945,7 +958,7 @@ function populateTable(data) {
 
           document.getElementById("selectTraceBtn").style.display = "block";
           document.getElementById("selectTraceBtn").onclick = function () {
-            window.location.href = "home"; //!!!!!
+            window.location.href = "home"; //!!!
             localStorage.removeItem("selectedTrace");
             localStorage.removeItem("selectedTraceID");
 
