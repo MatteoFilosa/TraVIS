@@ -303,7 +303,7 @@ function setupMinimapClickHandler(originalSVG) {
     statechart.attr("transform", "translate(0 ," + originalHeight + ")");
 
         var zoom = d3.zoom()
-            .scaleExtent([1, 20])
+            .scaleExtent([0.15, 20])
             .on('zoom', function (event) {
                 statechart
                     .selectAll("g")
@@ -1287,7 +1287,7 @@ function isNameInUrl(jsonData, systemUrl) {
             
 
             var zoom = d3.zoom()
-                .scaleExtent([1, 20])
+                .scaleExtent([0.15, 20])
                 .on('zoom', function (event) {
                     statechart
                     .selectAll("g")
@@ -1492,7 +1492,7 @@ function changeLayout(layoutName) {
             scale = 1, currentX = 0, currentY = originalHeight, translateX = 0, translateY = currentY, minimapHidden = false;
 
             var zoom = d3.zoom()
-                .scaleExtent([1, 20])
+                .scaleExtent([0.15, 20])
                 .on('zoom', function (event) {
                     statechart
                         .selectAll("g")
