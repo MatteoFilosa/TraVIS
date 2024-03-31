@@ -22,7 +22,7 @@ TraVIS: installation of the dependencies for the traces replay and state chart g
 
 3) Add the chromedriver's path to PATH environmental variable
 
-4) Change line 1143 in PathSimulator.py to your path to chromedriver (...). Use double '\' for the path if you get syntax error.
+4) Change line 1143 in PathSimulator.py to your path to chromedriver. Use double '\' for the path if you get a syntax error.
 
 5) Install the next node modules:
 
@@ -41,8 +41,7 @@ TraVIS: installation of the dependencies for the traces replay and state chart g
 
 4) On the top right corner of the extra info for the trace, it is possible to see a button, used to invoke the replay functionality (available only for a single trace). A new window will be opened, and the trace will be replayed, doing the same interactions in the trace, seeing on the left the visualization system and on the right the state chart, that is coloured basing on the interaction that is being performed in the visualization system. It is possible to play, pause, stop, and reproduce directly the next event by playing the relative buttons on the top.
 
-5) In the User Tasks tab, it is possible to see details about exploratory tasks performed while recording the user traces relative to Falcon crossfilter. It is possible to see details in the inner tables relative to each trace. A correctness percentage of the task
-is displayed for each trace (and "grouped" for each task). This percentage was calculated to see the users performance on each task, basing on pm4py trace alignment functionalites with an ideal trace (referred to as "golden trace"), that represents a possibly perfect execution of that task on the visualization system. It is also possible to see each task on the interaction space, by having the  state chart coloured as described in section 3.
+5) In the User Tasks tab, it is possible to see details about exploratory tasks performed while recording the user traces relative to Falcon crossfilter. It is possible to see details in the inner tables relative to each trace. A correctness percentage of the task is displayed for each trace (and "grouped" for each task). This percentage was calculated to see the users performance on each task, basing on pm4py trace alignment functionalites with an ideal trace (referred to as "golden trace"), that represents a possibly perfect execution of that task on the visualization system. It is also possible to see each task on the interaction space, by having the  state chart coloured as described in section 3.
 
 
 
