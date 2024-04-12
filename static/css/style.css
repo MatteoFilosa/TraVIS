@@ -728,6 +728,22 @@ table.dataTable tbody td {
     transition: all 0.2s ease-in-out;
 }
 
+.violationsTrace {
+    display: none;
+    border-radius: 4px;
+    border: 1px solid #fe9900;
+    height: 35px;
+    width: 35px;
+    background: transparent;
+    padding: 2px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.violationsTrace img {
+    width: 25px;
+    height: 25px;
+}
+
 #replayTraceBtn{
     border: none;
     border-radius: 13px;

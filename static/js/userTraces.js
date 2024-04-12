@@ -993,8 +993,10 @@ function ExtraInfo() {
       "traceInfoTitle"
     ).innerHTML = `Trace Information: User ${[userNum]}`;
     document.getElementById("previewTrace").style.display = "block";
+    document.getElementById("violationsTrace").style.display = "block";
 
     document.getElementById("previewTrace").href = "home";
+    document.getElementById("violationsTrace").href = "home";
 
     loadedTraces.forEach((element, index) => {
       let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
@@ -1013,6 +1015,7 @@ function ExtraInfo() {
     );
     localStorage.setItem("selectedTraceID", JSON.stringify(userNum));
     document.getElementById("previewTrace").id += userNum;
+    localStorage.setItem
 
     document.getElementById("heatmap").style.display = "block";
     document.getElementById("combinedHeatmaps").style.display = "none";
@@ -1099,6 +1102,24 @@ function ExtraInfo() {
       timeList.append(totalTime);
       timeList.append(averageTime);
     });
+
+    //Violations preview
+
+    var violationsTraceElement = document.getElementById("violationsTrace")
+    violationsTraceElement.addEventListener("click", function () {
+      localStorage.setItem(
+        "selectedTrace",
+        JSON.stringify(selectedTrace_RawValue)
+      );
+      localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
+      localStorage.setItem('violations', JSON.stringify(1))
+      console.log(violationsForAllTraces)
+      console.log("okokokk")
+      localStorage.setItem('violationsForAllTraces', JSON.stringify(violationsForAllTraces))
+      violationsTrace.href = "home";
+    });
+
+
   } else {
     console.log(selectedTraces);
     let traces = Array.from(selectedTraces);
@@ -1199,6 +1220,7 @@ function ExtraInfo() {
     }).then((response) => console.log(response));
   });
 }
+//USELESS FUNCTION, NEVER CALLED
 function showExtraInformation(userID) {
   //console.log(userID)
   selectedTraceID = userID;
@@ -1218,6 +1240,8 @@ function showExtraInformation(userID) {
   document.getElementById("previewTrace").style.display = "block";
 
   var previewTraceElement = document.getElementById("previewTrace");
+  var violationsTraceElement = document.getElementById("violationsTrace")
+  console.log(violationsTraceElement)
 
   previewTraceElement.addEventListener("click", function () {
     localStorage.setItem(
@@ -1226,8 +1250,20 @@ function showExtraInformation(userID) {
     );
     localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
 
-    console.log("home");
     previewTraceElement.href = "home";
+  });
+
+  violationsTraceElement.addEventListener("click", function () {
+    localStorage.setItem(
+      "selectedTrace",
+      JSON.stringify(selectedTrace_RawValue)
+    );
+    localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
+    localStorage.setItem('violations', JSON.stringify(1))
+    console.log(violationsForAllTraces)
+    console.log("okokokk")
+    localStorage.setItem('violationsForAllTraces', JSON.stringify(violationsForAllTraces))
+    violationsTrace.href = "home";
   });
 
   document.getElementById("previewTrace").id += selectedTraceID;

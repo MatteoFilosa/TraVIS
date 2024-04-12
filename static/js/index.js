@@ -46,6 +46,8 @@ window.onload = function () {
         console.log("Forced Falcon Visualization System. SelectedTrace is not null (or loadedtraces).")
         systemURL = "https://vega.github.io/falcon/flights/"
         LoadSystem();
+        console.log(JSON.parse(localStorage.getItem("violations")))
+        console.log(JSON.parse(localStorage.getItem("violationsForAllTraces")))
         
     }
 
@@ -493,13 +495,13 @@ function highlightStatechart(interaction_types) {
 
             if (interaction <= threshold) { //The blue results too whiteish
 
-                console.log("BLACK: " + interaction, threshold, nodeText)
+                //console.log("BLACK: " + interaction, threshold, nodeText)
                 d3.select(this.parentNode).selectAll("text").style("fill", "black");
 
 
             } else {
                 // Set the text color to black
-                console.log("WHITE: " + interaction, threshold, nodeText)
+                //console.log("WHITE: " + interaction, threshold, nodeText)
                 d3.select(this.parentNode).selectAll("text").style("fill", "white");
             }
 
@@ -653,6 +655,150 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
 
 }
 
+function highlightStatechartViolations(interaction_types, violationsForAllTraces) {
+
+    console.log(interaction_types, violationsForAllTraces)
+
+    document.getElementById("colorLegend").style.display = 'none';
+    document.getElementById("changeLayoutButton").style.display = "none";
+    document.getElementById("minimapContainer").style.display = "none";
+
+    //Making all the edges barely visible
+
+    var edges = d3.selectAll(".edge");
+    edges.select("polygon").style("opacity", 0.15);
+    edges.select("polyline").style("opacity", 0.15);
+    edges.select("path").style("opacity", 0.15);
+
+
+    // Select nodes, polygons, and texts
+    var nodes = d3.select("#originalSVG").selectAll(".node");
+    var polygons = nodes.selectAll("polygon");
+    var texts = nodes.selectAll("text");
+
+    //var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, maxFrequency]);
+
+    for(let i = 0; i < 50; i++){
+        var currentViolations = []
+        if(violationsForAllTraces[i].name.includes(selectedTraceID)) console.log("iprendi da qui") //da qui
+    }
+
+
+    polygons.style("fill", function () {
+        var nodeText = d3.select(this.parentNode).select("text").text();
+        //var interaction = interactionFrequency[nodeText] || 0;
+
+        // Color grey if there are no interactions for the polygon
+        /* //if (interaction === 0) {
+            var greyColor = "#a3a3a3" //"#404040";
+            d3.select(this).style("fill", greyColor);
+
+
+
+            return greyColor;
+        } */
+
+        /* var nodeId = this.id; // this.id is a string like "svg_edge_id_E54"
+        var parts = nodeId.split("_");
+        var realId = parts[3];
+
+        // Perform edge operations only when interactions are > 0
+        if (interaction > 0) {
+            // Check if the color is below a certain threshold
+            var threshold = maxFrequency / 3; // Adjust this threshold as needed
+
+            if (interaction <= threshold) { //The blue results too whiteish
+
+                //console.log("BLACK: " + interaction, threshold, nodeText)
+                d3.select(this.parentNode).selectAll("text").style("fill", "black");
+
+
+            } else {
+                // Set the text color to black
+                //console.log("WHITE: " + interaction, threshold, nodeText)
+                d3.select(this.parentNode).selectAll("text").style("fill", "white");
+            }
+
+            // Color the polygon using the color scale
+            var color = colorScale(interaction);
+            d3.select(this).style("fill", color);
+
+
+            edges.each(function () {
+                var edge = d3.select(this);
+                var titleContent = edge.select("title").text();
+
+                // Check if the edge has interactions on the polygons
+                var regex = new RegExp("\\b" + realId + "\\b");
+                if (titleContent.match(regex)) {
+                    // Set the edge colors
+                    // Increasing edges' opacity if we're interested in them
+                    console.log(nodeId, titleContent);
+                    edge.select("polygon").style("fill", color);
+                    edge.select("polyline").style("fill", color);
+                    edge.select("path").style("stroke", color);
+                    edge.select("polygon").style("opacity", 1);
+                    edge.select("polyline").style("opacity", 1);
+                    edge.select("path").style("opacity", 1);
+                }
+            });
+            return color;
+        } */
+    });
+
+
+
+
+    //texts.style("fill", "white"); // Set text color to white
+
+    // Create and update traceInfo div using plain HTML
+    var traceInfoDiv = document.getElementById("traceInfo");
+    if (!traceInfoDiv) {
+        var traceInfoDiv = document.createElement("div");
+        traceInfoDiv.id = "traceInfo";
+        traceInfoDiv.style.position = "absolute";
+        traceInfoDiv.style.top = "150px";
+        traceInfoDiv.style.right = "10px";
+        traceInfoDiv.style.background = "#f9f9f9";
+        traceInfoDiv.style.width = "200px";
+        traceInfoDiv.style.padding = "15px";
+        traceInfoDiv.style.border = "2px solid #554e8d";
+        traceInfoDiv.style.borderRadius = "8px";
+        traceInfoDiv.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+        traceInfoDiv.style.display = "flex";
+        traceInfoDiv.style.flexDirection = "column";
+        traceInfoDiv.style.display = "inline"
+
+        traceInfoDiv.innerHTML += "No Interactions: <svg height='20' width='20'><rect width='20' height='20' style='fill:#a3a3a3;'></rect></svg><br><br>";
+
+        // Add an image to the traceInfo div
+        var img = document.createElement("img");
+        img.src = "images/blues.png";
+        img.alt = "Blues Image";
+        img.style.height = "30px"
+        img.style.maxWidth = "100%";
+        traceInfoDiv.appendChild(img);
+
+        // Add a small number representing the maximum number of interactions
+        var interactionCount = document.createElement("div");
+        interactionCount.className = "interaction-count";
+        interactionCount.style.color = "black";
+        interactionCount.textContent = "Most performed interaction: " + mostPerformedEvent + ", " + maxFrequency + " times";
+        traceInfoDiv.appendChild(interactionCount);
+
+        // Append the traceInfo div to the statechartContainer
+        document.getElementById("statechartContainer").appendChild(traceInfoDiv);
+    }
+
+    // Add content to the traceInfo div
+    traceInfoDiv.innerHTML += "Trace selected: " + JSON.parse(localStorage.getItem("selectedTraceID"));
+
+    localStorage.removeItem("selectedTrace");
+    localStorage.removeItem("selectedTraceID");
+    localStorage.removeItem("violations");
+
+}
+
 function highlightTask(taskInfo, taskID) {
     var nodes = d3.select("#originalSVG").selectAll(".node");
     var polygons = nodes.selectAll("polygon");
@@ -741,13 +887,13 @@ function highlightTask(taskInfo, taskID) {
                 
                 if (interaction <= threshold) { //The blue results too whiteish
 
-                    console.log("BLACK: " + interaction, threshold, nodeText)
+                    //console.log("BLACK: " + interaction, threshold, nodeText)
                     d3.select(this.parentNode).selectAll("text").style("fill", "black");
                     
                     
                 } else {
                     // Set the text color to black
-                    console.log("WHITE: " + interaction, threshold, nodeText)
+                    //console.log("WHITE: " + interaction, threshold, nodeText)
                     d3.select(this.parentNode).selectAll("text").style("fill", "white");
                 }
 
@@ -1333,13 +1479,21 @@ function isNameInUrl(jsonData, systemUrl) {
 
             if(window.location.href.includes("replay")) document.getElementById("changeLayoutButton").style.display = "none";
             let selectedTrace = JSON.parse(localStorage.getItem("selectedTrace"));
+            let violationsTraceFlag = JSON.parse(localStorage.getItem("violations"));
+            let violationsForAllTraces = JSON.parse(localStorage.getItem("violationsForAllTraces"));
 
             //State chart highlighting for interaction frequency
 
-            if (selectedTrace && Object.keys(selectedTrace).length > 0) {
+            if (selectedTrace && Object.keys(selectedTrace).length > 0 && violationsTraceFlag != 1) {
                 console.log("selectedTrace is not empty");
                 console.log(selectedTrace);
                 highlightStatechart(selectedTrace);
+            }
+
+            if (violationsTraceFlag == 1) {
+                console.log("ViolationsPreviewFlag is not empty");
+                console.log(selectedTrace);
+                highlightStatechartViolations(selectedTrace, violationsForAllTraces);
             }
 
             //State chart highlighting for interaction frequency (multiple traces selected)
