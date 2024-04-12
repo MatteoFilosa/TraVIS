@@ -366,7 +366,7 @@ a.dropdown-item {
 
 .filterSpan {
     margin-bottom: 15px;
-
+    margin-right: 11px;
 }
 
 .extraFiltersBtn{
@@ -392,7 +392,7 @@ a.dropdown-item {
     margin-bottom: 28px;
 }
 #demographicFilter div{
-    margin-right: 10px;
+    margin-right: 3px;
 }
 #demographicFilter div select,.dropdown button{
     background-color: white;
@@ -624,12 +624,14 @@ thead {
 tr {
     height: 2rem;
 }
-
+.btn dropdown-toggle:hover{
+border: 2px solid #554e8d;
+}
 #tasktable th{
     font-size: 15px;
 }
 #tasktable tr{
-    height: 7rem;
+    height: 5rem;
 }
 tbody tr:hover {
     background-color: #d5d4e5 !important;
@@ -711,7 +713,7 @@ table.dataTable tbody td {
 }
 .selectTraceBtn{
     opacity: 0;
-    height: 38px;
+    height: 19px;
     width: 0px;
     /* position: absolute;
     right: 54px;
@@ -726,15 +728,33 @@ table.dataTable tbody td {
     transition: all 0.2s ease-in-out;
 }
 
+.violationsTrace {
+    display: none;
+    border-radius: 4px;
+    border: 1px solid #fe9900;
+    height: 35px;
+    width: 35px;
+    background: transparent;
+    padding: 2px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.violationsTrace img {
+    width: 25px;
+    height: 25px;
+}
+
 #replayTraceBtn{
     border: none;
-    border-radius: 6px;
+    border-radius: 13px;
     background-color: #52b0c3;
     font-size: 17px;
     font-weight: 500;
     color: white;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease-in-out;
+    width: 227px;
+    height: 56px;
 }
 
 
@@ -755,8 +775,8 @@ table.dataTable tbody td {
     flex-grow: 0;
 }
 #heatmap {
-    width: 300px;
-    height: 300px;
+    width: 284px;
+    height: 284px;
     position: relative;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid #00000047;
@@ -766,8 +786,8 @@ table.dataTable tbody td {
     grid-template-columns: auto auto;
     gap: 15px 10px;
     padding: 5px;
-    width: 300px;
-    height: 300px;
+    width: 284px;
+    height: 284px;
     position: relative;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid #00000047;
