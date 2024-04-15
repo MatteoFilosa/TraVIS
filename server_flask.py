@@ -534,6 +534,90 @@ def upload_user_traces():
 
     return "User traces correctly uploaded!"
 
+
+#Upload formatted violations
+
+@app.route("/upload_violations_formatted")
+def upload_violations_formatted():
+    try:
+        database_name = "user_traces"  
+        mongo_uri = config['DATABASES'][database_name]
+        app.config["MONGO_URI"] = mongo_uri
+        mongo = PyMongo(app)
+
+        folder = "static/files/user_traces/formatted_violations" #Change folder to change which user traces to upload
+        collection_name = "formatted_violations" 
+
+        # List all files in the specified folder
+        all_files = os.listdir(folder)
+
+        for file_name in all_files:
+            path = os.path.join(folder, file_name)
+
+            # Verifying if the file was already added to the db
+            existing_document = mongo.db[collection_name].find_one({"name": file_name})
+
+            if existing_document:
+                print(f"{file_name} is already in the database. Skipping...")
+            else:
+                with open(path, "r") as file:
+                    user_trace_data = file.read()
+
+                # Using regex to extract the number after "7M_"
+                match = re.search(r"7M_(\d+)", file_name)
+
+                if match:
+                    # Extracting the matched number
+                    number = match.group(1)
+
+                    # Insert the document into the collection
+                    document = {"name": file_name, "number": number, "violations": user_trace_data}
+                    mongo.db[collection_name].insert_one(document)
+                    print(f"{file_name} inserted into the database with number {number}.")
+                else:
+                    print(f"No number found in {file_name}. Skipping insertion.")
+
+        print("Process complete!")
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": str(e)}), 500
+
+    return "Formatted violations correctly uploaded!"
+
+
+# Function to download the user_traces with caching
+@app.route("/get_violations_formatted")
+@cache.cached(timeout=300) 
+def get_violations_formatted():
+    try:
+        database_name = "user_traces"  
+        mongo_uri = config['DATABASES'][database_name]
+        app.config["MONGO_URI"] = mongo_uri
+        mongo = PyMongo(app)
+
+        collection_name = "formatted_violations" 
+
+        # Recupera tutti i documenti dalla collezione
+        all_documents = mongo.db[collection_name].find()
+
+        # Lista per memorizzare i dati dei file
+        files_data = []
+
+        # Itera su tutti i documenti e aggiungili alla lista
+        for document in all_documents:
+            files_data.append({
+                "name": document["name"],
+                "number": document["number"],
+                "violations": document["violations"]
+            })
+
+        return files_data
+
+    except Exception as e:
+        print(f"Error: {e}")
+        return jsonify({"error": str(e)}), 500
+
 # Function to download the user_traces with caching
 @app.route("/get_user_traces")
 @cache.cached(timeout=300)  # Cache timeout set to 300 seconds (adjust as needed)

@@ -1,0 +1,53 @@
+[
+        {
+                "level": 1,
+                "visual_component": "delay",
+                "interaction": "mousemove_brush",
+                "timestamp": 225.03,
+                "info": [
+                        [
+                                128,
+                                219
+                        ],
+                        [
+                                258,
+                                326
+                        ]
+                ],
+                "task": 4
+        },
+        {
+                "level": 1,
+                "visual_component": "delay",
+                "interaction": "mousemove_brush",
+                "timestamp": 228.03,
+                "info": [
+                        [
+                                128,
+                                219
+                        ],
+                        [
+                                258,
+                                326
+                        ]
+                ],
+                "task": 4
+        },
+        {
+                "level": 1,
+                "visual_component": "distance",
+                "interaction": "mousemove_brush",
+                "timestamp": 271.03,
+                "info": [
+                        [
+                                167,
+                                50
+                        ],
+                        [
+                                549,
+                                50
+                        ]
+                ],
+                "task": 4
+        }
+]

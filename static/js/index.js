@@ -45,9 +45,9 @@ window.onload = function () {
     if ((JSON.parse(localStorage.getItem("selectedTrace")) != null) || (JSON.parse(localStorage.getItem("loadedTraces")) != null)){
         console.log("Forced Falcon Visualization System. SelectedTrace is not null (or loadedtraces).")
         systemURL = "https://vega.github.io/falcon/flights/"
+        console.log(JSON.parse(localStorage.getItem("violationsForAllTracesFormatted")))
         LoadSystem();
-        console.log(JSON.parse(localStorage.getItem("violations")))
-        console.log(JSON.parse(localStorage.getItem("violationsForAllTraces")))
+       
         
     }
 
@@ -142,7 +142,7 @@ function generateMinimap(originalSVG) {
         minimapHeight *= 2.5
         minimapWidth  *= 2.5
     }
-    console.log("Minimap width: " + minimapWidth + " , minimap height: " + minimapHeight)
+    //console.log("Minimap width: " + minimapWidth + " , minimap height: " + minimapHeight)
 
 
     var minimapSVG = originalSVG.cloneNode(true);
@@ -232,12 +232,12 @@ function setupMinimapClickHandler(originalSVG) {
     const statechartSVG = document.getElementById("statechartSVG");
     svgHeight = statechartSVG.getBoundingClientRect().height;
     svgWidth = statechartSVG.getBoundingClientRect().width;
-    console.log("Svg width: " + svgWidth + ", svg height: " + svgHeight)
+    //console.log("Svg width: " + svgWidth + ", svg height: " + svgHeight)
     
     //To adjust the indicator's height basing on the original svg's height
     minimapRatio = 800 / svgHeight
     if (minimapRatio > 1) minimapRatio = 1
-    console.log("Minimap ratio: " + minimapRatio)
+    //console.log("Minimap ratio: " + minimapRatio)
     const indicator = document.createElement("div");
     indicator.id = "indicator";
     indicator.style.position = "absolute";
@@ -486,7 +486,7 @@ function highlightStatechart(interaction_types) {
 
         var nodeId = this.id; // this.id is a string like "svg_edge_id_E54"
         var parts = nodeId.split("_");
-        var realId = parts[3];
+        var realID = parts[3];
 
         // Perform edge operations only when interactions are > 0
         if (interaction > 0) {
@@ -515,7 +515,7 @@ function highlightStatechart(interaction_types) {
                 var titleContent = edge.select("title").text();
                 
                 // Check if the edge has interactions on the polygons
-                var regex = new RegExp("\\b" + realId + "\\b");
+                var regex = new RegExp("\\b" + realID + "\\b");
                 if (titleContent.match(regex)) {
                     // Set the edge colors
                     // Increasing edges' opacity if we're interested in them
@@ -655,106 +655,111 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
 
 }
 
-function highlightStatechartViolations(interaction_types, violationsForAllTraces) {
-
-    console.log(interaction_types, violationsForAllTraces)
-
+function highlightStatechartViolations(violationsForAllTracesFormatted, selectedTraceID) {
+    // Nascondi gli elementi non necessari
     document.getElementById("colorLegend").style.display = 'none';
     document.getElementById("changeLayoutButton").style.display = "none";
     document.getElementById("minimapContainer").style.display = "none";
 
-    //Making all the edges barely visible
-
+    // Rendi i bordi degli elementi appena visibili
     var edges = d3.selectAll(".edge");
     edges.select("polygon").style("opacity", 0.15);
     edges.select("polyline").style("opacity", 0.15);
     edges.select("path").style("opacity", 0.15);
 
-
-    // Select nodes, polygons, and texts
+    // Seleziona nodi, poligoni e testi
     var nodes = d3.select("#originalSVG").selectAll(".node");
     var polygons = nodes.selectAll("polygon");
-    var texts = nodes.selectAll("text");
 
-    //var colorScale = d3.scaleSequential(d3.interpolateBlues).domain([0, maxFrequency]);
+    // Inizializza l'oggetto violationFrequency
+    var violationFrequency = {};
 
-    for(let i = 0; i < 50; i++){
-        var currentViolations = []
-        if(violationsForAllTraces[i].name.includes(selectedTraceID)) console.log("iprendi da qui") //da qui
+    // Cicla attraverso le violazioni per tutte le tracce formattate
+    for (let i = 0; i < violationsForAllTracesFormatted.length; i++) {
+        var currentViolation = violationsForAllTracesFormatted[i];
+
+        // Verifica se il numero della traccia corrente corrisponde a quello selezionato
+        if (currentViolation.number == selectedTraceID) {
+            var parsedCurrentViolation = JSON.parse(currentViolation.violations);
+
+            for (let j = 0; j < parsedCurrentViolation.length; j++) {
+
+            // Crea una chiave univoca per identificare la violazione
+                var key = parsedCurrentViolation[j].visual_component + '_' + parsedCurrentViolation[j].interaction;
+
+            // Verifica se la chiave esiste già in violationFrequency
+            if (violationFrequency[key]) {
+                // Se la chiave esiste, incrementa la frequenza
+                violationFrequency[key].frequency++;
+            } else {
+                // Se la chiave non esiste, crea una nuova voce in violationFrequency
+
+                
+
+                    var string_helper = "";
+                    console.log(parsedCurrentViolation[j])
+                    if (parsedCurrentViolation[j].interaction.includes("mousemove")) {
+                        string_helper = "'mousemove' on '#" + parsedCurrentViolation[j].visual_component + " canvas.marks'";
+                    }
+                    violationFrequency[key] = {
+                        frequency: 1,
+                        visual_component: parsedCurrentViolation[j].visual_component,
+                        interaction: parsedCurrentViolation[j].interaction,
+                        level: parsedCurrentViolation[j].level,
+                        string: string_helper
+                    };
+
+                }
+                
+            }
+        }
     }
 
+    console.log(violationFrequency)
 
+    // Crea la scala di colori Magma
+    var colorScale = d3.scaleSequential(d3.interpolateMagma)
+        .domain([0, d3.max(Object.values(violationFrequency), function (d) { return d.frequency; })]);
+
+
+    // Calcola il valore della soglia
+    var threshold = d3.max(colorScale.domain()) / 3;
+
+    // Colora i poligoni dell'SVG in base alla frequenza delle violazioni e al livello di violazione
     polygons.style("fill", function () {
         var nodeText = d3.select(this.parentNode).select("text").text();
-        //var interaction = interactionFrequency[nodeText] || 0;
 
-        // Color grey if there are no interactions for the polygon
-        /* //if (interaction === 0) {
-            var greyColor = "#a3a3a3" //"#404040";
-            d3.select(this).style("fill", greyColor);
+        // Cicla su tutte le chiavi di violationFrequency
+        for (var key in violationFrequency) {
+            if (violationFrequency.hasOwnProperty(key)) {
+                // Verifica se il nodeText corrisponde alla stringa nel violationFrequency corrente
+                if (nodeText == violationFrequency[key].string) {
+                    // Calcola il valore del colore moltiplicando la frequenza per il livello di violazione
+                    var colorValue = violationFrequency[key].frequency * violationFrequency[key].level;
 
+                    // Ritorna il colore corrispondente dalla scala di colori Magma
+                    var color = colorScale(colorValue);
 
+                    // Se il valore della scala è basso, colora il nodeText di nero
+                    if (colorValue > threshold) {
+                        d3.select(this.parentNode).selectAll("text").style("fill", "black");
+                    }
 
-            return greyColor;
-        } */
-
-        /* var nodeId = this.id; // this.id is a string like "svg_edge_id_E54"
-        var parts = nodeId.split("_");
-        var realId = parts[3];
-
-        // Perform edge operations only when interactions are > 0
-        if (interaction > 0) {
-            // Check if the color is below a certain threshold
-            var threshold = maxFrequency / 3; // Adjust this threshold as needed
-
-            if (interaction <= threshold) { //The blue results too whiteish
-
-                //console.log("BLACK: " + interaction, threshold, nodeText)
-                d3.select(this.parentNode).selectAll("text").style("fill", "black");
-
-
-            } else {
-                // Set the text color to black
-                //console.log("WHITE: " + interaction, threshold, nodeText)
-                d3.select(this.parentNode).selectAll("text").style("fill", "white");
-            }
-
-            // Color the polygon using the color scale
-            var color = colorScale(interaction);
-            d3.select(this).style("fill", color);
-
-
-            edges.each(function () {
-                var edge = d3.select(this);
-                var titleContent = edge.select("title").text();
-
-                // Check if the edge has interactions on the polygons
-                var regex = new RegExp("\\b" + realId + "\\b");
-                if (titleContent.match(regex)) {
-                    // Set the edge colors
-                    // Increasing edges' opacity if we're interested in them
-                    console.log(nodeId, titleContent);
-                    edge.select("polygon").style("fill", color);
-                    edge.select("polyline").style("fill", color);
-                    edge.select("path").style("stroke", color);
-                    edge.select("polygon").style("opacity", 1);
-                    edge.select("polyline").style("opacity", 1);
-                    edge.select("path").style("opacity", 1);
+                    return color;
                 }
-            });
-            return color;
-        } */
+            }
+        }
+
+        // Se non viene trovata corrispondenza, ritorna il colore grigio chiaro
+        return "#a3a3a3";
     });
 
 
 
-
-    //texts.style("fill", "white"); // Set text color to white
-
-    // Create and update traceInfo div using plain HTML
+    // Crea o aggiorna il div traceInfo con le informazioni sulla traccia selezionata
     var traceInfoDiv = document.getElementById("traceInfo");
     if (!traceInfoDiv) {
-        var traceInfoDiv = document.createElement("div");
+        traceInfoDiv = document.createElement("div");
         traceInfoDiv.id = "traceInfo";
         traceInfoDiv.style.position = "absolute";
         traceInfoDiv.style.top = "150px";
@@ -767,37 +772,38 @@ function highlightStatechartViolations(interaction_types, violationsForAllTraces
         traceInfoDiv.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
         traceInfoDiv.style.display = "flex";
         traceInfoDiv.style.flexDirection = "column";
-        traceInfoDiv.style.display = "inline"
+        traceInfoDiv.style.display = "inline";
 
-        traceInfoDiv.innerHTML += "No Interactions: <svg height='20' width='20'><rect width='20' height='20' style='fill:#a3a3a3;'></rect></svg><br><br>";
+        // Aggiungi una legenda al traceInfo div
+        traceInfoDiv.innerHTML += "No Violations: <svg height='20' width='20'><rect width='20' height='20' style='fill:#a3a3a3;'></rect></svg><br><br>";
 
-        // Add an image to the traceInfo div
+        // Aggiungi un'immagine al traceInfo div
         var img = document.createElement("img");
-        img.src = "images/blues.png";
-        img.alt = "Blues Image";
-        img.style.height = "30px"
+        img.src = "images/magma.png";
+        img.alt = "Magma Image";
+        img.style.height = "30px";
         img.style.maxWidth = "100%";
         traceInfoDiv.appendChild(img);
 
-        // Add a small number representing the maximum number of interactions
+        // Aggiungi un contatore delle interazioni al traceInfo div
         var interactionCount = document.createElement("div");
         interactionCount.className = "interaction-count";
         interactionCount.style.color = "black";
-        interactionCount.textContent = "Most performed interaction: " + mostPerformedEvent + ", " + maxFrequency + " times";
         traceInfoDiv.appendChild(interactionCount);
 
-        // Append the traceInfo div to the statechartContainer
+        // Aggiungi il traceInfo div al container dello statechart
         document.getElementById("statechartContainer").appendChild(traceInfoDiv);
     }
 
-    // Add content to the traceInfo div
+    // Aggiorna il contenuto del traceInfo div
     traceInfoDiv.innerHTML += "Trace selected: " + JSON.parse(localStorage.getItem("selectedTraceID"));
 
+    // Rimuovi i dati dalla memoria locale
     localStorage.removeItem("selectedTrace");
     localStorage.removeItem("selectedTraceID");
     localStorage.removeItem("violations");
-
 }
+
 
 function highlightTask(taskInfo, taskID) {
     var nodes = d3.select("#originalSVG").selectAll(".node");
@@ -878,7 +884,7 @@ function highlightTask(taskInfo, taskID) {
 
             var nodeId = this.id;
             var parts = nodeId.split("_");
-            var realId = parts[3];
+            var realID = parts[3];
 
             // Perform edge operations only when interactions are > 0
             if (interaction > 0) {
@@ -905,7 +911,7 @@ function highlightTask(taskInfo, taskID) {
                     var titleContent = edge.select("title").text();
 
                     // Check if the edge has interactions on the polygons
-                    var regex = new RegExp("\\b" + realId + "\\b");
+                    var regex = new RegExp("\\b" + realID + "\\b");
                     if (titleContent.match(regex)) {
                         // Set the edge colors
                         edge.select("polygon").style("fill", color);
@@ -1275,7 +1281,7 @@ function graphLayout(svg) {
         var degree = nodeEdgesCount[nodeNumber];
 
         // Print the number of edges for each node
-        console.log("Node " + nodeNumber + ": " + degree + " edges");
+        //console.log("Node " + nodeNumber + ": " + degree + " edges");
 
         // Update max and min degrees along with corresponding nodes
         if (degree > maxDegree) {
@@ -1297,8 +1303,8 @@ function graphLayout(svg) {
 
     // Print the max and min degrees along with corresponding nodes
     document.getElementById("maxDeg").innerHTML=`${maxDegree} in Node ${nodeWithMaxDegree}`;
-    console.log("Max Degree: " + maxDegree + " (Node " + nodeWithMaxDegree + ")");
-    console.log("Min Degree: " + minDegree + " (Node " + nodeWithMinDegree + ")");
+    //console.log("Max Degree: " + maxDegree + " (Node " + nodeWithMaxDegree + ")");
+    //console.log("Min Degree: " + minDegree + " (Node " + nodeWithMinDegree + ")");
 
     // Print the average degree
     document.getElementById("avgDeg").innerHTML=`${averageDegree.toFixed(2)}`;
@@ -1477,12 +1483,16 @@ function isNameInUrl(jsonData, systemUrl) {
 
             //Different functionalities part
 
-            if(window.location.href.includes("replay")) document.getElementById("changeLayoutButton").style.display = "none";
+            //Variables from local storage
+
             let selectedTrace = JSON.parse(localStorage.getItem("selectedTrace"));
+            let selectedTraceID = JSON.parse(localStorage.getItem("selectedTraceID"));
             let violationsTraceFlag = JSON.parse(localStorage.getItem("violations"));
-            let violationsForAllTraces = JSON.parse(localStorage.getItem("violationsForAllTraces"));
+            let violationsForAllTracesFormatted = JSON.parse(localStorage.getItem("violationsForAllTracesFormatted"));
 
             //State chart highlighting for interaction frequency
+
+            if (window.location.href.includes("replay")) document.getElementById("changeLayoutButton").style.display = "none";
 
             if (selectedTrace && Object.keys(selectedTrace).length > 0 && violationsTraceFlag != 1) {
                 console.log("selectedTrace is not empty");
@@ -1493,7 +1503,7 @@ function isNameInUrl(jsonData, systemUrl) {
             if (violationsTraceFlag == 1) {
                 console.log("ViolationsPreviewFlag is not empty");
                 console.log(selectedTrace);
-                highlightStatechartViolations(selectedTrace, violationsForAllTraces);
+                highlightStatechartViolations(violationsForAllTracesFormatted, selectedTraceID);
             }
 
             //State chart highlighting for interaction frequency (multiple traces selected)

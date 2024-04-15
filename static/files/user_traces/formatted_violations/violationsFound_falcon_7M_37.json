@@ -1,0 +1,206 @@
+[
+        {
+                "level": 1,
+                "visual_component": "departure",
+                "interaction": "mousemove_brush",
+                "timestamp": 204.40,
+                "info": [
+                        [
+                                305,
+                                50
+                        ],
+                        [
+                                335,
+                                50
+                        ]
+                ],
+                "task": 1
+        },
+        {
+                "level": 1,
+                "visual_component": "airtime",
+                "interaction": "mousemove_brush",
+                "timestamp": 475.00,
+                "info": [
+                        [
+                                318,
+                                50
+                        ],
+                        [
+                                503,
+                                50
+                        ]
+                ],
+                "task": 3
+        },
+        {
+                "level": 1,
+                "visual_component": "airtime",
+                "interaction": "mousemove_brush",
+                "timestamp": 203.96,
+                "info": [
+                        [
+                                318,
+                                50
+                        ],
+                        [
+                                503,
+                                50
+                        ]
+                ],
+                "task": 3
+        },
+        {
+                "level": 1,
+                "visual_component": "airtime",
+                "interaction": "mousemove_brush",
+                "timestamp": 303.96,
+                "info": [
+                        [
+                                218,
+                                50
+                        ],
+                        [
+                                403,
+                                50
+                        ]
+                ],
+                "task": 3
+        },
+        {
+                "level": 1,
+                "visual_component": "delay",
+                "interaction": "mousemove",
+                "timestamp": 203.96,
+                "info": [
+                        [
+                                218,
+                                50
+                        ],
+                        [
+                                503,
+                                50
+                        ]
+                ],
+                "task": 4
+        },
+        {
+                "level": 1,
+                "visual_component": "arrival",
+                "interaction": "mousemove_brush",
+                "timestamp": 203.96,
+                "info": [
+                        [
+                                272,
+                                50
+                        ],
+                        [
+                                321,
+                                50
+                        ]
+                ],
+                "task": 4
+        },
+        {
+                "level": 1,
+                "visual_component": "arrival",
+                "interaction": "mousemove_brush",
+                "timestamp": 208.96,
+                "info": [
+                        [
+                                272,
+                                50
+                        ],
+                        [
+                                321,
+                                50
+                        ]
+                ],
+                "task": 4
+        },
+        {
+                "level": 1,
+                "visual_component": "arrival",
+                "interaction": "mousemove_brush",
+                "timestamp": 213.96,
+                "info": [
+                        [
+                                272,
+                                50
+                        ],
+                        [
+                                321,
+                                50
+                        ]
+                ],
+                "task": 4
+        },
+        {
+                "level": 1,
+                "visual_component": "arrival",
+                "interaction": "mousemove_brush",
+                "timestamp": 233.96,
+                "info": [
+                        [
+                                272,
+                                50
+                        ],
+                        [
+                                321,
+                                50
+                        ]
+                ],
+                "task": 4
+        },
+        {
+                "level": 1,
+                "visual_component": "delay",
+                "interaction": "mousemove_brush",
+                "timestamp": 203.96,
+                "info": [
+                        [
+                                272,
+                                50
+                        ],
+                        [
+                                321,
+                                50
+                        ]
+                ],
+                "task": 4
+        },
+        {
+                "level": 1,
+                "visual_component": "delay",
+                "interaction": "mousemove_brush",
+                "timestamp": 203.96,
+                "info": [
+                        [
+                                272,
+                                50
+                        ],
+                        [
+                                321,
+                                50
+                        ]
+                ],
+                "task": 4
+        },
+        {
+                "level": 1,
+                "visual_component": "delay",
+                "interaction": "mousemove_brush",
+                "timestamp": 203.96,
+                "info": [
+                        [
+                                272,
+                                50
+                        ],
+                        [
+                                321,
+                                50
+                        ]
+                ],
+                "task": 4
+        }
+]

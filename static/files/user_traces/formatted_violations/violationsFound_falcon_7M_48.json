@@ -1,0 +1,58 @@
+[
+        {
+                "level": 3,
+                "visual_component": "departure",
+                "interaction": "mousemove",
+                "timestamp": 5066.62,
+                "info": [
+                        268,
+                        134
+                ],
+                "task": 0
+        },
+        {
+                "level": 2,
+                "visual_component": "departure",
+                "interaction": "mousemove_brush",
+                "timestamp": 2581.98,
+                "info": [
+                        [
+                                270,
+                                50
+                        ],
+                        [
+                                369,
+                                50
+                        ]
+                ],
+                "task": 0
+        },
+        {
+                "level": 3,
+                "visual_component": "airtime",
+                "interaction": "mousemove_brush",
+                "timestamp": 5030.01,
+                "info": [
+                        [
+                                270,
+                                50
+                        ],
+                        [
+                                434,
+                                50
+                        ]
+                ],
+                "task": 1
+        },
+        {
+                "level": 1,
+                "visual_component": "airtime",
+                "interaction": "mousemove",
+                "timestamp": 1621.73,
+                "info": [
+                        351,
+                        97
+                ],
+                "task": 1
+        }
+]

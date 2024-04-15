@@ -1,0 +1,90 @@
+[
+        {
+                "level": 3,
+                "visual_component": "arrival",
+                "interaction": "mousemove",
+                "timestamp": 5026.63,
+                "info": [
+                        265,
+                        151
+                ],
+                "task": 1
+        },
+        {
+                "level": 3,
+                "visual_component": "arrival",
+                "interaction": "mousemove",
+                "timestamp": 5028.63,
+                "info": [
+                        265,
+                        151
+                ],
+                "task": 1
+        },
+        {
+                "level": 3,
+                "visual_component": "arrival",
+                "interaction": "mousemove",
+                "timestamp": 5029.63,
+                "info": [
+                        265,
+                        151
+                ],
+                "task": 1
+        },
+        {
+                "level": 3,
+                "visual_component": "arrival",
+                "interaction": "mousemove",
+                "timestamp": 5032.63,
+                "info": [
+                        265,
+                        151
+                ],
+                "task": 1
+        },
+        {
+                "level": 3,
+                "visual_component": "arrival",
+                "interaction": "mousemove",
+                "timestamp": 5033.63,
+                "info": [
+                        265,
+                        151
+                ],
+                "task": 1
+        },
+        {
+                "level": 3,
+                "visual_component": "arrival",
+                "interaction": "mousemove",
+                "timestamp": 5037.63,
+                "info": [
+                        265,
+                        151
+                ],
+                "task": 1
+        },
+        {
+                "level": 3,
+                "visual_component": "arrival",
+                "interaction": "mousemove",
+                "timestamp": 5040.63,
+                "info": [
+                        265,
+                        151
+                ],
+                "task": 1
+        },
+        {
+                "level": 3,
+                "visual_component": "arrival",
+                "interaction": "mousemove",
+                "timestamp": 5043.63,
+                "info": [
+                        265,
+                        151
+                ],
+                "task": 1
+        }
+]

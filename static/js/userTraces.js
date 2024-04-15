@@ -3,6 +3,7 @@ var tracesNum;
 var selectedTraces = new Set();
 var loadedTraces;
 var violationsForAllTraces;
+var violationsForAllTracesFormatted;
 var timeForAllTraces;
 var selectedTraceID;
 var selectedTrace_RawValue;
@@ -33,6 +34,7 @@ window.onload = function () {
   //document.getElementById("colorLegend").classList.add("userTracesLegend");
   colorLegend();
   getViolations();
+  getViolationsFormatted();
   getTime();
   getUserTraces();
   //getTaskDivision();
@@ -736,6 +738,17 @@ function getViolations() {
       violationsForAllTraces = json;
     });
 }
+
+
+function getViolationsFormatted() {
+  const url = "http://127.0.0.1:5000/get_violations_formatted";
+  fetch(url)
+    .then((response) => response.json())
+    .then((json) => {
+      violationsForAllTracesFormatted = json;
+    });
+}
+
 function getTime() {
   const url = "http://127.0.0.1:5000/get_userTraceTime";
   fetch(url)
@@ -984,6 +997,7 @@ function populateTable(data) {
 function ExtraInfo() {
   document.getElementById("extrainfoContent").style.opacity = 1;
   document.getElementById("placeholderText").style.display = "none";
+  
 
   //For now, preview only one selected trace
   if (selectedTraces.size == 1) {
@@ -1090,6 +1104,9 @@ function ExtraInfo() {
       violationsList.append(level3);
       violationsList.append(level4);
       //generateViolationsHeatmap(value);
+
+      if(violationTotal == 0) document.getElementById("violationsTrace").style.opacity = 0
+      else document.getElementById("violationsTrace").style.opacity = 1
     });
     findTotalTime(selectedTraceID).then(function (value) {
       const timeList = document.getElementById("timeList");
@@ -1113,9 +1130,8 @@ function ExtraInfo() {
       );
       localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
       localStorage.setItem('violations', JSON.stringify(1))
-      console.log(violationsForAllTraces)
-      console.log("okokokk")
-      localStorage.setItem('violationsForAllTraces', JSON.stringify(violationsForAllTraces))
+      console.log(violationsForAllTracesFormatted)
+      localStorage.setItem('violationsForAllTracesFormatted', JSON.stringify(violationsForAllTracesFormatted))
       violationsTrace.href = "home";
     });
 
@@ -1262,7 +1278,7 @@ function showExtraInformation(userID) {
     localStorage.setItem('violations', JSON.stringify(1))
     console.log(violationsForAllTraces)
     console.log("okokokk")
-    localStorage.setItem('violationsForAllTraces', JSON.stringify(violationsForAllTraces))
+    localStorage.setItem('violationsForAllTracesFormatted', JSON.stringify(violationsForAllTracesFormatted))
     violationsTrace.href = "home";
   });
 
@@ -1348,6 +1364,7 @@ function showExtraInformation(userID) {
 
 async function clearExtraInformation() {
   document.getElementById(`previewTrace`).style.display = "none";
+  document.getElementById(`violationsTrace`).style.opacity= 0;
   document.getElementById("placeholderText").style.display = "block";
   document.getElementById("extrainfoContent").style.opacity = 0;
   document.getElementById("traceInfoTitle").innerHTML = "Trace Information   ";

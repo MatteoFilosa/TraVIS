@@ -1,0 +1,36 @@
+[
+        {
+                "level": 3,
+                "visual_component": "airtime",
+                "interaction": "mousemove_brush",
+                "timestamp": 5096.99,
+                "info": [
+                        [
+                                253,
+                                50
+                        ],
+                        [
+                                503,
+                                50
+                        ]
+                ],
+                "task": 3
+        },
+        {
+                "level": 1,
+                "visual_component": "arrival",
+                "interaction": "mousemove_brush",
+                "timestamp": 421.99,
+                "info": [
+                        [
+                                153,
+                                50
+                        ],
+                        [
+                                302,
+                                50
+                        ]
+                ],
+                "task": 4
+        }
+]
