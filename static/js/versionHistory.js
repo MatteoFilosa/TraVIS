@@ -146,10 +146,37 @@ function applyIds() {
     });
 }
 
+function clearStatechart(statechart){
+
+    if(statechart == "left"){
+
+        var container = document.getElementById("leftContainer");
+
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+
+    }
+
+    else if(statechart == "right"){
+
+        var container = document.getElementById("rightContainer");
+
+        while (container.firstChild) {
+            container.removeChild(container.firstChild);
+        }
+    }
+
+}
+
 
 function visualizeSnapshot(snapshotNumber){
     console.log(snapshotNumber)
-    console.log("sdasd")
+    clearStatechart("right")
+    visualizeStatecharts(statecharts[snapshotNumber].svg, rightContainer);
+    applyZoom();
+    applyIds();
+    highlightDifferences();
 }
 
 
