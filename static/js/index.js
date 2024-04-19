@@ -655,7 +655,7 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
 
 }
 
-function highlightStatechartViolations(violationsForAllTracesFormatted, selectedTraceID) {
+function highlightStatechartViolations(violationsForAllTracesFormatted, selectedTraceID, selectedTrace) {
     // Nascondi gli elementi non necessari
     document.getElementById("colorLegend").style.display = 'none';
     document.getElementById("changeLayoutButton").style.display = "none";
@@ -1503,7 +1503,7 @@ function isNameInUrl(jsonData, systemUrl) {
             if (violationsTraceFlag == 1) {
                 console.log("ViolationsPreviewFlag is not empty");
                 console.log(selectedTrace);
-                highlightStatechartViolations(violationsForAllTracesFormatted, selectedTraceID);
+                highlightStatechartViolations(violationsForAllTracesFormatted, selectedTraceID, selectedTrace);
             }
 
             //State chart highlighting for interaction frequency (multiple traces selected)

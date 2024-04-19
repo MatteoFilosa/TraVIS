@@ -34,7 +34,6 @@ function visualizeStatecharts(svg,container){
 
     if (originalSVG) {
         container.style.display = "block";
-        graphLayout(originalSVG);
         container.appendChild(originalSVG);
 
         var statechartId = container.id + "originalSVG"
@@ -129,7 +128,7 @@ function applyIds() {
     // Seleziona il primo elemento "text" di ogni nodo nel statechart di sinistra
     nodesLeft.each(function () {
         var textLeft = d3.select(this).select("text").text();
-
+        console.log(textLeft)
         // Controlla se il testo contiene un numero
         //if (!/\d/.test(textLeft)) {
             textsLeft.push(textLeft);
@@ -148,7 +147,10 @@ function applyIds() {
 }
 
 
-
+function visualizeSnapshot(snapshotNumber){
+    console.log(snapshotNumber)
+    console.log("sdasd")
+}
 
 
 
@@ -192,20 +194,41 @@ function highlightDifferences() {
         }
     }
 
-    console.log(missingItems);
+    // Inizializza un oggetto per tenere traccia degli elementi "nuovi" in textsRight
+    var newItems = {};
+
+    // Trova gli elementi "nuovi" in textsRight rispetto a textsLeft
+    textsRight.forEach(function (textRight) {
+        if (!textsLeft.includes(textRight)) {
+            if (newItems[textRight]) {
+                newItems[textRight]++;
+            } else {
+                newItems[textRight] = 1;
+            }
+        }
+    });
+
+    // Aggiungi tutti gli elementi "nuovi" all'array newItemsArray
+    var newItemsArray = [];
+    for (var item in newItems) {
+        for (var i = 0; i < newItems[item]; i++) {
+            newItemsArray.push(item);
+        }
+    }
+
 
     console.log(missingItems, encountered);
 
-    console.log(missingItems)
+    console.log(newItemsArray);
 
 
     var colorToApply = ""
 
-    // Itera sugli elementi dell'array "missingItems"
+    // Itera sugli elementi dell'array "missingItems". Vede gli elementi mancanti e li colora di lightcoral
     missingItems.forEach(function (item) {
-        // Se l'elemento è un numero
+        // Se l'elemento è un numero, quindi uno stato che è stato tolto e quindi devo colorare tutti i suoi figli...
         if (!isNaN(item)) {
-            console.log(item)
+            //console.log(item)
             // Itera su tutti i "g" dello statechart di sinistra
             gLeft.each(function () {
 
@@ -235,6 +258,36 @@ function highlightDifferences() {
                 }
                 
             });
+
+            gRight.each(function () {
+
+
+                if (d3.select(this).select("title").text() == item) {
+                    colorToApply = "lightcoral"
+
+                    d3.select(this).select("ellipse").style("fill", colorToApply)
+                }
+                else if (!isNaN(d3.select(this).select("title").text())) colorToApply = "#a3a3a3"
+
+                if (colorToApply == "#a3a3a3") {
+                    var polygon = d3.select(this).select("polygon");
+                    if (!polygon.empty() && polygon.attr("class") !== "lightcoral") {
+                        polygon.style("fill", colorToApply);
+                    }
+                }
+
+                else if ((colorToApply == "lightcoral")) {
+                    d3.select(this).selectAll("polygon").style("fill", colorToApply);
+                    //d3.select(this).selectAll("path").attr("stroke", colorToApply);
+                }
+
+
+                if (colorToApply == "lightcoral") {
+                    d3.select(this).select("polygon").attr("class", "lightcoral");
+                }
+
+            });
+            
         }
 
         else{
@@ -251,9 +304,120 @@ function highlightDifferences() {
                     }
                 }
             });
+
+            gRight.each(function () {
+                var polygon = d3.select(this).select("polygon");
+                var textElement = d3.select(this).select("text");
+                if (!polygon.empty() && !textElement.empty()) { // Verifica se esiste un poligono e un elemento di testo all'interno di questo elemento g
+                    var text = textElement.text();
+                    if (text.includes(item)) {
+                        colorToApply = "lightcoral";
+                        polygon.style("fill", colorToApply);
+                        polygon.attr("class", "lightcoral");
+                    }
+                }
+            });
             
         }
     });
+
+    
+    // Itera sugli elementi dell'array "newItems". Colora gli elementi nuovi di blu.
+    newItemsArray.forEach(function (item) {
+        // Se l'elemento è un numero, quindi uno stato che è stato tolto e quindi devo colorare tutti i suoi figli...
+        if (!isNaN(item)) {
+            //console.log(item)
+            // Itera su tutti i "g" dello statechart di destra
+            gRight.each(function () {
+
+
+                if (d3.select(this).select("title").text() == item) {
+                    colorToApply = "lightblue"
+
+                    d3.select(this).select("ellipse").style("fill", colorToApply)
+                }
+                else if (!isNaN(d3.select(this).select("title").text())) colorToApply = "#a3a3a3"
+
+                if (colorToApply == "#a3a3a3") {
+                    var polygon = d3.select(this).select("polygon");
+                    if (!polygon.empty() && polygon.attr("class") !== "lightblue") {
+                        polygon.style("fill", colorToApply);
+                    }
+                }
+
+                else if ((colorToApply == "lightblue")) {
+                    d3.select(this).selectAll("polygon").style("fill", colorToApply);
+                    //d3.select(this).selectAll("path").attr("stroke", colorToApply);
+                }
+
+
+                if (colorToApply == "lightblue") {
+                    d3.select(this).select("polygon").attr("class", "lightblue");
+                }
+
+            });
+
+            gLeft.each(function () {
+
+
+                if (d3.select(this).select("title").text() == item) {
+                    colorToApply = "lightblue"
+
+                    d3.select(this).select("ellipse").style("fill", colorToApply)
+                }
+                else if (!isNaN(d3.select(this).select("title").text())) colorToApply = "#a3a3a3"
+
+                if (colorToApply == "#a3a3a3") {
+                    var polygon = d3.select(this).select("polygon");
+                    if (!polygon.empty() && polygon.attr("class") !== "lightblue") {
+                        polygon.style("fill", colorToApply);
+                    }
+                }
+
+                else if ((colorToApply == "lightblue")) {
+                    d3.select(this).selectAll("polygon").style("fill", colorToApply);
+                    //d3.select(this).selectAll("path").attr("stroke", colorToApply);
+                }
+
+
+                if (colorToApply == "lightblue") {
+                    d3.select(this).select("polygon").attr("class", "lightblue");
+                }
+
+            });
+        }
+
+        else {
+
+            gRight.each(function () {
+                var polygon = d3.select(this).select("polygon");
+                var textElement = d3.select(this).select("text");
+                if (!polygon.empty() && !textElement.empty()) { // Verifica se esiste un poligono e un elemento di testo all'interno di questo elemento g
+                    var text = textElement.text();
+                    if (text.includes(item)) {
+                        colorToApply = "lightblue";
+                        polygon.style("fill", colorToApply);
+                        polygon.attr("class", "lightblue");
+                    }
+                }
+            });
+            
+            gLeft.each(function () {
+                var polygon = d3.select(this).select("polygon");
+                var textElement = d3.select(this).select("text");
+                if (!polygon.empty() && !textElement.empty()) { // Verifica se esiste un poligono e un elemento di testo all'interno di questo elemento g
+                    var text = textElement.text();
+                    if (text.includes(item)) {
+                        colorToApply = "lightblue";
+                        polygon.style("fill", colorToApply);
+                        polygon.attr("class", "lightblue");
+                    }
+                }
+            });
+
+        }
+    });
+
 }
 
 
@@ -262,175 +426,3 @@ function highlightDifferences() {
 highlightDifferences();
 
 
-function graphLayout(svg) {
-    //labelsCount = 0;
-    var textElements = svg.querySelectorAll("g.node text");
-    var edgesCount = svg.querySelectorAll("g.edge").length/2; //Divided 2 because the svg computes 2 edges: state ---(edge)--> label --(edge)--->. But the real edge is only 1.
-    var statesCount = svg.querySelectorAll("ellipse").length;
- 
-    if((window.location.href.includes("replay") === false)){
-
- 
-    textElements.forEach(function (textElement) {
-        
-        var node = textElement.parentElement;
-        //var xPath = "";
-        //console.log(node)
-
-        
-        if (node.classList.contains("node")) {
-        /*
-            if ((textElement.textContent.includes('[')) && (textElement.textContent.includes(']'))) {
-                xPath = textElement;
-                xPath.classList.add("xPath");
-                xPath.style.display = 'none';
-
-                // Tooltip
-                node.addEventListener("mouseover", function () {
-                    tooltip.textContent = xPath.innerHTML;
-                    tooltip.style.display = 'block';
-                    adjustTooltipPosition();
-                    //console.log("mouseover detected")
-                });
-
-                node.addEventListener("mouseout", function () {
-                    tooltip.style.display = 'none';
-                    //console.log("mouseout detected")
-                });
-            } */
-
-            // Increase font size of non-hidden text
-            /* if (textElement.innerHTML.length > 3) {
-                var fontSize = parseFloat(textElement.style.fontSize) || 12; // Default font size is 12px
-                textElement.style.fontSize = (fontSize + 4) + 'px';
-
-                var textY = parseFloat(textElement.getAttribute("y"));
-                textElement.classList.add("nodeText");
-                textElement.setAttribute("y", textY + 8);
-            } */
-
-            // Check for "mousemove" or "mouseup" and set child polygon's fill property accordingly
-            var firstString = textElement.textContent.split(',')[0];
-            var polygon = node.querySelector('polygon');
-            //if (polygon) labelsCount++;
-          
-
-            if (firstString.includes('mousemove')) {
-                if (polygon) {
-                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "mousemove"
-                    
-                }
-            } else if (firstString.includes('mouseup')) {
-                if (polygon) {
-                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "mouseup"
-                }
-            }
-            else if (firstString.includes('mousedown')) {
-                if (polygon) {
-                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "mousedown"
-                }
-            }
-            else if (firstString.includes('click')) {
-                if (polygon) {
-                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "click"
-                }
-            }
-            else if (firstString.includes('dblclick')) {
-                if (polygon) {
-                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "dblclick"
-                }
-            }
-            else if (firstString.includes('wheel')) {
-                if (polygon) {
-                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "wheel"
-                }
-            }
-            else if (firstString.includes('facsimile_back')) {
-                if (polygon) {
-                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "facsimile_back"
-                }
-            }
-            else if (firstString.includes('mouseout')) {
-                if (polygon) {
-                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "mouseout"
-                }
-            }
-            else if (firstString.includes('mouseover')) {
-                if (polygon) {
-                    polygon.setAttribute('fill', getColor(firstString)); // Set color for "mouseover"
-                }
-            }
-        }
-        
-    });
-    }
-    
-
-}
-const eventTypes=["mouseover","click","brush","mousemove","mousedown","wheel","mouseout","mouseup","dblclick","facsimile_back"];
-// more available colors: c49c94,e377c2,f7b6d2,7f7f7f,c7c7c7,bcbd22,dbdb8d,17becf,9edae5
-// Function to get color based on event name
-function getColor(eventName) {
-    if (eventName.includes("mouseover")) {
-        return "#1f77b4";
-    } else if (eventName.includes("dblclick")) {
-        return "#aec7e8";
-    } else if (eventName.includes("click")) {
-        return "#ff7f0e";
-    } else if (eventName.includes("brush")) {
-        return "#ffbb78";
-    } else if (eventName.includes("mousemove")) {
-        return "#2ca02c";
-    } else if (eventName.includes("mousedown")) {
-        return "#98df8a";
-    }else if (eventName.includes("wheel")) {
-        return "#8c564b";
-    } else if (eventName.includes("mouseout")) {
-        return "#ff9896";
-    } else if (eventName.includes("mouseup")) {
-        return "#9467bd";
-    } else if (eventName.includes("facsimile_back")) {
-        return "#c5b0d5";
-    } else {
-        console.log(eventName);
-        return "red";
-    }
-}
-
-function colorLegend(){
-    const colorLegend = document.getElementById("colorLegend");
-
-    eventTypes.forEach(element => {
-        
-        let colorElementDiv = document.createElement("div");
-        colorElementDiv.classList.add("legendElementDiv");
-
-        let colorElementImg = document.createElement("div");
-        colorElementImg.classList.add("colorDiv");
-        colorElementImg.style.backgroundColor = getColor(element);
-
-        let colorElementText = document.createElement("p");
-        colorElementText.textContent=element;
-
-        colorElementDiv.appendChild(colorElementImg);
-        colorElementDiv.appendChild(colorElementText);
-
-        colorLegend.appendChild(colorElementDiv);
-    });
-
-}
-
-function toggleLegend(){
-    const colorLegend = document.getElementById("colorLegend");
-    const buttonImg = document.getElementById("colorLegendButton");
-    //console.log(colorLegend.getAttribute("data-visible"));
-    if(colorLegend.getAttribute("data-visible")=="false"){
-        colorLegend.setAttribute("data-visible", "true");
-        buttonImg.style.transform = "rotate(0deg)";
-        colorLegend.style.height="310px";
-    }else{
-        colorLegend.setAttribute("data-visible","false");
-        buttonImg.style.transform = "rotate(180deg)";
-        colorLegend.style.height="31px";
-    }
-}

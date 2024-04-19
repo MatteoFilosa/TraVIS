@@ -1123,17 +1123,12 @@ function ExtraInfo() {
     //Violations preview
 
     var violationsTraceElement = document.getElementById("violationsTrace")
-    violationsTraceElement.addEventListener("click", function () {
-      localStorage.setItem(
-        "selectedTrace",
-        JSON.stringify(selectedTrace_RawValue)
-      );
+    localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue));
       localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
       localStorage.setItem('violations', JSON.stringify(1))
-      console.log(violationsForAllTracesFormatted)
       localStorage.setItem('violationsForAllTracesFormatted', JSON.stringify(violationsForAllTracesFormatted))
-      violationsTrace.href = "home";
-    });
+      violationsTraceElement.href = "home";
+
 
 
   } else {
@@ -1269,7 +1264,7 @@ function showExtraInformation(userID) {
     previewTraceElement.href = "home";
   });
 
-  violationsTraceElement.addEventListener("click", function () {
+  /* violationsTraceElement.addEventListener("click", function () {
     localStorage.setItem(
       "selectedTrace",
       JSON.stringify(selectedTrace_RawValue)
@@ -1280,7 +1275,7 @@ function showExtraInformation(userID) {
     console.log("okokokk")
     localStorage.setItem('violationsForAllTracesFormatted', JSON.stringify(violationsForAllTracesFormatted))
     violationsTrace.href = "home";
-  });
+  }); */
 
   document.getElementById("previewTrace").id += selectedTraceID;
 

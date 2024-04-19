@@ -33,110 +33,14 @@
 
 <body>
     <div class="wrapper">
-        <!-- Sidebar  -->
-        <nav id="sidebar" class="active">
-            <div class="sidebar-header">
-                <p>System Statistics</p>
-                <button class="sidebarPin" id="sidebarPinButton" onclick="pinSidebar()"><img id="pinImg"
-                        src="images/pin.png" / width="20px" height="20px"></button>
-            </div>
-            <ul class="list-unstyled components">
-                <li>
-                    <div class="iconTitle">
-                        <img src="images/pathIcon.png" width="20px" height="20px" />
-                        <p>Paths</p>
-                    </div>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Length less than 5
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Length more than 5
-                        </label>
-                    </div>
-                </li>
-                <div class="line"></div>
-
-                <li>
-                    <div class="iconTitle">
-                        <img src="images/interactorIcon.png" width="20px" height="20px" />
-                        <p>Events</p>
-                    </div>
-                    <div class="form-check" style="color: #554e8d;">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Mouse Move
-                        </label>
-                    </div>
-                    <div class="form-check" style="color: black;">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Mouse Up
-                        </label>
-                    </div>
-                    <div class="form-check" style="color: #381D2A;">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Mouse Down
-                        </label>
-                    </div>
-                    <div class="form-check" style="color: #9f0087;">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Mouse Out
-                        </label>
-                    </div>
-                    <div class="form-check" style="color: #52b0c3;">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Mouse Over
-                        </label>
-                    </div>
-                    <div class="form-check" style="color: #0734c6;">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Click
-                        </label>
-                    </div>
-                    <div class="form-check" style="color: purple;">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Double Click
-                        </label>
-                    </div>
-                    <div class="form-check" style="color: #640a0a;">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Wheel
-                        </label>
-                    </div>
-                    <div class="form-check" style="color: #05771c;">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Facsimile Back
-                        </label>
-                    </div>
-
-                </li>
-
-            </ul>
-
-
-        </nav>
+    
 
         <!-- Page Content  -->
         <div id="content">
             <!-- Main Nav Bar -->
             <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height: 3.2em">
                 <div class="container-fluid">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info" title="System Breakdown">
-                        <i class="fas fa-align-left"></i>
-                    </button>
+                    
                     <a class="navbar-brand" href="/" style="color: #52b0c3">TraVIS</a>
                     <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarSupportedContent">
                         <ul class="nav navbar-nav">
@@ -159,37 +63,32 @@
                                 <a class="nav-link" href="#">Version History</a>
                             </li>
                         </ul>
+                        <div style="width: 250px;">
+<div class="dropdown">
+    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Select Snapshot
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <li><a class="dropdown-item" href="#" data-bs-toggle="tooltip" title="Snapshot 1 - 2024-04-12 10:30 AM"><img
+                    src="images/crossfilter_snapshot.png" alt="Image 1" style="width: 30px; height: 30px;" onclick = "visualizeSnapshot(1)"> Snapshot
+                1</a></li>
+        <li><a class="dropdown-item selected" href="#" data-bs-toggle="tooltip"
+                title="Snapshot 2 - 2024-04-15 11:45 AM"><img src="images/crossfilter_snapshot.png" alt="Image 2"
+                    style="width: 30px; height: 30px;" onclick = "visualizeSnapshot(2)"> Snapshot 2</a></li>
+        <li><a class="dropdown-item selected" href="#" data-bs-toggle="tooltip"
+                title="Snapshot 3 - 2024-04-19 1:20 PM"><img src="images/crossfilter_snapshot.png" alt="Image 3"
+                    style="width: 30px; height: 30px;" onclick = "visualizeSnapshot(3)"> Snapshot 3</a></li>
+    </ul>
+</div>
+
+</div>
+
                     </div>
                 </div>
             </nav>
 
-            <!-- Tabs-->
-            <ul class="nav nav-tabs">
-
-                <div class="layoutButtons">
-                    <!-- TODO MATTEO -->
-                    <!--
-                        The replay icons.
-                        Initially they are not shown unless we are in the replay domain url "/home".
-                        The current action is green, the others are white.
-                        Clicking on them will change the replay state.
-                    -->
-                    <ul id="replayIconsID" style="display: none;">
-                        <li class="replayButtons" class="nav-item">
-                            <p><i id="replayID_stop" class="fa fa-stop replayButtonClass" style="color: rgb(255, 255, 255);"
-                                    onclick="changeReplayState('stop');"></i></p>
-                            <p><i id="replayID_pause" class="fa fa-pause replayButtonClass" style="color: rgb(255, 255, 255);"
-                                    onclick="changeReplayState('pause');"></i></p>
-                            <p><i id="replayID_play" class="fa fa-play replayButtonClass" style="color: rgb(0, 255, 0);"
-                                    onclick="changeReplayState('play');"></i></p>
-                            <p><i id="replayID_step" class="fa fa-step-forward replayButtonClass" style="color: rgb(255, 255, 255);"
-                                    onclick="changeReplayState('step');"></i></p>
-                            <div style="border-left: 1px solid #ffffffd9; height: 27px;"></div>
-                        </li>
-                    </ul>
-                </div>
-
-            </ul>
+           
 
             <div class="mainContainer" id="mainContainer">
                 <div id="colorLegend" data-visible="false">

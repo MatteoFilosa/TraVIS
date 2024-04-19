@@ -744,6 +744,10 @@ table.dataTable tbody td {
     height: 25px;
 }
 
+.dropdown-item.selected {
+    color: #6c757d;
+}
+
 #replayTraceBtn{
     border: none;
     border-radius: 13px;
