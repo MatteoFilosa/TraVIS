@@ -1007,10 +1007,10 @@ function ExtraInfo() {
       "traceInfoTitle"
     ).innerHTML = `Trace Information: User ${[userNum]}`;
     document.getElementById("previewTrace").style.display = "block";
-    document.getElementById("violationsTrace").style.display = "block";
+    //document.getElementById("violationsTrace").style.display = "block";
 
     document.getElementById("previewTrace").href = "home";
-    document.getElementById("violationsTrace").href = "home";
+    //document.getElementById("violationsTrace").href = "home";
 
     loadedTraces.forEach((element, index) => {
       let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
@@ -1105,8 +1105,12 @@ function ExtraInfo() {
       violationsList.append(level4);
       //generateViolationsHeatmap(value);
 
-      if(violationTotal == 0) document.getElementById("violationsTrace").style.opacity = 0
-      else document.getElementById("violationsTrace").style.opacity = 1
+      
+
+      if(violationTotal == 0) localStorage.setItem("violationsFlag", 0)
+      else localStorage.setItem("violationsFlag", 1)
+      
+      //else document.getElementById("violationsTrace").style.opacity = 1
     });
     findTotalTime(selectedTraceID).then(function (value) {
       const timeList = document.getElementById("timeList");
@@ -1122,12 +1126,12 @@ function ExtraInfo() {
 
     //Violations preview
 
-    var violationsTraceElement = document.getElementById("violationsTrace")
-    localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue));
+    //var violationsTraceElement = document.getElementById("violationsTrace")
+      localStorage.setItem("selectedTrace", JSON.stringify(selectedTrace_RawValue));
       localStorage.setItem("selectedTraceID", JSON.stringify(selectedTraceID));
-      localStorage.setItem('violations', JSON.stringify(1))
+      //localStorage.setItem('violations', JSON.stringify(1))
       localStorage.setItem('violationsForAllTracesFormatted', JSON.stringify(violationsForAllTracesFormatted))
-      violationsTraceElement.href = "home";
+      //violationsTraceElement.href = "home";
 
 
 
@@ -1251,8 +1255,8 @@ function showExtraInformation(userID) {
   document.getElementById("previewTrace").style.display = "block";
 
   var previewTraceElement = document.getElementById("previewTrace");
-  var violationsTraceElement = document.getElementById("violationsTrace")
-  console.log(violationsTraceElement)
+  //var violationsTraceElement = document.getElementById("violationsTrace")
+  //console.log(violationsTraceElement)
 
   previewTraceElement.addEventListener("click", function () {
     localStorage.setItem(
@@ -1359,7 +1363,7 @@ function showExtraInformation(userID) {
 
 async function clearExtraInformation() {
   document.getElementById(`previewTrace`).style.display = "none";
-  document.getElementById(`violationsTrace`).style.opacity= 0;
+  //document.getElementById(`violationsTrace`).style.opacity= 0;
   document.getElementById("placeholderText").style.display = "block";
   document.getElementById("extrainfoContent").style.opacity = 0;
   document.getElementById("traceInfoTitle").innerHTML = "Trace Information   ";
@@ -1941,4 +1945,3 @@ function toggleLegend() {
   }
 }
 
-function previewTrace() { }

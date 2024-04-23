@@ -115,10 +115,14 @@ function applyZoom(){
    
 
 }
-var textsLeft = [];
-var textsRight = [];
+var textsLeft;
+var textsRight;
 
 function applyIds() {
+
+    textsLeft = []
+    textsRight = []
+
     var statechartLeft = d3.select("#leftContaineroriginalSVG");
     var statechartRight = d3.select("#rightContaineroriginalSVG");
 

@@ -15,14 +15,16 @@ var json, url;
 var currentZoom = 1;
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0, currentX = 0, currentY = 0, translateX = 0, translateY = 0, minimapRatio = 0, scale = 1, svgWidth = 0, svgHeight = 0;
 
+var selectedTraceID = JSON.parse(localStorage.getItem("selectedTraceID")) !== null ? JSON.parse(localStorage.getItem("selectedTraceID")) : "";
 
+var selectedTrace = JSON.parse(localStorage.getItem("selectedTrace")) !== null ? JSON.parse(localStorage.getItem("selectedTrace")) : "";
 
+var violationsForAllTracesFormatted = JSON.parse(localStorage.getItem("violationsForAllTracesFormatted")) !== null ? JSON.parse(localStorage.getItem("violationsForAllTracesFormatted")) : ""
+
+var violationsFlag = JSON.parse(localStorage.getItem("violationsFlag"))
 
 // Create an array to store random colors
 let colorArray = ["red", "green", "blue", "purple", "orange", "brown", "pink", "gray", "cyan"];
-
-
-
 
 
 //#endregion
@@ -47,7 +49,7 @@ window.onload = function () {
         systemURL = "https://vega.github.io/falcon/flights/"
         console.log(JSON.parse(localStorage.getItem("violationsForAllTracesFormatted")))
         LoadSystem();
-       
+  
         
     }
 
@@ -406,8 +408,24 @@ function adjustIndicator(scale, currentX, currentY, event) {
 //#region Statechart
 
 //user story 4!!!!!!!
-function highlightStatechart(interaction_types) {
+function highlightStatechart(interaction_types, flag) {
     
+    console.log("highlightStatechart")
+
+    //Variables initialization & cleanup
+
+    //var selectedTraceID = JSON.parse(localStorage.getItem("selectedTraceID"));
+    //var selectedTrace = JSON.parse(localStorage.getItem("selectedTrace"));
+    //var violationsForAllTracesFormatted = JSON.parse(localStorage.getItem("violationsForAllTracesFormatted"));
+
+    var traceInfoDiv = document.getElementById("traceInfo")
+    
+    if (traceInfoDiv != null){
+        traceInfoDiv.remove()
+        
+    }
+
+
     document.getElementById("colorLegend").style.display = 'none';
     document.getElementById("changeLayoutButton").style.display = "none";
     document.getElementById("minimapContainer").style.display = "none";
@@ -429,12 +447,14 @@ function highlightStatechart(interaction_types) {
 
     var interactionFrequency = {}; // Object to store interaction frequency
 
+    console.log(interaction_types)
+
     for (let i = 0; i < interaction_types.length; i++) {
         var event = "'" + interaction_types[i].event + "'";
         var css = interaction_types[i].css;
 
         var interaction = event + " on " + "'" + css + "'";
-        console.log(interaction);
+        //console.log(interaction);
 
         // The brush interaction decomposes into three different interactions
         if (interaction_types[i].event === "brush") {
@@ -490,24 +510,35 @@ function highlightStatechart(interaction_types) {
 
         // Perform edge operations only when interactions are > 0
         if (interaction > 0) {
-            // Check if the color is below a certain threshold
-            var threshold = maxFrequency / 3; // Adjust this threshold as needed
+            
 
-            if (interaction <= threshold) { //The blue results too whiteish
-
-                //console.log("BLACK: " + interaction, threshold, nodeText)
-                d3.select(this.parentNode).selectAll("text").style("fill", "black");
-
-
-            } else {
-                // Set the text color to black
-                //console.log("WHITE: " + interaction, threshold, nodeText)
-                d3.select(this.parentNode).selectAll("text").style("fill", "white");
+            // If I have to make my polygons green
+            if(flag == "violations"){
+                var color = "lightgreen"
+                d3.select(this).style("fill", color);
             }
+            else{
 
-            // Color the polygon using the color scale
-            var color = colorScale(interaction);
-            d3.select(this).style("fill", color);
+
+                // Check if the color is below a certain threshold
+                var threshold = maxFrequency / 3; // Adjust this threshold as needed
+
+                if (interaction <= threshold) { //The blue results too whiteish
+
+                    //console.log("BLACK: " + interaction, threshold, nodeText)
+                    d3.select(this.parentNode).selectAll("text").style("fill", "black");
+
+
+                } else {
+                    // Set the text color to black
+                    //console.log("WHITE: " + interaction, threshold, nodeText)
+                    d3.select(this.parentNode).selectAll("text").style("fill", "white");
+                }
+
+                var color = colorScale(interaction);
+                d3.select(this).style("fill", color);
+            
+            
 
             
             edges.each(function () {
@@ -519,7 +550,7 @@ function highlightStatechart(interaction_types) {
                 if (titleContent.match(regex)) {
                     // Set the edge colors
                     // Increasing edges' opacity if we're interested in them
-                    console.log(nodeId, titleContent);
+                    //console.log(nodeId, titleContent);
                     edge.select("polygon").style("fill", color);
                     edge.select("polyline").style("fill", color);
                     edge.select("path").style("stroke", color);
@@ -528,6 +559,8 @@ function highlightStatechart(interaction_types) {
                     edge.select("path").style("opacity", 1);
                 }
             });
+        }
+            //console.log(color)
             return color;
         }
     });
@@ -538,8 +571,38 @@ function highlightStatechart(interaction_types) {
     //texts.style("fill", "white"); // Set text color to white
 
     // Create and update traceInfo div using plain HTML
+    if(document.getElementById("violationsButton") == null && violationsFlag == 1){
+
+        var button = document.createElement("button");
+        button.textContent = "Show Violations";
+        button.id = "violationsButton"
+        button.className = "btn btn-outline-success"
+        button.dataset.toggle = "show"; // Inizializza il dataset.toggle su "show"
+        button.addEventListener("click", function () {
+            if (this.dataset.toggle === "show") {
+                highlightStatechartViolations(violationsForAllTracesFormatted, selectedTraceID, selectedTrace);
+                this.dataset.toggle = "hide";
+                this.textContent = "Show Interaction Frequency";
+            } else {
+                highlightStatechart(selectedTrace, "normal");
+                this.dataset.toggle = "show";
+                this.textContent = "Show Violations";
+            }
+        });
+
+        document.body.appendChild(button);
+        button.style.position = "fixed"; // Cambia la posizione del bottone in modo che si muova con la finestra
+        button.style.bottom = "20px"; // Imposta il margine inferiore
+        button.style.right = "20px"; // Imposta il margine destro
+
+    }
+    
+
+    
+
+    
     var traceInfoDiv = document.getElementById("traceInfo");
-    if (!traceInfoDiv) {
+    if (flag != "violations" && !traceInfoDiv) {
         var traceInfoDiv = document.createElement("div");
         traceInfoDiv.id = "traceInfo";
         traceInfoDiv.style.position = "absolute";
@@ -574,10 +637,18 @@ function highlightStatechart(interaction_types) {
 
         // Append the traceInfo div to the statechartContainer
         document.getElementById("statechartContainer").appendChild(traceInfoDiv);
+        traceInfoDiv.innerHTML += "Trace selected: " + selectedTraceID;
+
+        
+        
     }
 
+    
+
+    
+
     // Add content to the traceInfo div
-    traceInfoDiv.innerHTML += "Trace selected: " + JSON.parse(localStorage.getItem("selectedTraceID"));
+    
 
     localStorage.removeItem("selectedTrace");
     localStorage.removeItem("selectedTraceID");
@@ -657,9 +728,20 @@ function highlightStatechartMultiple(loadedTraces, selectedTraces) {
 
 function highlightStatechartViolations(violationsForAllTracesFormatted, selectedTraceID, selectedTrace) {
     // Nascondi gli elementi non necessari
+
+    highlightStatechart(selectedTrace, "violations")
+
+    console.log(violationsForAllTracesFormatted, selectedTraceID, selectedTrace)
     document.getElementById("colorLegend").style.display = 'none';
     document.getElementById("changeLayoutButton").style.display = "none";
     document.getElementById("minimapContainer").style.display = "none";
+
+    var traceInfoDiv = document.getElementById("traceInfo")
+
+    if (traceInfoDiv != null) {
+        traceInfoDiv.remove()
+  
+    }
 
     // Rendi i bordi degli elementi appena visibili
     var edges = d3.selectAll(".edge");
@@ -680,10 +762,43 @@ function highlightStatechartViolations(violationsForAllTracesFormatted, selected
 
         // Verifica se il numero della traccia corrente corrisponde a quello selezionato
         if (currentViolation.number == selectedTraceID) {
+            
             var parsedCurrentViolation = JSON.parse(currentViolation.violations);
 
-            for (let j = 0; j < parsedCurrentViolation.length; j++) {
+            //In the case the violation is only one
+            if(parsedCurrentViolation.length == undefined){
 
+                // Crea una chiave univoca per identificare la violazione
+                var key = parsedCurrentViolation.visual_component + '_' + parsedCurrentViolation.interaction;
+
+                // Verifica se la chiave esiste già in violationFrequency
+                if (violationFrequency[key]) {
+                    // Se la chiave esiste, incrementa la frequenza
+                    violationFrequency[key].frequency++;
+                } else {
+                    // Se la chiave non esiste, crea una nuova voce in violationFrequency
+
+
+
+                    var string_helper = "";
+                    console.log(parsedCurrentViolation)
+                    if (parsedCurrentViolation.interaction.includes("mousemove")) {
+                        console.log("includes")
+                        string_helper = "'mousemove' on '#" + parsedCurrentViolation.visual_component + " canvas.marks'";
+                    }
+                    violationFrequency[key] = {
+                        frequency: 1,
+                        visual_component: parsedCurrentViolation.visual_component,
+                        interaction: parsedCurrentViolation.interaction,
+                        level: parsedCurrentViolation.level,
+                        string: string_helper
+                    };
+
+                }
+                
+            }
+            for (let j = 0; j < parsedCurrentViolation.length; j++) {
+       
             // Crea una chiave univoca per identificare la violazione
                 var key = parsedCurrentViolation[j].visual_component + '_' + parsedCurrentViolation[j].interaction;
 
@@ -699,6 +814,7 @@ function highlightStatechartViolations(violationsForAllTracesFormatted, selected
                     var string_helper = "";
                     console.log(parsedCurrentViolation[j])
                     if (parsedCurrentViolation[j].interaction.includes("mousemove")) {
+                        console.log("includes")
                         string_helper = "'mousemove' on '#" + parsedCurrentViolation[j].visual_component + " canvas.marks'";
                     }
                     violationFrequency[key] = {
@@ -751,10 +867,16 @@ function highlightStatechartViolations(violationsForAllTracesFormatted, selected
         }
 
         // Se non viene trovata corrispondenza, ritorna il colore grigio chiaro
-        return "#a3a3a3";
+        return d3.select(this).style("fill");
     });
 
 
+ 
+
+    
+
+   
+    
 
     // Crea o aggiorna il div traceInfo con le informazioni sulla traccia selezionata
     var traceInfoDiv = document.getElementById("traceInfo");
@@ -775,8 +897,8 @@ function highlightStatechartViolations(violationsForAllTracesFormatted, selected
         traceInfoDiv.style.display = "inline";
 
         // Aggiungi una legenda al traceInfo div
-        traceInfoDiv.innerHTML += "No Violations: <svg height='20' width='20'><rect width='20' height='20' style='fill:#a3a3a3;'></rect></svg><br><br>";
-
+        traceInfoDiv.innerHTML += "No Interactions: <svg height='20' width='20'><rect width='20' height='20' style='fill:#a3a3a3;'></rect></svg><br><br>";
+        traceInfoDiv.innerHTML += "No Violations: <svg height='20' width='20'><rect width='20' height='20' style='fill:lightgreen;'></rect></svg><br><br>";
         // Aggiungi un'immagine al traceInfo div
         var img = document.createElement("img");
         img.src = "images/magma.png";
@@ -793,10 +915,11 @@ function highlightStatechartViolations(violationsForAllTracesFormatted, selected
 
         // Aggiungi il traceInfo div al container dello statechart
         document.getElementById("statechartContainer").appendChild(traceInfoDiv);
+        
     }
 
     // Aggiorna il contenuto del traceInfo div
-    traceInfoDiv.innerHTML += "Trace selected: " + JSON.parse(localStorage.getItem("selectedTraceID"));
+    traceInfoDiv.innerHTML += "Trace selected: " + selectedTraceID;
 
     // Rimuovi i dati dalla memoria locale
     localStorage.removeItem("selectedTrace");
@@ -1485,26 +1608,22 @@ function isNameInUrl(jsonData, systemUrl) {
 
             //Variables from local storage
 
-            let selectedTrace = JSON.parse(localStorage.getItem("selectedTrace"));
-            let selectedTraceID = JSON.parse(localStorage.getItem("selectedTraceID"));
-            let violationsTraceFlag = JSON.parse(localStorage.getItem("violations"));
-            let violationsForAllTracesFormatted = JSON.parse(localStorage.getItem("violationsForAllTracesFormatted"));
+            //var selectedTrace = JSON.parse(localStorage.getItem("selectedTrace"));
+            
 
             //State chart highlighting for interaction frequency
 
             if (window.location.href.includes("replay")) document.getElementById("changeLayoutButton").style.display = "none";
 
-            if (selectedTrace && Object.keys(selectedTrace).length > 0 && violationsTraceFlag != 1) {
+            if (selectedTrace && Object.keys(selectedTrace).length > 0) {
                 console.log("selectedTrace is not empty");
                 console.log(selectedTrace);
-                highlightStatechart(selectedTrace);
+                highlightStatechart(selectedTrace, "normal");
             }
 
-            if (violationsTraceFlag == 1) {
-                console.log("ViolationsPreviewFlag is not empty");
-                console.log(selectedTrace);
-                highlightStatechartViolations(violationsForAllTracesFormatted, selectedTraceID, selectedTrace);
-            }
+            
+            
+            
 
             //State chart highlighting for interaction frequency (multiple traces selected)
             
