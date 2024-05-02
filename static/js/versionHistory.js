@@ -1,37 +1,39 @@
-var leftContainer,rightContainer;
-var statecharts={};
+var leftContainer, rightContainer;
+var statecharts = {};
 var minimapWidth = 0, minimapHeight = 0, scaleFactor = 0, originalHeight = 0, originalWidth = 0, currentX = 0, currentY = 0, translateX = 0, translateY = 0, minimapRatio = 0, scale = 1, svgWidth = 0, svgHeight = 0;
 
 window.onload = function () {
     leftContainer = document.getElementById("leftContainer");
     rightContainer = document.getElementById("rightContainer");
     document.getElementById("colorLegend").style.display = "none";
-    
+
     getVersionHistory();
 }
 
-async function getVersionHistory(){
+async function getVersionHistory() {
     const url = "http://127.0.0.1:5000/get_statechart_comparison";
     fetch(url)
-      .then((response) => response.json())
-      .then((json) => {
-        statecharts = json.files;
-        console.log(statecharts);
-        
-        visualizeStatechart(statecharts[0].svg,leftContainer);
-        visualizeStatechart(statecharts[1].svg,rightContainer);
-        applyZoom();
-        applyIds();
-        highlightDifferences();
+        .then((response) => response.json())
+        .then((json) => {
+            statecharts = json.files;
+            console.log(statecharts);
 
-      });
+            visualizeStatechart(statecharts[0].svg, leftContainer);
+            visualizeStatechart(statecharts[1].svg, rightContainer);
+            applyZoom();
+            applyIds();
+            highlightDifferences();
+
+        });
 }
 
-function visualizeStatechart(svg,container,snapshotNumber){
+function visualizeStatechart(svg, container, snapshotNumber) {
     console.log("visualizeStatechart")
     var parser = new DOMParser();
     var doc = parser.parseFromString(svg, "image/svg+xml");
     var originalSVG = doc.documentElement;
+    container.style.border = "2px solid grey";
+    container.style.boxShadow = "0 0 10px black";
 
     if (originalSVG) {
         container.style.display = "block";
@@ -39,8 +41,8 @@ function visualizeStatechart(svg,container,snapshotNumber){
 
         var statechartId = container.id + "originalSVG"
 
-        if(container.id.includes("left")){
-            originalWidth = originalSVG.width.baseVal.valueInSpecifiedUnits -200;
+        if (container.id.includes("left")) {
+            originalWidth = originalSVG.width.baseVal.valueInSpecifiedUnits - 200;
             originalHeight = originalSVG.height.baseVal.valueInSpecifiedUnits - 200;
 
             originalSVG.setAttribute("width", originalWidth);
@@ -54,23 +56,22 @@ function visualizeStatechart(svg,container,snapshotNumber){
 
         }
 
-        
 
-        //TODO: set up minimap for each container
 
-        // Generate and set up the minimap
-        //generateMinimap(originalSVG);
-        //Set the id of the originalSVG
+
+
+
         d3.select(originalSVG)
             .select("g")
             .attr("id", statechartId);
 
         //To avoid the cropping effect while zooming, I need to give the svg more height.
-        if(originalHeight < originalWidth) originalSVG.height.baseVal.valueInSpecifiedUnits = originalWidth + 1000;
+        if (originalHeight < originalWidth) originalSVG.height.baseVal.valueInSpecifiedUnits = originalWidth + 1000;
         // Configure the handler to click on the minimap passing originalSVG as a parameter
-      
-        container.style.border = "2px solid grey"; 
-        container.style.boxShadow = "0 0 10px black";
+
+
+
+
 
         //Snapshot description, etc.
 
@@ -78,8 +79,20 @@ function visualizeStatechart(svg,container,snapshotNumber){
             console.log("snapshotNumber")
             var statechartInfoDiv = document.createElement("div");
 
-            if (container.id.includes("left")) statechartInfoDiv.id = "statechartinfodivleft"
-            else statechartInfoDiv.id = "statechartinfodivright"
+            if (container.id.includes("left")) {
+                statechartInfoDiv.id = "statechartinfodivleft"
+
+                setTimeout(function () {
+                generateMinimap(originalSVG, "left");
+                }, 500);
+            }
+            else {
+                statechartInfoDiv.id = "statechartinfodivright"
+                console.log("debuf: " + originalSVG)
+                setTimeout(function () {
+                generateMinimap(originalSVG, "right");
+                }, 500);
+            }
 
             // Ottieni l'elemento <a> corrispondente al snapshotNumber
             var snapshotInfo = document.getElementById("snapshot" + snapshotNumber + "info");
@@ -110,31 +123,39 @@ function visualizeStatechart(svg,container,snapshotNumber){
             document.getElementById("statechartContainer2").appendChild(statechartInfoDiv);
         }
 
-        else{
+        else { // Case in which I just load the page without selecting the snapshots from the menu, in this case I show two statecharts automatically
             console.log("else")
+
+            
+            setTimeout(function () {
+                if(container.id.includes("right")) generateMinimap(originalSVG, "right");
+                else generateMinimap(originalSVG, "left");
+            }, 500);
+
+
             var statechartInfoDivLeft = document.createElement("div");
             statechartInfoDivLeft.id = "statechartinfodivleft";
 
-            
-                var title = "Snapshot 0"
-                var date = "2024-04-18 08:30 AM"
-                var description = "Falcon original vis.system "
 
-                // Aggiungi il titolo, la data e la descrizione al div creato
+            var title = "Snapshot 0"
+            var date = "2024-04-18 08:30 AM"
+            var description = "Falcon original vis.system "
+
+            // Aggiungi il titolo, la data e la descrizione al div creato
             statechartInfoDivLeft.innerHTML = `
             <h3 style="color: black;">${title}</h3>
             <p style="color: black;">Date: ${date}</p>
             <p style="color: black;">Description: ${description}</p>
         `;
 
-                // Imposta lo stile del div
+            // Imposta lo stile del div
             statechartInfoDivLeft.style.position = "absolute";
             statechartInfoDivLeft.style.top = "10px"; // 10px dal bordo superiore del container
             statechartInfoDivLeft.style.left = "10px"; // 10px dal bordo sinistro del container
             statechartInfoDivLeft.style.padding = "10px"; // Padding per migliorare leggibilità
             statechartInfoDivLeft.style.borderRadius = "10px"; // Bordo arrotondato
             statechartInfoDivLeft.style.border = "2px solid turquoise"; // Contorno nero
-                //statechartInfoDiv.style.boxShadow = "0 0 10px turquoise"; // Ombra turchese
+            //statechartInfoDiv.style.boxShadow = "0 0 10px turquoise"; // Ombra turchese
             // Aggiungi il div creato al container
             document.getElementById("statechartContainer").appendChild(statechartInfoDivLeft);
 
@@ -165,26 +186,59 @@ function visualizeStatechart(svg,container,snapshotNumber){
             document.getElementById("statechartContainer2").appendChild(statechartInfoDivRight);
 
 
-            }
-
-            
-
         }
 
-    
+
+
+    }
+
+
     else {
         console.error("Invalid original SVG");
         return false;
     }
 
-    
+
 
 
 }
 
+function generateMinimap(originalSVG, container) {
+    scaleFactor = 50;
+    originalWidth = originalSVG.width.baseVal.valueInSpecifiedUnits;
+    originalHeight = originalSVG.height.baseVal.valueInSpecifiedUnits;
 
+    //Needed to avoid certain behaviors while dragging the indicator
+    currentY = originalHeight;
+    translateY = originalHeight;
 
-function applyZoom(){
+    if (originalWidth / scaleFactor < 100 || originalHeight / scaleFactor < 100) {
+        scaleFactor = 25;
+    }
+
+    minimapWidth = originalWidth / scaleFactor;
+    minimapHeight = originalHeight / scaleFactor;
+    if (minimapHeight < 100 || minimapWidth < 100) {
+        minimapHeight *= 2.5
+        minimapWidth *= 2.5
+    }
+    //console.log("Minimap width: " + minimapWidth + " , minimap height: " + minimapHeight)
+
+    console.log(originalSVG)
+
+    var minimapSVG = originalSVG.cloneNode(true);
+    console.log(container)
+    minimapSVG.setAttribute("width", minimapWidth);
+    minimapSVG.setAttribute("height", minimapHeight);
+
+    // Add content to the minimapContainer
+    var minimapContainer = document.getElementById(container + "MinimapContainer");
+    minimapContainer.innerHTML = "";
+    minimapSVG.setAttribute("id", "minimapSVG" + container);
+    minimapContainer.appendChild(minimapSVG);
+}
+
+function applyZoom() {
 
     var statechartLeft = d3.select("#leftContaineroriginalSVG")
     var statechartRight = d3.select("#rightContaineroriginalSVG")
@@ -215,7 +269,7 @@ function applyZoom(){
 
     statechartRight.call(zoom)
 
-   
+
 
 }
 var textsLeft;
@@ -238,7 +292,7 @@ function applyIds() {
         console.log(textLeft)
         // Controlla se il testo contiene un numero
         //if (!/\d/.test(textLeft)) {
-            textsLeft.push(textLeft);
+        textsLeft.push(textLeft);
         //}
     });
 
@@ -248,14 +302,14 @@ function applyIds() {
 
         // Controlla se il testo contiene un numero
         //if (!/\d/.test(textRight)) {
-            textsRight.push(textRight);
+        textsRight.push(textRight);
         //}
     });
 }
 
-function clearStatechart(statechart){
+function clearStatechart(statechart) {
 
-    if(statechart == "left"){
+    if (statechart == "left") {
 
         var container = document.getElementById("leftContainer");
 
@@ -263,31 +317,38 @@ function clearStatechart(statechart){
             container.removeChild(container.firstChild);
         }
 
+        var newDiv = document.createElement("div");
+        newDiv.id = "leftMinimapContainer";
+        container.appendChild(newDiv);
+
         document.getElementById("statechartinfodivleft").remove();
 
     }
 
-    else if(statechart == "right"){
+    else if (statechart == "right") {
 
         var container = document.getElementById("rightContainer");
+
         var elements = document.querySelectorAll("#statechartinfodivright");
         elements.forEach(function (element) {
             element.remove();
         });
-        
-       
 
         while (container.firstChild) {
             container.removeChild(container.firstChild);
         }
-        console.log("right")
-        
-    }
 
+        var newDiv = document.createElement("div");
+        newDiv.id = "rightMinimapContainer";
+        container.appendChild(newDiv);
+
+        console.log("right")
+
+    }
 }
 
 
-function visualizeSnapshot(snapshotNumber){
+function visualizeSnapshot(snapshotNumber) {
     console.log(snapshotNumber)
     clearStatechart("right")
     visualizeStatechart(statecharts[snapshotNumber].svg, rightContainer, snapshotNumber);
@@ -376,10 +437,10 @@ function highlightDifferences() {
             // Itera su tutti i "g" dello statechart di sinistra
             gLeft.each(function () {
 
-                
-                if (d3.select(this).select("title").text() == item){
+
+                if (d3.select(this).select("title").text() == item) {
                     colorToApply = "lightcoral"
-                    
+
                     d3.select(this).select("ellipse").style("fill", colorToApply)
                 }
                 else if (!isNaN(d3.select(this).select("title").text())) colorToApply = "#a3a3a3"
@@ -390,17 +451,17 @@ function highlightDifferences() {
                         polygon.style("fill", colorToApply);
                     }
                 }
-                
-                else if ((colorToApply == "lightcoral")){
+
+                else if ((colorToApply == "lightcoral")) {
                     d3.select(this).selectAll("polygon").style("fill", colorToApply);
                     //d3.select(this).selectAll("path").attr("stroke", colorToApply);
                 }
-                
-                
-                if(colorToApply == "lightcoral"){
+
+
+                if (colorToApply == "lightcoral") {
                     d3.select(this).select("polygon").attr("class", "lightcoral");
                 }
-                
+
             });
 
             gRight.each(function () {
@@ -431,10 +492,10 @@ function highlightDifferences() {
                 }
 
             });
-            
+
         }
 
-        else{
+        else {
 
             gLeft.each(function () {
                 var polygon = d3.select(this).select("polygon");
@@ -461,11 +522,11 @@ function highlightDifferences() {
                     }
                 }
             });
-            
+
         }
     });
 
-    
+
     // Itera sugli elementi dell'array "newItems". Colora gli elementi nuovi di blu.
     newItemsArray.forEach(function (item) {
         // Se l'elemento è un numero, quindi uno stato che è stato tolto e quindi devo colorare tutti i suoi figli...
@@ -545,7 +606,7 @@ function highlightDifferences() {
                     }
                 }
             });
-            
+
             gLeft.each(function () {
                 var polygon = d3.select(this).select("polygon");
                 var textElement = d3.select(this).select("text");
