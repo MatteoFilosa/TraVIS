@@ -18,16 +18,17 @@ async function getVersionHistory(){
         statecharts = json.files;
         console.log(statecharts);
         
-        visualizeStatecharts(statecharts[0].svg,leftContainer);
-        visualizeStatecharts(statecharts[1].svg,rightContainer);
-          applyZoom()
-          applyIds()
-          highlightDifferences()
+        visualizeStatechart(statecharts[0].svg,leftContainer);
+        visualizeStatechart(statecharts[1].svg,rightContainer);
+        applyZoom();
+        applyIds();
+        highlightDifferences();
 
       });
 }
 
-function visualizeStatecharts(svg,container){
+function visualizeStatechart(svg,container,snapshotNumber){
+    console.log("visualizeStatechart")
     var parser = new DOMParser();
     var doc = parser.parseFromString(svg, "image/svg+xml");
     var originalSVG = doc.documentElement;
@@ -68,9 +69,109 @@ function visualizeStatecharts(svg,container){
         if(originalHeight < originalWidth) originalSVG.height.baseVal.valueInSpecifiedUnits = originalWidth + 1000;
         // Configure the handler to click on the minimap passing originalSVG as a parameter
       
+        container.style.border = "2px solid grey"; 
+        container.style.boxShadow = "0 0 10px black";
+
+        //Snapshot description, etc.
+
+        if (snapshotNumber) {
+            console.log("snapshotNumber")
+            var statechartInfoDiv = document.createElement("div");
+
+            if (container.id.includes("left")) statechartInfoDiv.id = "statechartinfodivleft"
+            else statechartInfoDiv.id = "statechartinfodivright"
+
+            // Ottieni l'elemento <a> corrispondente al snapshotNumber
+            var snapshotInfo = document.getElementById("snapshot" + snapshotNumber + "info");
+            if (snapshotInfo) {
+                // Ottieni il titolo, la data e la descrizione dagli attributi personalizzati
+                var title = snapshotInfo.textContent.trim();
+                var date = snapshotInfo.getAttribute("date");
+                var description = snapshotInfo.getAttribute("description");
+
+                // Aggiungi il titolo, la data e la descrizione al div creato
+                statechartInfoDiv.innerHTML = `
+            <h3 style="color: black;">${title}</h3>
+            <p style="color: black;">Date: ${date}</p>
+            <p style="color: black;">Description: ${description}</p>
+        `;
+
+                // Imposta lo stile del div
+                statechartInfoDiv.style.position = "absolute";
+                statechartInfoDiv.style.top = "10px"; // 10px dal bordo superiore del container
+                statechartInfoDiv.style.left = "10px"; // 10px dal bordo sinistro del container
+                statechartInfoDiv.style.padding = "10px"; // Padding per migliorare leggibilità
+                statechartInfoDiv.style.borderRadius = "10px"; // Bordo arrotondato
+                statechartInfoDiv.style.border = "2px solid turquoise"; // Contorno nero
+                //statechartInfoDiv.style.boxShadow = "0 0 10px turquoise"; // Ombra turchese
+            }
+
+            // Aggiungi il div creato al container
+            document.getElementById("statechartContainer2").appendChild(statechartInfoDiv);
+        }
+
+        else{
+            console.log("else")
+            var statechartInfoDivLeft = document.createElement("div");
+            statechartInfoDivLeft.id = "statechartinfodivleft";
+
+            
+                var title = "Snapshot 0"
+                var date = "2024-04-18 08:30 AM"
+                var description = "Falcon original vis.system "
+
+                // Aggiungi il titolo, la data e la descrizione al div creato
+            statechartInfoDivLeft.innerHTML = `
+            <h3 style="color: black;">${title}</h3>
+            <p style="color: black;">Date: ${date}</p>
+            <p style="color: black;">Description: ${description}</p>
+        `;
+
+                // Imposta lo stile del div
+            statechartInfoDivLeft.style.position = "absolute";
+            statechartInfoDivLeft.style.top = "10px"; // 10px dal bordo superiore del container
+            statechartInfoDivLeft.style.left = "10px"; // 10px dal bordo sinistro del container
+            statechartInfoDivLeft.style.padding = "10px"; // Padding per migliorare leggibilità
+            statechartInfoDivLeft.style.borderRadius = "10px"; // Bordo arrotondato
+            statechartInfoDivLeft.style.border = "2px solid turquoise"; // Contorno nero
+                //statechartInfoDiv.style.boxShadow = "0 0 10px turquoise"; // Ombra turchese
+            // Aggiungi il div creato al container
+            document.getElementById("statechartContainer").appendChild(statechartInfoDivLeft);
+
+            var statechartInfoDivRight = document.createElement("div");
+            statechartInfoDivRight.id = "statechartinfodivright";
 
 
-    }
+            var title = "Snapshot 1"
+            var date = "2024-04-12 10:30 AM"
+            var description = "Test"
+
+            // Aggiungi il titolo, la data e la descrizione al div creato
+            statechartInfoDivRight.innerHTML = `
+            <h3 style="color: black;">${title}</h3>
+            <p style="color: black;">Date: ${date}</p>
+            <p style="color: black;">Description: ${description}</p>
+        `;
+
+            // Imposta lo stile del div
+            statechartInfoDivRight.style.position = "absolute";
+            statechartInfoDivRight.style.top = "10px"; // 10px dal bordo superiore del container
+            statechartInfoDivRight.style.left = "10px"; // 10px dal bordo sinistro del container
+            statechartInfoDivRight.style.padding = "10px"; // Padding per migliorare leggibilità
+            statechartInfoDivRight.style.borderRadius = "10px"; // Bordo arrotondato
+            statechartInfoDivRight.style.border = "2px solid turquoise"; // Contorno nero
+            //statechartInfoDiv.style.boxShadow = "0 0 10px turquoise"; // Ombra turchese
+            // Aggiungi il div creato al container
+            document.getElementById("statechartContainer2").appendChild(statechartInfoDivRight);
+
+
+            }
+
+            
+
+        }
+
+    
     else {
         console.error("Invalid original SVG");
         return false;
@@ -80,6 +181,8 @@ function visualizeStatecharts(svg,container){
 
 
 }
+
+
 
 function applyZoom(){
 
@@ -160,15 +263,25 @@ function clearStatechart(statechart){
             container.removeChild(container.firstChild);
         }
 
+        document.getElementById("statechartinfodivleft").remove();
+
     }
 
     else if(statechart == "right"){
 
         var container = document.getElementById("rightContainer");
+        var elements = document.querySelectorAll("#statechartinfodivright");
+        elements.forEach(function (element) {
+            element.remove();
+        });
+        
+       
 
         while (container.firstChild) {
             container.removeChild(container.firstChild);
         }
+        console.log("right")
+        
     }
 
 }
@@ -177,7 +290,7 @@ function clearStatechart(statechart){
 function visualizeSnapshot(snapshotNumber){
     console.log(snapshotNumber)
     clearStatechart("right")
-    visualizeStatecharts(statecharts[snapshotNumber].svg, rightContainer);
+    visualizeStatechart(statecharts[snapshotNumber].svg, rightContainer, snapshotNumber);
     applyZoom();
     applyIds();
     highlightDifferences();

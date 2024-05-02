@@ -505,7 +505,8 @@ span {
 }
 
 #statechartContainer {
-
+    
+    position: relative;
     overflow-x: scroll;
     overflow-y: scroll;
 
@@ -513,6 +514,7 @@ span {
 
 #statechartContainer2 {
 
+    position: relative;
     overflow-x: scroll;
     overflow-y: scroll;
 
