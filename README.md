@@ -12,7 +12,7 @@
 
 3) Run the runApp file contained in the main directory to start the app: python runApp.py <name_of_the_virtual_environment>
 
-4) In order to run all the functionalities of the framework, download and install GraphViz: https://graphviz.org/download/source/
+4) In order to run all the functionalities of the framework, download and install GraphViz: https://graphviz.org/download/
 
 TraVIS: installation of the dependencies for the traces replay and state chart generation features
 
