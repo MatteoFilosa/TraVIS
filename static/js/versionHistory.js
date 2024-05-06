@@ -34,6 +34,7 @@ function visualizeStatechart(svg, container, snapshotNumber) {
     var originalSVG = doc.documentElement;
     container.style.border = "2px solid grey";
     container.style.boxShadow = "0 0 10px black";
+    container.style.margin = "5px";
 
     if (originalSVG) {
         container.style.display = "block";
@@ -75,7 +76,7 @@ function visualizeStatechart(svg, container, snapshotNumber) {
 
         //Snapshot description, etc.
 
-        if (snapshotNumber) {
+        if ((snapshotNumber)) {
             console.log("snapshotNumber")
             var statechartInfoDiv = document.createElement("div");
 
@@ -88,7 +89,7 @@ function visualizeStatechart(svg, container, snapshotNumber) {
             }
             else {
                 statechartInfoDiv.id = "statechartinfodivright"
-                console.log("debuf: " + originalSVG)
+                console.log("debug: " + originalSVG)
                 setTimeout(function () {
                 generateMinimap(originalSVG, "right");
                 }, 500);
@@ -96,7 +97,7 @@ function visualizeStatechart(svg, container, snapshotNumber) {
 
             // Ottieni l'elemento <a> corrispondente al snapshotNumber
             var snapshotInfo = document.getElementById("snapshot" + snapshotNumber + "info");
-            if (snapshotInfo) {
+            if (snapshotInfo ) {
                 // Ottieni il titolo, la data e la descrizione dagli attributi personalizzati
                 var title = snapshotInfo.textContent.trim();
                 var date = snapshotInfo.getAttribute("date");
@@ -104,22 +105,23 @@ function visualizeStatechart(svg, container, snapshotNumber) {
 
                 // Aggiungi il titolo, la data e la descrizione al div creato
                 statechartInfoDiv.innerHTML = `
-            <h3 style="color: black;">${title}</h3>
-            <p style="color: black;">Date: ${date}</p>
-            <p style="color: black;">Description: ${description}</p>
+            <h4 style="color: black; font-size: 16px;">${title}</h4>
+    <p style="color: black; font-size: 14px;">Date: ${date}</p>
+    <p style="color: black; font-size: 14px;">Description: ${description}</p>
         `;
-
+                
                 // Imposta lo stile del div
                 statechartInfoDiv.style.position = "absolute";
                 statechartInfoDiv.style.top = "10px"; // 10px dal bordo superiore del container
                 statechartInfoDiv.style.left = "10px"; // 10px dal bordo sinistro del container
-                statechartInfoDiv.style.padding = "10px"; // Padding per migliorare leggibilità
-                statechartInfoDiv.style.borderRadius = "10px"; // Bordo arrotondato
+                statechartInfoDiv.style.padding = "5px"; // Padding per migliorare leggibilità
+                statechartInfoDiv.style.borderRadius = "5px"; // Bordo arrotondato
                 statechartInfoDiv.style.border = "2px solid turquoise"; // Contorno nero
                 //statechartInfoDiv.style.boxShadow = "0 0 10px turquoise"; // Ombra turchese
             }
 
             // Aggiungi il div creato al container
+            
             document.getElementById("statechartContainer2").appendChild(statechartInfoDiv);
         }
 
@@ -139,21 +141,21 @@ function visualizeStatechart(svg, container, snapshotNumber) {
 
             var title = "Snapshot 0"
             var date = "2024-04-18 08:30 AM"
-            var description = "Falcon original vis.system "
+            var description = "Falcon original"
 
             // Aggiungi il titolo, la data e la descrizione al div creato
             statechartInfoDivLeft.innerHTML = `
-            <h3 style="color: black;">${title}</h3>
-            <p style="color: black;">Date: ${date}</p>
-            <p style="color: black;">Description: ${description}</p>
+            <h4 style="color: black; font-size: 16px;">${title}</h4>
+    <p style="color: black; font-size: 14px;">Date: ${date}</p>
+    <p style="color: black; font-size: 14px;">Description: ${description}</p>
         `;
 
             // Imposta lo stile del div
             statechartInfoDivLeft.style.position = "absolute";
             statechartInfoDivLeft.style.top = "10px"; // 10px dal bordo superiore del container
             statechartInfoDivLeft.style.left = "10px"; // 10px dal bordo sinistro del container
-            statechartInfoDivLeft.style.padding = "10px"; // Padding per migliorare leggibilità
-            statechartInfoDivLeft.style.borderRadius = "10px"; // Bordo arrotondato
+            statechartInfoDivLeft.style.padding = "5px"; // Padding per migliorare leggibilità
+            statechartInfoDivLeft.style.borderRadius = "5px"; // Bordo arrotondato
             statechartInfoDivLeft.style.border = "2px solid turquoise"; // Contorno nero
             //statechartInfoDiv.style.boxShadow = "0 0 10px turquoise"; // Ombra turchese
             // Aggiungi il div creato al container
@@ -169,18 +171,19 @@ function visualizeStatechart(svg, container, snapshotNumber) {
 
             // Aggiungi il titolo, la data e la descrizione al div creato
             statechartInfoDivRight.innerHTML = `
-            <h3 style="color: black;">${title}</h3>
-            <p style="color: black;">Date: ${date}</p>
-            <p style="color: black;">Description: ${description}</p>
+            <h4 style="color: black; font-size: 16px;">${title}</h4>
+    <p style="color: black; font-size: 14px;">Date: ${date}</p>
+    <p style="color: black; font-size: 14px;">Description: ${description}</p>
         `;
 
             // Imposta lo stile del div
             statechartInfoDivRight.style.position = "absolute";
             statechartInfoDivRight.style.top = "10px"; // 10px dal bordo superiore del container
             statechartInfoDivRight.style.left = "10px"; // 10px dal bordo sinistro del container
-            statechartInfoDivRight.style.padding = "10px"; // Padding per migliorare leggibilità
-            statechartInfoDivRight.style.borderRadius = "10px"; // Bordo arrotondato
+            statechartInfoDivRight.style.padding = "5px"; // Padding per migliorare leggibilità
+            statechartInfoDivRight.style.borderRadius = "5px"; // Bordo arrotondato
             statechartInfoDivRight.style.border = "2px solid turquoise"; // Contorno nero
+            statechartInfoDivRight.style.width = "auto";
             //statechartInfoDiv.style.boxShadow = "0 0 10px turquoise"; // Ombra turchese
             // Aggiungi il div creato al container
             document.getElementById("statechartContainer2").appendChild(statechartInfoDivRight);
@@ -272,8 +275,8 @@ function applyZoom() {
 
 
 }
-var textsLeft;
-var textsRight;
+var textsLeft = [];
+var textsRight = [];
 
 function applyIds() {
 
@@ -289,7 +292,7 @@ function applyIds() {
     // Seleziona il primo elemento "text" di ogni nodo nel statechart di sinistra
     nodesLeft.each(function () {
         var textLeft = d3.select(this).select("text").text();
-        console.log(textLeft)
+        //console.log(textLeft)
         // Controlla se il testo contiene un numero
         //if (!/\d/.test(textLeft)) {
         textsLeft.push(textLeft);
@@ -321,7 +324,7 @@ function clearStatechart(statechart) {
         newDiv.id = "leftMinimapContainer";
         container.appendChild(newDiv);
 
-        document.getElementById("statechartinfodivleft").remove();
+        //document.getElementById("statechartinfodivleft").remove();
 
     }
 
@@ -338,6 +341,8 @@ function clearStatechart(statechart) {
             container.removeChild(container.firstChild);
         }
 
+        
+
         var newDiv = document.createElement("div");
         newDiv.id = "rightMinimapContainer";
         container.appendChild(newDiv);
@@ -351,6 +356,8 @@ function clearStatechart(statechart) {
 function visualizeSnapshot(snapshotNumber) {
     console.log(snapshotNumber)
     clearStatechart("right")
+    clearStatechart("left")
+    visualizeStatechart(statecharts[0].svg, leftContainer, "none")
     visualizeStatechart(statecharts[snapshotNumber].svg, rightContainer, snapshotNumber);
     applyZoom();
     applyIds();
@@ -464,7 +471,7 @@ function highlightDifferences() {
 
             });
 
-            gRight.each(function () {
+            /* gRight.each(function () {
 
 
                 if (d3.select(this).select("title").text() == item) {
@@ -491,7 +498,7 @@ function highlightDifferences() {
                     d3.select(this).select("polygon").attr("class", "lightcoral");
                 }
 
-            });
+            }); */
 
         }
 
@@ -510,7 +517,7 @@ function highlightDifferences() {
                 }
             });
 
-            gRight.each(function () {
+            /* gRight.each(function () {
                 var polygon = d3.select(this).select("polygon");
                 var textElement = d3.select(this).select("text");
                 if (!polygon.empty() && !textElement.empty()) { // Verifica se esiste un poligono e un elemento di testo all'interno di questo elemento g
@@ -521,7 +528,7 @@ function highlightDifferences() {
                         polygon.attr("class", "lightcoral");
                     }
                 }
-            });
+            }); */
 
         }
     });

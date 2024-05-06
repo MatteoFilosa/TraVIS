@@ -870,6 +870,7 @@ function populateTable(data) {
       // Add violations column
       const violationsCell = document.createElement("td");
       violationsCell.id = "violationBarCell";
+      
       const violationsValue = Object.values(value).reduce(
         (acc, count) => acc + count,
         0
@@ -1615,6 +1616,7 @@ function createViolationsBar(violations) {
   totalNum.textContent = totalViolations;
   totalNum.style.marginRight = "8px";
   totalNum.style.color = "black";
+  totalNum.style.marginTop = "7px";
   totalNum.id = "violationsCell";
   violationsRectangle.appendChild(totalNum);
 
@@ -1645,7 +1647,7 @@ function createViolationsBar(violations) {
       const eventDiv = document.createElement("div");
       eventDiv.classList.add("eventColor");
       eventDiv.style.height = "20px";
-
+      eventDiv.style.marginTop = "7px";
       // Calculate the width of the bar based on percentage
       const barWidth = Math.max(
         minWidth,
