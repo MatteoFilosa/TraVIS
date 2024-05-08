@@ -121,6 +121,47 @@ function calculateConformity(trace, goldenTrace) {
   };
 }
 
+function uploadTrace() {
+  var input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'application/json';
+
+  input.onchange = function (event) {
+    var file = event.target.files[0];
+
+    var reader = new FileReader();
+    reader.onload = function () {
+      var jsonContent = reader.result;
+      // Visualizza il contenuto JSON nel modal
+      displayJSONModal(jsonContent);
+    };
+    reader.readAsText(file);
+  };
+
+  input.click();
+}
+
+function displayJSONModal(jsonContent) {
+  // Trova l'elemento del body del modal
+  var modalBody = document.getElementById('jsonModalBody');
+
+  // Svuota il contenuto precedente
+  modalBody.innerHTML = '';
+
+  // Crea un nuovo elemento <pre> per mantenere la formattazione del JSON
+  var preElement = document.createElement('pre');
+
+  // Inserisci il contenuto JSON all'interno del <pre>
+  preElement.textContent = jsonContent;
+
+  // Aggiungi il <pre> contenente il JSON all'elemento del body del modal
+  modalBody.appendChild(preElement);
+
+  // Mostra il modal
+  $('#jsonModal').modal('show');
+}
+
+
 function getUserTasks() {
   const url = "http://127.0.0.1:5000/get_user_tasks";
 
@@ -141,6 +182,26 @@ function getUserTasks() {
       };
 
       document.getElementById("tracesNum").innerHTML = `Tasks covered: 5`;
+
+ 
+      var button = document.createElement('button');
+      button.className = 'btn extraFiltersBtn';
+      button.style.marginTop = '10px';
+      button.style.marginRight = '50px';
+
+      // Creazione dell'icona FontAwesome e del testo del bottone
+      var icon = document.createElement('i');
+      icon.className = 'fas fa-file-alt'; // Specifica il nome delle classi FontAwesome per l'icona
+      var buttonText = document.createTextNode(' New Ideal Path');
+
+      // Aggiungi l'icona e il testo al bottone
+      button.appendChild(icon);
+      button.appendChild(buttonText);
+
+      button.onclick = uploadTrace;
+
+      var upperDiv = document.getElementById('upperDiv');
+      upperDiv.appendChild(button);
 
       // Iterate through each file
       json.forEach((task) => {

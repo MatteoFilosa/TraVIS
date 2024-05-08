@@ -20,6 +20,7 @@ async function getVersionHistory() {
 
             visualizeStatechart(statecharts[0].svg, leftContainer);
             visualizeStatechart(statecharts[1].svg, rightContainer);
+            createStatechartStructure();
             applyZoom();
             applyIds();
             highlightDifferences();
@@ -278,6 +279,90 @@ function applyZoom() {
 var textsLeft = [];
 var textsRight = [];
 
+//Function that creates a graph-like structure for the state charts.
+//Rivedere se è meglio labelare con id, classi, o una via di mezzo! (Ora è con le classi)
+
+/* ESEMPIO DI COME COLORARE UN ARCO:
+var pathsToColor = document.getElementsByClassName("E41->0")
+d3.selectAll(pathsToColor).style("stroke", "blue") */
+
+function createStatechartStructure() {
+    var statechartLeft = d3.select("#leftContaineroriginalSVG");
+    var statechartRight = d3.select("#rightContaineroriginalSVG");
+
+    // Funzione per estrarre i dati da un singolo elemento SVG
+    function extractDataFromSVG(svg) {
+        var data = {};
+
+        svg.selectAll("*").each(function () {
+            var element = d3.select(this);
+            var titleElement = element.select("title");
+            if (!titleElement.empty()) { // Controlla se l'elemento <title> esiste
+                var title = titleElement.text();
+
+                data[title] = {};
+                var xPathText = ""; // Stringa per memorizzare gli xPath
+                var interactionText = ""; // Stringa per memorizzare le interazioni
+                element.selectAll("text").each(function () { // Seleziona tutti gli elementi <text>
+                    var textContent = d3.select(this).text();
+                    if (textContent.includes("/")) {
+                        // Se il testo contiene "/", consideralo come xPath
+                        xPathText += textContent + ", ";
+                        // Aggiungi l'id "xPath" all'elemento HTML che contiene l'xPath
+                        d3.select(this).attr("class", "xPath");
+                    } else {
+                        // Altrimenti, consideralo come interaction
+                        interactionText += textContent + ", ";
+                        // Aggiungi l'id "interaction" all'elemento HTML che contiene l'interazione
+                        d3.select(this).attr("class", "interaction");
+                    }
+                });
+                // Rimuovi l'ultima virgola e lo spazio vuoto dalle stringhe
+                xPathText = xPathText.slice(0, -2);
+                interactionText = interactionText.slice(0, -2);
+                // Salva le stringhe nella struttura dati
+                data[title]["xPath"] = xPathText;
+                data[title]["interaction"] = interactionText;
+
+                // Cerca l'elemento HTML che ha <polygon>, <path> o <ellipse> come tag e imposta l'id come il titolo
+                var polygonElement = element.select("polygon");
+                if (!polygonElement.empty()) {
+                    polygonElement.attr("class", title);
+                }
+
+                var pathElement = element.select("path");
+                if (!pathElement.empty()) {
+                    pathElement.attr("class", title);
+                }
+
+                var ellipseElement = element.select("ellipse");
+                if (!ellipseElement.empty()) {
+                    ellipseElement.attr("class", title);
+                }
+
+                // Salva il contenuto degli altri tag HTML nell'oggetto associato
+                element.selectAll(":not(title, text)").each(function () {
+                    var tag = this.tagName;
+                    var content = d3.select(this).html();
+                    data[title][tag] = content;
+                });
+            }
+        });
+
+        return data;
+    }
+
+    // Estrai i dati per il container sinistro e destro
+    var leftData = extractDataFromSVG(statechartLeft);
+    var rightData = extractDataFromSVG(statechartRight);
+
+    // Ora leftData e rightData contengono le strutture dati dei grafi per i rispettivi contenitori
+    console.log("Struttura dati per il contenitore sinistro:", leftData);
+    console.log("Struttura dati per il contenitore destro:", rightData);
+}
+
+
+
 function applyIds() {
 
     textsLeft = []
@@ -292,6 +377,9 @@ function applyIds() {
     // Seleziona il primo elemento "text" di ogni nodo nel statechart di sinistra
     nodesLeft.each(function () {
         var textLeft = d3.select(this).select("text").text();
+        var titleLeft = d3.select(this).select("title").text();
+        console.log(titleLeft)
+        d3.select(this).id = titleLeft
         //console.log(textLeft)
         // Controlla se il testo contiene un numero
         //if (!/\d/.test(textLeft)) {
@@ -302,6 +390,8 @@ function applyIds() {
     // Seleziona il primo elemento "text" di ogni nodo nel statechart di destra
     nodesRight.each(function () {
         var textRight = d3.select(this).select("text").text();
+        var titleRight = d3.select(this).select("title").text();
+        d3.select(this).id = titleRight
 
         // Controlla se il testo contiene un numero
         //if (!/\d/.test(textRight)) {
@@ -360,6 +450,7 @@ function visualizeSnapshot(snapshotNumber) {
     visualizeStatechart(statecharts[0].svg, leftContainer, "none")
     visualizeStatechart(statecharts[snapshotNumber].svg, rightContainer, snapshotNumber);
     applyZoom();
+    createStatechartStructure();
     applyIds();
     highlightDifferences();
 }
