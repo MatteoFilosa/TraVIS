@@ -132,14 +132,31 @@ function uploadTrace() {
     var reader = new FileReader();
     reader.onload = function () {
       var jsonContent = reader.result;
-      // Visualizza il contenuto JSON nel modal
-      displayJSONModal(jsonContent);
+
+      // Invia il JSON al backend
+      fetch('/perform_trace_alignment_with_json', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ golden_trace: jsonContent })
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Manipola la risposta se necessario
+        console.log(data);
+      })
+      .catch(error => {
+        // Gestisci gli errori
+        console.error('Error:', error);
+      });
     };
     reader.readAsText(file);
   };
 
   input.click();
 }
+
 
 function displayJSONModal(jsonContent) {
   // Trova l'elemento del body del modal
