@@ -131,7 +131,17 @@ function uploadTrace() {
 
     var reader = new FileReader();
     reader.onload = function () {
-      var jsonContent = reader.result;
+      var jsonContent = JSON.parse(reader.result); // Converti il contenuto in un oggetto JSON direttamente
+
+      // Estrai il numero finale dal titolo del file
+      var fileName = file.name;
+      var traceId = fileName.match(/\d+\.json$/)[0]; // Estrai il numero finale dal titolo del file così ho il traceID (formattazione: "exploration_falcon_7M_1.json")
+      
+      traceId = traceId.slice(0, -5)
+
+
+      // Aggiungi il campo "trace_id" all'oggetto JSON
+      //jsonContent.trace_id = traceId;
 
       // Invia il JSON al backend
       fetch('/perform_trace_alignment_with_json', {
@@ -139,7 +149,7 @@ function uploadTrace() {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ golden_trace: jsonContent })
+        body: JSON.stringify({ golden_trace: jsonContent, trace_id: traceId })
       })
       .then(response => response.json())
       .then(data => {

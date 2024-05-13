@@ -370,60 +370,67 @@ def get_trace_alignment():
 @app.route("/perform_trace_alignment_with_json", methods=["POST"])
 def perform_trace_alignment_with_json():
     input_folder = "static/files/user_traces/task_division/csv_outputs"
-    output_folder = "static/files/user_traces/trace_alignment/xesFiles"
+    output_folder = "static/files/user_traces/task_division/csv_outputs/xesFiles"
+    result_folder = "static/files/user_traces/task_division/csv_outputs/dynamic_alignment_results"
 
     # Create the output folder if it doesn't exist
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
-    # Load JSON data from the request
-    request_data = request.get_json()
+    # Supponendo che request.data sia una stringa JSON
+    request_data = json.loads(request.data)
 
-    # Step 1: Flatten JSON and convert to CSV
-    golden_trace_csv = os.path.join(input_folder, "golden_trace.csv")
+
+    # Step 1 (DONE): Convert JSON data to CSV
+    golden_trace_csv = os.path.join(input_folder, "golden_trace_dynamic.csv")
     with open(golden_trace_csv, "w", newline='', encoding='utf-8') as csvfile:
         csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(['event', 'traceID', 'taskID', 'timestamp'])
+        csv_writer.writerow(['event', 'traceID' , 'taskID', 'formatted_timestamp'])
+        base_timestamp = datetime(2022, 12, 7, 16, 0)  # 20221207T1600
+        trace_id = request_data["trace_id"]
 
-        for trace_id, events in enumerate(request_data):
-            timestamp = 0
-            for task_id, event_data in enumerate(events):
-                csv_writer.writerow([event_data["event"], trace_id + 1, task_id, timestamp])
-                timestamp += 1
+        # Itera su ciascun oggetto nel JSON e scrivi le informazioni nel CSV
+        for i, item in enumerate(request_data["golden_trace"]):
+            event = item['event']
+            task_id = item['task_id']
+            # Incrementa il timestamp di base di un secondo per ogni riga
+            timestamp = base_timestamp + timedelta(seconds=i)
+            # Scrivi le informazioni nel CSV
+            csv_writer.writerow([event, trace_id, task_id, timestamp.strftime("%Y%m%dT%H%M%S")])
 
-    # Step 2: Convert timestamps in CSV
-    golden_trace_formatted_csv = os.path.join(input_folder, "golden_trace_formatted.csv")
-    df = pd.read_csv(golden_trace_csv)
-    base_timestamp = datetime(2022, 12, 7, 16, 0)  # 20221207T1600
-    df['formatted_timestamp'] = (base_timestamp + df['timestamp'].cumsum().apply(lambda x: timedelta(seconds=x))).dt.strftime('%Y%m%dT%H%M')
-    df.to_csv(golden_trace_formatted_csv, index=False)
 
-    # Step 3: Convert formatted CSV to XES
-    golden_trace_xes = os.path.join(output_folder, "golden_trace_event_log.xes")
-    dataframe = pd.read_csv(golden_trace_formatted_csv)
+
+    # Step 2: Convert formatted golden_trace CSV to XES
+    golden_trace_xes = os.path.join(input_folder, "golden_trace_event_log.xes")
+    dataframe = pd.read_csv(golden_trace_csv)
     dataframe = pm4py.format_dataframe(dataframe, case_id='traceID', activity_key='event', timestamp_key='formatted_timestamp')
     event_log = pm4py.convert_to_event_log(dataframe)
     pm4py.write_xes(event_log, golden_trace_xes)
 
-    # Step 4: Perform alignment between golden trace and other traces
+    # Step 3: Perform alignment between golden trace and other traces
     alignment_results = []
 
     for i in range(1, 51):
-        reference_xes = os.path.join(output_folder, f"output_{i}_event_log.xes")
-        alignment_result_path = os.path.join(output_folder, f"alignment_result_{i}.json")
+        reference_xes = os.path.join(input_folder, "golden_trace_event_log.xes")
+        other_traces_xes_path = os.path.join(output_folder, f"output_{i}_event_log.xes")
+        alignment_results_path = os.path.join(result_folder, f"alignment_{i}_event_log.xes")
+
 
         reference_log = pm4py.read_xes(reference_xes)
-        alignment = pm4py.alignments.align_log(event_log, reference_log)
-        
+        print(other_traces_xes_path)
+        simulated_log = pm4py.read_xes(other_traces_xes_path)
+        alignments = logs_alignments.apply(reference_log, simulated_log)
+        net, im, fm = pm4py.discover_petri_net_inductive(reference_log)
+
         # Convert alignments to a Python data structure
         alignments_data = [
             {"alignment": [(str(key), str(value)) for key, value in alignment.items()],
              "cost": alignment["cost"],
              "fitness": alignment["fitness"],
-             "bwc": alignment["bwc"]} for alignment in alignment]
+             "bwc": alignment["bwc"]} for alignment in alignments]
 
         # Save alignments in JSON format
-        with open(alignment_result_path, "w") as file:
+        with open(alignment_results_path, "w") as file:
             json.dump(alignments_data, file, indent=2)
 
         alignment_results.append(alignments_data)

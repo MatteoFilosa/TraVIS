@@ -1,0 +1,25 @@
+[
+  {
+    "alignment": [
+      [
+        "alignment",
+        "[('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('click', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('dblclick', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('click', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('click', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('click', '>>'), ('>>', 'wheel on departure'), ('>>', 'brush on arrival'), ('>>', 'brush on arrival'), ('>>', 'brush on arrival'), ('>>', 'brush on arrival'), ('>>', 'wheel on airtime'), ('>>', 'mousemove on arrival'), ('>>', 'brush on arrival'), ('>>', 'brush on arrival'), ('>>', 'brush on arrival'), ('>>', 'click on arrival'), ('>>', 'mousemove on arrival'), ('>>', 'brush on arrival'), ('>>', 'click on arrival'), ('>>', 'mousemove on arrival'), ('>>', 'brush on arrival'), ('>>', 'wheel on airtime'), ('>>', 'brush on arrival'), ('>>', 'brush on arrival'), ('>>', 'brush on arrival')]"
+      ],
+      [
+        "cost",
+        "830000"
+      ],
+      [
+        "fitness",
+        "-0.23880597014925375"
+      ],
+      [
+        "bwc",
+        "670000"
+      ]
+    ],
+    "cost": 830000,
+    "fitness": -0.23880597014925375,
+    "bwc": 670000
+  }
+]

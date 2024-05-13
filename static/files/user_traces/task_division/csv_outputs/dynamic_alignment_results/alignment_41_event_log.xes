@@ -1,0 +1,25 @@
+[
+  {
+    "alignment": [
+      [
+        "alignment",
+        "[('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('click', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('dblclick', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('click', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('click', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('click', '>>'), ('>>', 'mousemove on airtime'), ('>>', 'mousemove on departure'), ('>>', 'mousemove on departure'), ('>>', 'brush on departure'), ('>>', 'mousemove on delay'), ('>>', 'mousemove on distance'), ('>>', 'brush on departure')]"
+      ],
+      [
+        "cost",
+        "700000"
+      ],
+      [
+        "fitness",
+        "-0.09375"
+      ],
+      [
+        "bwc",
+        "640000"
+      ]
+    ],
+    "cost": 700000,
+    "fitness": -0.09375,
+    "bwc": 640000
+  }
+]
