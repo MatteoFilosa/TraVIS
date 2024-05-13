@@ -1,0 +1,623 @@
+
+  [
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[3]/canvas[1]",
+      "css": "#arrival canvas.marks",
+      "event": "mousemove",
+      "info": [
+        613,
+        146
+      ],
+      "task_id": 0
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[3]/canvas[1]",
+      "css": "#arrival canvas.marks",
+      "event": "mousemove",
+      "info": [
+        251,
+        44
+      ],
+      "task_id": 0
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[3]/canvas[1]",
+      "css": "#arrival canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            253,
+            46
+          ],
+          [
+            530,
+            129
+          ]
+        ],
+        [
+          [
+            -74,
+            7,
+            441,
+            111,
+            0,
+            0
+          ],
+          [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        ]
+      ],
+      "task_id": 0
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[3]/canvas[1]",
+      "css": "#arrival canvas.marks",
+      "event": "click",
+      "info": [
+        367,
+        118
+      ],
+      "task_id": 0
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[4]/canvas[1]",
+      "css": "#departure canvas.marks",
+      "event": "mousemove",
+      "info": [
+        679,
+        63
+      ],
+      "task_id": 0
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[4]/canvas[1]",
+      "css": "#departure canvas.marks",
+      "event": "mousemove",
+      "info": [
+        396,
+        88
+      ],
+      "task_id": 0
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[4]/canvas[1]",
+      "css": "#departure canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            398,
+            90
+          ],
+          [
+            398,
+            90
+          ]
+        ]
+      ],
+      "task_id": 0
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[4]/canvas[1]",
+      "css": "#departure canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            378,
+            90
+          ],
+          [
+            398,
+            86
+          ]
+        ]
+      ],
+      "task_id": 0
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[4]/canvas[1]",
+      "css": "#departure canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            350,
+            90
+          ],
+          [
+            378,
+            98
+          ]
+        ]
+      ],
+      "task_id": 0
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[6]/canvas[1]",
+      "css": "#airtime canvas.marks",
+      "event": "mousemove",
+      "info": [
+        563,
+        168
+      ],
+      "task_id": 1
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[6]/canvas[1]",
+      "css": "#airtime canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            350,
+            90
+          ],
+          [
+            366,
+            144
+          ]
+        ],
+        [
+          [
+            49,
+            -1,
+            366,
+            144,
+            0,
+            0
+          ],
+          [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        ]
+      ],
+      "task_id": 1
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[6]/canvas[1]",
+      "css": "#airtime canvas.marks",
+      "event": "mousemove",
+      "info": [
+        334,
+        78
+      ],
+      "task_id": 1
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[6]/canvas[1]",
+      "css": "#airtime canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            330,
+            80
+          ],
+          [
+            336,
+            85
+          ]
+        ]
+      ],
+      "task_id": 1
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[2]/canvas[1]",
+      "css": "#distance canvas.marks",
+      "event": "mousemove",
+      "info": [
+        653,
+        111
+      ],
+      "task_id": 2
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[7]/canvas[1]",
+      "css": "#delay canvas.marks",
+      "event": "mousemove",
+      "info": [
+        227,
+        2
+      ],
+      "task_id": 2
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[2]/canvas[1]",
+      "css": "#distance canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            330,
+            80
+          ],
+          [
+            654,
+            11
+          ]
+        ]
+      ],
+      "task_id": 2
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[4]/canvas[1]",
+      "css": "#departure canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            330,
+            80
+          ],
+          [
+            607,
+            9
+          ]
+        ],
+        [
+          [
+            613,
+            11,
+            607,
+            9,
+            0,
+            0
+          ],
+          [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        ]
+      ],
+      "task_id": 2
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[3]/canvas[1]",
+      "css": "#arrival canvas.marks",
+      "event": "click",
+      "info": [
+        613,
+        11
+      ],
+      "task_id": 2
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[6]/canvas[1]",
+      "css": "#airtime canvas.marks",
+      "event": "mousemove",
+      "info": [
+        649,
+        11
+      ],
+      "task_id": 2
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[6]/canvas[1]",
+      "css": "#airtime canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            651,
+            13
+          ],
+          [
+            651,
+            13
+          ]
+        ]
+      ],
+      "task_id": 2
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[4]/canvas[1]",
+      "css": "#departure canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            636,
+            13
+          ],
+          [
+            651,
+            10
+          ]
+        ]
+      ],
+      "task_id": 3
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[2]/canvas[1]",
+      "css": "#distance canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            636,
+            13
+          ],
+          [
+            656,
+            20
+          ]
+        ]
+      ],
+      "task_id": 3
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[2]/canvas[1]",
+      "css": "#distance canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            636,
+            13
+          ],
+          [
+            658,
+            13
+          ]
+        ]
+      ],
+      "task_id": 3
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[6]/canvas[1]",
+      "css": "#airtime canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            636,
+            13
+          ],
+          [
+            648,
+            8
+          ]
+        ]
+      ],
+      "task_id": 3
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[3]/canvas[1]",
+      "css": "#arrival canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            631,
+            13
+          ],
+          [
+            636,
+            10
+          ]
+        ],
+        [
+          [
+            46,
+            29,
+            141,
+            323,
+            0,
+            0
+          ],
+          [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        ]
+      ],
+      "task_id": 3
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[7]/canvas[1]",
+      "css": "#delay canvas.marks",
+      "event": "click",
+      "info": [
+        141,
+        323
+      ],
+      "task_id": 3
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[7]/canvas[1]",
+      "css": "#delay canvas.marks",
+      "event": "mousemove",
+      "info": [
+        116,
+        301
+      ],
+      "task_id": 3
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[7]/canvas[1]",
+      "css": "#delay canvas.marks",
+      "event": "mousemove",
+      "info": [
+        374,
+        294
+      ],
+      "task_id": 3
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[7]/canvas[1]",
+      "css": "#delay canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            326,
+            50
+          ],
+          [
+            387,
+            50
+          ]
+        ]
+      ],
+      "task_id": 3
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[2]/canvas[1]",
+      "css": "#distance canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            376,
+            50
+          ],
+          [
+            657,
+            10
+          ]
+        ]
+      ],
+      "task_id": 4
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[4]/canvas[1]",
+      "css": "#departure canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            376,
+            50
+          ],
+          [
+            662,
+            3
+          ]
+        ]
+      ],
+      "task_id": 4
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[4]/canvas[1]",
+      "css": "#departure canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            376,
+            50
+          ],
+          [
+            659,
+            10
+          ]
+        ],
+        [
+          [
+            660,
+            10,
+            659,
+            10,
+            0,
+            0
+          ],
+          [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ]
+        ]
+      ],
+      "task_id": 4
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[3]/canvas[1]",
+      "css": "#arrival canvas.marks",
+      "event": "click",
+      "info": [
+        660,
+        10
+      ],
+      "task_id": 4
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[6]/canvas[1]",
+      "css": "#airtime canvas.marks",
+      "event": "mousemove",
+      "info": [
+        657,
+        17
+      ],
+      "task_id": 4
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[6]/canvas[1]",
+      "css": "#airtime canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            659,
+            19
+          ],
+          [
+            659,
+            19
+          ]
+        ]
+      ],
+      "task_id": 4
+    },
+    {
+      "xpath": "/html[1]/body[1]/div[2]/div[6]/canvas[1]",
+      "css": "#airtime canvas.marks",
+      "event": "brush",
+      "info": [
+        [
+          [
+            659,
+            19
+          ],
+          [
+            662,
+            12
+          ]
+        ]
+      ],
+      "task_id": 4
+    }
+  ]
