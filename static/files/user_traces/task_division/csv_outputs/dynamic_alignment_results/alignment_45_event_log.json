@@ -1,0 +1,25 @@
+[
+  {
+    "alignment": [
+      [
+        "alignment",
+        "[('mouseout on arrival', '>>'), ('mousemove on departure', '>>'), ('mouseout on departure', '>>'), ('mousemove on delay', '>>'), ('mousemove on delay', '>>'), ('brush on delay', '>>'), ('mousemove on delay', '>>'), ('brush on delay', '>>'), ('mousemove on airtime', 'mousemove on airtime'), ('mousemove on arrival', '>>'), ('>>', 'wheel on airtime'), ('>>', 'mousemove on airtime'), ('mousemove on airtime', 'mousemove on airtime'), ('brush on airtime', 'brush on airtime'), ('brush on airtime', 'brush on airtime'), ('>>', 'click on airtime'), ('>>', 'mousemove on airtime'), ('>>', 'mousemove on airtime'), ('brush on airtime', 'brush on airtime'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('mouseout on airtime', '>>'), ('mouseout on count', '>>'), ('brush on airtime', 'brush on airtime'), ('mouseout on airtime', '>>'), ('brush on arrival', '>>'), ('mouseout on arrival', '>>'), ('mouseout on airtime', '>>')]"
+      ],
+      [
+        "cost",
+        "530000"
+      ],
+      [
+        "fitness",
+        "0.18461538461538463"
+      ],
+      [
+        "bwc",
+        "650000"
+      ]
+    ],
+    "cost": 530000,
+    "fitness": 0.18461538461538463,
+    "bwc": 650000
+  }
+]

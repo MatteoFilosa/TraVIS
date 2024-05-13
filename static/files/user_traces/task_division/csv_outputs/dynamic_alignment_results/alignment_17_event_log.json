@@ -1,0 +1,25 @@
+[
+  {
+    "alignment": [
+      [
+        "alignment",
+        "[('mouseout on arrival', '>>'), ('mousemove on departure', '>>'), ('mouseout on departure', '>>'), ('mousemove on delay', '>>'), ('mousemove on delay', '>>'), ('brush on delay', '>>'), ('mousemove on delay', '>>'), ('brush on delay', '>>'), ('mousemove on airtime', 'mousemove on airtime'), ('mousemove on arrival', '>>'), ('mousemove on airtime', 'mousemove on airtime'), ('brush on airtime', 'brush on airtime'), ('brush on airtime', 'brush on airtime'), ('brush on airtime', 'brush on airtime'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('mouseout on airtime', '>>'), ('mouseout on count', '>>'), ('brush on airtime', 'brush on airtime'), ('mouseout on airtime', '>>'), ('brush on arrival', '>>'), ('mouseout on arrival', '>>'), ('mouseout on airtime', '>>'), ('>>', 'brush on airtime'), ('>>', 'click on airtime'), ('>>', 'mousemove on count'), ('>>', 'click on count'), ('>>', 'mousemove on count'), ('>>', 'mousemove on count'), ('>>', 'click on count'), ('>>', 'mousemove on count')]"
+      ],
+      [
+        "cost",
+        "560000"
+      ],
+      [
+        "fitness",
+        "0.17647058823529416"
+      ],
+      [
+        "bwc",
+        "680000"
+      ]
+    ],
+    "cost": 560000,
+    "fitness": 0.17647058823529416,
+    "bwc": 680000
+  }
+]

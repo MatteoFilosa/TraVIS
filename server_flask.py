@@ -366,7 +366,9 @@ def get_trace_alignment():
     return json.dumps(fitness_values)
 
 #User Story 7: dynamic alignment
-
+#The function: converts the user trace uploaded from the user task page to csv with all the relevant parameters, then to xes.
+#It uses the old xes files for all the 50 traces, uses the chosen golden trace from the task page and perfrom the alignemnts saving them in 50 new files 
+#TOTAL FITNESS (still not per task)
 @app.route("/perform_trace_alignment_with_json", methods=["POST"])
 def perform_trace_alignment_with_json():
     input_folder = "static/files/user_traces/task_division/csv_outputs"
@@ -391,7 +393,17 @@ def perform_trace_alignment_with_json():
 
         # Itera su ciascun oggetto nel JSON e scrivi le informazioni nel CSV
         for i, item in enumerate(request_data["golden_trace"]):
-            event = item['event']
+
+            # Dividi la stringa utilizzando '#' come delimitatore e prendi la seconda parte
+            event_part = item["css"].split('#')
+
+            # Prendi solo la prima parte (dopo lo split)
+            relevant_event_part = event_part[1].split()[0]
+
+            event = item['event'] + " on " + relevant_event_part
+            
+            print(event)
+
             task_id = item['task_id']
             # Incrementa il timestamp di base di un secondo per ogni riga
             timestamp = base_timestamp + timedelta(seconds=i)
@@ -413,8 +425,7 @@ def perform_trace_alignment_with_json():
     for i in range(1, 51):
         reference_xes = os.path.join(input_folder, "golden_trace_event_log.xes")
         other_traces_xes_path = os.path.join(output_folder, f"output_{i}_event_log.xes")
-        alignment_results_path = os.path.join(result_folder, f"alignment_{i}_event_log.xes")
-
+        alignment_results_path = os.path.join(result_folder, f"alignment_{i}_event_log.json")
 
         reference_log = pm4py.read_xes(reference_xes)
         print(other_traces_xes_path)

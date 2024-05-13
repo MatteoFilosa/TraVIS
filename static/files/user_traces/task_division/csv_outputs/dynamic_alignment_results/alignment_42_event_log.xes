@@ -3,23 +3,23 @@
     "alignment": [
       [
         "alignment",
-        "[('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('click', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('click', '>>'), ('dblclick', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('click', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('click', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('brush', '>>'), ('mousemove', '>>'), ('click', '>>'), ('mousemove', '>>'), ('brush', '>>'), ('click', '>>'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'brush on delay'), ('>>', 'brush on delay'), ('>>', 'mousemove on delay'), ('>>', 'brush on delay'), ('>>', 'dblclick on delay'), ('>>', 'dblclick on delay'), ('>>', 'mousemove on delay'), ('>>', 'brush on delay'), ('>>', 'mousemove on delay'), ('>>', 'brush on delay'), ('>>', 'dblclick on delay'), ('>>', 'dblclick on delay'), ('>>', 'mousemove on delay'), ('>>', 'mousemove on delay'), ('>>', 'brush on delay'), ('>>', 'mousemove on delay'), ('>>', 'brush on delay')]"
+        "[('mousemove on airtime', '>>'), ('mousemove on distance', '>>'), ('mousemove on departure', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('mousemove on arrival', '>>'), ('brush on airtime', '>>'), ('brush on airtime', '>>'), ('click on airtime', '>>'), ('mousemove on airtime', '>>'), ('mousemove on airtime', '>>'), ('mousemove on airtime', '>>'), ('brush on airtime', '>>'), ('mousemove on airtime', '>>'), ('click on airtime', '>>'), ('mousemove on airtime', '>>'), ('click on airtime', '>>'), ('mousemove on airtime', '>>'), ('click on airtime', '>>'), ('mousemove on airtime', '>>'), ('click on airtime', '>>'), ('click on airtime', '>>'), ('mousemove on airtime', '>>'), ('click on airtime', '>>'), ('mousemove on airtime', '>>'), ('click on airtime', '>>'), ('dblclick on airtime', '>>'), ('mousemove on delay', '>>'), ('mousemove on delay', '>>'), ('mousemove on delay', '>>'), ('mousemove on delay', '>>'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('>>', 'wheel on distance'), ('brush on delay', 'brush on delay'), ('brush on delay', 'brush on delay'), ('mousemove on delay', 'mousemove on delay'), ('brush on delay', 'brush on delay'), ('brush on departure', '>>'), ('brush on departure', '>>'), ('>>', 'dblclick on delay'), ('>>', 'dblclick on delay'), ('mousemove on delay', 'mousemove on delay'), ('brush on delay', 'brush on delay'), ('click on delay', '>>'), ('mousemove on delay', 'mousemove on delay'), ('brush on delay', 'brush on delay'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('click on distance', '>>'), ('mousemove on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('brush on distance', '>>'), ('mousemove on distance', '>>'), ('click on distance', '>>'), ('>>', 'dblclick on delay'), ('>>', 'dblclick on delay'), ('>>', 'mousemove on delay'), ('mousemove on delay', 'mousemove on delay'), ('brush on delay', 'brush on delay'), ('click on delay', '>>'), ('>>', 'mousemove on delay'), ('>>', 'brush on delay')]"
       ],
       [
         "cost",
-        "920000"
+        "720000"
       ],
       [
         "fitness",
-        "-0.4375"
+        "-0.125"
       ],
       [
         "bwc",
         "640000"
       ]
     ],
-    "cost": 920000,
-    "fitness": -0.4375,
+    "cost": 720000,
+    "fitness": -0.125,
     "bwc": 640000
   }
 ]

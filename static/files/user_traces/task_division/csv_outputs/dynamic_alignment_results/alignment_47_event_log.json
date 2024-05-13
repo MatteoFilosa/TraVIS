@@ -1,0 +1,25 @@
+[
+  {
+    "alignment": [
+      [
+        "alignment",
+        "[('mouseout on arrival', '>>'), ('mousemove on departure', '>>'), ('mouseout on departure', '>>'), ('mousemove on delay', '>>'), ('mousemove on delay', 'mousemove on delay'), ('brush on delay', 'brush on delay'), ('mousemove on delay', 'mousemove on delay'), ('brush on delay', 'brush on delay'), ('mousemove on airtime', '>>'), ('>>', 'mousemove on delay'), ('>>', 'brush on delay'), ('>>', 'mousemove on arrival'), ('>>', 'brush on arrival'), ('>>', 'brush on arrival'), ('>>', 'click on arrival'), ('>>', 'mousemove on arrival'), ('>>', 'mousemove on arrival'), ('>>', 'brush on arrival'), ('>>', 'mousemove on arrival'), ('>>', 'brush on departure'), ('mousemove on arrival', 'mousemove on arrival'), ('mousemove on airtime', 'mousemove on airtime'), ('brush on airtime', 'brush on airtime'), ('brush on airtime', 'brush on airtime'), ('>>', 'click on airtime'), ('>>', 'mousemove on airtime'), ('brush on airtime', 'brush on airtime'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('wheel on airtime', '>>'), ('mouseout on airtime', '>>'), ('mouseout on count', '>>'), ('>>', 'mousemove on airtime'), ('>>', 'mousemove on distance'), ('>>', 'brush on distance'), ('>>', 'mousemove on distance'), ('>>', 'brush on distance'), ('>>', 'mousemove on distance'), ('brush on airtime', 'brush on airtime'), ('mouseout on airtime', '>>'), ('brush on arrival', '>>'), ('mouseout on arrival', '>>'), ('mouseout on airtime', '>>'), ('>>', 'wheel on departure'), ('>>', 'mousemove on departure'), ('>>', 'brush on departure'), ('>>', 'click on departure'), ('>>', 'mousemove on departure'), ('>>', 'brush on departure'), ('>>', 'click on departure')]"
+      ],
+      [
+        "cost",
+        "700000"
+      ],
+      [
+        "fitness",
+        "-0.2727272727272727"
+      ],
+      [
+        "bwc",
+        "550000"
+      ]
+    ],
+    "cost": 700000,
+    "fitness": -0.2727272727272727,
+    "bwc": 550000
+  }
+]
