@@ -369,6 +369,7 @@ def get_trace_alignment():
 #The function: converts the user trace uploaded from the user task page to csv with all the relevant parameters, then to xes.
 #It uses the old xes files for all the 50 traces, uses the chosen golden trace from the task page and perfrom the alignemnts saving them in 50 new files 
 #TOTAL FITNESS (still not per task)
+#WORKS WITH THE TRACES OF static/files/user_traces/user_traces_task_id
 @app.route("/perform_trace_alignment_with_json", methods=["POST"])
 def perform_trace_alignment_with_json():
     input_folder = "static/files/user_traces/task_division/csv_outputs"
@@ -449,6 +450,30 @@ def perform_trace_alignment_with_json():
     return jsonify(alignment_results=alignment_results, message="Trace alignment process completed for all files.")
 
 
+    #Version for TOTAL ALIGNEMENT
+    """ for i in range(1, 51):
+        reference_xes = os.path.join(input_folder, "golden_trace_event_log.xes")
+        other_traces_xes_path = os.path.join(output_folder, f"output_{i}_event_log.xes")
+        alignment_results_path = os.path.join(result_folder, f"alignment_{i}_event_log.json")
+
+        reference_log = pm4py.read_xes(reference_xes)
+        print(other_traces_xes_path)
+        simulated_log = pm4py.read_xes(other_traces_xes_path)
+        alignments = logs_alignments.apply(reference_log, simulated_log)
+        net, im, fm = pm4py.discover_petri_net_inductive(reference_log)
+
+        # Convert alignments to a Python data structure
+        alignments_data = [
+            {"alignment": [(str(key), str(value)) for key, value in alignment.items()],
+             "cost": alignment["cost"],
+             "fitness": alignment["fitness"],
+             "bwc": alignment["bwc"]} for alignment in alignments]
+
+        # Save alignments in JSON format
+        with open(alignment_results_path, "w") as file:
+            json.dump(alignments_data, file, indent=2)
+
+        alignment_results.append(alignments_data) """
 
 
 @app.route("/upload_statechart") #Function that uploads all the statecharts
