@@ -162,6 +162,12 @@ a:focus {
     color: white;
 }
 
+.modal-body .mt-2 {
+    color: #000 !important;
+    /* Imposta il colore del testo su nero */
+}
+
+
 #violationsButton {
     border: 2px solid white;
     background-color: #52b0c3;
@@ -689,6 +695,18 @@ tbody tr:hover {
 
 #table,#tasktable {
     display: none;
+}
+#upperDiv {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+    /* Spazio tra il bottone e il bordo destro */
+}
+
+#traceInfoSpan {
+    margin-right: 10px;
+    /* Spazio tra lo span e il bottone */
 }
 
 .expandButton {

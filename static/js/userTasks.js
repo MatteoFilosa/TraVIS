@@ -11,6 +11,10 @@ var userTasks = {};
 var allViolations = {};
 var allTaskTime = {};
 var interactionCounts = {};
+var dynamicAlignmentData = {} //Used for user story 7
+var averageDynamicAlignmentData = {}
+var dynamicAlignmentEvents = {}
+var dynamicTraceId = 0
 
 window.onload = function () {
   filtersContainer = document.getElementById("filtersContainer");
@@ -121,7 +125,23 @@ function calculateConformity(trace, goldenTrace) {
   };
 }
 
+//Function for usert story 7, dynamic alignment
+
 function uploadTrace() {
+  // Resettare il modal
+  $('#loadingModal .spinner-border').show();
+  $('#loadingModal .modal-body .fas.fa-check-circle').hide();
+
+  var $icon = $('#loadingModal .modal-body .fa-check-circle');
+
+  // Controlla se l'elemento esiste
+  if ($icon.length) {
+    // Se esiste, rimpiazzalo con lo spinner border
+    $icon.replaceWith('<div class="spinner-border" role="status"><span class="sr-only">Loading...</span></div>');
+  }
+  
+  $('#loadingModal .modal-body .mt-2').text('Performing trace alignment...this might take a while.');
+
   var input = document.createElement('input');
   input.type = 'file';
   input.accept = 'application/json';
@@ -131,19 +151,16 @@ function uploadTrace() {
 
     var reader = new FileReader();
     reader.onload = function () {
-      var jsonContent = JSON.parse(reader.result); // Converti il contenuto in un oggetto JSON direttamente
-
-      // Estrai il numero finale dal titolo del file
+      var jsonContent = JSON.parse(reader.result);
       var fileName = file.name;
-      var traceId = fileName.match(/\d+\.json$/)[0]; // Estrai il numero finale dal titolo del file così ho il traceID (formattazione: "exploration_falcon_7M_1.json")
-      
-      traceId = traceId.slice(0, -5)
+      var traceId = fileName.match(/\d+\.json$/)[0];
+      traceId = traceId.slice(0, -5);
 
+      dynamicTraceId = traceId
 
-      // Aggiungi il campo "trace_id" all'oggetto JSON
-      //jsonContent.trace_id = traceId;
+      // Mostra il modal di caricamento
+      $('#loadingModal').modal('show');
 
-      // Invia il JSON al backend
       fetch('/perform_trace_alignment_with_json', {
         method: 'POST',
         headers: {
@@ -151,15 +168,83 @@ function uploadTrace() {
         },
         body: JSON.stringify({ golden_trace: jsonContent, trace_id: traceId })
       })
-      .then(response => response.json())
-      .then(data => {
-        // Manipola la risposta se necessario
-        console.log(data);
-      })
-      .catch(error => {
-        // Gestisci gli errori
-        console.error('Error:', error);
-      });
+        .then(response => response.json())
+        .then(data => {
+          // Nascondi il modal di caricamento dopo 2 secondi
+          setTimeout(function () {
+            $('#loadingModal').modal('hide');
+          }, 2000); // 2000 millisecondi = 2 secondi
+          // Manipola la risposta se necessario
+          console.log(data);
+          // Nascondi l'icona dello spinner border
+          $('#loadingModal .spinner-border').hide();
+
+          // Mostra la spunta al posto dell'icona dello spinner border
+          $('#loadingModal .modal-body .spinner-border').replaceWith('<i class="fas fa-check-circle text-success fa-3x"></i>');
+
+          // Aggiorna il contenuto del modal con il messaggio del server
+          $('#loadingModal .modal-body .mt-2').text(data.message);
+
+          //document.getElementById("uploadTraceBtn").textContent = "Trace " + traceId + " uploaded"
+
+          dynamicAlignmentData = data
+
+          // Array per memorizzare i valori medi
+          let fitnessValuesPerIndex = [];
+
+          // Itera attraverso dynamicAlignmentData e aggiorna le celle di correttezza
+          dynamicAlignmentData.alignment_results.forEach((result) => {
+            // Itera attraverso tutti gli oggetti result
+            result.forEach((item, itemIndex) => {
+              // Inizializza l'array se non esiste ancora
+              if (!fitnessValuesPerIndex[itemIndex]) {
+                fitnessValuesPerIndex[itemIndex] = [];
+              }
+
+              // Ottieni il valore di fitness per l'indice corrente e lo converti in positivo
+              let fitness = Math.abs(parseFloat(item.fitness));
+              // Aggiungi il valore di fitness all'array corrispondente all'indice
+              fitnessValuesPerIndex[itemIndex].push(fitness);
+            });
+          });
+
+          // Calcola la media dei valori di fitness per ogni indice
+          averageDynamicAlignmentData = fitnessValuesPerIndex.map((values) => {
+            let totalFitness = values.reduce((acc, curr) => acc + curr, 0);
+            return totalFitness / values.length;
+          });
+
+          // Visualizza i valori medi nell'array
+          console.log(averageDynamicAlignmentData);
+
+          for (let j = 0; j < averageDynamicAlignmentData.length; j++){
+
+            let taskCorrectnessCell = document.getElementById("correctness_" + j)
+
+            taskCorrectnessCell.textContent = (averageDynamicAlignmentData[j] * 100).toFixed(2)
+            taskCorrectnessCell.style.color = 'green';
+
+          }
+
+          var traceInfoSpan = document.getElementById("traceInfoSpan")
+          traceInfoSpan.textContent = "Trace Uploaded: " + traceId
+          traceInfoSpan.style.color = "green"
+          traceInfoSpan.style.fontSize = "18px"
+          traceInfoSpan.style.alignItems = "center";
+
+
+          
+          
+
+        })
+        .catch(error => {
+          // Nascondi il modal di caricamento in caso di errore
+          $('#loadingModal').modal('hide');
+          // Gestisci gli errori
+          console.error('Error:', error);
+          // Mostra un messaggio di errore
+          alert('There was an error in the uploading of the user trace.');
+        });
     };
     reader.readAsText(file);
   };
@@ -213,22 +298,28 @@ function getUserTasks() {
  
       var button = document.createElement('button');
       button.className = 'btn extraFiltersBtn';
-      button.style.marginTop = '10px';
-      button.style.marginRight = '50px';
+      button.id = "uploadTraceBtn";
+
+      var traceInfoSpan = document.createElement('span');
+      traceInfoSpan.id = "traceInfoSpan";
+      
 
       // Creazione dell'icona FontAwesome e del testo del bottone
       var icon = document.createElement('i');
       icon.className = 'fas fa-file-alt'; // Specifica il nome delle classi FontAwesome per l'icona
-      var buttonText = document.createTextNode(' New Ideal Path');
+      var buttonText = document.createTextNode('New Ideal Path');
 
       // Aggiungi l'icona e il testo al bottone
       button.appendChild(icon);
       button.appendChild(buttonText);
 
-      button.onclick = uploadTrace;
+      button.onclick = uploadTrace
 
       var upperDiv = document.getElementById('upperDiv');
+      upperDiv.appendChild(traceInfoSpan);
       upperDiv.appendChild(button);
+
+      
 
       // Iterate through each file
       json.forEach((task) => {
@@ -286,6 +377,7 @@ function getUserTasks() {
         //mainContainer.appendChild(infoDiv);
       });
       populateTable(taskInfo);
+      console.log(taskInfo)
     })
     .then(() => {
       // Enable filtering for table
@@ -518,6 +610,7 @@ function populateTable(data) {
         row.appendChild(violationCell);
 
         const correctnessCell = document.createElement("td");
+        correctnessCell.id = `correctness_${checkbox.id}`;
         row.appendChild(correctnessCell);
 
         //Start Golden Trace Button
@@ -555,48 +648,95 @@ function populateTable(data) {
 
             goldenTraceBtn.setAttribute("showedGoldenTrace", "true");
 
-            // Retrieve the information from the super_golden_trace.json file
-            fetch("/files/user_traces/trace_alignment/super_golden_trace.json")
-              .then((response) => response.json())
-              .then((data) => {
-                document.getElementById(
-                  "traceInfoTitle"
-                ).innerHTML = `Golden Trace for Task ${checkboxId}`;
-                document.getElementById("goldenTraceContent").style.opacity = 1;
-                document.getElementById("extrainfoContent").style.display =
-                  "none";
-                document.getElementById("placeholderText").style.display =
-                  "none";
-                generateHeatmap(data, checkbox.id);
-                // Populate the modal with the information
-                data[checkboxId].forEach((item) => {
-                  const li = document.createElement("li");
-                  li.style.color = "#000";
-                  li.textContent = item;
-                  document.getElementById("goldenTraceEvents").appendChild(li);
-                });
-                var replayTraceBtnElem =
-                  document.getElementById("replayTraceBtn");
-                replayTraceBtnElem.style.opacity = 1;
-                document.getElementById("selectTraceBtn").style.display =
-                  "none";
-                replayTraceBtnElem.addEventListener("click", function () {
-                  localStorage.removeItem("selectedTrace");
-                  localStorage.removeItem("selectedTraceID");
-                  localStorage.removeItem("loadedTraces");
+         
 
-                  /// TODO: find id of golden trace and get raw value so we can replay it
-                  let url = "http://127.0.0.1:5000/replay";
-                  fetch(url, {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                      current_trace: JSON.stringify(selectedTrace_RawValue),
-                      name: "falcon",
-                    }),
-                  }).then((response) => console.log(response));
+            //document.getElementById("goldenTraceEvents").id += "_" + checkboxId
+
+            // Retrieve the information from the super_golden_trace.json file
+
+            if (Object.keys(dynamicAlignmentData).length == 0) {
+
+              fetch("/files/user_traces/trace_alignment/super_golden_trace.json")
+                .then((response) => response.json())
+                .then((data) => {
+                  document.getElementById(
+                    "traceInfoTitle"
+                  ).innerHTML = `Golden Trace for Task ${checkboxId}`;
+                  document.getElementById("goldenTraceContent").style.opacity = 1;
+
+                  document.getElementById("extrainfoContent").style.display =
+                    "none";
+                  document.getElementById("placeholderText").style.display =
+                    "none";
+                  generateHeatmap(data, checkbox.id);
+                  // Extra Info for golden trace: Populate the modal with the information
+                  data[checkboxId].forEach((item) => {
+                    const li = document.createElement("li");
+                    li.style.color = "#000";
+                    li.textContent = item;
+                    document.getElementById("goldenTraceEvents").appendChild(li);
+                  });
+                  var replayTraceBtnElem =
+                    document.getElementById("replayTraceBtn");
+                  replayTraceBtnElem.style.opacity = 1;
+                  document.getElementById("selectTraceBtn").style.display =
+                    "none";
+                  replayTraceBtnElem.addEventListener("click", function () {
+                    localStorage.removeItem("selectedTrace");
+                    localStorage.removeItem("selectedTraceID");
+                    localStorage.removeItem("loadedTraces");
+
+                    /// TODO: find id of golden trace and get raw value so we can replay it
+                    let url = "http://127.0.0.1:5000/replay";
+                    fetch(url, {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+                      body: JSON.stringify({
+                        current_trace: JSON.stringify(selectedTrace_RawValue),
+                        name: "falcon",
+                      }),
+                    }).then((response) => console.log(response));
+                  });
                 });
-              });
+            }
+
+            //If the user performed a dynamic alignment, I need to show him the new golden trace divided by task
+            else{
+
+              fetch("/files/user_traces/task_division/task_division_falcon_7M_" + dynamicTraceId + ".json")
+                .then((response) => response.json())
+                .then((data) => {
+                  console.log(data)
+
+             
+
+                    document.getElementById(
+                      "traceInfoTitle"
+                    ).innerHTML = `Golden Trace for Task ${checkboxId}`;
+                    document.getElementById("goldenTraceEvents").innerHTML = ""
+                    document.getElementById("goldenTraceContent").style.opacity = 1;
+                    document.getElementById("extrainfoContent").style.display =
+                      "none";
+                    document.getElementById("placeholderText").style.display =
+                      "none";
+                  generateHeatmap(data, checkboxId);
+                    // Extra Info for golden trace: Populate the modal with the information
+                      data[checkboxId].forEach((item) => {
+                      const li = document.createElement("li");
+                      li.style.color = "green";
+                      li.textContent = item;
+                      document.getElementById("goldenTraceEvents").appendChild(li);
+                    });
+
+                  
+
+                });
+
+            }
+
+            
+
+            
           } else {
             document.getElementById(
               "traceInfoTitle"
@@ -711,6 +851,9 @@ function generateHeatmap(data, id) {
   return mainDiv;
 }
 var rowExpanded = false;
+
+//INNER TABLES 
+
 function expandTableOnClick(id, row) {
   if (!rowExpanded) {
     if (document.getElementById(`newrow${id}`) == undefined) {
@@ -752,6 +895,9 @@ function expandTableOnClick(id, row) {
     rowExpanded = false;
   }
 }
+
+//POPULATING THE INNER TABLES
+
 async function addTraceInfo(taskID) {
   var div = document.getElementById(`newrow${taskID}`);
   var title = document.createElement("p");
@@ -764,6 +910,7 @@ async function addTraceInfo(taskID) {
   table.classList.add("table-responsive");
   table.classList.add("table-hover");
   table.id = `innerTable${taskID}`;
+
   // Create table header
   var thead = document.createElement("thead");
   var tr = document.createElement("tr");
@@ -801,7 +948,8 @@ async function addTraceInfo(taskID) {
 
   var traceCnt = 0;
   var tbody = document.createElement("tbody");
-  tbody.classList.id = "tracesTable";
+  tbody.id = "tracesTable"; // corretto da tbody.classList.id a tbody.id
+
   userTasks.forEach((element) => {
     let totalElements = 0;
     let events = {};
@@ -819,7 +967,6 @@ async function addTraceInfo(taskID) {
       tr.appendChild(userIDCell);
 
       var interactionsCell = document.createElement("td");
-
       interactionsCell.textContent = totalElements;
       eventTypes(events).then(function (value) {
         interactionsCell.appendChild(createEventsBar(value, traceCnt + 1));
@@ -841,7 +988,6 @@ async function addTraceInfo(taskID) {
             if (key == taskID) {
               totalViolations += userTrace[key].length;
               violations = userTrace[key];
-              //violationsCell.textContent = totalViolations;
               findViolations(violations).then(function (value) {
                 violationsCell.appendChild(createViolationsBar(value));
               });
@@ -855,7 +1001,6 @@ async function addTraceInfo(taskID) {
       const timeInfo = { totalTime: 0, averageTime: 0 };
       allTaskTime.forEach((element, index) => {
         let match = element.name.match(/_(\d+)\.[a-zA-Z]+$/);
-        // Extract the captured number from the file name
         let extractedNumber = match ? match[1] : null;
 
         if (extractedNumber === (traceCnt + 1).toString()) {
@@ -873,37 +1018,64 @@ async function addTraceInfo(taskID) {
         }
       });
 
+      // CORRECTNESS CELL
       var correctnessCell = document.createElement("td");
-      Object.entries(globalAlignmentDataPercent).forEach(([fileName, data]) => {
-        const regex = /alignment_result_(\d+)\.json/;
-        const match = fileName.match(regex);
-        if (parseInt(match[1], 10) == traceCnt + 1) {
-          //console.log(parseInt(match[1], 10), cellContent);
-          correctnessCell.textContent = `${(data[taskID] || 0).toFixed(2)}%`;
-          tr.appendChild(correctnessCell);
-        }
-      });
 
-      tbody.appendChild(tr);
-      table.appendChild(tbody);
+      //IF the user still didn't perform dynamic trace alignment
+      if (Object.keys(dynamicAlignmentData).length == 0) {
+        Object.entries(globalAlignmentDataPercent).forEach(([fileName, data]) => {
+          const regex = /alignment_result_(\d+)\.json/;
+          const match = fileName.match(regex);
+          if (parseInt(match[1], 10) == traceCnt + 1) {
+            correctnessCell.textContent = `${(data[taskID] || 0).toFixed(2)}`;
+            tr.appendChild(correctnessCell);
+          }
+        });
+      } else {
+        // Populating inner tables with dynamic alignment data (IF present)
+        dynamicAlignmentData.alignment_results.forEach((result, index) => {
+
+          if (result[taskID].fitness != undefined){
+            if (result[taskID].trace_id == traceCnt + 1) {
+              //console.log(result[taskID].trace_id, traceCnt)
+              const fitness = result[taskID].fitness
+              //console.log(fitness)
+              const fitnessPercent = Math.abs((parseFloat(fitness) * 100)).toFixed(2); 
+
+              correctnessCell.textContent = `${fitnessPercent}`;
+              correctnessCell.style.color = 'green'; // Cambia il colore del testo in verde
+              tr.appendChild(correctnessCell);
+
+            }
+
+          }
+          
+          
+        });
+      }
+
+      tbody.appendChild(tr); // Spostato all'interno del controllo if-else per assicurarsi che venga aggiunto solo se ci sono dati
     }
     traceCnt++;
   });
 
+  table.appendChild(tbody);
   tableDiv.appendChild(table);
   div.appendChild(tableDiv);
+
   const EventElements = document.querySelectorAll("[id^='eventCell']");
   EventElements.forEach((element) => {
     element.style.marginTop = "10%";
   });
 
-  const ViolationElements = document.querySelectorAll(
-    "[id^='violationBarCell']"
-  );
+  const ViolationElements = document.querySelectorAll("[id^='violationBarCell']");
   ViolationElements.forEach((element) => {
     element.style.marginTop = "10%";
   });
 }
+
+
+
 // Function to get color based on event name
 function getColor(eventName) {
   switch (eventName) {
@@ -1061,6 +1233,8 @@ function ExtraInfo(taskID) {
 
         var descriptionCell = document.getElementById("description");
         descriptionCell = "-";
+
+        
 
         // Retrieve the information from the super_golden_trace.json file
         fetch("/files/user_traces/trace_alignment/super_golden_trace.json")

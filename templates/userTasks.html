@@ -9,6 +9,9 @@
     <title>TraVIS</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-Fj+6z6RwhdUe7F+qepPIprx4XpkqVJOK5Ocq6DwZIvAYsS5umz4/GYlFs/3D7FL7sOFfT5DGy9dJpgR+YHk2Xw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
@@ -98,22 +101,19 @@
                         <div style="display: flex;justify-content: space-between;" id = "upperDiv">
                             <h1 id="tracesNum" style="margin-bottom: 2%;">Loading User Tasks... </h1>
                         </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="jsonModal" tabindex="-1" role="dialog" aria-labelledby="jsonModalLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="jsonModalLabel">Uploaded User Trace</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body" id="jsonModalBody">
-                                        <!-- Il contenuto del JSON verrà inserito qui -->
-                                    </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                    
+                                    <p class="mt-2">Performing trace alignment...this might take a while.</p>
+                                    <div class="spinner-border text-primary mb-3 d-block mx-auto" role="status" style="display: block;"></div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                         <div class="spinner-border" id="loadingIcon" role="status" style="display: block;margin-left: 50%;
                         margin-top: 22%;">
                             <span class="sr-only">Loading...</span>

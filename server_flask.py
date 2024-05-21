@@ -383,18 +383,16 @@ def perform_trace_alignment_with_json():
     # Supponendo che request.data sia una stringa JSON
     request_data = json.loads(request.data)
 
-
     # Step 1 (DONE): Convert JSON data to CSV
     golden_trace_csv = os.path.join(input_folder, "golden_trace_dynamic.csv")
     with open(golden_trace_csv, "w", newline='', encoding='utf-8') as csvfile:
         csv_writer = csv.writer(csvfile)
-        csv_writer.writerow(['event', 'traceID' , 'taskID', 'formatted_timestamp'])
+        csv_writer.writerow(['event', 'traceID', 'taskID', 'formatted_timestamp'])
         base_timestamp = datetime(2022, 12, 7, 16, 0)  # 20221207T1600
         trace_id = request_data["trace_id"]
 
         # Itera su ciascun oggetto nel JSON e scrivi le informazioni nel CSV
         for i, item in enumerate(request_data["golden_trace"]):
-
             # Dividi la stringa utilizzando '#' come delimitatore e prendi la seconda parte
             event_part = item["css"].split('#')
 
@@ -411,12 +409,11 @@ def perform_trace_alignment_with_json():
             # Scrivi le informazioni nel CSV
             csv_writer.writerow([event, trace_id, task_id, timestamp.strftime("%Y%m%dT%H%M%S")])
 
-
-
     # Step 2: Convert formatted golden_trace CSV to XES
     golden_trace_xes = os.path.join(input_folder, "golden_trace_event_log.xes")
     dataframe = pd.read_csv(golden_trace_csv)
-    dataframe = pm4py.format_dataframe(dataframe, case_id='traceID', activity_key='event', timestamp_key='formatted_timestamp')
+    dataframe = pm4py.format_dataframe(dataframe, case_id='taskID', activity_key='event', timestamp_key='formatted_timestamp') #TASK ALIGNMENT
+    #FULL TRACE ALIGNMENT dataframe = pm4py.format_dataframe(dataframe, case_id='traceID', activity_key='event', timestamp_key='formatted_timestamp')
     event_log = pm4py.convert_to_event_log(dataframe)
     pm4py.write_xes(event_log, golden_trace_xes)
 
@@ -426,7 +423,7 @@ def perform_trace_alignment_with_json():
     for i in range(1, 51):
         reference_xes = os.path.join(input_folder, "golden_trace_event_log.xes")
         other_traces_xes_path = os.path.join(output_folder, f"output_{i}_event_log.xes")
-        alignment_results_path = os.path.join(result_folder, f"alignment_{i}_event_log.json")
+        alignment_results_path = os.path.join(result_folder, f"alignment_{i}_event_log.json") #I need this index to be passed 
 
         reference_log = pm4py.read_xes(reference_xes)
         print(other_traces_xes_path)
@@ -439,7 +436,8 @@ def perform_trace_alignment_with_json():
             {"alignment": [(str(key), str(value)) for key, value in alignment.items()],
              "cost": alignment["cost"],
              "fitness": alignment["fitness"],
-             "bwc": alignment["bwc"]} for alignment in alignments]
+             "bwc": alignment["bwc"],
+             "trace_id": i} for alignment in alignments]  # Add trace_id field
 
         # Save alignments in JSON format
         with open(alignment_results_path, "w") as file:
@@ -450,30 +448,6 @@ def perform_trace_alignment_with_json():
     return jsonify(alignment_results=alignment_results, message="Trace alignment process completed for all files.")
 
 
-    #Version for TOTAL ALIGNEMENT
-    """ for i in range(1, 51):
-        reference_xes = os.path.join(input_folder, "golden_trace_event_log.xes")
-        other_traces_xes_path = os.path.join(output_folder, f"output_{i}_event_log.xes")
-        alignment_results_path = os.path.join(result_folder, f"alignment_{i}_event_log.json")
-
-        reference_log = pm4py.read_xes(reference_xes)
-        print(other_traces_xes_path)
-        simulated_log = pm4py.read_xes(other_traces_xes_path)
-        alignments = logs_alignments.apply(reference_log, simulated_log)
-        net, im, fm = pm4py.discover_petri_net_inductive(reference_log)
-
-        # Convert alignments to a Python data structure
-        alignments_data = [
-            {"alignment": [(str(key), str(value)) for key, value in alignment.items()],
-             "cost": alignment["cost"],
-             "fitness": alignment["fitness"],
-             "bwc": alignment["bwc"]} for alignment in alignments]
-
-        # Save alignments in JSON format
-        with open(alignment_results_path, "w") as file:
-            json.dump(alignments_data, file, indent=2)
-
-        alignment_results.append(alignments_data) """
 
 
 @app.route("/upload_statechart") #Function that uploads all the statecharts
