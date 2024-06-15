@@ -1061,7 +1061,6 @@ replayState = "play"
 
 
 
-# Function that changes the color of the replay path.
 def changeStateChartColors(transition, replayJson, driver):
     
     global currentState
@@ -1072,7 +1071,7 @@ def changeStateChartColors(transition, replayJson, driver):
 
     # We are in the first ever transition. 'currentState' is 0 and we only need to find the 'currentEdge'.
     if -1 == currentState and "E-1" == currentEdge:
-        print("ANCORA PRIMA: "  + currentEdge + ", " + str(currentState))
+        print("ANCORA PRIMA: " + currentEdge + ", " + str(currentState))
         currentState = 0
 
         for edge in replayJson:
@@ -1088,7 +1087,18 @@ def changeStateChartColors(transition, replayJson, driver):
     # In any other transition we compute the new 'currentState' and 'currentEdge', after having filled the old
     # ones in blue.
     else:
-        totalScript += "document.querySelector('#originalSVG #svg_node_id_" + str(currentState) + "').style.fill = 'rgb(0, 0, 255)'; document.querySelector('#originalSVG #svg_edge_id_" + currentEdge + "').style.fill = 'rgb(0, 0, 255)'; "
+        totalScript += """
+        var currentNode = document.querySelector('#originalSVG #svg_node_id_{currentState}');
+        var currentEdge = document.querySelector('#originalSVG #svg_edge_id_{currentEdge}');
+        currentNode.style.fill = 'rgb(0, 0, 255)';
+        currentEdge.style.fill = 'rgb(0, 0, 255)';
+        var nextElementNode = currentNode.parentElement.nextElementSibling;
+        var nextElementEdge = currentEdge.parentElement.nextElementSibling;
+        var pathElement = nextElementEdge.querySelector('path');
+        pathElement.style.stroke = 'rgb(0, 0, 255)';
+        console.log('Next Element of Parent Node of svg_node_id_{currentState}:', nextElementNode);
+        console.log('Next Element of Parent Node of svg_edge_id_{currentEdge}:', nextElementEdge);
+        """.format(currentState=str(currentState), currentEdge=currentEdge)
 
         for edge in replayJson:
             if (
@@ -1103,8 +1113,21 @@ def changeStateChartColors(transition, replayJson, driver):
     print("SECONDA: " + currentEdge + ", " + str(currentState))
 
     # The current transition is filled in red and the whole script is executed.
-    totalScript += "document.querySelector('#originalSVG #svg_node_id_" + str(currentState) + "').style.fill = 'rgb(255, 0, 0)'; document.querySelector('#originalSVG #svg_edge_id_" + currentEdge + "').style.fill = 'rgb(255, 0, 0)';"
+    totalScript += """
+    var currentNode = document.querySelector('#originalSVG #svg_node_id_{currentState}');
+    var currentEdge = document.querySelector('#originalSVG #svg_edge_id_{currentEdge}');
+    currentNode.style.fill = 'rgb(255, 0, 0)';
+    currentEdge.style.fill = 'rgb(255, 0, 0)';
+    var nextElementNode = currentNode.parentElement.nextElementSibling;
+    var nextElementEdge = currentEdge.parentElement.nextElementSibling;
+    var pathElement = nextElementEdge.querySelector('path');
+    pathElement.style.stroke = 'rgb(255, 0, 0)';
+    console.log('Next Element of Parent Node of svg_node_id_{currentState}:', nextElementNode);
+    console.log('Next Element of Parent Node of svg_edge_id_{currentEdge}:', nextElementEdge);
+    """.format(currentState=str(currentState), currentEdge=currentEdge)
+
     driver.execute_script(totalScript)
+
 
 
 
