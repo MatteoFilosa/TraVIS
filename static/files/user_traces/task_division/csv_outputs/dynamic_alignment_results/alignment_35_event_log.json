@@ -3,7 +3,7 @@
     "alignment": [
       [
         "alignment",
-        "[('mousemove on distance', '>>'), ('mousemove on airtime', 'mousemove on airtime'), ('mousemove on departure', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>')]"
+        "[('mousemove on distance', 'mousemove on distance'), ('mousemove on airtime', '>>'), ('mousemove on departure', '>>'), ('mousemove on departure', '>>'), ('brush on departure', '>>'), ('brush on departure', '>>')]"
       ],
       [
         "cost",
@@ -27,7 +27,7 @@
     "alignment": [
       [
         "alignment",
-        "[('mousemove on arrival', '>>'), ('brush on airtime', '>>'), ('>>', 'mousemove on airtime')]"
+        "[('mousemove on arrival', '>>'), ('brush on airtime', '>>'), ('>>', 'mousemove on distance')]"
       ],
       [
         "cost",
@@ -51,7 +51,7 @@
     "alignment": [
       [
         "alignment",
-        "[('mousemove on delay', '>>'), ('brush on airtime', '>>'), ('brush on airtime', '>>'), ('brush on airtime', '>>'), ('brush on departure', '>>'), ('click on departure', '>>'), ('mousemove on departure', '>>'), ('click on departure', '>>'), ('click on departure', '>>'), ('>>', 'mousemove on airtime')]"
+        "[('mousemove on delay', '>>'), ('brush on airtime', '>>'), ('brush on airtime', '>>'), ('brush on airtime', '>>'), ('brush on departure', '>>'), ('click on departure', '>>'), ('mousemove on departure', '>>'), ('click on departure', '>>'), ('click on departure', '>>'), ('>>', 'mousemove on distance')]"
       ],
       [
         "cost",
@@ -75,7 +75,7 @@
     "alignment": [
       [
         "alignment",
-        "[('mousemove on arrival', '>>'), ('brush on arrival', '>>'), ('click on arrival', '>>'), ('mousemove on arrival', '>>'), ('click on arrival', '>>'), ('mousemove on airtime', 'mousemove on airtime'), ('brush on airtime', '>>'), ('click on airtime', '>>'), ('mousemove on airtime', '>>'), ('click on airtime', '>>'), ('mousemove on distance', '>>'), ('brush on distance', '>>'), ('click on distance', '>>')]"
+        "[('mousemove on arrival', '>>'), ('brush on arrival', '>>'), ('click on arrival', '>>'), ('mousemove on arrival', '>>'), ('click on arrival', '>>'), ('mousemove on airtime', '>>'), ('brush on airtime', '>>'), ('click on airtime', '>>'), ('mousemove on airtime', '>>'), ('click on airtime', '>>'), ('mousemove on distance', 'mousemove on distance'), ('brush on distance', '>>'), ('click on distance', '>>')]"
       ],
       [
         "cost",

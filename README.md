@@ -1,5 +1,6 @@
-# InterView: demo
+# TraVIS: a User Trace Analyzer to Support the User-Centered Design of Visual Analytics Solutions
 
+![alt text](image.png)
 
 ## Installation
 
@@ -13,7 +14,7 @@
 
 4) In order to run all the functionalities of the framework, download and install GraphViz: https://graphviz.org/download/
 
-InterViewIS: installation of the dependencies for the traces replay and state chart generation features
+TraVIS: installation of the dependencies for the traces replay and state chart generation features
 
 1) Install selenium 4.1.3 ----> pip install selenium==4.1.3 (it should be already installed from step 1)
 
@@ -30,7 +31,7 @@ InterViewIS: installation of the dependencies for the traces replay and state ch
 - fs node module v1.0.0 (npm install fs@v1.0.0)
 - is-same-origin node module v0.0.7 (npm install is-same-origin@v0.0.7)
 
-## InterViewIS: main functionalities and how to run them
+## TraVIS: main functionalities and how to run them
 
 1) In the static/files/URLs folder there's the sampleUrls file. Copy a URL from the file and put it in the "Load System" placeholder: the visualization system will be loaded on the left, the resulting state chart will be loaded on the right. The URLs contain precomputed state charts. If for a visualization system a state chart wasn't generated, the system will invoke a subprocess that in the end generates it and puts it in the DB (it is the state chart generation subprocess). This subprocess can take much time, even an entire day, keep that in mind while trying to generate a new state chart
 

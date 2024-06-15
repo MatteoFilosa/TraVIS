@@ -902,7 +902,6 @@ def get_statecharts_gv():
 # write it in the 'system_url.txt' file beforehand.
 @app.route("/create_statechart_files", methods=['POST'])
 def create_statechart_files():
-    print("create")
     # We write the current vis URL (inputted via POST) in the 'system_url.txt' file.
     request_data = request.get_json()
     system_url = request_data.get('newUrl')
@@ -1048,6 +1047,10 @@ def userTraces():
 def userTasks():
     return render_template('userTasks.html')
     
+@app.route("/versionHistory")
+def versionHistory():
+    return render_template('versionHistory.html')
+
 
 
 
