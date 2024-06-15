@@ -18,6 +18,7 @@ def modifySvg():
 
     lookingForEllipse = False
     lookingForPolygon = False
+    lookingForPath = False
     lookingForText = 0
 
     for line in svgLines:
@@ -40,10 +41,17 @@ def modifySvg():
                 lastEdge = line.split(" ")[1]
                 lookingForText = 2
             lookingForPolygon = True
+            lookingForPath = True
 
         elif (lookingForPolygon) and (re.search(r'^<polygon .', line)):
+            print("polygon")
             line = line.replace("<polygon ", '<polygon id="svg_edge_id_'+ str(lastEdge) +'" ')
             lookingForPolygon = False
+
+        elif (lookingForPath) and (re.search(r'^<path .', line)):
+            print("path")
+            line = line.replace("<path ", '<path id="svg_real_edge_id_'+ str(lastEdge) +'" ')
+            lookingForPath = False
 
         elif (lookingForText > 0) and (re.search(r'^<text .', line)):
             splittedText = line.split(">")
