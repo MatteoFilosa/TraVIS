@@ -37,11 +37,14 @@ TraVIS: installation of the dependencies for the traces replay and state chart g
 
 2) In the User Traces Tab you can see all user traces captured, with many details such as violations in latency thresholds, interactions, etc. They are relative to the Falcon crossfilter Visualization system (see https://vega.github.io/falcon/flights/). This page also allows filtering of the traces based on quantitative details (# of a certain interaction, execution time of the user traces, etc.) and qualitative details (based on the users' personal info, like gender, age, etc.)
 
-3) By selecting a single (or multiple) traces, an extra info div appears on the right. On the top right corner, there's a button for seeing the user trace (or traces) in the interaction space (state chart), whose edges' label are colured accordingly to a color scale, indicating how much a certain interaction has been performed or not. 
+3) By selecting a single trace, an extra info div appears on the right. On the top right corner, there's a button for seeing the user trace (or traces) in the interaction space (state chart), whose edges' label are colured accordingly to a color scale, indicating how much a certain interaction has been performed or not. If the trace recorded violations in latency thresholds, it is also possible to see them reflected in the state chart.
 
-4) On the top right corner of the extra info for the trace, it is possible to see a button, used to invoke the replay functionality (available only for a single trace). A new window will be opened, and the trace will be replayed, doing the same interactions in the trace, seeing on the left the visualization system and on the right the state chart, that is coloured basing on the interaction that is being performed in the visualization system. It is possible to play, pause, stop, and reproduce directly the next event by playing the relative buttons on the top.
+4) At the bottom of the extra info for the trace, it is possible to see a button, used to invoke the replay functionality (available only for a single trace). A new window will be opened, and the trace will be replayed, doing the same interactions in the trace, seeing on the left the visualization system and on the right the state chart, that is coloured basing on the interaction that is being performed in the visualization system. It is possible to play, pause, stop, and reproduce directly the next event by playing the relative buttons on the top.
 
 5) In the User Tasks tab, it is possible to see details about exploratory tasks performed while recording the user traces relative to Falcon crossfilter. It is possible to see details in the inner tables relative to each trace. A correctness percentage of the task is displayed for each trace (and "grouped" for each task). This percentage was calculated to see the users performance on each task, basing on pm4py trace alignment functionalites with an ideal trace (referred to as "golden trace"), that represents a possibly perfect execution of that task on the visualization system. It is also possible to see each task on the interaction space, by having the  state chart coloured as described in section 3.
+
+
+
 
 
 
