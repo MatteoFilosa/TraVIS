@@ -1062,12 +1062,57 @@ replayState = "play"
 
 
 def changeStateChartColors(transition, replayJson, driver):
+
+    #print("------------CHANGE STATECHART COLOR--------------")
     
     global currentState
     global currentEdge
 
     # We will add here the scripts to execute on the inputted driver.
-    totalScript = ""
+    # This part of the script uses a mechanism to color all the statechart's elements in light grey.
+    totalScript = """
+    
+    
+
+    if(document.getElementById('svg_edge_id_E79').style.fill != 'rgb(163, 163, 163)'){
+    
+ 
+        const nodes = document.querySelectorAll('.node');
+
+        nodes.forEach(function(node) {
+
+        const polygons = node.querySelectorAll('polygon');
+
+            polygons.forEach(function(polygon) {
+                polygon.style.fill = '#a3a3a3';
+            });
+
+        });
+
+
+        var edges = document.querySelectorAll('.edge');
+
+
+        edges.forEach(function(edge) {
+ 
+        edge.querySelectorAll('polygon').forEach(function(polygon) {
+            polygon.style.opacity = 0.15;
+        });
+
+
+        edge.querySelectorAll('polyline').forEach(function(polyline) {
+            polyline.style.opacity = 0.15;
+        });
+
+ 
+        edge.querySelectorAll('path').forEach(function(path) {
+            path.style.opacity = 0.15;
+        });
+
+        });
+    }
+
+    """
 
     # We are in the first ever transition. 'currentState' is 0 and we only need to find the 'currentEdge'.
     if -1 == currentState and "E-1" == currentEdge:
@@ -1095,7 +1140,14 @@ def changeStateChartColors(transition, replayJson, driver):
         var nextElementNode = currentNode.parentElement.nextElementSibling;
         var nextElementEdge = currentEdge.parentElement.nextElementSibling;
         var pathElement = nextElementEdge.querySelector('path');
+        var polygonElement = nextElementEdge.querySelector('polygon');
+        var polylineElement = nextElementEdge.querySelector('polyline');
         pathElement.style.stroke = 'rgb(0, 0, 255)';
+        pathElement.style.opacity = 1.0;
+        polygonElement.style.fill = 'rgb(0, 0, 255)';
+        polygonElement.style.opacity = 1.0;
+        polylineElement.style.stroke = 'rgb(0, 0, 255)';
+        polylineElement.style.opacity = 1.0;
         console.log('Next Element of Parent Node of svg_node_id_{currentState}:', nextElementNode);
         console.log('Next Element of Parent Node of svg_edge_id_{currentEdge}:', nextElementEdge);
         """.format(currentState=str(currentState), currentEdge=currentEdge)
@@ -1121,7 +1173,14 @@ def changeStateChartColors(transition, replayJson, driver):
     var nextElementNode = currentNode.parentElement.nextElementSibling;
     var nextElementEdge = currentEdge.parentElement.nextElementSibling;
     var pathElement = nextElementEdge.querySelector('path');
+    var polygonElement = nextElementEdge.querySelector('polygon');
+    var polylineElement = nextElementEdge.querySelector('polyline');
     pathElement.style.stroke = 'rgb(255, 0, 0)';
+    pathElement.style.opacity = 1.0;
+    polygonElement.style.fill = 'rgb(255, 0, 0)';
+    polygonElement.style.opacity = 1.0;
+    polylineElement.style.stroke = 'rgb(255, 0, 0)';
+    polylineElement.style.opacity = 1.0;
     console.log('Next Element of Parent Node of svg_node_id_{currentState}:', nextElementNode);
     console.log('Next Element of Parent Node of svg_edge_id_{currentEdge}:', nextElementEdge);
     """.format(currentState=str(currentState), currentEdge=currentEdge)
@@ -1212,7 +1271,7 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
             #    driver.switch_to.window(originalWindow) 
             driver.switch_to.default_content()
             if calledFirstTime == 0: #tochange!
-                time.sleep(20)       #tochange!
+                time.sleep(10)       #tochange!
             print(calledFirstTime)
             changeStateChartColors(transition, replayJson, driver)
             calledFirstTime = 1
