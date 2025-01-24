@@ -1,6 +1,12 @@
 # TraVIS: a User Trace Analyzer to Support the User-Centered Design of Visual Analytics Solutions
 
-![alt text](image.png)
+
+
+
+https://github.com/user-attachments/assets/077fb93f-7fc6-4606-a09b-313d6b097cfd
+
+
+
 
 ## Installation
 
