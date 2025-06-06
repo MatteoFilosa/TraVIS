@@ -45,8 +45,8 @@ window.onload = function () {
 
     // If the user wants to see the state chart highlighted from the user traces page. Change here for conflicts with replay. And for the future...
     if ((JSON.parse(localStorage.getItem("selectedTrace")) != null) || (JSON.parse(localStorage.getItem("loadedTraces")) != null)){
-        console.log("Forced Falcon Visualization System. SelectedTrace is not null (or loadedtraces).")
-        systemURL = "https://vega.github.io/falcon/flights/"
+        console.log("Forced Falcon DUCK DB!!!! Visualization System. SelectedTrace is not null (or loadedtraces).")
+        systemURL = "https://vega.github.io/falcon/flights-duckdb/"
         console.log(JSON.parse(localStorage.getItem("violationsForAllTracesFormatted")))
         LoadSystem();
   
@@ -1719,7 +1719,7 @@ function changeLayout(layoutName) {
     var vis_name = ""
     var changeLayoutButton = document.getElementById("changeLayoutButton")
 
-    if (systemURL.includes("falcon"))  vis_name = "https://vega.github.io/falcon/flights/"
+    if (systemURL.includes("falcon")) vis_name =  "https://vega.github.io/falcon/flights-duckdb/" //modfiicato
     if (systemURL.includes("nemesis")) vis_name = "http://awareserver.dis.uniroma1.it/nemesis/"
     if (systemURL.includes("crumbs"))  vis_name = "http://awareserver.dis.uniroma1.it:11768/crumbs-example/"
     if (systemURL.includes("summit"))  vis_name = "https://fredhohman.com/summit/"

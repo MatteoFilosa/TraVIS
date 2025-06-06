@@ -3,32 +3,164 @@ digraph G {
 	rankdir="LR";
 	splines=ortho;
 
-	E0 [label="'mouseenter' on '#bottone1ID'\n(/html[1]/body[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	E0 [label="'click' on '#count canvas.marks'\n(/html[1]/body[1]/div[2]/div[1]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
 	0 -> E0 [arrowhead="box"];
-	E0 -> 1;
+	E0 -> 0;
 
-	E1 [label="'click' on '#bottone1ID'\n(/html[1]/body[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
-	1 -> E1 [arrowhead="box"];
-	E1 -> 2;
+	E1 [label="'mousemove' on '#count canvas.marks'\n(/html[1]/body[1]/div[2]/div[1]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E1 [arrowhead="box"];
+	E1 -> 0;
 
-	E2 [label="'mouseleave' on '#bottone1ID'\n(/html[1]/body[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
-	1 -> E2 [arrowhead="box"];
-	E2 -> 0;
+	E2 [label="'mousedown' on '#date'\n(/html[1]/body[1]/div[2]/div[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E2 [arrowhead="box"];
+	E2 -> 1;
 
-	E3 [label="'click' on '#bottone1ID'\n(/html[1]/body[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
-	2 -> E3 [arrowhead="box"];
-	E3 -> 2;
+	E3 [label="'mousedown' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E3 [arrowhead="box"];
+	E3 -> 3;
 
-	E4 [label="'mouseleave' on '#bottone1ID'\n(/html[1]/body[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
-	2 -> E4 [arrowhead="box"];
-	E4 -> 3;
+	E4 [label="'mouseout' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E4 [arrowhead="box"];
+	E4 -> 0;
 
-	E5 [label="'mouseenter' on '#bottone1ID'\n(/html[1]/body[1]/div[1]/button[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
-	3 -> E5 [arrowhead="box"];
-	E5 -> 2;
+	E5 [label="'wheel' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E5 [arrowhead="box"];
+	E5 -> 0;
 
-	E6 [label="'click' on '#bottone2ID'\n(/html[1]/body[1]/div[1]/button[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
-	3 -> E6 [arrowhead="box"];
-	E6 -> 0;
+	E6 [label="'mousedown' on '#distance canvas.marks'\n(/html[1]/body[1]/div[2]/div[3]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E6 [arrowhead="box"];
+	E6 -> 4;
+
+	E7 [label="'mousemove' on '#distance canvas.marks'\n(/html[1]/body[1]/div[2]/div[3]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E7 [arrowhead="box"];
+	E7 -> 0;
+
+	E8 [label="'dblclick' on '#distance canvas.marks'\n(/html[1]/body[1]/div[2]/div[3]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E8 [arrowhead="box"];
+	E8 -> 0;
+
+	E9 [label="'click' on '#arrival canvas.marks'\n(/html[1]/body[1]/div[2]/div[4]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E9 [arrowhead="box"];
+	E9 -> 0;
+
+	E10 [label="'mousemove' on '#arrival canvas.marks'\n(/html[1]/body[1]/div[2]/div[4]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E10 [arrowhead="box"];
+	E10 -> 0;
+
+	E11 [label="'dblclick' on '#arrival canvas.marks'\n(/html[1]/body[1]/div[2]/div[4]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E11 [arrowhead="box"];
+	E11 -> 0;
+
+	E12 [label="'click' on '#departure canvas.marks'\n(/html[1]/body[1]/div[2]/div[5]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E12 [arrowhead="box"];
+	E12 -> 0;
+
+	E13 [label="'mousemove' on '#departure canvas.marks'\n(/html[1]/body[1]/div[2]/div[5]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E13 [arrowhead="box"];
+	E13 -> 0;
+
+	E14 [label="'dblclick' on '#departure canvas.marks'\n(/html[1]/body[1]/div[2]/div[5]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E14 [arrowhead="box"];
+	E14 -> 0;
+
+	E15 [label="'click' on '#airtime canvas.marks'\n(/html[1]/body[1]/div[2]/div[6]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E15 [arrowhead="box"];
+	E15 -> 0;
+
+	E16 [label="'mousemove' on '#airtime canvas.marks'\n(/html[1]/body[1]/div[2]/div[6]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E16 [arrowhead="box"];
+	E16 -> 0;
+
+	E17 [label="'dblclick' on '#airtime canvas.marks'\n(/html[1]/body[1]/div[2]/div[6]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E17 [arrowhead="box"];
+	E17 -> 0;
+
+	E18 [label="'click' on '#delay canvas.marks'\n(/html[1]/body[1]/div[2]/div[7]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E18 [arrowhead="box"];
+	E18 -> 0;
+
+	E19 [label="'mousemove' on '#delay canvas.marks'\n(/html[1]/body[1]/div[2]/div[7]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E19 [arrowhead="box"];
+	E19 -> 0;
+
+	E20 [label="'dblclick' on '#delay canvas.marks'\n(/html[1]/body[1]/div[2]/div[7]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	0 -> E20 [arrowhead="box"];
+	E20 -> 0;
+
+	E21 [label="'click' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	1 -> E21 [arrowhead="box"];
+	E21 -> 1;
+
+	E22 [label="'mousedown' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	1 -> E22 [arrowhead="box"];
+	E22 -> 2;
+
+	E23 [label="'mousemove' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	1 -> E23 [arrowhead="box"];
+	E23 -> 1;
+
+	E24 [label="'mouseout' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	1 -> E24 [arrowhead="box"];
+	E24 -> 1;
+
+	E25 [label="'dblclick' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	1 -> E25 [arrowhead="box"];
+	E25 -> 1;
+
+	E26 [label="'wheel' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	1 -> E26 [arrowhead="box"];
+	E26 -> 1;
+
+	E27 [label="'facsimile_back' on '#date'\n(/html[1]/body[1]/div[2]/div[2])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	1 -> E27 [arrowhead="box"];
+	E27 -> 0;
+
+	E28 [label="'click' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	2 -> E28 [arrowhead="box"];
+	E28 -> 2;
+
+	E29 [label="'mousemove' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	2 -> E29 [arrowhead="box"];
+	E29 -> 2;
+
+	E30 [label="'mouseout' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	2 -> E30 [arrowhead="box"];
+	E30 -> 2;
+
+	E31 [label="'mouseup' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	2 -> E31 [arrowhead="box"];
+	E31 -> 1;
+
+	E32 [label="'dblclick' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	2 -> E32 [arrowhead="box"];
+	E32 -> 2;
+
+	E33 [label="'wheel' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	2 -> E33 [arrowhead="box"];
+	E33 -> 2;
+
+	E34 [label="'click' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	3 -> E34 [arrowhead="box"];
+	E34 -> 3;
+
+	E35 [label="'mouseout' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	3 -> E35 [arrowhead="box"];
+	E35 -> 3;
+
+	E36 [label="'dblclick' on '#date canvas.marks'\n(/html[1]/body[1]/div[2]/div[2]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	3 -> E36 [arrowhead="box"];
+	E36 -> 3;
+
+	E37 [label="'click' on '#distance canvas.marks'\n(/html[1]/body[1]/div[2]/div[3]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	4 -> E37 [arrowhead="box"];
+	E37 -> 4;
+
+	E38 [label="'mouseout' on '#distance canvas.marks'\n(/html[1]/body[1]/div[2]/div[3]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	4 -> E38 [arrowhead="box"];
+	E38 -> 4;
+
+	E39 [label="'dblclick' on '#distance canvas.marks'\n(/html[1]/body[1]/div[2]/div[3]/canvas[1])", shape="box", style="filled", fillcolor="#000000", fontcolor="#FFFFFF"];
+	4 -> E39 [arrowhead="box"];
+	E39 -> 4;
 
 }

@@ -1224,6 +1224,10 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
     options = webdriver.ChromeOptions()
     options.add_argument('ignore-certificate-errors')
     options.add_argument('--ignore-ssl-errors')
+    options.set_capability(
+    "goog:loggingPrefs", 
+    {"browser": "ALL"}      # → “ALL” cattura tutti i livelli (INFO, WARNING, SEVERE, ecc.)
+    )
     driver = webdriver.Chrome(executable_path='C:\webdrivers\chromedriver.exe', chrome_options=options) #VERY IMPORTANT TO MODIFY THIS LINE, DEPENDING ON WHERE YOUR CHROMEDRIVER IS!!!!
     #driver = webdriver.Chrome(executable_path='/home/user/Scrivania/paper/Webdriver/chromedriver')
 
@@ -1248,6 +1252,7 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
 
         iframe = driver.find_element(By.ID, "website")
         driver.switch_to.frame(iframe)
+        print(iframe)
 
     except Exception as e:
 
@@ -1273,7 +1278,7 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
             if calledFirstTime == 0: #tochange!
                 time.sleep(10)       #tochange!
             print(calledFirstTime)
-            changeStateChartColors(transition, replayJson, driver)
+            #changeStateChartColors(transition, replayJson, driver) DISATTIVATA PERCHE CON FALCON DUCKDB NON VA
             calledFirstTime = 1
 
             
@@ -1347,8 +1352,13 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
 
             print("-------------------------------------------------------")
 
+        logs = driver.get_log('browser')
 
-        driver.close()
+        # Salva i messaggi in console
+        with open("browser_logs.json", "w", encoding="utf-8") as f:
+            json.dump(logs, f, indent=2)
+
+        #driver.close()
 
         with open('userTraceSummary_' + nameVis + '.json', 'w') as fp:
             json.dump(finalSummary, fp,  indent=4)
