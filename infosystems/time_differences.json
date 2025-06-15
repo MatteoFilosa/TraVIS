@@ -1,33 +1,33 @@
 {
     "click": {
-        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": 0.8575916290283203,
-        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": 1.0600090026855469,
-        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": -2.5949478149414062,
-        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": -1.0213851928710938
+        "arrival": 0.8575916290283203, "NO"
+        "airtime": 1.0600090026855469,"NO"
+        "departure": -2.5949478149414062,"NO"
+        "distance": -1.0213851928710938, "NO"
     },
     "brush mousemove": {
-        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": 7.991313934326172,
-        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": -3659.6755981445312,
-        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": -2331.68363571167,
-        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": -661.5321636199951
+        "arrival": 7.991313934326172, "NO"
+        "airtime": -3659.6755981445312, "YES"
+        "departure": -2331.68363571167,  "YES"
+        "distance": -661.5321636199951 , "YES"
     },
     "brush mousedown": {
-        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": -4.033565521240234,
-        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": 1.5442371368408203,
-        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": -5.889892578125,
-        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": -0.3001689910888672
+        "arrival": -4.033565521240234, "NO"
+        "airtime": 1.5442371368408203, "NO"
+        "departure": -5.889892578125,"NO"
+        "distance": -0.3001689910888672, "NO"
     },
     "brush mouseup": {
-        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": -0.8409023284912109,
-        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": -10.63394546508789,
-        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": -23.26679229736328,
-        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": 4.017829895019531
+        "arrival": -0.8409023284912109, "NO"
+        "airtime": -10.63394546508789, "YES"
+        "departure": -23.26679229736328, "YES"
+        "distance": 4.017829895019531, "NO"
     },
     "mousemove": {
-        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": -31.991243362426758,
-        "/html[1]/body[1]/div[2]/div[7]/canvas[1]": -127.23565101623535,
-        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": -169.97289657592773,
-        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": -1419.6207523345947,
-        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": -655.9083461761475
+        "arrival": -31.991243362426758, YES
+        "delay": -127.23565101623535, YES
+        "airtime": -169.97289657592773, YES 
+        "departure": -1419.6207523345947, "YES"
+        "distance": -655.9083461761475 "YES"
     }
 }

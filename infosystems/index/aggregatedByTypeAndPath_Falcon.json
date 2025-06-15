@@ -1,33 +1,34 @@
 {
     "mousemove": {
-        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": 10445.754289627075,
-        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": 6904.494047164917,
-        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": 42032.177448272705,
-        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": 18769.152641296387,
-        "/html[1]/body[1]/div[2]/div[7]/canvas[1]": 3410.8426570892334
+        "airtime": 10445.754289627075,
+        "arrival": 6904.494047164917,
+        "departure": 42032.177448272705,
+        "distance": 18769.152641296387,
+        "delay": 3410.8426570892334
     },
     "click": {
-        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": 16.505956649780273,
-        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": 2.6776790618896484,
-        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": 7.249355316162109,
-        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": 3.6149024963378906
+        "departure": 16.505956649780273,
+        "distance": 2.6776790618896484,
+        "airtime": 7.249355316162109,
+        "arrival": 3.6149024963378906
     },
     "brush mousedown": {
-        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": 26.29828453063965,
-        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": 32.95016288757324,
-        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": 6.738901138305664,
-        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": 9.447097778320312
+        "departure": 26.29828453063965,
+        "airtime": 32.95016288757324,
+        "distance": 6.738901138305664,
+        "arrival": 9.447097778320312
     },
     "brush mousemove": {
-        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": 22207.014799118042,
-        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": 29937.405824661255,
-        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": 5001.311779022217,
-        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": 7737.221240997314
+        "departure": 22207.014799118042,
+        "airtime": 29937.405824661255,
+        "distance": 5001.311779022217,
+        "arrival": 7737.221240997314
     },
     "brush mouseup": {
-        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": 23.5140323638916,
-        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": 23.83565902709961,
-        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": 9.942293167114258,
-        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": 10.010480880737305
+        "departure": 23.5140323638916,
+        "airtime": 23.83565902709961,
+        "distance": 9.942293167114258,
+        "arrival": 10.010480880737305
     }
 }
+

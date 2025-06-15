@@ -24,7 +24,6 @@ for evt, paths in data_with.items():
 max_abs = max(abs(d) for d in diffs.values())
 
 # --- 5) Prepara colormap log e viridis ---
-#  estraiamo global min/max su tutti i valori > 0
 all_vals = [v for paths in data_with.values() for v in paths.values() if v>0] + \
            [v for paths in data_no.values()   for v in paths.values()   if v>0]
 eps   = min(all_vals)*1e-3
@@ -36,7 +35,6 @@ cmap  = cm.get_cmap('viridis')
 def shifted_hex(value, shift):
     """Applica lo shift logaritmico e ritorna l’hex viridis."""
     v = max(value, eps)
-    # moltiplichiamo nel log: log(v * 10^shift) = log(v) + shift*ln(10)
     shifted = v * (10**shift)
     rgba = cmap(norm(shifted))
     return colors.to_hex(rgba)
@@ -44,34 +42,47 @@ def shifted_hex(value, shift):
 # --- 6) Precompute shift per (mode, evt, xpath) ---
 shifts = {'with_index':{}, 'no_index':{}}
 for (evt,xpath), d in diffs.items():
-    # componente normalizzata
-    comp = math.copysign(abs(d)/max_abs, d)           # in [-1,1]
-    comp = math.copysign(abs(comp)**GAMMA, comp)      # applica gamma
-    # due shift opposti
+    comp = math.copysign(abs(d)/max_abs, d)      
+    comp = math.copysign(abs(comp)**GAMMA, comp)
     shifts['with_index'][(evt,xpath)] = -comp * SCALE_FACTOR
     shifts['no_index']  [(evt,xpath)] = +comp * SCALE_FACTOR
 
 # --- 7) Funzione di rendering generica ---
 def render(mode, data, shift_map, out_svg):
-    tree = ET.parse('statechart/falcon_10M_duckdb.svg')
+    tree = ET.parse('statechart/template.svg')
     ns   = {'svg':'http://www.w3.org/2000/svg'}
     root = tree.getroot()
     DEFAULT = '#a3a3a3'
-    # reset
+
+    #  reset to grey
     for poly in root.findall('.//svg:g[@class="node"]/svg:polygon', ns):
         poly.set('fill', DEFAULT)
-    # colora
+
+    #  apply colors
     for g in root.findall('.//svg:g[@class="node"]', ns):
         texts = g.findall('svg:text', ns)
         poly  = g.find('svg:polygon', ns)
-        if len(texts)>=2 and poly is not None:
-            evt   = texts[0].text.split("'")[1]
-            xpath = texts[1].text.strip('()')
-            v     = data.get(evt,{}).get(xpath)
-            shift = shift_map.get((evt,xpath), 0.0)
-            if v is not None:
-                color = shifted_hex(v, shift)
-                poly.set('fill', color)
+
+        # skip if missing polygon or less than 2 text elements
+        if poly is None or len(texts) < 2:
+            continue
+
+        t0 = texts[0].text
+        t1 = texts[1].text
+        # skip if either text is None
+        if t0 is None or t1 is None:
+            continue
+
+        # safe to parse
+        evt   = t0.split("'")[1]
+        xpath = t1.strip('()')
+        v     = data.get(evt, {}).get(xpath)
+        shift = shift_map.get((evt, xpath), 0.0)
+
+        if v is not None:
+            color = shifted_hex(v, shift)
+            poly.set('fill', color)
+
     tree.write(out_svg)
     print(f"Wrote {out_svg}")
 

@@ -1,0 +1,38 @@
+{
+    "mousemove": {
+        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": "#3c508b",
+        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": "#453781",
+        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": "#fde725",
+        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": "#25838e",
+        "/html[1]/body[1]/div[2]/div[7]/canvas[1]": "#481d6f"
+    },
+    "click": {
+        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": "#440154",
+        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": "#440154",
+        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": "#440154",
+        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": "#440154"
+    },
+    "brush mousedown": {
+        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": "#440154",
+        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": "#440154",
+        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": "#440154",
+        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": "#440154"
+    },
+    "brush mousemove": {
+        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": "#1fa088",
+        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": "#69cd5b",
+        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": "#472e7c",
+        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": "#433d84"
+    },
+    "brush mouseup": {
+        "/html[1]/body[1]/div[2]/div[4]/canvas[1]": "#440154",
+        "/html[1]/body[1]/div[2]/div[6]/canvas[1]": "#440154",
+        "/html[1]/body[1]/div[2]/div[2]/canvas[1]": "#440154",
+        "/html[1]/body[1]/div[2]/div[3]/canvas[1]": "#440154"
+    }
+}
+2 -> distance
+3-> arrival
+4 -> departure
+6 -> airtime
+7 -> delay
