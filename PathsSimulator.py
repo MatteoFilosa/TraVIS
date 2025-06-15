@@ -1352,16 +1352,57 @@ def pathsSimulatorContainer(explorationSequence, replayJson):
 
             print("-------------------------------------------------------")
 
-        logs = driver.get_log('browser')
+        """ logs = driver.get_log('browser')
 
         # Salva i messaggi in console
         with open("browser_logs.json", "w", encoding="utf-8") as f:
-            json.dump(logs, f, indent=2)
+            json.dump(logs, f, indent=2) """
 
         #driver.close()
 
         with open('userTraceSummary_' + nameVis + '.json', 'w') as fp:
             json.dump(finalSummary, fp,  indent=4)
+
+        # TOTAL TRACE TIME PER CHIAVE E PER EVENT TYPE E PATH
+
+        with open(f'userTraceSummary_{nameVis}.json', 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+            # 1) Somma totale per ogni "key"
+            sums = {}
+            for key, events in data.items():
+                total = 0.0
+                for entry in events:
+                    try:
+                        duration = float(entry[3])
+                    except (IndexError, ValueError, TypeError):
+                        continue
+                    total += duration
+                sums[key] = total
+
+            # 2) Somma totale per ogni coppia (eventType, path)
+            agg = {}  # { eventType: { path: total_duration } }
+            for key, events in data.items():
+                for entry in events:
+                    try:
+                        path = entry[0]
+                        event_type = entry[1]
+                        duration = float(entry[3])
+                    except (IndexError, ValueError, TypeError):
+                        continue
+
+                    agg.setdefault(event_type, {})
+                    agg[event_type].setdefault(path, 0.0)
+                    agg[event_type][path] += duration
+
+        # 3) Scrittura dei risultati
+        with open(f'traceTimeSummary_{nameVis}.json', 'w', encoding='utf-8') as f:
+            json.dump(sums, f, indent=4)
+        print(f"Summed durations written to traceTimeSummary_{nameVis}.json")
+
+        with open(f'aggregatedByTypeAndPath_{nameVis}.json', 'w', encoding='utf-8') as f:
+            json.dump(agg, f, indent=4)
+        print(f"Aggregated times by eventType and path written to aggregatedByTypeAndPath_{nameVis}.json")
 
         #print(actionSequence)
         print("Problems found :",end="")

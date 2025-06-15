@@ -46,7 +46,7 @@ window.onload = function () {
     // If the user wants to see the state chart highlighted from the user traces page. Change here for conflicts with replay. And for the future...
     if ((JSON.parse(localStorage.getItem("selectedTrace")) != null) || (JSON.parse(localStorage.getItem("loadedTraces")) != null)){
         console.log("Forced Falcon DUCK DB!!!! Visualization System. SelectedTrace is not null (or loadedtraces).")
-        systemURL = "https://vega.github.io/falcon/flights-duckdb/"
+        systemURL = "https://vega.github.io/falcon/flights-duckdb/"                               //GLOBALLY AVAILABLE VERSION systemURL = "https://vega.github.io/falcon/flights-duckdb/"
         console.log(JSON.parse(localStorage.getItem("violationsForAllTracesFormatted")))
         LoadSystem();
   
