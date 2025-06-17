@@ -1,27 +1,10 @@
 {
-    "click": {
-        "arrival": 0.8575916290283203, "NO"
-        "airtime": 1.0600090026855469,"NO"
-        "departure": -2.5949478149414062,"NO"
-        "distance": -1.0213851928710938, "NO"
-    },
+   
     "brush mousemove": {
         "arrival": 7.991313934326172, "NO"
         "airtime": -3659.6755981445312, "YES"
         "departure": -2331.68363571167,  "YES"
         "distance": -661.5321636199951 , "YES"
-    },
-    "brush mousedown": {
-        "arrival": -4.033565521240234, "NO"
-        "airtime": 1.5442371368408203, "NO"
-        "departure": -5.889892578125,"NO"
-        "distance": -0.3001689910888672, "NO"
-    },
-    "brush mouseup": {
-        "arrival": -0.8409023284912109, "NO"
-        "airtime": -10.63394546508789, "YES"
-        "departure": -23.26679229736328, "YES"
-        "distance": 4.017829895019531, "NO"
     },
     "mousemove": {
         "arrival": -31.991243362426758, YES
